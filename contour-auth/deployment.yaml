@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contour-auth
+  namespace: contour-auth
+  labels:
+    app: contour-auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: contour-auth
+  template:
+    metadata:
+      labels:
+        app: contour-auth
+    spec:
+      containers:
+        - name: contour-auth
+          imagePullPolicy: Always
+          image: xquare/contour-auth:v0.0.1
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 9443
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /tls
+              name: tls
+              readOnly: true
+      volumes:
+        - name: tls
+          secret:
+            secretName: contour-auth-cert

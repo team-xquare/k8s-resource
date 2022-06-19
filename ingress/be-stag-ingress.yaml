@@ -1,0 +1,26 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: stag-api-ingress
+  namespace: be-stag
+spec:
+  ingressClassName: contour
+  virtualhost:
+    fqdn: stag-api.xquare.app
+    tls:
+      secretName: be-stag-cert
+    authorization:
+      extensionRef:
+        name: contour-auth
+        namespace: contour-auth
+  includes:
+    - name: dms
+      namespace: be-stag
+    - name: application
+      namespace: be-stag
+    - name: meal
+      namespace: be-stag
+    - name: notification
+      namespace: be-stag
+    - name: backoffice
+      namespace: be-stag

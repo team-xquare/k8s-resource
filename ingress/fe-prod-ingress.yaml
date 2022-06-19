@@ -1,0 +1,39 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: webview-ingress
+  namespace: fe-prod
+spec:
+  ingressClassName: contour
+  virtualhost:
+    fqdn: webview.xquare.app
+    tls:
+      secretName: fe-prod-cert
+    # authorization:
+    #   extensionRef:
+    #     name: authorization
+    #     namespace: authorization
+  includes:
+    - name: apply
+      namespace: fe-prod
+    - name: xbridge-test
+      namespace: fe-prod
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: style-ingress
+  namespace: fe-prod
+spec:
+  ingressClassName: contour
+  virtualhost:
+    fqdn: style.xquare.app
+    tls:
+      secretName: fe-prod-cert
+    # authorization:
+    #   extensionRef:
+    #     name: authorization
+    #     namespace: authorization
+  includes:
+    - name: style
+      namespace: fe-prod

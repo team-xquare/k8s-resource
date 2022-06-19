@@ -1,0 +1,9 @@
+apiVersion: projectcontour.io/v1alpha1
+kind: ExtensionService
+metadata:
+  name: contour-auth
+  namespace: contour-auth
+spec:
+  services:
+    - name: contour-auth
+      port: 9443

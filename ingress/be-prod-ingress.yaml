@@ -1,0 +1,24 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: api-ingress
+  namespace: be-prod
+spec:
+  ingressClassName: contour
+  virtualhost:
+    fqdn: api.xquare.app
+    tls:
+      secretName: be-prod-cert
+    authorization:
+      extensionRef:
+        name: contour-auth
+        namespace: contour-auth
+  includes:
+    - name: dms
+      namespace: be-prod
+    - name: application
+      namespace: be-prod
+    - name: meal
+      namespace: be-prod
+    - name: notification
+      namespace: be-prod

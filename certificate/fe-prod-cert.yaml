@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: fe-prod-cert
+  namespace: fe-prod
+spec:
+  commonName: "*.xquare.app"
+  dnsNames:
+    - "*.xquare.app"
+    - xquare.app
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: ClusterIssuer
+  secretName: fe-prod-cert
