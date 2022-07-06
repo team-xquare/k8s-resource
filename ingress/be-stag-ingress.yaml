@@ -24,3 +24,7 @@ spec:
       namespace: be-stag
     - name: backoffice
       namespace: be-stag
+    - name: user
+      namespace: be-stag
+    - name: authority
+      namespace: be-stag
