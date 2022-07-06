@@ -22,3 +22,9 @@ spec:
       namespace: be-prod
     - name: notification
       namespace: be-prod
+    - name: backoffice
+      namespace: be-stag
+    - name: user
+      namespace: be-prod
+    - name: authority
+      namespace: be-prod
