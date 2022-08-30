@@ -11,8 +11,8 @@ spec:
       secretName: be-stag-cert
     authorization:
       extensionRef:
-        name: contour-auth
-        namespace: contour-auth
+        name: contour-middleware
+        namespace: contour-middleware
   includes:
     - name: dms
       namespace: be-stag
@@ -28,3 +28,5 @@ spec:
       namespace: be-stag
     - name: authority
       namespace: be-stag
+    - name: oauth
+      namespace: be-prod

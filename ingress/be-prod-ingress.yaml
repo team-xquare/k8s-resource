@@ -11,8 +11,8 @@ spec:
       secretName: be-prod-cert
     authorization:
       extensionRef:
-        name: contour-auth
-        namespace: contour-auth
+        name: contour-middleware
+        namespace: contour-middleware
   includes:
     - name: dms
       namespace: be-prod
@@ -27,4 +27,6 @@ spec:
     - name: user
       namespace: be-prod
     - name: authority
+      namespace: be-prod
+    - name: oauth
       namespace: be-prod
