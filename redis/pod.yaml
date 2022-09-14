@@ -6,6 +6,8 @@ metadata:
   labels:
     app: redis
 spec:
+  nodeSelector:
+    redis: "true"
   containers:
     - name: redis
       image: redis:5.0.4
@@ -35,3 +37,4 @@ spec:
         items:
           - key: redis-config
             path: redis.conf
+  restartPolicy: Always

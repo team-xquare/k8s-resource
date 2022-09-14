@@ -1009,7 +1009,7 @@ server:
       # -- Certificate issuer kind. Either `Issuer` or `ClusterIssuer`
       kind: "ClusterIssuer"
       # -- Certificate isser name. Eg. `letsencrypt`
-      name: "letsencrypt-prod"
+      name: "letsencrypt-issuer"
     # -- Certificate manager additional hosts
     additionalHosts: []
     # -- The name of the Secret that will be automatically created and managed by this Certificate resource

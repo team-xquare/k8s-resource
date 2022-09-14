@@ -29,3 +29,18 @@ spec:
   includes:
     - name: style
       namespace: fe-prod
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: admin-ingress
+  namespace: fe-prod
+spec:
+  ingressClassName: contour
+  virtualhost:
+    fqdn: admin.xquare.app
+    tls:
+      secretName: fe-prod-cert
+  includes:
+    - name: admin
+      namespace: fe-prod
