@@ -42,5 +42,5 @@ spec:
     tls:
       secretName: fe-prod-cert
   includes:
-    - name: admin
+    - name: dormitory-admin
       namespace: fe-prod

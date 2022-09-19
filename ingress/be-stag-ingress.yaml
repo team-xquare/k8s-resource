@@ -28,5 +28,5 @@ spec:
       namespace: be-stag
     - name: authority
       namespace: be-stag
-    - name: oauth
-      namespace: be-prod
+    - name: contour-middleware-test
+      namespace: be-stag
