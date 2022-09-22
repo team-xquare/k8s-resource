@@ -12,7 +12,7 @@ spec:
     authorization:
       extensionRef:
         name: contour-middleware
-        namespace: contour-middleware
+        namespace: be-stag
   includes:
     - name: dms
       namespace: be-stag
