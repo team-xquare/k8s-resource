@@ -13,6 +13,23 @@ spec:
       extensionRef:
         name: contour-middleware
         namespace: be-prod
+    corsPolicy:
+      allowCredentials: true
+      allowOrigin: 
+        - "https://service.xquare.app"
+      allowMethods:
+        - "GET"
+        - "POST"
+        - "PUT"
+        - "DELETE"
+        - "OPTIONS"
+      allowHeaders:
+        - "content-type"
+        - "authorization"
+        - "accept"
+        - "accept-encoding"
+      exposeHeaders:
+        - "Access-Control-Allow-Credentials"
   includes:
     - name: dms
       namespace: be-prod
