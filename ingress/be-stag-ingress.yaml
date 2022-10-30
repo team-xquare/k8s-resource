@@ -13,6 +13,25 @@ spec:
       extensionRef:
         name: contour-middleware
         namespace: be-stag
+    corsPolicy:
+      allowCredentials: true
+      allowOrigin: 
+        - "http://localhost:3000"
+        - "http://localhost:3001"
+        - "https://service.xquare.app"
+      allowMethods:
+        - "GET"
+        - "POST"
+        - "PUT"
+        - "DELETE"
+        - "OPTIONS"
+      allowHeaders:
+        - "content-type"
+        - "authorization"
+        - "accept-encoding"
+        - "accept"
+      exposeHeaders:
+        - "Access-Control-Allow-Credentials"
   includes:
     - name: dms
       namespace: be-stag
