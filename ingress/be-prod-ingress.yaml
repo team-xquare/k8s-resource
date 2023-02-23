@@ -33,11 +33,7 @@ spec:
   includes:
     - name: dms
       namespace: be-prod
-    - name: application
-      namespace: be-prod
     - name: meal
-      namespace: be-prod
-    - name: notification
       namespace: be-prod
     - name: backoffice
       namespace: be-stag
@@ -45,5 +41,7 @@ spec:
       namespace: be-prod
     - name: authority
       namespace: be-prod
-    - name: oauth
+    - name: cloud-config
+      namespace: be-prod
+    - name: point
       namespace: be-prod

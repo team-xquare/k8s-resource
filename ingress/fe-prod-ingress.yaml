@@ -14,6 +14,8 @@ spec:
       namespace: fe-prod
     - name: xbridge-test
       namespace: fe-prod
+    - name: feed
+      namespace: fe-prod
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy

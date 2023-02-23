@@ -23,6 +23,7 @@ spec:
         - "GET"
         - "POST"
         - "PUT"
+        - "PATCH"
         - "DELETE"
         - "OPTIONS"
       allowHeaders:
@@ -39,8 +40,6 @@ spec:
       namespace: be-stag
     - name: meal
       namespace: be-stag
-    - name: notification
-      namespace: be-stag
     - name: backoffice
       namespace: be-stag
     - name: user
@@ -49,3 +48,16 @@ spec:
       namespace: be-stag
     - name: contour-middleware-test
       namespace: be-stag
+    - name: attachment
+      namespace: be-stag
+    - name: point
+      namespace: be-stag
+    - name: feed
+      namespace: be-stag
+    - name: pick
+      namespace: be-stag
+    - name: timetable
+      namespace: be-stag
+    - name: schedule
+      namespace: be-stag
+
