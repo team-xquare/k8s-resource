@@ -440,10 +440,10 @@ contour:
 
   ## @param contour.debug Enable Contour debug log level
   ##
-  debug: false
+  debug: true
 
   ## @param contour.kubernetesDebug Contour kubernetes debug log level, Default 0, minimum 0, maximum 9.
-  kubernetesDebug: 0
+  kubernetesDebug: 9
 
   ## @param contour.rootNamespaces Restrict Contour to searching these namespaces for root ingress routes.
   rootNamespaces: ""
@@ -721,7 +721,7 @@ envoy:
   terminationGracePeriodSeconds: 300
   ## @param envoy.logLevel Envoy log level
   ##
-  logLevel: info
+  logLevel: debug
   ## Envoy Service properties
   ##
   service:
@@ -799,8 +799,8 @@ envoy:
   ## @param envoy.hostPorts.https Sets `hostPort` https port
   ##
   hostPorts:
-    http: 80
-    https: 443
+    http: 30080
+    https: 30443
   ## @param envoy.hostIPs.http Sets `hostIP` http IP
   ## @param envoy.hostIPs.https Sets `hostIP` https IP
   ##
