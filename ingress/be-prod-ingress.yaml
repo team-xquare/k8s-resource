@@ -21,6 +21,7 @@ spec:
         - "GET"
         - "POST"
         - "PUT"
+        - "PATCH"
         - "DELETE"
         - "OPTIONS"
       allowHeaders:
@@ -28,6 +29,7 @@ spec:
         - "authorization"
         - "accept"
         - "accept-encoding"
+        - "Refresh-Token"
       exposeHeaders:
         - "Access-Control-Allow-Credentials"
   includes:
