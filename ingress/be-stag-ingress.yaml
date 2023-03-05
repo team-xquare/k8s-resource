@@ -31,6 +31,7 @@ spec:
         - "authorization"
         - "accept-encoding"
         - "accept"
+        - "Refresh-Token"
       exposeHeaders:
         - "Access-Control-Allow-Credentials"
   includes:
