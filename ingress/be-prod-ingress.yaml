@@ -17,6 +17,7 @@ spec:
       allowCredentials: true
       allowOrigin: 
         - "https://service.xquare.app"
+        - "https://admin.xquare.app"
       allowMethods:
         - "GET"
         - "POST"
