@@ -19,6 +19,7 @@ spec:
         - "http://localhost:3000"
         - "http://localhost:3001"
         - "https://service.xquare.app"
+        - "https://admin.xquare.app"
       allowMethods:
         - "GET"
         - "POST"
