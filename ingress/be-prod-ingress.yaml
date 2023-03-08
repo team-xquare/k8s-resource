@@ -34,17 +34,28 @@ spec:
       exposeHeaders:
         - "Access-Control-Allow-Credentials"
   includes:
-    - name: dms
+    - name: application
+      namespace: be-prod
+    - name: attachment
+      namespace: be-prod
+    - name: authority
+      namespace: be-stag
+    - name: cloud-config
+      namespace: be-prod
+    - name: contour-middleware
+      namespace: be-prod
+    - name: feed
       namespace: be-prod
     - name: meal
       namespace: be-prod
-    - name: backoffice
-      namespace: be-stag
-    - name: user
-      namespace: be-prod
-    - name: authority
-      namespace: be-prod
-    - name: cloud-config
+    - name: pick
       namespace: be-prod
     - name: point
       namespace: be-prod
+    - name: schedule
+      namespace: be-prod
+    - name: timetable
+      namespace: be-prod
+    - name: user
+      namespace: be-prod
+
