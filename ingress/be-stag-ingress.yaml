@@ -62,4 +62,5 @@ spec:
       namespace: be-stag
     - name: schedule
       namespace: be-stag
-
+    - name: report
+      namespace: be-stag
