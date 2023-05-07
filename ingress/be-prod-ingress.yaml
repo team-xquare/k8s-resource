@@ -58,4 +58,5 @@ spec:
       namespace: be-prod
     - name: user
       namespace: be-prod
-
+    - name: report
+      namespace: be-prod
