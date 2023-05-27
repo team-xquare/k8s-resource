@@ -18,6 +18,8 @@ spec:
       namespace: fe-prod
     - name: today-director
       namespace: fe-prod
+    - name: school-meal
+      namespace: fe-prod
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
