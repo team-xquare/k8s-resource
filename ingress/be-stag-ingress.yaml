@@ -36,8 +36,6 @@ spec:
       exposeHeaders:
         - "Access-Control-Allow-Credentials"
   includes:
-    - name: dms
-      namespace: be-stag
     - name: application
       namespace: be-stag
     - name: meal
@@ -63,4 +61,6 @@ spec:
     - name: schedule
       namespace: be-stag
     - name: report
+      namespace: be-stag
+    - name: notification
       namespace: be-stag
