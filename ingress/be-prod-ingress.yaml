@@ -18,6 +18,9 @@ spec:
       allowOrigin: 
         - "https://service.xquare.app"
         - "https://admin.xquare.app"
+        - "https://admin.dsm-pick.com"
+        - "https://teacher.dsm-pick.com"
+        - "https://keeper.dsm-pick.com"
       allowMethods:
         - "GET"
         - "POST"
@@ -61,4 +64,6 @@ spec:
     - name: report
       namespace: be-prod
     - name: git
+      namespace: be-prod
+    - name: notification
       namespace: be-prod
