@@ -39,7 +39,7 @@ spec:
     - name: attachment
       namespace: be-prod
     - name: authority
-      namespace: be-stag
+      namespace: be-prod
     - name: cloud-config
       namespace: be-prod
     - name: contour-middleware
@@ -59,4 +59,6 @@ spec:
     - name: user
       namespace: be-prod
     - name: report
+      namespace: be-prod
+    - name: git
       namespace: be-prod
