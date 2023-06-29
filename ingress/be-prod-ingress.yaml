@@ -21,6 +21,8 @@ spec:
         - "https://admin.dsm-pick.com"
         - "https://teacher.dsm-pick.com"
         - "https://keeper.dsm-pick.com"
+        - "http://localhost:3000"
+        - "http://localhost:3001"
       allowMethods:
         - "GET"
         - "POST"
