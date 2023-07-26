@@ -1,0 +1,24 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: xquare-cert
+  namespace: istio-system
+spec:
+  isCA: true
+  duration: 87600h # 10 years
+  secretName: xquare-cert
+  commonName: xquare-cert
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  subject:
+    organizations:
+    - cluster.local
+    - cert-manager
+  dnsNames:
+    - "*.xquare.app"
+    - xquare.app
+  issuerRef:
+    name: letsencrypt-issuer
+    kind: ClusterIssuer
+  secretName: xquare-cert

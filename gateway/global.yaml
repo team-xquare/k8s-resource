@@ -1,0 +1,78 @@
+kind: Gateway
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: default-http-to-https
+spec:
+  servers:
+    - hosts:
+        - '*'
+      port:
+        name: http
+        number: 80
+        protocol: HTTP
+      tls:
+        httpsRedirect: true
+  selector:
+    app: istio-ingressgateway
+---
+kind: Gateway
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: https-gateway
+spec:
+  servers:
+    - hosts:
+        - '*.xquare.app'
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        credentialName: xquare.app
+        mode: SIMPLE
+  selector:
+    app: istio-ingressgateway
+---
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istiocontrolplane
+  namespace: istio-system
+spec:
+  profile: default
+  components:
+    ingressGateways:
+      - name: istio-ingressgateway
+        enabled: true 
+      - name: simple-ingressgateway
+        enabled: true
+        label:
+          service.istio.io/canonical-name: simple-ingressgateway
+        k8s:
+          service:
+            externalTrafficPolicy: Local
+          hpaSpec:
+            minReplicas: 2
+            maxReplicas: 10
+          service:
+            ports:
+              - name: http
+                port: 80
+                targetPort: 8080
+              - name: https
+                port: 443
+                targetPort: 8080
+              - name: helath
+                port: 15020
+                targetPort: 15020
+            type: NodePort 
+          serviceAnnotations:
+            service.beta.kubernetes.io/aws-load-balancer-type: 'nlb-ip'
+            service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+            service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+  values:
+    sidecarInjectorWebhook:
+      rewriteAppHTTPProbe: true
+    gateways:
+      istio-ingressgateway:
+        type: ClusterIP
