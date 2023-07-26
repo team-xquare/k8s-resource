@@ -1,7 +1,7 @@
 kind: Gateway
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: default-http-to-https
+  name: xquare-gateway
 spec:
   servers:
     - hosts:
@@ -12,15 +12,6 @@ spec:
         protocol: HTTP
       tls:
         httpsRedirect: true
-  selector:
-    app: istio-ingressgateway
----
-kind: Gateway
-apiVersion: networking.istio.io/v1alpha3
-metadata:
-  name: https-gateway
-spec:
-  servers:
     - hosts:
         - '*.xquare.app'
       port:
@@ -28,7 +19,7 @@ spec:
         number: 443
         protocol: HTTPS
       tls:
-        credentialName: xquare.app
+        credentialName: xquare-cert
         mode: SIMPLE
   selector:
     app: istio-ingressgateway
@@ -43,11 +34,9 @@ spec:
   components:
     ingressGateways:
       - name: istio-ingressgateway
-        enabled: true 
-      - name: simple-ingressgateway
         enabled: true
         label:
-          service.istio.io/canonical-name: simple-ingressgateway
+          service.istio.io/canonical-name: istio-ingressgateway
         k8s:
           service:
             externalTrafficPolicy: Local

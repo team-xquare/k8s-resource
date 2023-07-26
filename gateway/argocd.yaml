@@ -5,7 +5,7 @@ metadata:
   namespace: istio-system
 spec:
   gateways:
-    - argocd-server
+    - xquare-gateway
   hosts:
     - 'argo.xquare.com'
   http:
