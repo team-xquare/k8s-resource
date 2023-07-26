@@ -42,7 +42,7 @@ subjects:
   - apiGroup: ""
     kind: ServiceAccount
     name: {{ template "cert-manager.serviceAccountName" . }}
-    namespace: {{ .Release.Namespace }}
+    namespace: {{ include "cert-manager.namespace" . }}
 
 ---
 
@@ -70,7 +70,6 @@ rules:
   - apiGroups: [""]
     resources: ["events"]
     verbs: ["create", "patch"]
-
 ---
 
 # ClusterIssuer controller role
@@ -291,7 +290,7 @@ roleRef:
   name: {{ template "cert-manager.fullname" . }}-controller-issuers
 subjects:
   - name: {{ template "cert-manager.serviceAccountName" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "cert-manager.namespace" . }}
     kind: ServiceAccount
 
 ---
@@ -312,7 +311,7 @@ roleRef:
   name: {{ template "cert-manager.fullname" . }}-controller-clusterissuers
 subjects:
   - name: {{ template "cert-manager.serviceAccountName" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "cert-manager.namespace" . }}
     kind: ServiceAccount
 
 ---
@@ -333,7 +332,7 @@ roleRef:
   name: {{ template "cert-manager.fullname" . }}-controller-certificates
 subjects:
   - name: {{ template "cert-manager.serviceAccountName" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "cert-manager.namespace" . }}
     kind: ServiceAccount
 
 ---
@@ -354,7 +353,7 @@ roleRef:
   name: {{ template "cert-manager.fullname" . }}-controller-orders
 subjects:
   - name: {{ template "cert-manager.serviceAccountName" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "cert-manager.namespace" . }}
     kind: ServiceAccount
 
 ---
@@ -375,7 +374,7 @@ roleRef:
   name: {{ template "cert-manager.fullname" . }}-controller-challenges
 subjects:
   - name: {{ template "cert-manager.serviceAccountName" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "cert-manager.namespace" . }}
     kind: ServiceAccount
 
 ---
@@ -396,7 +395,7 @@ roleRef:
   name: {{ template "cert-manager.fullname" . }}-controller-ingress-shim
 subjects:
   - name: {{ template "cert-manager.serviceAccountName" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "cert-manager.namespace" . }}
     kind: ServiceAccount
 
 ---
@@ -489,7 +488,7 @@ roleRef:
   name: {{ template "cert-manager.fullname" . }}-controller-approve:cert-manager-io
 subjects:
   - name: {{ template "cert-manager.serviceAccountName" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "cert-manager.namespace" . }}
     kind: ServiceAccount
 
 ---
@@ -540,6 +539,6 @@ roleRef:
   name: {{ template "cert-manager.fullname" . }}-controller-certificatesigningrequests
 subjects:
   - name: {{ template "cert-manager.serviceAccountName" . }}
-    namespace: {{ .Release.Namespace | quote }}
+    namespace: {{ include "cert-manager.namespace" . }}
     kind: ServiceAccount
 {{- end }}
