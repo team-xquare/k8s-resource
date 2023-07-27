@@ -7,7 +7,7 @@ spec:
   isCA: true
   duration: 87600h # 10 years
   secretName: xquare-cert
-  commonName: xquare-cert
+  commonName: xquare.app
   privateKey:
     algorithm: ECDSA
     size: 256
