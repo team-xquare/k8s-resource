@@ -14,3 +14,20 @@ spec:
         host: argocd-server.argocd.svc.cluster.local
         port:
           number: 80
+---
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: kiali-server
+  namespace: istio-system
+spec:
+  gateways:
+    - xquare-gateway
+  hosts:
+    - 'kiali.xquare.com'
+  http:
+  - route:
+    - destination:
+        host: kiali.istio-system.svc.cluster.local
+        port:
+          number: 80
