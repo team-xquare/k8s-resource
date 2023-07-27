@@ -7,7 +7,7 @@ spec:
   gateways:
     - xquare-gateway
   hosts:
-    - 'argo.xquare.com'
+    - 'argo.xquare.app'
   http:
   - route:
     - destination:
@@ -24,7 +24,7 @@ spec:
   gateways:
     - xquare-gateway
   hosts:
-    - 'kiali.xquare.com'
+    - 'kiali.xquare.app'
   http:
   - route:
     - destination:
