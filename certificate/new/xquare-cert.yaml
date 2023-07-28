@@ -7,7 +7,7 @@ spec:
   isCA: true
   duration: 87600h # 10 years
   secretName: xquare-cert
-  commonName: xquare.app
+  commonName: argo-cd.xquare.app
   privateKey:
     algorithm: ECDSA
     size: 256
@@ -16,8 +16,8 @@ spec:
     - cluster.local
     - cert-manager
   dnsNames:
-    - "*.xquare.app"
-    - xquare.app
+    - argo-cd.xquare.app
+    - kia1i.xquare.app
   issuerRef:
     name: letsencrypt-issuer
     kind: ClusterIssuer
