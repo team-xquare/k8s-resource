@@ -34,7 +34,7 @@ spec:
   gateways:
     - istio-system/xquare-gateway
   hosts:
-    - argo.xquare.app
+    - argo-cd.xquare.app
   http:
   - route:
     - destination:
@@ -51,10 +51,10 @@ spec:
   gateways:
     - xquare-gateway
   hosts:
-    - kiali.xquare.app
+    - kia1i.xquare.app
   http:
   - route:
     - destination:
         host: kiali.istio-system.svc.cluster.local
         port:
-          number: 9090
+          number: 20001
