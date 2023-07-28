@@ -1,30 +1,3 @@
-kind: Gateway
-apiVersion: networking.istio.io/v1alpha3
-metadata:
-  name: xquare-gateway
-  namespace: istio-system
-spec:
-  servers:
-    - hosts:
-        - '*'
-      port:
-        name: http
-        number: 80
-        protocol: HTTP
-      tls:
-        httpsRedirect: true
-    - hosts:
-        - '*.xquare.app'
-      port:
-        name: https
-        number: 443
-        protocol: HTTPS
-      tls:
-        credentialName: xquare-cert
-        mode: SIMPLE
-  selector:
-    app: istio-ingressgateway
----
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 metadata:
@@ -35,6 +8,7 @@ spec:
   components:
     ingressGateways:
       - name: istio-ingressgateway
+        namespace: istio-system
         enabled: true
         label:
           service.istio.io/canonical-name: istio-ingressgateway
@@ -45,21 +19,23 @@ spec:
             minReplicas: 2
             maxReplicas: 10
           service:
+            type: LoadBalancer
             ports:
               - name: http
                 port: 80
                 targetPort: 8080
               - name: https
                 port: 443
-                targetPort: 8080
+                targetPort: 8443
               - name: helath
                 port: 15020
                 targetPort: 15020
-            type: NodePort 
           serviceAnnotations:
-            service.beta.kubernetes.io/aws-load-balancer-type: 'nlb'
-            service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+            service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+            service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+            service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
             service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+            service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
   values:
     sidecarInjectorWebhook:
       rewriteAppHTTPProbe: true
