@@ -1,0 +1,42 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: jwt-header-filter
+spec:
+  workloadSelector:
+    labels:
+      app: server
+  configPatches:
+    - applyTo: HTTP_FILTER
+      match:
+        context: SIDECAR_INBOUND
+        listener:
+          filterChain:
+            filter:
+              name: "envoy.http_connection_manager"
+              subFilter:
+                name: "envoy.filters.http.jwt_authn"
+      patch:
+        operation: MERGE
+        value:
+          name: envoy.lua
+          typed_config:
+            "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
+            inlineCode: |
+              function envoy_on_request(request_handle)
+                local jwt = request_handle:headers():get("Authorization")
+                local headers = request_handle:headers()
+                -- Parse JWT
+                local base64Url = jwt:gsub('-', '+'):gsub('_', '/')
+                local payload = base64Url:match('%.%w+%.([A-Za-z0-9%+/=]+)')
+                local decodedPayload = ngx.decode_base64(payload)
+                local jsonPayload = cjson.decode(decodedPayload)
+                
+                -- Extract 'role' and 'authorities' from the JWT payload
+                local role = jsonPayload["role"]
+                local authorities = jsonPayload["authorities"]
+                
+                -- Add 'role' and 'authorities' to the headers
+                headers:add("Request-User-Role", role)
+                headers:add("Request-User-Authorities", authorities)
+              end
