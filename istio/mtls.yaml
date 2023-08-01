@@ -1,8 +1,17 @@
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
-  name: default
+  name: default-peer-authentication
   namespace: istio-system
 spec:
   mtls:
     mode: STRICT
+---
+apiVersion: security.istio.io/v1beta1
+kind: PeerAuthentication
+metadata:
+  name: argocd-peer-authentication
+  namespace: argocd
+spec:
+  mtls:
+    mode: DISABLE
