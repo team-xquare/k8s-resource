@@ -51,7 +51,7 @@ spec:
   gateways:
     - xquare-gateway
   hosts:
-    - kia1i.xquare.app
+    - kiali.xquare.app
   http:
   - route:
     - destination:
