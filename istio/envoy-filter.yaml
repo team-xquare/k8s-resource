@@ -6,7 +6,7 @@ metadata:
 spec:
   workloadSelector:
     labels:
-      app: server
+      type: be
   configPatches:
     - applyTo: HTTP_FILTER
       match:
@@ -24,6 +24,24 @@ spec:
           typed_config:
             "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
             inlineCode: |
+              local function retrieve_jwt_secret()
+                local kubeconfig = os.getenv("KUBECONFIG")
+                local kube = require("resty.kubernetes.client")
+                local client, err = kube:new({config = kubeconfig})
+                if not client then
+                  ngx.log(ngx.ERR, "Failed to create Kubernetes client: ", err)
+                  return nil
+                end
+                local namespace = "xquare-user"
+                local secret_name = "xquare-jwt-secret"
+                local secret, err = client:read_namespaced_secret(secret_name, namespace)
+                if not secret then
+                  ngx.log(ngx.ERR, "Failed to retrieve secret: ", err)
+                  return nil
+                end
+                return secret.data["secret"]
+              end
+
               function decode_base64url(str)
                 local base64 = str:gsub("-", "+"):gsub("_", "/")
                 return ngx.decode_base64(base64)
@@ -64,7 +82,7 @@ spec:
                   request_handle:respond({[":status"] = "401"}, "Unauthorized - Invalid token")
                 else
                   local token = string.sub(auth_header, 8)
-                  local secret = 
+                  local secret = retrieve_jwt_secret()
                   local is_verified, json_claims = hs256_verify(token, secret)
                   if is_verified then
                     local claims = cjson.decode(json_claims)
@@ -97,25 +115,31 @@ metadata:
   namespace: istio-system
 spec:
   workloadSelector:
-    namespaces:
-      include: [namespace1, namespace2, namespace3]
-  filters:
-  - listenerMatch:
-      listenerType: GATEWAY
-      listenerProtocol: HTTP
-      listenerPort:
-        number: 80
-    filterName: envoy.lua
-    filterType: HTTP
-    filterConfig:
-      inlineCode: |
-        function envoy_on_request(request_handle)
-          local headers = request_handle:headers()
-          local source_ip = request_handle:remoteAddress():toString()
-          
-          if not string.match(source_ip, "^192.168.") and not string.match(source_ip, "^10.") and not string.match(source_ip, "^172.16.") then
-            headers:remove("Request-User-Id")
-            headers:remove("Request-User-Role")
-            headers:remove("Request-User-Authorities")
-          end
-        end
+    labels:
+      type: be
+  configPatches:
+    - applyTo: HTTP_FILTER
+      match:
+        context: GATEWAY
+        listener:
+          filterChain:
+            filter:
+              name: "envoy.http_connection_manager"
+              subFilter:
+                name: "envoy.filters.http.remove_header"
+      patch:
+        operation: INSERT_BEFORE
+        value:
+          name: envoy.lua
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua
+            inlineCode: |
+              function envoy_on_request(request_handle)
+                local headers = request_handle:headers()
+                local source_ip = request_handle:remoteAddress():toString()
+                if not string.match(source_ip, "^192.168.") and not string.match(source_ip, "^10.") and not string.match(source_ip, "^172.16.") then
+                  headers:remove("Request-User-Id")
+                  headers:remove("Request-User-Role")
+                  headers:remove("Request-User-Authorities")
+                end
+              end
