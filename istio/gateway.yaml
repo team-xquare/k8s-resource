@@ -58,3 +58,37 @@ spec:
         host: kiali.istio-system.svc.cluster.local
         port:
           number: 20001
+---
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: kiali-server
+  namespace: istio-system
+spec:
+  gateways:
+    - xquare-gateway
+  hosts:
+    - kiali.xquare.app
+  http:
+  - route:
+    - destination:
+        host: kiali.istio-system.svc.cluster.local
+        port:
+          number: 20001
+---
+kind: VirtualService
+apiVersion: networking.istio.io/v1alpha3
+metadata:
+  name: prometeus-server
+  namespace: istio-system
+spec:
+  gateways:
+    - xquare-gateway
+  hosts:
+    - prometheus.xquare.app
+  http:
+  - route:
+    - destination:
+        host: prometheus-server.prometheus.svc.cluster.local
+        port:
+          number: 80
