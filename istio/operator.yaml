@@ -5,6 +5,17 @@ metadata:
   namespace: istio-system
 spec:
   profile: default
+  meshConfig:
+    accessLogFile: /dev/stdout
+    extensionProviders:
+      - name: "xquare-middleware-grpc"
+        envoyExtAuthzGrpc:
+          service: "envoy-middleware-be-prod-service.xquare-prod.svc.cluster.local"
+          port: "9000"
+      - name: "sample-ext-authz-grpc"
+        envoyExtAuthzGrpc:
+          service: "ext-authz.xquare-prod.svc.cluster.local"
+          port: "9000"
   components:
     ingressGateways:
       - name: istio-ingressgateway
@@ -12,6 +23,13 @@ spec:
         enabled: true
         label:
           service.istio.io/canonical-name: istio-ingressgateway
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 2000m
+            memory: 1024Mi
         k8s:
           service:
             externalTrafficPolicy: Local
