@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: middleware-cert
+  namespace: xquare-prod
+spec:
+  dnsNames:
+    - jwt-middleware-be-prod-service
+  secretName: middleware-cert
+  issuerRef:
+    name: selfsigned
+    kind: ClusterIssuer
