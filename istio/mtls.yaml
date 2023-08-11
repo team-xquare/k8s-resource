@@ -1,26 +1,21 @@
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
 metadata:
-  name: default-peer-authentication
-  namespace: istio-system
+  name: xquare-mtls-rule
+  namespace: xquare-prod
 spec:
-  mtls:
-    mode: STRICT
+  host: "*.xquare-prod.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
 ---
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
 metadata:
-  name: argocd-peer-authentication
-  namespace: argocd
+  name: xquare-mtls-rule
+  namespace: xquare-stag
 spec:
-  mtls:
-    mode: DISABLE
----
-apiVersion: security.istio.io/v1beta1
-kind: PeerAuthentication
-metadata:
-  name: cert-manager-authentication
-  namespace: cert-manager
-spec:
-  mtls:
-    mode: DISABLE
+  host: "*.xquare-stag.svc.cluster.local"
+  trafficPolicy:
+    tls:
+      mode: ISTIO_MUTUAL
