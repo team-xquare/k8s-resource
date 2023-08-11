@@ -10,7 +10,7 @@ spec:
     extensionProviders:
       - name: "xquare-middleware-grpc"
         envoyExtAuthzGrpc:
-          service: "envoy-middleware-be-prod-service.xquare-prod.svc.cluster.local"
+          service: "envoy-middleware-be-prod.xquare-prod.svc.cluster.local"
           port: "9000"
       - name: "sample-ext-authz-grpc"
         envoyExtAuthzGrpc:
