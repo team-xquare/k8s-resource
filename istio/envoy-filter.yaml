@@ -1,116 +1,6 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
-  name: jwt-header-filter
-  namespace: istio-system
-spec:
-  workloadSelector:
-    labels:
-      type: be
-  configPatches:
-    - applyTo: HTTP_FILTER
-      match:
-        context: SIDECAR_INBOUND
-        listener:
-          filterChain:
-            filter:
-              name: "envoy.http_connection_manager"
-              subFilter:
-                name: "envoy.filters.http.jwt_authn"
-      patch:
-        operation: MERGE
-        value:
-          name: envoy.lua
-          typed_config:
-            "@type": "type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua"
-            inlineCode: |
-              local function retrieve_jwt_secret()
-                local kubeconfig = os.getenv("KUBECONFIG")
-                local kube = require("resty.kubernetes.client")
-                local client, err = kube:new({config = kubeconfig})
-                if not client then
-                  ngx.log(ngx.ERR, "Failed to create Kubernetes client: ", err)
-                  return nil
-                end
-                local namespace = "xquare-user"
-                local secret_name = "xquare-jwt-secret"
-                local secret, err = client:read_namespaced_secret(secret_name, namespace)
-                if not secret then
-                  ngx.log(ngx.ERR, "Failed to retrieve secret: ", err)
-                  return nil
-                end
-                return secret.data["secret"]
-              end
-
-              function decode_base64url(str)
-                local base64 = str:gsub("-", "+"):gsub("_", "/")
-                return ngx.decode_base64(base64)
-              end
-
-              function hs256_verify(token, secret)
-                local sep, _ = token:find('%.') 
-
-                local encoded_header = token:sub(0, sep-1)
-                local encoded_payload = token:sub(sep+1, token:len())
-
-                local raw_signature = token:match("%w+$")
-                local sep, _ = raw_signature:find('%-')
-                local signature = raw_signature:sub(sep+1, raw_signature:len())
-
-                local header = cjson.decode(decode_base64url(encoded_header))
-                local payload = cjson.decode(decode_base64url(encoded_payload))
-
-                if header and header.alg == "HS256" then
-                  local resty_hmac = require "resty.hmac"
-                  local hmac = resty_hmac:new(secret, resty_hmac.ALGOS.SHA256)
-
-                  local derived_signature, _ = hmac:generate_signature(encoded_header .. "." .. encoded_payload)
- 
-                  if signature ~= ngx.encode_base64(derived_signature):gsub('+', '-'):gsub('/', '_') then
-                    return false, "failed signature verification"
-                  end
-
-                  return true, cjson.encode(payload)
-                else
-                  return false, "unsupported algorithm"
-                end
-              end
-
-              function envoy_on_request(request_handle)
-                local auth_header = request_handle:headers():get("authorization")
-                if not auth_header or string.sub(auth_header, 1, 7):lower() ~= "bearer " then
-                  request_handle:respond({[":status"] = "401"}, "Unauthorized - Invalid token")
-                else
-                  local token = string.sub(auth_header, 8)
-                  local secret = retrieve_jwt_secret()
-                  local is_verified, json_claims = hs256_verify(token, secret)
-                  if is_verified then
-                    local claims = cjson.decode(json_claims)
-                    local user_id = claims["sub"] or ""
-                    local user_role = claims["role"] or ""
-                    local user_authorities = claims["authorities"]
-                    
-                    if user_authorities and type(user_authorities) == "table" then
-                      user_authorities = table.concat(user_authorities, ' ')
-                    else
-                      user_authorities = ""
-                    end
-
-                    local headers = request_handle:headers()
-                    headers:add("Request-User-Id", user_id)
-                    headers:add("Request-User-Role", user_role)
-                    headers:add("Request-User-Authorities", user_authorities)
-                  else
-                    request_handle:respond({[":status"] = "401"}, "Unauthorized - Invalid token")
-                  end
-                end
-              end
-
----
-
-apiVersion: networking.istio.io/v1alpha3
-kind: EnvoyFilter
-metadata:
   name: remove-headers-filter
   namespace: istio-system
 spec:
@@ -124,9 +14,9 @@ spec:
         listener:
           filterChain:
             filter:
-              name: "envoy.http_connection_manager"
+              name: "envoy.filters.network.http_connection_manager"
               subFilter:
-                name: "envoy.filters.http.remove_header"
+                name: "envoy.filters.http.router"
       patch:
         operation: INSERT_BEFORE
         value:
