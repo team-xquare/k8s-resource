@@ -10,10 +10,8 @@ spec:
   action: CUSTOM
   provider:
     name: sample-ext-authz-grpc
-  rules: 
-  - from: 
-    - source: 
-        namespaces: ["xquare-prod", "xquare-stag"]
+  rules:
+  - {}
 ---
 apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
@@ -27,7 +25,5 @@ spec:
   action: CUSTOM
   provider:
     name: sample-ext-authz-grpc
-  rules: 
-  - from: 
-    - source: 
-        namespaces: ["xquare-prod", "xquare-stag"]
+  rules:
+  - {}
