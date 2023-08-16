@@ -74,7 +74,9 @@ image:
 ## @param objstoreConfig The [objstore configuration](https://thanos.io/tip/thanos/storage.md/)
 ## Specify content for objstore.yml
 ##
-objstoreConfig: ""
+objstoreConfig:
+  key: "objstore.yml"
+  name: "thanos-objstore-secret"
 ## @param indexCacheConfig The [index cache configuration](https://thanos.io/tip/components/store.md/)
 ## Specify content for index-cache.yml
 ##
@@ -653,7 +655,7 @@ query:
   ingress:
     ## @param query.ingress.enabled Enable ingress controller resource
     ##
-    enabled: false
+    enabled: true
     ## @param query.ingress.hostname Default host for the ingress resource
     ##
     hostname: thanos.local
@@ -752,7 +754,7 @@ query:
     grpc:
       ## @param query.ingress.grpc.enabled Enable ingress controller resource (GRPC)
       ##
-      enabled: false
+      enabled: true
       ## @param query.ingress.grpc.hostname Default host for the ingress resource (GRPC)
       ##
       hostname: thanos-grpc.local
@@ -2130,7 +2132,7 @@ compactor:
   persistence:
     ## @param compactor.persistence.enabled Enable data persistence using PVC(s) on Thanos Compactor pods
     ##
-    enabled: true
+    enabled: false
     ## @param compactor.persistence.storageClass Specify the `storageClass` used to provision the volume
     ## If defined, storageClassName: <storageClass>
     ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -2497,7 +2499,7 @@ storegateway:
   persistence:
     ## @param storegateway.persistence.enabled Enable data persistence using PVC(s) on Thanos Store Gateway pods
     ##
-    enabled: true
+    enabled: false
     ## @param storegateway.persistence.storageClass Specify the `storageClass` used to provision the volume
     ## If defined, storageClassName: <storageClass>
     ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -3140,7 +3142,7 @@ ruler:
   persistence:
     ## @param ruler.persistence.enabled Enable data persistence using PVC(s) on Thanos Ruler pods
     ##
-    enabled: true
+    enabled: false
     ## @param ruler.persistence.storageClass Specify the `storageClass` used to provision the volume
     ## If defined, storageClassName: <storageClass>
     ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -3692,7 +3694,7 @@ receive:
   persistence:
     ## @param receive.persistence.enabled Enable data persistence using PVC(s) on Thanos Receive pods
     ##
-    enabled: true
+    enabled: false
     ## @param receive.persistence.storageClass Specify the `storageClass` used to provision the volume
     ## If defined, storageClassName: <storageClass>
     ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -4096,16 +4098,16 @@ receiveDistributor:
 metrics:
   ## @param metrics.enabled Enable the export of Prometheus metrics
   ##
-  enabled: false
+  enabled: true
   ## Prometheus Operator ServiceMonitor configuration
   ##
   serviceMonitor:
     ## @param metrics.serviceMonitor.enabled Specify if a ServiceMonitor will be deployed for Prometheus Operator
     ##
-    enabled: false
+    enabled: true
     ## @param metrics.serviceMonitor.namespace Namespace in which Prometheus is running
     ##
-    namespace: ""
+    namespace: "monitoring"
     ## @param metrics.serviceMonitor.labels Extra labels for the ServiceMonitor
     ##
     labels: {}
@@ -4274,7 +4276,7 @@ minio:
   ## @param minio.enabled Enable/disable MinIO&reg; chart installation
   ## to be used as an objstore for Thanos
   ##
-  enabled: false
+  enabled: true
   ## MinIO&reg; authentication parameters
   ##
   auth:
