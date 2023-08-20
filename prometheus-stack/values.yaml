@@ -2533,12 +2533,7 @@ prometheus:
 
     ## Service type
     ##
-    type: LoadBalancer
-
-    ## Port to expose on each node
-    ##
-    nodePort: 30901
-    httpNodePort: 30902
+    type: ClusterIP
 
   ## Configuration for Prometheus service
   ##

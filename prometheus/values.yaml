@@ -509,7 +509,7 @@ server:
       servicePort: 80
       ## Enable gRPC port on service to allow auto discovery with thanos-querier
       gRPC:
-        enabled: false
+        enabled: true
         servicePort: 10901
         # nodePort: 10901
 
@@ -611,7 +611,7 @@ server:
 
     ## Enable gRPC port on service to allow auto discovery with thanos-querier
     gRPC:
-      enabled: false
+      enabled: true
       servicePort: 10901
       # nodePort: 10901
 
