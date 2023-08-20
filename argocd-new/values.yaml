@@ -1787,10 +1787,6 @@ server:
     labels: {}
     # -- Server service type
     type: ClusterIP
-    # -- Server service http port for NodePort service type (only if `server.service.type` is set to "NodePort")
-    nodePortHttp: 30080
-    # -- Server service https port for NodePort service type (only if `server.service.type` is set to "NodePort")
-    nodePortHttps: 30443
     # -- Server service http port
     servicePortHttp: 80
     # -- Server service https port
@@ -1799,18 +1795,6 @@ server:
     servicePortHttpName: http
     # -- Server service https port name, can be used to route traffic via istio
     servicePortHttpsName: https
-    # -- Server service https port appProtocol. (should be upper case - i.e. HTTPS)
-    # servicePortHttpsAppProtocol: HTTPS
-    # -- LoadBalancer will get created with the IP specified in this field
-    loadBalancerIP: ""
-    # -- Source IP ranges to allow access to service from
-    loadBalancerSourceRanges: []
-    # -- Server service external IPs
-    externalIPs: []
-    # -- Denotes if this Service desires to route external traffic to node-local or cluster-wide endpoints
-    externalTrafficPolicy: ""
-    # -- Used to maintain session affinity. Supports `ClientIP` and `None`
-    sessionAffinity: ""
 
   ## Server metrics service configuration
   metrics:
