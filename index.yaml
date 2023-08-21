@@ -6,7 +6,7 @@ entries:
         - "[Added]: Support annotations in argocd-configs secrets"
     apiVersion: v2
     appVersion: v2.3.4
-    created: "2023-08-21T12:12:24.071721+09:00"
+    created: "2023-08-22T15:15:40.874091+09:00"
     dependencies:
     - condition: redis-ha.enabled
       name: redis-ha
@@ -33,7 +33,7 @@ entries:
   aws-ebs-csi-driver:
   - apiVersion: v2
     appVersion: 1.21.0
-    created: "2023-08-21T12:12:24.075755+09:00"
+    created: "2023-08-22T15:15:40.875987+09:00"
     description: A Helm chart for AWS EBS CSI Driver
     digest: 3544cac187e1c3922e31fe675a54d1a55ac4b7ac61e7b3067d9abbb5d8c891a8
     home: https://github.com/kubernetes-sigs/aws-ebs-csi-driver
@@ -57,7 +57,7 @@ entries:
       artifacthub.io/prerelease: '{{IS_PRERELEASE}}'
     apiVersion: v1
     appVersion: v1.12.3
-    created: "2023-08-21T12:12:24.078458+09:00"
+    created: "2023-08-22T15:15:40.878452+09:00"
     description: A Helm chart for cert-manager
     digest: 578d82da0c1e36cb1731859f67782dfd48c95d80d14c37646b08e9778bc38372
     home: https://github.com/cert-manager/cert-manager
@@ -80,15 +80,26 @@ entries:
     version: v1.12.3
   karpenter:
   - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2023-08-21T12:12:24.079427+09:00"
-    description: A Helm chart for Kubernetes
-    digest: 3962100f4de3589e5a6f973c94a0b215bd0642f90345cd2e53f7e342526a32fa
+    appVersion: 0.30.0
+    created: "2023-08-22T15:15:40.879613+09:00"
+    description: A Helm chart for Karpenter, an open-source node provisioning project
+      built for Kubernetes.
+    digest: 01c8e8cfd9e74c51993cfef934160d9f3cc8bdfbfcdd54c10d0a81bab76c678c
+    home: https://karpenter.sh/
+    icon: https://repository-images.githubusercontent.com/278480393/dab059c8-caa1-4b55-aaa7-3d30e47a5616
+    keywords:
+    - cluster
+    - node
+    - scheduler
+    - autoscaling
+    - lifecycle
     name: karpenter
+    sources:
+    - https://github.com/aws/karpenter/
     type: application
     urls:
-    - karpenter-0.1.0.tgz
-    version: 0.1.0
+    - karpenter-0.30.0.tgz
+    version: 0.30.0
   kube-prometheus-stack:
   - annotations:
       artifacthub.io/license: Apache-2.0
@@ -100,7 +111,7 @@ entries:
       artifacthub.io/operator: "true"
     apiVersion: v2
     appVersion: v0.66.0
-    created: "2023-08-21T12:12:24.103474+09:00"
+    created: "2023-08-22T15:15:40.901702+09:00"
     dependencies:
     - condition: crds.enabled
       name: crds
@@ -163,7 +174,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 0.31.0
-    created: "2023-08-21T12:12:24.112517+09:00"
+    created: "2023-08-22T15:15:40.912012+09:00"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -194,4 +205,4 @@ entries:
     urls:
     - thanos-12.11.0.tgz
     version: 12.11.0
-generated: "2023-08-21T12:12:24.063474+09:00"
+generated: "2023-08-22T15:15:40.865906+09:00"
