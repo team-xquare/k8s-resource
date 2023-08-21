@@ -153,8 +153,7 @@ awsAccessSecret:
 controller:
   volumeModificationFeature:
     enabled: false
-  additionalArgs:
-    - --aws-sdk-debug-log=true
+  additionalArgs: {}
   sdkDebugLog: false
   loggingFormat: text
   affinity:
