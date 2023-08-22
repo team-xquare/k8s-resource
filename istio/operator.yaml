@@ -23,13 +23,6 @@ spec:
         enabled: true
         label:
           service.istio.io/canonical-name: istio-ingressgateway
-        resources:
-          requests:
-            cpu: 100m
-            memory: 128Mi
-          limits:
-            cpu: 2000m
-            memory: 1024Mi
         k8s:
           service:
             externalTrafficPolicy: Local
