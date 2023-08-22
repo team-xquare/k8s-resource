@@ -1,35 +1,38 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
-  name: remove-headers-filter
+  name: global-cors
   namespace: istio-system
 spec:
-  workloadSelector:
-    labels:
-      type: be
   configPatches:
     - applyTo: HTTP_FILTER
       match:
-        context: GATEWAY
+        context: SIDECAR_OUTBOUND 
         listener:
           filterChain:
             filter:
-              name: "envoy.filters.network.http_connection_manager"
-              subFilter:
-                name: "envoy.filters.http.router"
+              name: "envoy.filters.network.tcp_proxy"
       patch:
-        operation: INSERT_BEFORE
+        operation: INSERT_AFTER
         value:
-          name: envoy.lua
+          name: envoy.filters.http.cors
           typed_config:
-            "@type": type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua
-            inlineCode: |
-              function envoy_on_request(request_handle)
-                local headers = request_handle:headers()
-                local source_ip = request_handle:remoteAddress():toString()
-                if not string.match(source_ip, "^192.168.") and not string.match(source_ip, "^10.") and not string.match(source_ip, "^172.16.") then
-                  headers:remove("Request-User-Id")
-                  headers:remove("Request-User-Role")
-                  headers:remove("Request-User-Authorities")
-                end
-              end
+            "@type": "type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors"
+            allow_origin_string_match:
+              - exact: "https://service.xquare.app"
+              - exact: "https://admin.xquare.app"
+              - exact: "https://admin.dsm-pick.com"
+              - exact: "https://teacher.dsm-pick.com"
+              - exact: "https://keeper.dsm-pick.com"
+              - exact: "http://localhost:3000"
+              - exact: "http://localhost:3001"
+            allow_methods:
+              - "GET"
+              - "POST"
+              - "PUT"
+              - "PATCH"
+              - "DELETE"
+              - "OPTIONS"
+            allow_headers: "content-type, authorization, accept, accept-encoding, Refresh-Token, X-Not-Using-Xquare-Auth"
+            expose_headers:
+              - "Access-Control-Allow-Credentials"
