@@ -30,22 +30,22 @@ jobs:
       - name: Add helm repo
         working-directory: helm
         run: |
-          function random_name() {
-            echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 12 | head -n 1)
-          }
-
           find . -mindepth 1 -maxdepth 1 -type d |
           while IFS= read -r package_directory; do
               helm dependency update $(basename "$package_directory")
           done
 
+          find . -mindepth 2 -maxdepth 2 -name "Chart.lock" |
           while IFS= read -r chart_lock_file; do
+
+            yq eval '.dependencies[] | .repository' "$chart_lock_file" |
             while IFS= read -r repo; do
               if [ -n "$repo" ]; then
-                helm repo add $random_name() $repo || true
+                random_name=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 12 | head -n 1)
+                helm repo add $random_name $repo || true
               fi
-            done <<< $(yq eval '.dependencies[] | .repository' "$chart_lock_file")  # repos
-          done <<< "$(find . -name "Chart.lock") # chart lock files
+            done
+          done
 
       - name: Helm build
         working-directory: helm
@@ -76,7 +76,7 @@ jobs:
       - name: Commit The Chart Realease
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "update :: new chart realease"
+          commit_message: ${{ github.event.head_commit.message }}
           branch: gh-pages
           commit_options: '--no-verify --signoff'
           repository: .
