@@ -86,6 +86,8 @@ jobs:
         with:
           commit_message: ${{ github.event.head_commit.message }}
           commit_options: '--no-verify --signoff'
+          branch: gh-pages
+          skip_checkout: true
           repository: .
           commit_user_name: XQUARE GitOps Bot
           commit_user_email: teamxquare@gmail.com
