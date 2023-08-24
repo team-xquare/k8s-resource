@@ -30,18 +30,14 @@ jobs:
       - name: Helm package
         id: helm_package
         run: |
-          find helm -mindepth 1 -maxdepth 1 -type d |
-          while IFS= read -r package_directory; do
-              package_name=$(basename "$package_directory")
-              cd helm/$package_name
-              helm dependency update .
-              helm dependency build .
-              cd ../../
-          done
-
-          helm package $(find helm -type d -mindepth 1 -maxdepth 1 -exec basename {} \; | tr '\n' ' ')
+          package_dir=$(find helm -type d -mindepth 1 -maxdepth 1 -exec basename {} \; | tr '\n' ' ')
+          echo $package_dir
+          cd helm
+          helm package $package_dir
+          cd ../
 
           package_list=$(find . -type f -mindepth 1 -maxdepth 1 -name "*.tgz" -exec basename {} \; | tr '\n' ' ')
+          echo $package_list
           echo "package_list=$package_list" >> $GITHUB_OUTPUT
           
       - name: Checkout gh-pages branch
