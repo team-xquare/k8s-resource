@@ -26,16 +26,40 @@ jobs:
         uses: azure/setup-helm@v3.5
         with:
           version: v3.10.1 # Also update in lint-and-test.yaml
-          
-      - name: Helm package
+
+      - name: Add helm repo
+        working-directory: helm
+        run: |
+          function random_name() {
+            echo $(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 12 | head -n 1)
+          }
+
+          find . -mindepth 1 -maxdepth 1 -type d |
+          while IFS= read -r package_directory; do
+              helm dependency update $(basename "$package_directory")
+          done
+
+          while IFS= read -r chart_lock_file; do
+            while IFS= read -r repo; do
+              if [ -n "$repo" ]; then
+                helm repo add $random_name() $repo || true
+              fi
+            done <<< $(yq eval '.dependencies[] | .repository' "$chart_lock_file")  # repos
+          done <<< "$(find . -name "Chart.lock") # chart lock files
+
+      - name: Helm build
+        working-directory: helm
+        run: |
+          find . -mindepth 1 -maxdepth 1 -type d |
+          while IFS= read -r package_directory; do
+              dir_name=$(basename "$package_directory")
+              helm dependency build $dir_name
+              helm package $dir_name
+          done
+
+      - name: Get Helm package
         id: helm_package
         run: |
-          package_dir=$(find helm -type d -mindepth 1 -maxdepth 1 -exec basename {} \; | tr '\n' ' ')
-          echo $package_dir
-          cd helm
-          helm package $package_dir
-          cd ../
-
           package_list=$(find . -type f -mindepth 1 -maxdepth 1 -name "*.tgz" -exec basename {} \; | tr '\n' ' ')
           echo $package_list
           echo "package_list=$package_list" >> $GITHUB_OUTPUT
@@ -52,7 +76,7 @@ jobs:
       - name: Commit The Chart Realease
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "update :: new realease"
+          commit_message: "update :: new chart realease"
           branch: gh-pages
           commit_options: '--no-verify --signoff'
           repository: .
