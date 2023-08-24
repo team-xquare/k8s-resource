@@ -31,13 +31,14 @@ jobs:
         id: helm-changes
         run: |
           changed_helm_packages=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "^helm/")
+          echo "$changed_helm_packages"
           echo "changed-helm-packages=$changed_helm_packages" >> $GITHUB_OUTPUT
 
       - name: Add helm repo
         working-directory: helm
         run: |
           ${{ steps.helm-changes.outputs.changed-helm-packages }} |
-          while IFS=$'\n' read -r package_directory; do
+          while IFS=$'\n' read -r package_directory; do 
 
             helm dependency update $(basename "$package_directory")
             find $package_directory -mindepth 2 -maxdepth 2 -name "Chart.lock"
@@ -62,7 +63,6 @@ jobs:
           done
 
       - name: Get Helm package
-        id: helm_package
         run: |
           package_list=$(find . -type f -mindepth 1 -maxdepth 1 -name "*.tgz" -exec basename {} \; | tr '\n' ' ')
           echo $package_list
@@ -74,14 +74,17 @@ jobs:
           ref: gh-pages
 
       - name: Get *.tgz files
+        if: ${{ steps.helm_package.outputs.package_list }}
         run: | 
           git checkout main -- ${{ steps.helm_package.outputs.package_list }}
       
       - name: Helm repo index
+        if: ${{ steps.helm_package.outputs.package_list }}
         run: |
           helm repo index .
 
       - name: Commit The Chart Realease
+        if: ${{ steps.helm_package.outputs.package_list }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: ${{ github.event.head_commit.message }}
