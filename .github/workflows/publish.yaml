@@ -25,18 +25,22 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v3.5
         with:
-          version: v3.10.1 # Also update in lint-and-test.yaml
+          version: v3.10.1
+
+      - name: Find Changed Helm Packages
+        id: helm-changes
+        run: |
+          changed_helm_packages=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "^helm/")
+          echo "changed-helm-packages=$changed_helm_packages" >> $GITHUB_OUTPUT
 
       - name: Add helm repo
         working-directory: helm
         run: |
-          find . -mindepth 1 -maxdepth 1 -type d |
-          while IFS= read -r package_directory; do
-              helm dependency update $(basename "$package_directory")
-          done
+          ${{ steps.helm-changes.outputs.changed-helm-packages }} |
+          while IFS=$'\n' read -r package_directory; do
 
-          find . -mindepth 2 -maxdepth 2 -name "Chart.lock" |
-          while IFS= read -r chart_lock_file; do
+            helm dependency update $(basename "$package_directory")
+            find $package_directory -mindepth 2 -maxdepth 2 -name "Chart.lock"
 
             yq eval '.dependencies[] | .repository' "$chart_lock_file" |
             while IFS= read -r repo; do
@@ -72,6 +76,11 @@ jobs:
       - name: Get *.tgz files
         run: | 
           git checkout main -- ${{ steps.helm_package.outputs.package_list }}
+      
+      - name: Helm repo index
+        run: |
+          helm repo index .
+          git add .
 
       - name: Commit The Chart Realease
         uses: stefanzweifel/git-auto-commit-action@v4
