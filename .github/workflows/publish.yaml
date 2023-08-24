@@ -30,7 +30,7 @@ jobs:
       - name: Find Changed Helm Packages
         id: helm-changes
         run: |
-          changed_helm_packages=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "^helm/")
+          changed_helm_packages=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^helm/' | cut -d/ -f1-2 | sort -u)
           echo "$changed_helm_packages"
           echo "changed-helm-packages=$changed_helm_packages" >> $GITHUB_OUTPUT
 
