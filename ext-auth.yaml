@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ext-authz
+  namespace: xquare-prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ext-authz
+  template:
+    metadata:
+      labels:
+        app: ext-authz
+    spec:
+      containers:
+        - name: ext-authz
+          image: 471407337433.dkr.ecr.ap-northeast-2.amazonaws.com/envoy-middleware-be-prod:prod-adbec77224a17a1125155f9e6cf19a656a599aec
+          ports:
+            - containerPort: 9000
+              protocol: TCP
+          resources: {}
+          imagePullPolicy: IfNotPresent
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ext-authz
+  name: ext-authz
+  namespace: xquare-prod
+spec:
+  ports:
+  - name: http
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  - name: grpc
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: ext-authz
+  sessionAffinity: None
+  type: ClusterIP

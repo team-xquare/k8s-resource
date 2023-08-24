@@ -12,7 +12,7 @@ Before you can install the chart you will need to authenticate your Helm client.
 ```shell
 aws ecr-public get-login-password \
      --region us-east-1 | helm registry login \
-     --username AWS \
+     --username AWS \ 
      --password-stdin public.ecr.aws
 ```
 
