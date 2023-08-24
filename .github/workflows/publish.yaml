@@ -13,70 +13,82 @@ permissions:
 jobs:
   publish:
     permissions:
-      contents: write  # for helm/chart-releaser-action to push chart release and create a release
-      packages: write  # to push OCI chart package to GitHub Registry
+      contents: write
+      packages: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+        uses: actions/checkout@v3.5.3
         with:
           fetch-depth: 0
 
       - name: Install Helm
-        uses: azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3.5
+        uses: azure/setup-helm@v3.5
         with:
-          version: v3.10.1 # Also update in lint-and-test.yaml
+          version: v3.10.1
 
-      - name: Add dependency chart repos
+      - name: Find Changed Helm Packages
+        id: helm-changes
         run: |
-          helm repo add dandydeveloper https://dandydeveloper.github.io/charts/
+          changed_helm_packages=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep "^helm/")
+          echo "changed-helm-packages=$changed_helm_packages" >> $GITHUB_OUTPUT
 
-      - name: Configure Git
+      - name: Add helm repo
+        working-directory: helm
         run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
+          ${{ steps.helm-changes.outputs.changed-helm-packages }} |
+          while IFS=$'\n' read -r package_directory; do
 
-      ## This is required to consider the old Circle-CI Index and to stay compatible with all the old releases.
-      - name: Fetch current Chart Index
-        run: |
-          git checkout origin/gh-pages index.yaml
+            helm dependency update $(basename "$package_directory")
+            find $package_directory -mindepth 2 -maxdepth 2 -name "Chart.lock"
 
-      # The GitHub repository secret `PGP_PRIVATE_KEY` contains the private key
-      # in ASCII-armored format. To export a (new) key, run this command:
-      # `gpg --armor --export-secret-key <my key>`
-      # - name: Prepare PGP key
-      #   run: |
-      #     IFS=""
-      #     echo "$PGP_PRIVATE_KEY" | gpg --dearmor > $HOME/secring.gpg
-      #     echo "$PGP_PASSPHRASE" > $HOME/passphrase.txt
-
-      #     # Tell chart-releaser-action where to find the key and its passphrase
-      #     echo "CR_KEYRING=$HOME/secring.gpg" >> "$GITHUB_ENV"
-      #     echo "CR_PASSPHRASE_FILE=$HOME/passphrase.txt" >> "$GITHUB_ENV"
-      #   env:
-      #     PGP_PRIVATE_KEY: "${{ secrets.PGP_PRIVATE_KEY }}"
-      #     PGP_PASSPHRASE: "${{ secrets.PGP_PASSPHRASE }}"
-
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@be16258da8010256c6e82849661221415f031968 # v1.5.0
-        with:
-          config: "./.github/configs/cr.yaml"
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-
-      - name: Login to GHCR
-        uses: docker/login-action@465a07811f14bebb1938fbed4728c6a1ff8901fc # v2.2.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Push chart to GHCR
-        run: |
-          shopt -s nullglob
-          for pkg in .cr-release-packages/*.tgz; do
-            if [ -z "${pkg:-}" ]; then
-              break
-            fi
-            helm push "${pkg}" oci://ghcr.io/${{ github.repository }}
+            yq eval '.dependencies[] | .repository' "$chart_lock_file" |
+            while IFS= read -r repo; do
+              if [ -n "$repo" ]; then
+                random_name=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 12 | head -n 1)
+                helm repo add $random_name $repo || true
+              fi
+            done
           done
+
+      - name: Helm build
+        working-directory: helm
+        run: |
+          find . -mindepth 1 -maxdepth 1 -type d |
+          while IFS= read -r package_directory; do
+              dir_name=$(basename "$package_directory")
+              helm dependency build $dir_name
+              helm package $dir_name
+          done
+
+      - name: Get Helm package
+        id: helm_package
+        run: |
+          package_list=$(find . -type f -mindepth 1 -maxdepth 1 -name "*.tgz" -exec basename {} \; | tr '\n' ' ')
+          echo $package_list
+          echo "package_list=$package_list" >> $GITHUB_OUTPUT
+          
+      - name: Checkout gh-pages branch
+        uses: actions/checkout@v2
+        with:
+          ref: gh-pages
+
+      - name: Get *.tgz files
+        run: | 
+          git checkout main -- ${{ steps.helm_package.outputs.package_list }}
+      
+      - name: Helm repo index
+        run: |
+          helm repo index .
+
+      - name: Commit The Chart Realease
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: ${{ github.event.head_commit.message }}
+          commit_options: '--no-verify --signoff'
+          branch: gh-pages
+          skip_checkout: true
+          repository: .
+          commit_user_name: XQUARE GitOps Bot
+          commit_user_email: teamxquare@gmail.com
+          commit_author: XQUARE GitOps Bot <teamxquare@gmail.com>
