@@ -92,7 +92,7 @@ serviceAccount:
   create: true
 
   # -- Annotations to be added to the service account.
-  annotations: {}
+  annotations: {} 
 
   # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template.
@@ -102,7 +102,7 @@ rbac:
   # -- Specifies whether RBAC resources should be created.
   # If disabled, the operator is responsible for creating the necessary resources based on the templates.
   create: true
-
+ 
   # -- Specifies which RBAC resources should be created.
   # If disabled, the operator is responsible for creating the necessary resources (ClusterRole and RoleBinding or CRD's)
   createClusterScoped: true
