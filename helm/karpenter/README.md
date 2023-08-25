@@ -7,7 +7,7 @@ A Helm chart for Karpenter, an open-source node provisioning project built for K
 ## Documentation
 
 For full Karpenter documentation please checkout [https://karpenter.sh](https://karpenter.sh/docs/).
-
+ 
 ## Installing the Chart
 
 You can follow the detailed installation instruction in the [documentation](https://karpenter.sh/docs/getting-started/getting-started-with-karpenter/#install) which covers the Karpenter prerequisites and installation options. The outcome of these instructions should result in something like the following command.

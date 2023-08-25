@@ -6,7 +6,7 @@
 * Enable customization of aws-secret name and keys in Helm Chart ([#1668](https://github.com/kubernetes-sigs/aws-ebs-csi-driver/pull/1668), [@AndrewSirenko](https://github.com/AndrewSirenko))
 * The sidecars have been updated. The new versions are:
     - csi-snapshotter: `v6.2.2`
-
+ 
 ## v2.20.0
 * Bump driver version to `v1.20.0`
 * Enable leader election in csi-resizer sidecar ([#1606](https://github.com/kubernetes-sigs/aws-ebs-csi-driver/pull/1606), [@rdpsin](https://github.com/rdpsin))

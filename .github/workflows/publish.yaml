@@ -30,7 +30,7 @@ jobs:
       - name: Find Changed Helm Packages
         id: helm-changes
         run: |
-          changed_helm_packages=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^helm/' | cut -d/ -f1-2 | sort -u)
+          changed_helm_packages=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^helm/' | cut -d/ -f1-2 | tr '\n' ' ')
           echo "$changed_helm_packages"
           echo "changed-helm-packages=$changed_helm_packages" >> $GITHUB_OUTPUT
 
@@ -48,14 +48,14 @@ jobs:
                 helm repo add $random_name $repo || true
               fi
             done
-          done <<< ${{ steps.helm-changes.outputs.changed-helm-packages }}
+          done <<< "${{ steps.helm-changes.outputs.changed-helm-packages }}"
 
       - name: Helm build
         run: |
           while IFS= read -r package_directory; do
               helm dependency build $package_directory
               helm package $package_directory
-          done <<< ${{ steps.helm-changes.outputs.changed-helm-packages }}
+          done <<< "${{ steps.helm-changes.outputs.changed-helm-packages }}"
 
       - name: Get Helm package
         id: helm_package

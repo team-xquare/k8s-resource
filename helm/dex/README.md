@@ -66,7 +66,7 @@ helm install \
 ```
 
 The next step is setting up an [issuer](https://cert-manager.io/docs/concepts/issuer/) (eg. [Let's Encrypt](https://letsencrypt.org/)):
-
+ 
 ```shell
 cat <<EOF | kubectl apply -f -
 apiVersion: cert-manager.io/v1
