@@ -1,0 +1,46 @@
+apiVersion: install.istio.io/v1alpha1
+kind: IstioOperator
+metadata:
+  name: istiocontrolplane
+  namespace: istio-system
+spec:
+  profile: {{ .Values.profile }}
+  meshConfig:
+    accessLogFile: /dev/stdout
+    extensionProviders:
+    {{- range .Values.operator.extensionProviders }}
+      - name: {{ .name }}
+        envoyExtAuthzGrpc:
+          service: {{ .envoyExtAuthzGrpc.service }}
+          port: {{ .envoyExtAuthzGrpc.port }}
+    {{- end }}
+  components:
+    ingressGateways:
+      - name: istio-ingressgateway
+        namespace: istio-system
+        enabled: true
+        label:
+          service.istio.io/canonical-name: istio-ingressgateway
+        k8s:
+          service:
+            externalTrafficPolicy: {{ .Values.operator.k8s.service.externalTrafficPolicy }}
+          hpaSpec:
+            minReplicas: {{ .Values.operator.hpaSpec.minReplicas }}
+            maxReplicas: {{ .Values.operator.hpaSpec.maxReplicas }}
+          service:
+            type: LoadBalancer
+            ports:
+            {{- range .Values.k8s.servicePorts }}
+            - name: {{ .name }}
+              port: {{ .port }}
+              targetPort: {{ .targetPort }}
+          {{- with .Values.k8s.serviceAnnotations }}
+          serviceAnnotations:
+          {{ toYaml . | indent 12 }}
+          {{- end }}
+  values:
+    sidecarInjectorWebhook:
+      rewriteAppHTTPProbe: true
+    gateways:
+      istio-ingressgateway:
+        type: ClusterIP
