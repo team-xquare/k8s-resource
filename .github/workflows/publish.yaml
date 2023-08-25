@@ -39,7 +39,7 @@ jobs:
             while IFS= read -r repo; do
               if [ -n "$repo" ]; then
                 random_name=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 12 | head -n 1)
-                helm repo add $random_name $repo || true
+                helm repo add $random_name $repo
               fi
             done
           done <<< "$changed_helm_packages"
