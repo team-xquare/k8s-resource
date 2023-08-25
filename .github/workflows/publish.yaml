@@ -29,20 +29,9 @@ jobs:
 
       - name: Add helm repo
         run: |
-          changed_helm_packages=$(git diff --name-only HEAD~1 | grep '^helm/' | cut -d/ -f1-2)
-          while IFS=$'\n' read -r package_directory; do 
-
-            helm dependency update $package_directory
-            chart_lock_file=$(find $package_directory -mindepth 1 -maxdepth 1 -name "Chart.lock")
-
-            yq eval '.dependencies[] | .repository' "$chart_lock_file" |
-            while IFS= read -r repo; do
-              if [ -n "$repo" ]; then
-                random_name=$(LC_ALL=C tr -dc 'a-zA-Z0-9' < /dev/urandom | fold -w 12 | head -n 1)
-                helm repo add $random_name $repo
-              fi
-            done
-          done <<< "$changed_helm_packages"
+          helm repo add prometheus https://prometheus-community.github.io/helm-charts
+          helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo add bitnami https://charts.bitnami.com/bitnami
 
       - name: Helm build
         run: |
