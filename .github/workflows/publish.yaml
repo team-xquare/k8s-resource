@@ -35,13 +35,12 @@ jobs:
           echo "changed-helm-packages=$changed_helm_packages" >> $GITHUB_OUTPUT
 
       - name: Add helm repo
-        working-directory: helm
         run: |
           ${{ steps.helm-changes.outputs.changed-helm-packages }} |
           while IFS=$'\n' read -r package_directory; do 
 
-            helm dependency update $(basename "$package_directory")
-            find $package_directory -mindepth 2 -maxdepth 2 -name "Chart.lock"
+            helm dependency update $package_directory
+            chart_lock_file=find $package_directory -mindepth 1 -maxdepth 1 -name "Chart.lock"
 
             yq eval '.dependencies[] | .repository' "$chart_lock_file" |
             while IFS= read -r repo; do
@@ -53,13 +52,11 @@ jobs:
           done
 
       - name: Helm build
-        working-directory: helm
         run: |
           find . -mindepth 1 -maxdepth 1 -type d |
           while IFS= read -r package_directory; do
-              dir_name=$(basename "$package_directory")
-              helm dependency build $dir_name
-              helm package $dir_name
+              helm dependency build $package_directory
+              helm package $package_directory
           done
 
       - name: Get Helm package
