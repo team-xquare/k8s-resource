@@ -11,7 +11,7 @@ Disclaimer: Redis is a registered trademark of Redis Ltd. Any rights therein are
 ## TL;DR
 
 ```console
-helm install my-release oci://registry-1.docker.io/bitnamicharts/redis
+helm install my-release https://charts.bitnami.com/bitnami/redis
 ```
 
 ## Introduction
@@ -48,7 +48,7 @@ Looking to use Redisreg; in production? Try [VMware Application Catalog](https:/
 To install the chart with the release name `my-release`:
 
 ```console
-helm install my-release oci://registry-1.docker.io/bitnamicharts/redis
+helm install my-release https://charts.bitnami.com/bitnami/redis
 ```
 
 The command deploys Redis&reg; on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
@@ -574,7 +574,7 @@ Specify each parameter using the `--set key=value[,key=value]` argument to `helm
 ```console
 helm install my-release \
   --set auth.password=secretpassword \
-    oci://registry-1.docker.io/bitnamicharts/redis
+    https://charts.bitnami.com/bitnami/redis
 ```
 
 The above command sets the Redis&reg; server password to `secretpassword`.
@@ -584,7 +584,7 @@ The above command sets the Redis&reg; server password to `secretpassword`.
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml oci://registry-1.docker.io/bitnamicharts/redis
+helm install my-release -f values.yaml https://charts.bitnami.com/bitnami/redis
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
@@ -748,7 +748,7 @@ By default, the chart mounts a [Persistent Volume](https://kubernetes.io/docs/co
 3. Install the chart
 
 ```console
-helm install my-release --set master.persistence.existingClaim=PVC_NAME oci://registry-1.docker.io/bitnamicharts/redis
+helm install my-release --set master.persistence.existingClaim=PVC_NAME https://charts.bitnami.com/bitnami/redis
 ```
 
 ## Backup and restore
@@ -783,9 +783,9 @@ For example, on a rolling update `master-0` and `replica-2` are updated first fr
 This issue can be mitigated by splitting the upgrade into two stages: one for all replicas and another for any master.
 
 - Stage 1 (replicas only, as there's no master with an ordinal higher than 99):
-`helm upgrade oci://registry-1.docker.io/bitnamicharts/redis --set master.updateStrategy.rollingUpdate.partition=99`
+`helm upgrade https://charts.bitnami.com/bitnami/redis --set master.updateStrategy.rollingUpdate.partition=99`
 - Stage 2 (anything else that is not up to date, in this case only master):
-`helm upgrade oci://registry-1.docker.io/bitnamicharts/redis`
+`helm upgrade https://charts.bitnami.com/bitnami/redis`
 
 ### To 17.0.0
 
@@ -837,7 +837,7 @@ Backwards compatibility is not guaranteed. To upgrade to `14.0.0`, install a new
 - Reuse the PVC used to hold the master data on your previous release. To do so, use the `master.persistence.existingClaim` parameter. The following example assumes that the release name is `redis`:
 
 ```console
-helm install redis oci://registry-1.docker.io/bitnamicharts/redis --set auth.password=[PASSWORD] --set master.persistence.existingClaim=[EXISTING_PVC]
+helm install redis https://charts.bitnami.com/bitnami/redis --set auth.password=[PASSWORD] --set master.persistence.existingClaim=[EXISTING_PVC]
 ```
 
 | Note: you need to substitute the placeholder *[EXISTING_PVC]* with the name of the PVC used on your previous release, and *[PASSWORD]* with the password used in your previous release.
@@ -901,14 +901,14 @@ This version causes a change in the Redis&reg; Master StatefulSet definition, so
 - Recommended: Create a clone of the Redis&reg; Master PVC (for example, using projects like [this one](https://github.com/edseymour/pvc-transfer)). Then launch a fresh release reusing this cloned PVC.
 
 ```console
-helm install my-release oci://registry-1.docker.io/bitnamicharts/redis --set persistence.existingClaim=<NEW PVC>
+helm install my-release https://charts.bitnami.com/bitnami/redis --set persistence.existingClaim=<NEW PVC>
 ```
 
 - Alternative (not recommended, do at your own risk): `helm delete --purge` does not remove the PVC assigned to the Redis&reg; Master StatefulSet. As a consequence, the following commands can be done to upgrade the release
 
 ```console
 helm delete --purge <RELEASE>
-helm install <RELEASE> oci://registry-1.docker.io/bitnamicharts/redis
+helm install <RELEASE> https://charts.bitnami.com/bitnami/redis
 ```
 
 Previous versions of the chart were not using persistence in the slaves, so this upgrade would add it to them. Another important change is that no values are inherited from master to slaves. For example, in 6.0.0 `slaves.readinessProbe.periodSeconds`, if empty, would be set to `master.readinessProbe.periodSeconds`. This approach lacked transparency and was difficult to maintain. From now on, all the slave parameters must be configured just as it is done with the masters.
