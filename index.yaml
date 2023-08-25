@@ -6,7 +6,7 @@ entries:
         - "[Added]: Support annotations in argocd-configs secrets"
     apiVersion: v2
     appVersion: v2.3.4
-    created: "2023-08-22T15:15:40.874091+09:00"
+    created: "2023-08-25T01:53:12.111429532Z"
     dependencies:
     - condition: redis-ha.enabled
       name: redis-ha
@@ -33,7 +33,7 @@ entries:
   aws-ebs-csi-driver:
   - apiVersion: v2
     appVersion: 1.21.0
-    created: "2023-08-22T15:15:40.875987+09:00"
+    created: "2023-08-25T01:53:12.114856039Z"
     description: A Helm chart for AWS EBS CSI Driver
     digest: 3544cac187e1c3922e31fe675a54d1a55ac4b7ac61e7b3067d9abbb5d8c891a8
     home: https://github.com/kubernetes-sigs/aws-ebs-csi-driver
@@ -57,7 +57,7 @@ entries:
       artifacthub.io/prerelease: '{{IS_PRERELEASE}}'
     apiVersion: v1
     appVersion: v1.12.3
-    created: "2023-08-22T15:15:40.878452+09:00"
+    created: "2023-08-25T01:53:12.118455746Z"
     description: A Helm chart for cert-manager
     digest: 578d82da0c1e36cb1731859f67782dfd48c95d80d14c37646b08e9778bc38372
     home: https://github.com/cert-manager/cert-manager
@@ -78,10 +78,44 @@ entries:
     urls:
     - cert-manager-v1.12.3.tgz
     version: v1.12.3
+  dex:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: "Add default values for path and honorLabels to ServiceMonitor"
+      artifacthub.io/images: |
+        - name: dex
+          image: ghcr.io/dexidp/dex:v2.37.0
+    apiVersion: v2
+    appVersion: 2.37.0
+    created: "2023-08-25T01:53:12.119587249Z"
+    description: OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable
+      connectors.
+    digest: 0f4e1d20d8c9e806e5d1a8fb079e668685ac937fae5d191b0fa2aa81a1eaceb1
+    home: https://dexidp.io/
+    icon: https://dexidp.io/favicon.png
+    keywords:
+    - oidc
+    - oauth
+    - identity-provider
+    - saml
+    kubeVersion: '>=1.14.0-0'
+    maintainers:
+    - email: mark.sagikazar@gmail.com
+      name: sagikazarmark
+      url: https://sagikazarmark.hu
+    name: dex
+    sources:
+    - https://github.com/dexidp/dex
+    - https://github.com/dexidp/helm-charts/tree/master/charts/dex
+    type: application
+    urls:
+    - dex-0.15.3.tgz
+    version: 0.15.3
   karpenter:
   - apiVersion: v2
     appVersion: 0.30.0
-    created: "2023-08-22T15:15:40.879613+09:00"
+    created: "2023-08-25T01:53:12.120931751Z"
     description: A Helm chart for Karpenter, an open-source node provisioning project
       built for Kubernetes.
     digest: 01c8e8cfd9e74c51993cfef934160d9f3cc8bdfbfcdd54c10d0a81bab76c678c
@@ -111,7 +145,7 @@ entries:
       artifacthub.io/operator: "true"
     apiVersion: v2
     appVersion: v0.66.0
-    created: "2023-08-22T15:15:40.901702+09:00"
+    created: "2023-08-25T01:53:12.152003017Z"
     dependencies:
     - condition: crds.enabled
       name: crds
@@ -174,7 +208,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 0.31.0
-    created: "2023-08-22T15:15:40.912012+09:00"
+    created: "2023-08-25T01:53:12.166088446Z"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -205,4 +239,4 @@ entries:
     urls:
     - thanos-12.11.0.tgz
     version: 12.11.0
-generated: "2023-08-22T15:15:40.865906+09:00"
+generated: "2023-08-25T01:53:12.101487311Z"
