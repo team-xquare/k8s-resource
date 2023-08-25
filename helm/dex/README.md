@@ -81,7 +81,7 @@ spec:
       name: acme-account-key
     solvers:
     - http01:
-       ingress:
+       ingress: 
          class: YOUR_INGRESS_CLASS
 EOF
 ```
@@ -89,11 +89,11 @@ EOF
 Finally, change the ingress config to use TLS:
 
 ```yaml
-ingress:
-  enabled: true
-
+ingress: 
+  enabled: true 
+ 
   annotations:
-    cert-manager.io/cluster-issuer: acme
+    cert-manager.io/cluster-issuer: acme 
 
   hosts:
     - host: my-issuer-url.com

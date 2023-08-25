@@ -36,11 +36,10 @@ jobs:
 
       - name: Add helm repo
         run: |
-          ${{ steps.helm-changes.outputs.changed-helm-packages }} |
           while IFS=$'\n' read -r package_directory; do 
 
             helm dependency update $package_directory
-            chart_lock_file=find $package_directory -mindepth 1 -maxdepth 1 -name "Chart.lock"
+            chart_lock_file=$(find $package_directory -mindepth 1 -maxdepth 1 -name "Chart.lock")
 
             yq eval '.dependencies[] | .repository' "$chart_lock_file" |
             while IFS= read -r repo; do
@@ -49,39 +48,28 @@ jobs:
                 helm repo add $random_name $repo || true
               fi
             done
-          done
+          done <<< ${{ steps.helm-changes.outputs.changed-helm-packages }}
 
       - name: Helm build
         run: |
-          find . -mindepth 1 -maxdepth 1 -type d |
           while IFS= read -r package_directory; do
               helm dependency build $package_directory
               helm package $package_directory
-          done
+          done <<< ${{ steps.helm-changes.outputs.changed-helm-packages }}
 
       - name: Get Helm package
+        id: helm_package
         run: |
           package_list=$(find . -type f -mindepth 1 -maxdepth 1 -name "*.tgz" -exec basename {} \; | tr '\n' ' ')
           echo $package_list
           echo "package_list=$package_list" >> $GITHUB_OUTPUT
-          
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v2
-        with:
-          ref: gh-pages
 
-      - name: Get *.tgz files
-        if: ${{ steps.helm_package.outputs.package_list }}
+      - name: checkout gh-pages branch and helm index
         run: | 
-          git checkout main -- ${{ steps.helm_package.outputs.package_list }}
-      
-      - name: Helm repo index
-        if: ${{ steps.helm_package.outputs.package_list }}
-        run: |
+          git checkout gh-pages --
           helm repo index .
 
       - name: Commit The Chart Realease
-        if: ${{ steps.helm_package.outputs.package_list }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: ${{ github.event.head_commit.message }}
