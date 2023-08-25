@@ -36,6 +36,8 @@ jobs:
       - name: Helm build
         run: |
           changed_helm_packages=$(git diff --name-only HEAD~1 | grep '^helm/' | cut -d/ -f1-2)
+          echo $changed_helm_packages
+
           while IFS=$'\n' read -r package_directory; do
               helm dependency build $package_directory
               helm package $package_directory
