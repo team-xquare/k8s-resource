@@ -27,15 +27,9 @@ jobs:
         with:
           version: v3.10.1
 
-      - name: Find Changed Helm Packages
-        id: helm-changes
-        run: |
-          changed_helm_packages=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^helm/' | cut -d/ -f1-2 | tr '\n' ' ')
-          echo "$changed_helm_packages"
-          echo "changed-helm-packages=$changed_helm_packages" >> $GITHUB_OUTPUT
-
       - name: Add helm repo
         run: |
+          changed_helm_packages=$(git diff --name-only HEAD~1 | grep '^helm/' | cut -d/ -f1-2)
           while IFS=$'\n' read -r package_directory; do 
 
             helm dependency update $package_directory
@@ -48,21 +42,15 @@ jobs:
                 helm repo add $random_name $repo || true
               fi
             done
-          done <<< "${{ steps.helm-changes.outputs.changed-helm-packages }}"
+          done <<< "$changed_helm_packages"
 
       - name: Helm build
         run: |
-          while IFS= read -r package_directory; do
+          changed_helm_packages=$(git diff --name-only HEAD~1 | grep '^helm/' | cut -d/ -f1-2)
+          while IFS=$'\n' read -r package_directory; do
               helm dependency build $package_directory
               helm package $package_directory
-          done <<< "${{ steps.helm-changes.outputs.changed-helm-packages }}"
-
-      - name: Get Helm package
-        id: helm_package
-        run: |
-          package_list=$(find . -type f -mindepth 1 -maxdepth 1 -name "*.tgz" -exec basename {} \; | tr '\n' ' ')
-          echo $package_list
-          echo "package_list=$package_list" >> $GITHUB_OUTPUT
+          done <<< "$changed_helm_packages"
 
       - name: checkout gh-pages branch and helm index
         run: | 

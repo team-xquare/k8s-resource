@@ -7,9 +7,9 @@ It will ensure certificates are valid and up to date periodically, and attempt
 to renew certificates at an appropriate time before expiry.
 
 ## Prerequisites
-
+         
 - Kubernetes 1.20+
- 
+  
 ## Installing the Chart
 
 Full installation instructions, including details on how to configure extra

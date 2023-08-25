@@ -64,10 +64,10 @@ helm install \
   --namespace cert-manager \
   --set installCRDs=true
 ```
-
+ 
 The next step is setting up an [issuer](https://cert-manager.io/docs/concepts/issuer/) (eg. [Let's Encrypt](https://letsencrypt.org/)):
  
-```shell
+```shell 
 cat <<EOF | kubectl apply -f -
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
