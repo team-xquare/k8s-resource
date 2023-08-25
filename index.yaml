@@ -6,7 +6,7 @@ entries:
         - "[Added]: Support annotations in argocd-configs secrets"
     apiVersion: v2
     appVersion: v2.3.4
-    created: "2023-08-25T08:03:24.743760678Z"
+    created: "2023-08-25T11:00:30.580779167Z"
     dependencies:
     - condition: redis-ha.enabled
       name: redis-ha
@@ -33,7 +33,7 @@ entries:
   aws-ebs-csi-driver:
   - apiVersion: v2
     appVersion: 1.21.0
-    created: "2023-08-25T08:03:24.745685781Z"
+    created: "2023-08-25T11:00:30.582542288Z"
     description: A Helm chart for AWS EBS CSI Driver
     digest: 3544cac187e1c3922e31fe675a54d1a55ac4b7ac61e7b3067d9abbb5d8c891a8
     home: https://github.com/kubernetes-sigs/aws-ebs-csi-driver
@@ -57,7 +57,7 @@ entries:
       artifacthub.io/prerelease: '{{IS_PRERELEASE}}'
     apiVersion: v1
     appVersion: v1.12.3
-    created: "2023-08-25T08:03:24.749570885Z"
+    created: "2023-08-25T11:00:30.586388635Z"
     description: A Helm chart for cert-manager
     digest: 578d82da0c1e36cb1731859f67782dfd48c95d80d14c37646b08e9778bc38372
     home: https://github.com/cert-manager/cert-manager
@@ -88,7 +88,7 @@ entries:
           image: ghcr.io/dexidp/dex:v2.37.0
     apiVersion: v2
     appVersion: 2.37.0
-    created: "2023-08-25T08:03:24.751800688Z"
+    created: "2023-08-25T11:00:30.588669162Z"
     description: OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable
       connectors.
     digest: 2f39feff3a6f3f0b88e633b96538336edd3501a375c5a17530956ebb414629e5
@@ -121,7 +121,7 @@ entries:
           image: ghcr.io/dexidp/dex:v2.37.0
     apiVersion: v2
     appVersion: 2.37.0
-    created: "2023-08-25T08:03:24.750697287Z"
+    created: "2023-08-25T11:00:30.587559349Z"
     description: OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable
       connectors.
     digest: 0f4e1d20d8c9e806e5d1a8fb079e668685ac937fae5d191b0fa2aa81a1eaceb1
@@ -145,10 +145,42 @@ entries:
     urls:
     - dex-0.15.3.tgz
     version: 0.15.3
+  istio:
+  - apiVersion: v2
+    appVersion: 1.18.1
+    created: "2023-08-25T11:00:30.589209569Z"
+    description: Istio setting for xquare
+    digest: 873ba4d447bac93bd7c696e943e975ce999d0b459e8e60fe10fd099c38a1598b
+    name: istio
+    type: application
+    urls:
+    - istio-1.0.0.tgz
+    version: 1.0.0
   karpenter:
   - apiVersion: v2
     appVersion: 0.30.0
-    created: "2023-08-25T08:03:24.75316859Z"
+    created: "2023-08-25T11:00:30.591844501Z"
+    description: A Helm chart for Karpenter, an open-source node provisioning project
+      built for Kubernetes.
+    digest: c1b2c9d76c812cc4b5c7cf7614095c60aa4f11f86830986a8912304d8e7e2b93
+    home: https://karpenter.sh/
+    icon: https://repository-images.githubusercontent.com/278480393/dab059c8-caa1-4b55-aaa7-3d30e47a5616
+    keywords:
+    - cluster
+    - node
+    - scheduler
+    - autoscaling
+    - lifecycle
+    name: karpenter
+    sources:
+    - https://github.com/aws/karpenter/
+    type: application
+    urls:
+    - karpenter-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 0.30.0
+    created: "2023-08-25T11:00:30.590573285Z"
     description: A Helm chart for Karpenter, an open-source node provisioning project
       built for Kubernetes.
     digest: 01c8e8cfd9e74c51993cfef934160d9f3cc8bdfbfcdd54c10d0a81bab76c678c
@@ -178,7 +210,7 @@ entries:
       artifacthub.io/operator: "true"
     apiVersion: v2
     appVersion: v0.66.0
-    created: "2023-08-25T08:03:24.784438527Z"
+    created: "2023-08-25T11:00:30.625125203Z"
     dependencies:
     - condition: crds.enabled
       name: crds
@@ -241,7 +273,38 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.12
-    created: "2023-08-25T08:03:24.790701734Z"
+    created: "2023-08-25T11:00:30.637619754Z"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 2.x.x
+    description: Redis(R) is an open source, advanced key-value store. It is often
+      referred to as a data structure server since keys can contain strings, hashes,
+      lists, sets and sorted sets.
+    digest: bc29b125fd0751102596d515dc84c8aeb5e02a53e2ce4aa3a4d8b5f609045ca9
+    home: https://bitnami.com
+    icon: https://bitnami.com/assets/stacks/redis/img/redis-stack-220x234.png
+    keywords:
+    - redis
+    - keyvalue
+    - database
+    maintainers:
+    - name: VMware, Inc.
+      url: https://github.com/bitnami/charts
+    name: redis
+    sources:
+    - https://github.com/bitnami/charts/tree/main/bitnami/redis
+    urls:
+    - redis-17.15.4.tgz
+    version: 17.15.4
+  - annotations:
+      category: Database
+      licenses: Apache-2.0
+    apiVersion: v2
+    appVersion: 7.0.12
+    created: "2023-08-25T11:00:30.63146728Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -273,7 +336,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 0.31.0
-    created: "2023-08-25T08:03:24.806292453Z"
+    created: "2023-08-25T11:00:30.65380115Z"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -304,4 +367,26 @@ entries:
     urls:
     - thanos-12.11.0.tgz
     version: 12.11.0
-generated: "2023-08-25T08:03:24.726817258Z"
+  xquare-application:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-08-25T11:00:30.654468658Z"
+    description: Xquare application
+    digest: ff0253fef43670855706a0c1cec9300590b1abf0772c4b4c5fc16f658ce375ce
+    name: xquare-application
+    type: application
+    urls:
+    - xquare-application-1.0.0.tgz
+    version: 1.0.0
+  xquare-certificate:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-08-25T11:00:30.654803962Z"
+    description: Xquare certificate for tls
+    digest: cef31088bf243477c047c51654d398ed115027edf50dbe1ddbc11c5fa98aec1d
+    name: xquare-certificate
+    type: application
+    urls:
+    - xquare-certificate-1.0.0.tgz
+    version: 1.0.0
+generated: "2023-08-25T11:00:30.569560031Z"
