@@ -11,7 +11,7 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 ## TL;DR
  
 ```console 
-helm install my-release oci://registry-1.docker.io/bitnamicharts/thanos
+helm install my-release https://charts.bitnami.com/bitnami/thanos
 ```
  
 ## Introduction
@@ -33,7 +33,7 @@ Looking to use Thanos in production? Try [VMware Application Catalog](https://bi
 To install the chart with the release name `my-release`:
 
 ```console
-helm install my-release oci://registry-1.docker.io/bitnamicharts/thanos
+helm install my-release https://charts.bitnami.com/bitnami/thanos
 ```
 
 These commands deploy Thanos on the Kubernetes cluster with the default configuration. The [configuration](#configuration-and-installation-details) section lists the parameters that can be configured during installation.
@@ -1211,7 +1211,7 @@ Check the section [Integrate Thanos with Prometheus and Alertmanager](#integrate
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
 
 ```console
-helm install my-release --set query.replicaCount=2 oci://registry-1.docker.io/bitnamicharts/thanos
+helm install my-release --set query.replicaCount=2 https://charts.bitnami.com/bitnami/thanos
 ```
 
 The above command install Thanos chart with 2 Thanos Query replicas.
@@ -1219,7 +1219,7 @@ The above command install Thanos chart with 2 Thanos Query replicas.
 Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
 
 ```console
-helm install my-release -f values.yaml oci://registry-1.docker.io/bitnamicharts/thanos
+helm install my-release -f values.yaml https://charts.bitnami.com/bitnami/thanos
 ```
 
 > **Tip**: You can use the default [values.yaml](values.yaml)
@@ -1418,7 +1418,7 @@ helm install kube-prometheus \
 helm install thanos \
     --values values.yaml \
     --namespace monitoring \
-    oci://registry-1.docker.io/bitnamicharts/thanos
+    https://charts.bitnami.com/bitnami/thanos
 ```
 
 That's all! Now you have Thanos fully integrated with Prometheus and Alertmanager.
