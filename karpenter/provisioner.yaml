@@ -19,12 +19,29 @@ spec:
       values:
         - "ap-northeast-2a"
         - "ap-northeast-2c"
-    - key: "node.kubernetes.io/instance-type"
+    - key: "karpenter.k8s.aws/instance-size"
       operator: In
       values:
-        - "m5a.large"
-        - "m5a.xlarge"
-        - "m5a.2xlarge"
+        - "medium"
+        - "large"
+        - "xlarge"
+        - "2xlarge"
+    - key: "karpenter.k8s.aws/instance-cpu"
+      operator: In
+      values:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "8"
+    - key: "karpenter.k8s.aws/instance-category"
+      operator: In
+      values:
+        - "m"
+    - key: "kubernetes.io/arch"
+      operator: In
+      values:
+        - "amd64"
   limits:
     resources:
       cpu: 1000
@@ -33,7 +50,6 @@ spec:
     name: xquare
   consolidation:
     enabled: true
-
 ---
 apiVersion: karpenter.k8s.aws/v1alpha1
 kind: AWSNodeTemplate
