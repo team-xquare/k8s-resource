@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: xquare
+  namespace: argocd
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: xquare
+  source:
+    path: deploy
+    repoURL: https://github.com/team-xquare/xquare-gitops-repo.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.application.name }}
+  namespace: {{ .Values.application.namespace }}
+spec:
+  destination:
+    namespace: {{ .Values.application.namespace }}
+    server: https://kubernetes.default.svc
+  project: {{ .Values.application.project }}
+  source:
+    path: {{ .Values.application.source.path }}
+    repoURL: {{ .Values.application.source.repoURL }}
+    targetRevision: {{ .Values.application.source.targetRevision }}
+  syncPolicy:
+    automated:
+      prune: {{ .Values.application.syncPolicy.automated.prune }}
+      selfHeal: {{ .Values.application.syncPolicy.automated.selfHeal }}

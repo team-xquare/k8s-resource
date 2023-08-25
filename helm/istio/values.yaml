@@ -1,0 +1,70 @@
+operator:
+  profile: default
+  extensionProviders:
+    - name: "xquare-middleware-grpc"
+      envoyExtAuthzGrpc:
+        service: "envoy-middleware-be-prod.xquare-prod.svc.cluster.local"
+        port: "9000"
+    - name: "sample-ext-authz-grpc"
+      envoyExtAuthzGrpc:
+        service: "ext-authz.xquare-prod.svc.cluster.local"
+        port: "9000"
+  k8s:
+    service:
+      externalTrafficPolicy: Local
+    hpaSpec:
+      minReplicas: 2
+      maxReplicas: 10
+    serviceType: LoadBalancer
+    servicePorts:
+      - name: http
+        port: 80
+        targetPort: 8080
+      - name: https
+        port: 443
+        targetPort: 8443
+      - name: helath
+        port: 15020
+        targetPort: 15020
+    serviceAnnotations:
+      service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+      service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+
+virtual-services:
+  - name: argocd-server
+    host: argo-cd.xquare.app
+    destination:
+      host: argocd-server.argocd.svc.cluster.local
+      port: 80
+  - name: kiali-server
+    host: kiali.xquare.app
+    destination:
+      host: kiali.istio-system.svc.cluster.local
+      port: 20001
+  - name: prometeus-server
+    host: prometheus.xquare.app
+    destination:
+      host: prometheus-server.prometheus.svc.cluster.local
+      port: 80
+  - name: jaeger-server
+    host: jaeger.xquare.app
+    destination:
+      host: tracing.istio-system.svc.cluster.local
+      port: 80
+  - name: grafana-server
+    host: argo-cd.xquare.app
+    destination:
+      host: argocd-server.argocd.svc.cluster.local
+      port: 80
+
+addon:
+  jeager:
+    enable: true
+  kiali:
+    enable: true
+
+
+    

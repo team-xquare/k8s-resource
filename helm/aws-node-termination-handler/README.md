@@ -4,7 +4,7 @@ AWS Node Termination Handler Helm chart for Kubernetes. For more information on 
 
 ## Prerequisites
 
-- _Kubernetes_ >= v1.16
+- _Kubernetes_ >= v1.16 
         
 ## Installing the Chart
   

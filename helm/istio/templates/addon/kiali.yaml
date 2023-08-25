@@ -1,3 +1,4 @@
+{{- if .Values.addons.kiali.enable }}
 ---
 # Source: kiali-server/templates/serviceaccount.yaml
 apiVersion: v1
@@ -548,3 +549,4 @@ spec:
           configMap:
             name: kiali-cabundle
             optional: true
+{{- end }}
