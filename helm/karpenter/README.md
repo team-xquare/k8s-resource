@@ -5,10 +5,10 @@ A Helm chart for Karpenter, an open-source node provisioning project built for K
 ![Version: 0.30.0-rc.0](https://img.shields.io/badge/Version-0.30.0--rc.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.30.0-rc.0](https://img.shields.io/badge/AppVersion-0.30.0--rc.0-informational?style=flat-square)
 
 ## Documentation
-
+ 
 For full Karpenter documentation please checkout [https://karpenter.sh](https://karpenter.sh/docs/).
  
-## Installing the Chart
+## Installing the Chart 
 
 You can follow the detailed installation instruction in the [documentation](https://karpenter.sh/docs/getting-started/getting-started-with-karpenter/#install) which covers the Karpenter prerequisites and installation options. The outcome of these instructions should result in something like the following command.
 

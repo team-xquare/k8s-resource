@@ -5,9 +5,9 @@ AWS Node Termination Handler Helm chart for Kubernetes. For more information on 
 ## Prerequisites
 
 - _Kubernetes_ >= v1.16
-
+        
 ## Installing the Chart
- 
+  
 Before you can install the chart you will need to authenticate your Helm client.
 ```shell
 aws ecr-public get-login-password \

@@ -6,11 +6,11 @@ See the [kube-prometheus](https://github.com/prometheus-operator/kube-prometheus
  
 _Note: This chart was formerly named `prometheus-operator` chart, now renamed to more clearly reflect that it installs the `kube-prometheus` project stack, within which Prometheus Operator is only one component._
 
-## Prerequisites
+## Prerequisites 
 
 - Kubernetes 1.16+
 - Helm 3+
-
+ 
 ## Get Helm Repository Info
 
 ```console

@@ -10,10 +10,10 @@ Trademarks: This software listing is packaged by Bitnami. The respective tradema
 
 ## TL;DR
  
-```console
+```console 
 helm install my-release oci://registry-1.docker.io/bitnamicharts/thanos
 ```
-
+ 
 ## Introduction
 
 This chart bootstraps a [Thanos](https://github.com/bitnami/containers/tree/main/bitnami/thanos) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
