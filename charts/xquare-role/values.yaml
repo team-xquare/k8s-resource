@@ -1,0 +1,6 @@
+clubs:
+  - name: dms
+    deployments: 
+      - "feed-fe-prod"
+    users:
+      - "rlaisqls@gmail.com"

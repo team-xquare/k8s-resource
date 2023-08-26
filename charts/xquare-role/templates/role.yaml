@@ -1,0 +1,45 @@
+{{- range .Values.clubs }}
+{{- $clubname := .name }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: 
+  name: {{ $clubname }}-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log"]
+  verbs: ["get", "list"]
+  resourceNames:
+    {{- range .deployments }}
+      - name: {{ . }}
+    {{- end }}
+{{- range .users }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ $clubname }}-rolebinding
+  namespace: xquare-prod
+subjects:
+- kind: User 
+  name: {{ . }}
+roleRef:
+  kind: Role
+  name: {{ $clubname }}-pod-read-and-logs
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ $clubname }}-rolebinding
+  namespace: xquare-stag
+subjects:
+- kind: User 
+  name: {{ . }}
+roleRef:
+  kind: Role
+  name: {{ $clubname }}-pod-read-and-logs
+  apiGroup: rbac.authorization.k8s.io
+{{- end }}
+{{- end }}
