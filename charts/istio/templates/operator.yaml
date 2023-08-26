@@ -6,7 +6,6 @@ metadata:
 spec:
   profile: {{ .Values.profile }}
   meshConfig:
-    accessLogFile: /dev/stdout
     extensionProviders:
     {{- range .Values.operator.extensionProviders }}
       - name: {{ .name }}
@@ -23,20 +22,21 @@ spec:
           service.istio.io/canonical-name: istio-ingressgateway
         k8s:
           service:
-            externalTrafficPolicy: {{ .Values.operator.k8s.service.externalTrafficPolicy }}
+            externalTrafficPolicy: {{ .Values.operator.service.externalTrafficPolicy }}
           hpaSpec:
             minReplicas: {{ .Values.operator.hpaSpec.minReplicas }}
             maxReplicas: {{ .Values.operator.hpaSpec.maxReplicas }}
           service:
             type: LoadBalancer
             ports:
-            {{- range .Values.k8s.servicePorts }}
+            {{- range .Values.operator.servicePorts }}
             - name: {{ .name }}
               port: {{ .port }}
               targetPort: {{ .targetPort }}
-          {{- with .Values.k8s.serviceAnnotations }}
+            {{- end }}
+          {{- with .Values.operator.serviceAnnotations }}
           serviceAnnotations:
-          {{ toYaml . | indent 12 }}
+{{ toYaml . | indent 12 }}
           {{- end }}
   values:
     sidecarInjectorWebhook:
