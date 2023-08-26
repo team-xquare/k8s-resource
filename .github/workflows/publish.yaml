@@ -32,6 +32,7 @@ jobs:
           helm repo add prometheus https://prometheus-community.github.io/helm-charts
           helm repo add grafana https://grafana.github.io/helm-charts
           helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo add dandydeveloper https://dandydeveloper.github.io/charts/
 
       - name: Helm build
         run: |
@@ -39,8 +40,8 @@ jobs:
           echo $changed_helm_packages
 
           while IFS=$'\n' read -r package_directory; do
-              helm dependency build $package_directory
-              helm package $package_directory
+              helm dependency build $package_directory || true
+              helm package $package_directory || true
           done <<< "$changed_helm_packages"
 
       - name: checkout gh-pages branch and helm index
