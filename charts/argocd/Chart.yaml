@@ -21,5 +21,5 @@ maintainers:
 - name: alexmt
 - name: jessesuen
 - name: seanson
-name: argo-cd
+name: argocd
 version: 4.8.3
