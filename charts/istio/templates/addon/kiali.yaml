@@ -96,7 +96,7 @@ data:
       istio:
         root_namespace: istio-system
       prometheus:
-        url: http://prometheus-stack-kube-prom-prometheus.monitoring:9090
+        url: {{ .Values.addons.kiali.prometheusUrl }}
     identity:
       cert_file: ""
       private_key_file: ""
