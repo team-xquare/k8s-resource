@@ -16,10 +16,7 @@ spec:
     organizations:
     - cluster.local
     - cert-manager
-  dnsNames:
-    {{- range .dnsNames }}
-    - {{ . }}
-    {{- end }}
+  dnsNames: {{ .dnsNames | toYaml | nindent 4 }}
   issuerRef:
     name: letsencrypt-issuer
     kind: ClusterIssuer
