@@ -6,7 +6,7 @@ entries:
         - "[Added]: Support annotations in argocd-configs secrets"
     apiVersion: v2
     appVersion: v2.3.4
-    created: "2023-08-27T01:29:11.098601057Z"
+    created: "2023-08-27T03:40:15.638562287Z"
     dependencies:
     - condition: redis-ha.enabled
       name: redis-ha
@@ -36,7 +36,7 @@ entries:
         - "[Added]: Support annotations in argocd-configs secrets"
     apiVersion: v2
     appVersion: v2.3.4
-    created: "2023-08-27T01:29:11.112662591Z"
+    created: "2023-08-27T03:40:15.651592107Z"
     dependencies:
     - condition: redis-ha.enabled
       name: redis-ha
@@ -63,7 +63,7 @@ entries:
   aws-ebs-csi-driver:
   - apiVersion: v2
     appVersion: 1.21.0
-    created: "2023-08-27T01:29:11.114061504Z"
+    created: "2023-08-27T03:40:15.653793544Z"
     description: A Helm chart for AWS EBS CSI Driver
     digest: 3544cac187e1c3922e31fe675a54d1a55ac4b7ac61e7b3067d9abbb5d8c891a8
     home: https://github.com/kubernetes-sigs/aws-ebs-csi-driver
@@ -84,7 +84,7 @@ entries:
   aws-node-termination-handler:
   - apiVersion: v2
     appVersion: 1.20.0
-    created: "2023-08-27T01:29:11.115478317Z"
+    created: "2023-08-27T03:40:15.655505573Z"
     description: A Helm chart for the AWS Node Termination Handler.
     digest: 0fd273f68c91effacd8df930ff8e4175a009a7eab7ef4b1ea3bfda49b6069e7d
     home: https://github.com/aws/aws-node-termination-handler/
@@ -116,7 +116,7 @@ entries:
       artifacthub.io/prerelease: '{{IS_PRERELEASE}}'
     apiVersion: v1
     appVersion: v1.12.3
-    created: "2023-08-27T01:29:11.119003751Z"
+    created: "2023-08-27T03:40:15.660614859Z"
     description: A Helm chart for cert-manager
     digest: 578d82da0c1e36cb1731859f67782dfd48c95d80d14c37646b08e9778bc38372
     home: https://github.com/cert-manager/cert-manager
@@ -147,7 +147,7 @@ entries:
           image: ghcr.io/dexidp/dex:v2.37.0
     apiVersion: v2
     appVersion: 2.37.0
-    created: "2023-08-27T01:29:11.121392173Z"
+    created: "2023-08-27T03:40:15.665663144Z"
     description: OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable
       connectors.
     digest: 2f39feff3a6f3f0b88e633b96538336edd3501a375c5a17530956ebb414629e5
@@ -180,7 +180,7 @@ entries:
           image: ghcr.io/dexidp/dex:v2.37.0
     apiVersion: v2
     appVersion: 2.37.0
-    created: "2023-08-27T01:29:11.120147661Z"
+    created: "2023-08-27T03:40:15.66246429Z"
     description: OpenID Connect (OIDC) identity and OAuth 2.0 provider with pluggable
       connectors.
     digest: 0f4e1d20d8c9e806e5d1a8fb079e668685ac937fae5d191b0fa2aa81a1eaceb1
@@ -207,7 +207,7 @@ entries:
   istio:
   - apiVersion: v2
     appVersion: 1.18.1
-    created: "2023-08-27T01:29:11.123282191Z"
+    created: "2023-08-27T03:40:15.670525527Z"
     description: Istio setting for xquare
     digest: 3f276ceecfb80cb4f8eb9b8dc68926a34e9c4f207d28ab828a0dd93f709b90ac
     name: istio
@@ -217,7 +217,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 1.18.1
-    created: "2023-08-27T01:29:11.122582684Z"
+    created: "2023-08-27T03:40:15.669412508Z"
     description: Istio setting for xquare
     digest: 3146f3cff43a56cf3dfa5330a6bf624cabe5ccebcee13370d0929bc67cf7760d
     name: istio
@@ -227,7 +227,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 1.18.1
-    created: "2023-08-27T01:29:11.121993079Z"
+    created: "2023-08-27T03:40:15.668480092Z"
     description: Istio setting for xquare
     digest: 873ba4d447bac93bd7c696e943e975ce999d0b459e8e60fe10fd099c38a1598b
     name: istio
@@ -238,7 +238,7 @@ entries:
   karpenter:
   - apiVersion: v2
     appVersion: 0.30.0
-    created: "2023-08-27T01:29:11.131429768Z"
+    created: "2023-08-27T03:40:15.674506594Z"
     description: A Helm chart for Karpenter, an open-source node provisioning project
       built for Kubernetes.
     digest: c1b2c9d76c812cc4b5c7cf7614095c60aa4f11f86830986a8912304d8e7e2b93
@@ -259,7 +259,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 0.30.0
-    created: "2023-08-27T01:29:11.130075655Z"
+    created: "2023-08-27T03:40:15.672586261Z"
     description: A Helm chart for Karpenter, an open-source node provisioning project
       built for Kubernetes.
     digest: 01c8e8cfd9e74c51993cfef934160d9f3cc8bdfbfcdd54c10d0a81bab76c678c
@@ -289,7 +289,7 @@ entries:
       artifacthub.io/operator: "true"
     apiVersion: v2
     appVersion: v0.66.0
-    created: "2023-08-27T01:29:11.16441438Z"
+    created: "2023-08-27T03:40:15.717073012Z"
     dependencies:
     - condition: crds.enabled
       name: crds
@@ -352,7 +352,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.12
-    created: "2023-08-27T01:29:11.177823507Z"
+    created: "2023-08-27T03:40:15.73232527Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -383,7 +383,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 7.0.12
-    created: "2023-08-27T01:29:11.171869751Z"
+    created: "2023-08-27T03:40:15.724754542Z"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -415,7 +415,7 @@ entries:
       licenses: Apache-2.0
     apiVersion: v2
     appVersion: 0.31.0
-    created: "2023-08-27T01:29:11.19396176Z"
+    created: "2023-08-27T03:40:15.762634982Z"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -449,7 +449,7 @@ entries:
   xquare-application:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-08-27T01:29:11.194389064Z"
+    created: "2023-08-27T03:40:15.763233192Z"
     description: Xquare application
     digest: 00add2ee828d7256e174447c8ca94123de1f084e5fc241feec40b5cc8c0cb0e1
     name: xquare-application
@@ -459,7 +459,7 @@ entries:
     version: 1.0.1
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-08-27T01:29:11.194133562Z"
+    created: "2023-08-27T03:40:15.762901686Z"
     description: Xquare application
     digest: ff0253fef43670855706a0c1cec9300590b1abf0772c4b4c5fc16f658ce375ce
     name: xquare-application
@@ -470,7 +470,17 @@ entries:
   xquare-certificate:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-08-27T01:29:11.194551966Z"
+    created: "2023-08-27T03:40:15.763806701Z"
+    description: Xquare certificate for tls
+    digest: f73cba834f47dc0756ea405fbd0f2d5bbae4efce608576ec8000070fc7b05fd8
+    name: xquare-certificate
+    type: application
+    urls:
+    - xquare-certificate-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2023-08-27T03:40:15.763476796Z"
     description: Xquare certificate for tls
     digest: cef31088bf243477c047c51654d398ed115027edf50dbe1ddbc11c5fa98aec1d
     name: xquare-certificate
@@ -481,7 +491,7 @@ entries:
   xquare-role:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2023-08-27T01:29:11.194713367Z"
+    created: "2023-08-27T03:40:15.764024305Z"
     description: Xquare role
     digest: 7e3960b895c7d678dc2914d5e9657225d3b499fdbcb5be9d524781b9aee653d1
     name: xquare-role
@@ -489,4 +499,4 @@ entries:
     urls:
     - xquare-role-1.0.1.tgz
     version: 1.0.1
-generated: "2023-08-27T01:29:11.08729665Z"
+generated: "2023-08-27T03:40:15.624804155Z"
