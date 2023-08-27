@@ -208,8 +208,7 @@ controller:
     portName: https-controller
 
   # -- [Node selector]
-  nodeSelector:
-    argocd: "true"
+  nodeSelector: {}
   # -- [Tolerations] for use with node taints
   tolerations: []
   # -- Assign custom [affinity] rules to the deployment
@@ -520,8 +519,7 @@ dex:
   servicePortMetrics: 5558
 
   # -- [Node selector]
-  nodeSelector:
-    argocd: "true"
+  nodeSelector: {}
   # -- [Tolerations] for use with node taints
   tolerations: []
   # -- Assign custom [affinity] rules to the deployment
@@ -631,8 +629,7 @@ redis:
   podLabels: {}
 
   # -- [Node selector]
-  nodeSelector:
-    argocd: "true"
+  nodeSelector: {}
   # -- [Tolerations] for use with node taints
   tolerations: []
   # -- Assign custom [affinity] rules to the deployment
@@ -958,8 +955,7 @@ server:
   volumes: []
 
   # -- [Node selector]
-  nodeSelector:
-    argocd: "true"
+  nodeSelector: {}
   # -- [Tolerations] for use with node taints
   tolerations: []
   # -- Assign custom [affinity] rules to the deployment
@@ -1590,8 +1586,7 @@ repoServer:
   #    emptyDir: {}
 
   # -- [Node selector]
-  nodeSelector:
-    argocd: "true"
+  nodeSelector: {}
   # -- [Tolerations] for use with node taints
   tolerations: []
   # -- Assign custom [affinity] rules to the deployment
@@ -2108,8 +2103,7 @@ applicationSet:
     #   memory: 128Mi
 
   # -- [Node selector]
-  nodeSelector:
-    argocd: "true"
+  nodeSelector: {}
 
   # -- [Tolerations] for use with node taints
   tolerations: []
@@ -2228,8 +2222,7 @@ notifications:
   imagePullSecrets: []
 
   # -- [Node selector]
-  nodeSelector:
-    argocd: "true"
+  nodeSelector: {}
 
   # -- The deployment strategy to use to replace existing pods with new ones
   updateStrategy:
@@ -2718,5 +2711,4 @@ notifications:
       tolerations: []
 
       # -- [Node selector]
-      nodeSelector:
-        argocd: "true"
+      nodeSelector: {}
