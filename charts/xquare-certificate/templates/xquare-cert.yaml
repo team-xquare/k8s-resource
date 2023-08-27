@@ -3,7 +3,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: {{ .name }}
-  namespace: istio-system
+  namespace: {{ .namespace }}
 spec:
   isCA: true
   duration: 87600h # 10 years

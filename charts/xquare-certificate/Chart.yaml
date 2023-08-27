@@ -1,6 +1,6 @@
 apiVersion: v2
 type: application
 name: xquare-certificate
-version: 1.0.2
+version: 1.0.3
 appVersion: "1.0.0"
 description: Xquare certificate for tls
