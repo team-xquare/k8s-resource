@@ -1,16 +1,19 @@
 certificates:
   - name: xquare-cert
     commonName: xquare.app
+    namespace: istio-system
     dnsNames: 
     - '*.xquare.app'
     - 'xquare.app'
   - name: pick-cert
     commonName: dsm-pick.com
+    namespace: istio-system
     dnsNames: 
     - '*.dsm-pick.com'
     - 'dsm-pick.com'
   - name: repo-cert
     commoNname: dsm-repo.com
+    namespace: istio-system
     dnsNames: 
     - '*.dsm-repo.com'
     - 'dsm-repo.com'
