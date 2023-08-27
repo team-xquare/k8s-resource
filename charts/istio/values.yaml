@@ -33,6 +33,7 @@ operator:
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 
 gateway:
+  servers:
   - hosts:
       - '*.xquare.app'
     port:
@@ -52,7 +53,7 @@ gateway:
       mode: SIMPLE
       credentialName: pick-cert
   - hosts:
-      - '*.dsm-repo.con'
+      - '*.dsm-repo.com'
     port:
       name: https
       number: 443

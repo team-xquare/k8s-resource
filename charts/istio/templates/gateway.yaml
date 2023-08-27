@@ -15,12 +15,14 @@ spec:
         protocol: HTTP
       tls:
         httpsRedirect: true
-    - hosts:
-        - '*.xquare.app'
+    {{- range .Values.gateway.servers }}
+    - hosts: {{ .hosts | toYaml | nindent 6 }}
       port:
-        name: https
-        number: 443
-        protocol: HTTPS
+        name: {{ .port.name }}
+        number: {{ .port.number }}
+        protocol: {{ .port.protocol }}
       tls:
-        mode: SIMPLE
-        credentialName: xquare-cert
+        mode: {{ .tls.mode }}
+        credentialName: {{ .tls.credentialName }}
+    {{- end }}
+
