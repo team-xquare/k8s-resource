@@ -32,6 +32,35 @@ operator:
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 
+gateway:
+  - hosts:
+      - '*.xquare.app'
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: xquare-cert
+  - hosts:
+      - '*.dsm-pick.com'
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: pick-cert
+  - hosts:
+      - '*.dsm-repo.con'
+    port:
+      name: https
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: repo-cert
+
 virtualServices:
   - name: argocd-server
     host: argo-cd.xquare.app
