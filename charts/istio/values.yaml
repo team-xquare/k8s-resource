@@ -83,7 +83,7 @@ virtualServices:
       host: tracing.istio-system.svc.cluster.local
       port: 80
   - name: grafana-server
-    host: argo-cd.xquare.app
+    host: grafana.xquare.app
     destination:
       host: argocd-server.argocd.svc.cluster.local
       port: 80
