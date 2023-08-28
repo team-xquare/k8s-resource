@@ -1,0 +1,12 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ .Values.destinationRule.name }}
+spec:
+  host: {{ .Values.destinationRule.host }}
+  tcp:
+    maxConnections: 100
+    connectTimeout: 100ms
+    tcpKeepalive:
+      time: 7200s
+      interval: 75s
