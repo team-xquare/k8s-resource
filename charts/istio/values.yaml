@@ -88,6 +88,16 @@ virtualServices:
     destination:
       host: argocd-server.argocd.svc.cluster.local
       port: 80
+  - name: dex-server
+    host: dex.xquare.app
+    destination:
+      host: dex.dex.svc.cluster.local
+      port: 5556
+  - name: dex-login-server
+    host: dex-login.xquare.app
+    destination:
+      host: dex-k8s-authenticator.dex.svc.cluster.local
+      port: 5555
 
 addons:
   jeager:
