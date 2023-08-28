@@ -89,7 +89,7 @@ data:
       service_type: ""
       tolerations: []
       version_label: v1.67.0
-      view_only_mode: false
+      view_only_mode: true
     external_services:
       custom_dashboards:
         enabled: true
