@@ -53,7 +53,33 @@ configSecret:
 
 # -- Application configuration.
 # See the [official documentation](https://dexidp.io/docs/).
-config: {}
+config:
+  issuer: https://dex.xquare.app
+  logger:
+    level: debug
+  storage:
+    type: memory
+  oauth2:
+    responseTypes: ["code", "token", "id_token"]
+    skipApprovalScreen: true
+  staticClients:
+  - id: xquare
+    name: 'xquare'
+    redirectURIs:
+      - 'https://dex-login.xquare.app/callback'
+    secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+  connectors:
+  - type: github
+    id: github
+    name: GitHub
+    config:
+      clientID: d486635d82817cb24ce9
+      clientSecret: 792b92a7326af17adeed34241ae95bbd98c1785a
+      redirectURI: 'https://dex.xquare.app/callback'
+      orgs:
+      - name: team-xquare
+      - name: dodododopppp
+      - name: heiiwrd98
 
 # -- Additional storage [volumes](https://kubernetes.io/docs/concepts/storage/volumes/).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
