@@ -99,6 +99,10 @@ virtualServices:
       host: dex-k8s-authenticator.dex.svc.cluster.local
       port: 5555
 
+destinationRule:
+  host: "*"
+  name: xquare-destinatioen-rule
+
 addons:
   jeager:
     enable: true
