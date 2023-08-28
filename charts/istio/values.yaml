@@ -37,7 +37,7 @@ gateway:
   - hosts:
       - '*.xquare.app'
     port:
-      name: https
+      name: https-xquare
       number: 443
       protocol: HTTPS
     tls:
@@ -46,7 +46,7 @@ gateway:
   - hosts:
       - '*.dsm-pick.com'
     port:
-      name: https
+      name: https-pick
       number: 443
       protocol: HTTPS
     tls:
@@ -55,7 +55,7 @@ gateway:
   - hosts:
       - '*.dsm-repo.com'
     port:
-      name: https
+      name: https-repo
       number: 443
       protocol: HTTPS
     tls:
