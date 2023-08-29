@@ -104,10 +104,6 @@ virtualServices:
       host: oidc-proxy.dex.svc.cluster.local
       port: 443
 
-destinationRule:
-  host: '*'
-  name: xquare-destination-rule
-
 addons:
   jeager:
     enable: true
