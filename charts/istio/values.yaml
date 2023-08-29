@@ -101,7 +101,7 @@ virtualServices:
   - name: oidc-proxy-server
     host: oidc-proxy.xquare.app
     destination:
-      host: oidc-proxy.dex.svc.cluster.local
+      host: kube-oidc-proxy.dex.svc.cluster.local
       port: 443
 
 addons:
