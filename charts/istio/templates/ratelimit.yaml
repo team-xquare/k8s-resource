@@ -179,7 +179,7 @@ spec:
         context: GATEWAY
         routeConfiguration:
           vhost:
-            name: ""
+            name: "*"
             route:
               action: ANY
       patch:
