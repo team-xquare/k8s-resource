@@ -137,7 +137,7 @@ metadata:
 spec:
   workloadSelector:
     labels:
-      istio: ingressgateway
+      app: istio-ingressgateway
   configPatches:
     - applyTo: HTTP_FILTER
       match:
@@ -172,7 +172,7 @@ metadata:
 spec:
   workloadSelector:
     labels:
-      istio: ingressgateway
+      app: istio-ingressgateway
   configPatches:
     - applyTo: VIRTUAL_HOST
       match:
