@@ -1427,7 +1427,7 @@ serviceAccount:
 pdb:
   ## @param pdb.create Specifies whether a PodDisruptionBudget should be created
   ##
-  create: false
+  create: true
   ## @param pdb.minAvailable Min number of pods that must still be available after the eviction
   ##
   minAvailable: 1
