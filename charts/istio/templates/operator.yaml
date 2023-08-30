@@ -4,6 +4,8 @@ metadata:
   name: istiocontrolplane
   namespace: istio-system
 spec:
+  meshConfig:
+    accessLogFile: /dev/stdout
   profile: {{ .Values.profile }}
   meshConfig:
     extensionProviders:
