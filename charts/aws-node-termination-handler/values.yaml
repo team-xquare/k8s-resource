@@ -97,7 +97,7 @@ deleteLocalData: true
 ignoreDaemonSets: true
 
 # podTerminationGracePeriod is time in seconds given to each pod to terminate gracefully. If negative, the default value specified in the pod will be used.
-podTerminationGracePeriod: -1
+podTerminationGracePeriod: 60
 
 # nodeTerminationGracePeriod specifies the period of time in seconds given to each NODE to terminate gracefully. Node draining will be scheduled based on this value to optimize the amount of compute time, but still safely drain the node before an event.
 nodeTerminationGracePeriod: 120
