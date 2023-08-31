@@ -1,6 +1,35 @@
+namespaces: 
+  - xquare-prod
+  - xquare-stag
+
 clubs:
-  - name: dms
-    deployments: 
-      - "feed-fe-prod"
+  - name: xquare-dev
+    resourceNames:
+      - application-be-prod        
+      - apply-fe-prod              
+      - attachment-be-prod         
+      - authority-be-prod              
+      - cloud-config-be-prod          
+      - dormitory-admin-fe-prod       
+      - feed-be-prod               
+      - feed-fe-prod               
+      - git-be-prod                
+      - meal-be-prod               
+      - notification-be-prod       
+      - oauth-be-prod              
+      - pick-admin-fe-prod            
+      - pick-be-prod                
+      - pick-teacher-fe-prod          
+      - point-be-prod                   
+      - project-secret-manager-be-prod  
+      - report-be-prod             
+      - schedule-be-prod           
+      - school-meal-fe-prod        
+      - timetable-be-prod          
     users:
-      - "rlaisqls@gmail.com"
+      - "heiiwrd982"
+      - "tedsoftj1123"
+      - "jungho1209"
+      - "jyk1029"
+      - "alsdl0629"
+      - "pokabook"

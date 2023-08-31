@@ -13,6 +13,9 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+istio:
+  host: oidc-proxy.xquare.app
+
 service:
   type: ClusterIP
   port: 443
@@ -40,7 +43,7 @@ oidc:
 
   # PEM encoded value of CA cert that will verify TLS connection to
   # OIDC issuer URL. If not provided, default hosts root CA's will be used.
-  caPEM: 
+  caPEM:  
 
   usernamePrefix:
   groupsClaim: "groups"
@@ -62,7 +65,8 @@ extraImpersonationHeaders:
   clientIP: false
   #headers: key1=foo,key2=bar,key1=bar
 
-extraArgs: {}
+extraArgs:
+  v: 10
   #audit-log-path: /audit-log
   #audit-policy-file: /audit/audit.yaml
 

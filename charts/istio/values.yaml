@@ -98,11 +98,6 @@ virtualServices:
     destination:
       host: dex-k8s-authenticator.dex.svc.cluster.local
       port: 5555
-  - name: oidc-proxy-server
-    host: oidc-proxy.xquare.app
-    destination:
-      host: kube-oidc-proxy.dex.svc.cluster.local
-      port: 443
 
 addons:
   jeager:
