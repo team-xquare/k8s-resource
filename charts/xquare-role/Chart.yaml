@@ -1,6 +1,6 @@
 apiVersion: v2
 type: application
 name: xquare-role
-version: 1.0.1
+version: 1.0.2
 appVersion: "1.0.0"
 description: Xquare role
