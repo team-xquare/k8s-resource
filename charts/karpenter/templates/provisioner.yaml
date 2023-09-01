@@ -22,8 +22,7 @@ spec:
       memory: {{ .Values.provisioner.spec.limits.resources.memory }}
   providerRef:
     name: {{ .Values.provisioner.spec.providerRef.name }}
-  consolidation:
-    enabled: {{ .Values.provisioner.spec.consolidation.enabled }}
+  ttlSecondsAfterEmpty: {{ .Values.provisioner.spec.ttlSecondsAfterEmpty }}
 ---
 apiVersion: karpenter.k8s.aws/v1alpha1
 kind: AWSNodeTemplate
