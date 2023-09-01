@@ -39,7 +39,7 @@ spec:
                   numerator: 100
                   denominator: HUNDRED
               response_headers_to_add:
-                - append: false
+                - append: true
                   header:
                     key: x-local-rate-limit
                     value: 'true'
