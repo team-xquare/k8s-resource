@@ -113,7 +113,7 @@ completeLifecycleActionDelaySeconds: -1
 kubernetesEventsExtraAnnotations: ""
 
 # webhookURL if specified, posts event data to URL upon instance interruption action.
-webhookURL: ""
+webhookURL: "https://hooks.slack.com/services/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"
 
 # Webhook URL will be fetched from the secret store using the given name.
 webhookURLSecretName: ""
@@ -274,10 +274,10 @@ enableSpotInterruptionDraining: true
 enableScheduledEventDraining: true
 
 # enableRebalanceMonitoring If true, cordon nodes when the rebalance recommendation notice is received. Only used in IMDS mode.
-enableRebalanceMonitoring: false
+enableRebalanceMonitoring: true
 
 # enableRebalanceDraining If true, drain nodes when the rebalance recommendation notice is received. Only used in IMDS mode.
-enableRebalanceDraining: false
+enableRebalanceDraining: true
 
 # deleteSqsMsgIfNodeNotFound If true, delete the SQS Message from the SQS Queue if the targeted node(s) are not found. Only used in Queue Processor mode.
 deleteSqsMsgIfNodeNotFound: false
