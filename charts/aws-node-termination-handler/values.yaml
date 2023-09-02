@@ -135,7 +135,7 @@ webhookTemplateConfigMapName: ""
 webhookTemplateConfigMapKey: ""
 
 # enableSqsTerminationDraining If true, this turns on queue-processor mode which drains nodes when an SQS termination event is received
-enableSqsTerminationDraining: true
+enableSqsTerminationDraining: false
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Queue Processor Mode
@@ -156,7 +156,7 @@ serviceMonitor:
   # Specifies whether ServiceMonitor should be created
   # this needs enableSqsTerminationDraining: true
   # and enablePrometheusServer: true
-  create: true
+  create: false
   # Specifies whether the ServiceMonitor should be created in a different namespace than
   # the Helm release
   namespace:
