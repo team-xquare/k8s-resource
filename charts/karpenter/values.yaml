@@ -53,7 +53,7 @@ priorityClassName: system-cluster-critical
 terminationGracePeriodSeconds:
 # -- Bind the pod to the host network.
 # This is required when using a custom CNI.
-hostNetwork: false
+hostNetwork: true
 # -- Configure the DNS Policy for the pod
 dnsPolicy: Default
 # -- Configure DNS Config for the pod
