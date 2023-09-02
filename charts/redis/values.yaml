@@ -161,7 +161,7 @@ existingConfigmap: ""
 master:
   ## @param master.count Number of Redis&reg; master instances to deploy (experimental, requires additional configuration)
   ##
-  count: 1
+  count: 4
   ## @param master.configuration Configuration for Redis&reg; master nodes
   ## ref: https://redis.io/topics/config
   ##
@@ -575,7 +575,7 @@ master:
 replica:
   ## @param replica.replicaCount Number of Redis&reg; replicas to deploy
   ##
-  replicaCount: 2
+  replicaCount: 0
   ## @param replica.configuration Configuration for Redis&reg; replicas nodes
   ## ref: https://redis.io/topics/config
   ##
