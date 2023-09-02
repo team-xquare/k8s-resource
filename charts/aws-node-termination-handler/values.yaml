@@ -81,10 +81,10 @@ prometheusServerPort: 9092
 dryRun: false
 
 # Cordon but do not drain nodes upon spot interruption termination notice.
-cordonOnly: false
+cordonOnly: true
 
 # Taint node upon spot interruption termination notice.
-taintNode: false
+taintNode: true
 
 # Exclude node from load balancer before cordoning via the ServiceNodeExclusion feature gate.
 excludeFromLoadBalancers: false
@@ -103,7 +103,7 @@ podTerminationGracePeriod: 60
 nodeTerminationGracePeriod: 120
 
 # emitKubernetesEvents If true, Kubernetes events will be emitted when interruption events are received and when actions are taken on Kubernetes nodes. In IMDS Processor mode a default set of annotations with all the node metadata gathered from IMDS will be attached to each event
-emitKubernetesEvents: false
+emitKubernetesEvents: true
 
 # completeLifecycleActionDelaySeconds will pause for the configured duration after draining the node before completing the EC2 Autoscaling lifecycle action. This may be helpful if Pods on the node have Persistent Volume Claims.
 completeLifecycleActionDelaySeconds: -1
@@ -113,7 +113,7 @@ completeLifecycleActionDelaySeconds: -1
 kubernetesEventsExtraAnnotations: ""
 
 # webhookURL if specified, posts event data to URL upon instance interruption action.
-webhookURL: "https://hooks.slack.com/services/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"
+webhookURL: "https://hooks.slack.com/services/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"
 
 # Webhook URL will be fetched from the secret store using the given name.
 webhookURLSecretName: ""
@@ -135,7 +135,7 @@ webhookTemplateConfigMapName: ""
 webhookTemplateConfigMapKey: ""
 
 # enableSqsTerminationDraining If true, this turns on queue-processor mode which drains nodes when an SQS termination event is received
-enableSqsTerminationDraining: false
+enableSqsTerminationDraining: true
 
 # ---------------------------------------------------------------------------------------------------------------------
 # Queue Processor Mode
@@ -156,7 +156,7 @@ serviceMonitor:
   # Specifies whether ServiceMonitor should be created
   # this needs enableSqsTerminationDraining: true
   # and enablePrometheusServer: true
-  create: false
+  create: true
   # Specifies whether the ServiceMonitor should be created in a different namespace than
   # the Helm release
   namespace:
@@ -170,9 +170,10 @@ serviceMonitor:
 priorityClassName: system-cluster-critical
 
 # If specified, use the AWS region for AWS API calls
-awsRegion: ""
+awsRegion: "ap-northeast-2"
 
 # Listens for messages on the specified SQS queue URL
+# Set by Terraforn
 queueURL: ""
 
 # The maximum amount of parallel event processors to handle concurrent events
@@ -182,7 +183,7 @@ workers: 10
 checkASGTagBeforeDraining: true
 
 # If true, check that the instance is tagged with "aws-node-termination-handler/managed" as the key before draining the node
-checkTagBeforeDraining: true
+checkTagBeforeDraining: false
 
 # [DEPRECATED] Use managedTag instead
 managedAsgTag: "aws-node-termination-handler/managed"
