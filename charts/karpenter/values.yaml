@@ -129,7 +129,7 @@ controller:
   errorOutputPaths:
     - stderr
   # -- Controller log level, defaults to the global log level
-  logLevel: ""
+  logLevel: debug
   # -- Controller log encoding, defaults to the global log encoding
   logEncoding: ""
   # -- Additional volumeMounts for the controller pod.
