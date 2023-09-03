@@ -171,7 +171,7 @@ settings:
     # -- Duration of assumed credentials in minutes. Default value is 15 minutes. Not used unless aws.assumeRoleARN set.
     assumeRoleDuration: 15m
     # -- Cluster name.
-    clusterName: ""
+    clusterName: xquare-cluster
     # -- Cluster endpoint. If not set, will be discovered during startup (EKS only)
     clusterEndpoint: ""
     # -- The default instance profile to use when launching nodes
