@@ -81,7 +81,7 @@ prometheusServerPort: 9092
 dryRun: false
 
 # Cordon but do not drain nodes upon spot interruption termination notice.
-cordonOnly: true
+cordonOnly: false
 
 # Taint node upon spot interruption termination notice.
 taintNode: true
