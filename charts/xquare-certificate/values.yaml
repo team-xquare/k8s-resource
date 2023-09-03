@@ -12,8 +12,13 @@ certificates:
     - '*.dsm-pick.com'
     - 'dsm-pick.com'
   - name: repo-cert
-    commoNname: dsm-repo.com
+    commonName: dsm-repo.com
     namespace: istio-system
     dnsNames: 
     - '*.dsm-repo.com'
     - 'dsm-repo.com'
+  - name: oidc-proxy-cert
+    commonName: xquare.app
+    namespace: istio-system
+    dnsNames: 
+    - '*.xquare.app'
