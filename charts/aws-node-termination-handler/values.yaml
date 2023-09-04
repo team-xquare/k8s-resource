@@ -3,9 +3,9 @@
 # Declare variables to be passed into your templates.
  
 image:
-  repository: public.ecr.aws/aws-ec2/aws-node-termination-handler
+  repository: 471407337433.dkr.ecr.ap-northeast-2.amazonaws.com/node-termination-handler
   # Overrides the image tag whose default is {{ printf "v%s" .Chart.AppVersion }}
-  tag: ""
+  tag: "v1.0.0"
   pullPolicy: IfNotPresent
   pullSecrets: []
 
@@ -113,7 +113,7 @@ completeLifecycleActionDelaySeconds: -1
 kubernetesEventsExtraAnnotations: ""
 
 # webhookURL if specified, posts event data to URL upon instance interruption action.
-webhookURL: "https://hooks.slack.com/services/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"
+webhookURL: "https://hooks.slack.com/services/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"
 
 # Webhook URL will be fetched from the secret store using the given name.
 webhookURLSecretName: ""
@@ -125,7 +125,19 @@ webhookHeaders: ""
 webhookProxy: ""
 
 # webhookTemplate if specified, replaces the default webhook message template.
-webhookTemplate: ""
+webhookTemplate: |
+  {
+    "blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "*[NTH][Instance Interruption] EventID:* `{{ .EventID }}`\n*Kind:* `{{ .Kind }}`\n*Instance:* `{{ .InstanceID }}`\n*Node:* `{{ .NodeName }}`\n*Description:* `{{ .Description }}`\n*Start Time:* `{{ .StartTime }}`"
+        }
+      }
+    ]
+  }
+
 
 # webhook template file will be fetched from given config map name
 # if specified, replaces the default webhook message with the content of the template file
