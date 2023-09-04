@@ -113,10 +113,10 @@ completeLifecycleActionDelaySeconds: -1
 kubernetesEventsExtraAnnotations: ""
 
 # webhookURL if specified, posts event data to URL upon instance interruption action.
-webhookURL: "https://hooks.slack.com/services/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"
+webhookURL: ""
 
 # Webhook URL will be fetched from the secret store using the given name.
-webhookURLSecretName: ""
+webhookURLSecretName: "nth-webhook-secret"
 
 # webhookHeaders if specified, replaces the default webhook headers.
 webhookHeaders: ""
