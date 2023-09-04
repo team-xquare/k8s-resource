@@ -19,6 +19,7 @@ certificates:
     - 'dsm-repo.com'
   - name: oidc-proxy-cert
     commonName: xquare.app
-    namespace: istio-system
+    namespace: dex
     dnsNames: 
     - '*.xquare.app'
+    - 'xquare.app'
