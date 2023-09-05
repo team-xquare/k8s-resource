@@ -4,7 +4,7 @@ metadata:
   name: istiocontrolplane
   namespace: istio-system
 spec:
-  profile: {{ .Values.profile }}
+  profile: {{ .Values.operator.profile }}
   meshConfig:
     accessLogFile: /dev/stdout
     extensionProviders:
@@ -36,8 +36,7 @@ spec:
               targetPort: {{ .targetPort }}
             {{- end }}
           {{- with .Values.operator.serviceAnnotations }}
-          serviceAnnotations:
-{{ toYaml . | indent 12 }}
+          serviceAnnotations: {{ toYaml . | nindent 12 }}
           {{- end }}
   values:
     sidecarInjectorWebhook:
