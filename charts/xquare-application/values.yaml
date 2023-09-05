@@ -5,18 +5,16 @@ projects:
         source:
           path: deploy
           repoURL: https://github.com/team-xquare/xquare-gitops-repo.git
-          targetRevision: HEAD
         syncPolicy:
           automated:
             prune: true
             selfHeal: true
-  - name: xquare-k8s-resources
+  - name: xquare-resources
     applications:
       - name: xquare-role
         source:
           path: charts/xquare-role
           repoURL: https://github.com/team-xquare/k8s-resource.git
-          targetRevision: HEAD
         syncPolicy:
           automated:
             prune: true
