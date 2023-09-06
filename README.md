@@ -16,7 +16,7 @@ cluster의 **현 상태를 정확하고 투명**하게 파악하며, **누가 �
 
 ## Related Repositories
 
-  ### [ecr-heimdall](https://github.com/wafflestudio/ecr-heimdall)
+  ### [xquare-infrastructure-global](https://github.com/team-xquare/xquare-infrastructure-global)
   - 해당 repository에서 helm 배포 및 전체 AWS 인프라를 Terraform으로 관리합니다 
 
   ### [xquare-gitops-repo](https://github.com/team-xquare/xquare-gitops-repo)
