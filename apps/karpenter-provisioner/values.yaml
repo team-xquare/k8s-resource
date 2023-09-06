@@ -1,0 +1,50 @@
+provisioner:
+  name: xquare
+  spec:
+    requirements:
+      - key: kubernetes.io/os
+        operator: In
+        values: 
+          - "linux"
+      - key: "karpenter.sh/capacity-type"
+        operator: In
+        values:
+          - "spot"
+      - key: "topology.kubernetes.io/zone"
+        operator: In
+        values:
+          - "ap-northeast-2a"
+          - "ap-northeast-2c"
+      - key: "karpenter.k8s.aws/instance-size"
+        operator: In
+        values:
+          - "medium"
+          - "large"
+          - "xlarge"
+          - "2xlarge"
+      - key: "karpenter.k8s.aws/instance-cpu"
+        operator: In
+        values:
+          - "1"
+          - "2"
+          - "3"
+          - "4"
+          - "8"
+      - key: "karpenter.k8s.aws/instance-category"
+        operator: In
+        values:
+          - "m"
+      - key: "kubernetes.io/arch"
+        operator: In
+        values:
+          - "amd64"
+    limits:
+      resources:
+        cpu: 1000
+        memory: 1000Gi
+    providerRef:
+      name: xquare
+    ttlSecondsAfterEmpty: 30
+
+awsNodeTemplate:
+  name: xquare
