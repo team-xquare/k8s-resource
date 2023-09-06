@@ -5,33 +5,49 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   namespace: xquare-prod
-  name: {{ $clubname }}-role
+  name: {{ $clubname }}
 rules:
-- apiGroups: [""]
-  resources: ["pods", "pods/log"]
-  verbs: ["get", "list"]
 - apiGroups: ["apps"]
   resources: ["deployments"]
-  verbs: ["get", "list"]
+  verbs: ["get"]
+  resourceNames:
+  {{- range .projects }}
+    - {{ . }}-fe-prod
+    - {{ . }}-be-prod
+  {{- end }}
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["list"]
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   namespace: xquare-stag
-  name: {{ $clubname }}-role
+  name: {{ $clubname }}
 rules:
-- apiGroups: [""]
-  resources: ["pods", "pods/log"]
-  verbs: ["get", "list"]
 - apiGroups: ["apps"]
   resources: ["deployments"]
-  verbs: ["get", "list"]
----
+  verbs: ["get"]
+  resourceNames:
+  {{- range .projects }}
+    - {{ . }}-fe-stag
+    - {{ . }}-be-stag
+  {{- end }}
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["list"]
+- apiGroups: [""]
+  resources: ["pods/log"]
+  verbs: ["get"]
 {{- range .users }}
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ $clubname }}-{{ . }}-rolebinding
+  name: {{ $clubname }}-{{ . }}
   namespace: xquare-prod
 subjects:
 - kind: User 
@@ -44,7 +60,7 @@ roleRef:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ $clubname }}-{{ . }}-rolebinding
+  name: {{ $clubname }}-{{ . }}
   namespace: xquare-stag
 subjects:
 - kind: User 
@@ -53,6 +69,5 @@ roleRef:
   kind: Role
   name: {{ $clubname }}-role
   apiGroup: rbac.authorization.k8s.io
----
 {{- end }}
 {{- end }}

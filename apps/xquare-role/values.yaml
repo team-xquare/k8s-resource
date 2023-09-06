@@ -1,0 +1,35 @@
+clubs:
+  - name: dms
+    users:
+    - "rlaisqls"
+    - "alsdl0629"
+    projects:
+    - application
+    - attachment 
+    - dormitory-admin
+    - point
+    - meal       
+    - school-meal
+  - name: pick
+    users:
+    - "alsco39"
+    - "tedsoftj1123"
+    projects:
+    - pick-admin     
+    - pick        
+    - pick-teacher   
+  - name: etc
+    users:
+    - "jyk1029"
+    projects:
+    - report     
+    - schedule   
+    - timetable-be
+    - feed 
+    - git        
+    - notification-be 
+  - name: mukgen
+    users: 
+    - HyunSu1768
+    projects:
+    - mukgen
