@@ -14,7 +14,7 @@ provisioner:
     requirements:
       - key: kubernetes.io/os
         operator: In
-        values:
+        values: 
           - "linux"
       - key: "karpenter.sh/capacity-type"
         operator: In

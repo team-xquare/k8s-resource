@@ -3,4 +3,4 @@ kube-prometheus-stack:
     prometheusSpec:
       thanos:
         image: quay.io/thanos/thanos:v0.28.1
-  
+    

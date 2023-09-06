@@ -1,4 +1,4 @@
 argo-cd:
   configs:
     params:
-      server.insecure: true
+      server.insecure: true 

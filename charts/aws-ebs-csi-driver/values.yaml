@@ -8,7 +8,7 @@ aws-ebs-csi-driver:
                 expirationSeconds: 3607
                 path: token
             - configMap:
-                name: kube-root-ca.crt
+                name: kube-root-ca.crt 
                 items:
                   - key: ca.crt
                     path: ca.crt

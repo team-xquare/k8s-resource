@@ -54,7 +54,7 @@ service:
   # loadBalancerIP: 127.0.0.1
 
   # For nodeport, specify the following:
-  #   type: NodePort
+  #   type: NodePort 
   #   nodePort: <port-number>
 
 ingress:

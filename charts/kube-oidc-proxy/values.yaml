@@ -57,7 +57,7 @@ oidc:
 # https://github.com/jetstack/kube-oidc-proxy/blob/master/docs/tasks/token-passthrough.md
 tokenPassthrough:
   enabled: false
-  audiences: []
+  audiences: [] 
 
 # To add extra impersonation headers
 # https://github.com/jetstack/kube-oidc-proxy/blob/master/docs/tasks/extra-impersonation-headers.md

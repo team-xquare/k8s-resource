@@ -14,7 +14,7 @@ operator:
   hpaSpec:
     minReplicas: 2
     maxReplicas: 10
-  serviceType: LoadBalancer
+  serviceType: LoadBalancer 
   servicePorts:
     - name: http
       port: 80
