@@ -76,10 +76,6 @@ config:
       clientID: d486635d82817cb24ce9
       clientSecret: 792b92a7326af17adeed34241ae95bbd98c1785a
       redirectURI: 'https://dex.xquare.app/callback'
-      orgs:
-      - name: team-xquare
-      - name: dodododopppp
-      - name: heiiwrd98
 
 # -- Additional storage [volumes](https://kubernetes.io/docs/concepts/storage/volumes/).
 # See the [API reference](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#volumes-1) for details.
