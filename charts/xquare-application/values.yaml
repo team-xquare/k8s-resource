@@ -33,7 +33,7 @@ projects:
           repoURL: https://github.com/team-xquare/k8s-resource.git
         syncPolicy:
           automated:
-            prune: false
+            prune: false 
             selfHeal: true
       - name: external-auth
         source:

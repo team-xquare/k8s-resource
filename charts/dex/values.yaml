@@ -7,7 +7,7 @@ dex:
       type: memory
     oauth2:
       responseTypes: ["code", "token", "id_token"]
-      skipApprovalScreen: true
+      skipApprovalScreen: true 
     staticClients:
     - id: xquare
       name: 'xquare'

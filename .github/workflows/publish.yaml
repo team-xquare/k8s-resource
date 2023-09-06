@@ -43,14 +43,11 @@ jobs:
       - name: Helm build
         run: |
           changed_helm_packages=$(git diff --name-only HEAD~1 | grep '^charts/' | cut -d/ -f1-2)
-          unique_list=($(echo "${changed_helm_packages[@]}" | tr ' ' '\n' | awk '!seen[$0]++' | tr '\n' ' '))
-
-          echo $unique_list
 
           while IFS=$'\n' read -r package_directory; do
-              helm dependency build $package_directory || true
-              helm package $package_directory || true
-          done <<< "$unique_list"
+              helm dependency build $package_directory
+              helm package $package_directory
+          done <<< "$changed_helm_packages"
 
       - name: checkout gh-pages branch and helm index
         run: | 

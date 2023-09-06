@@ -9,7 +9,7 @@ aws-node-termination-handler:
     {
       "blocks": [
         {
-          "type": "section",
+          "type": "section", 
           "text": {
             "type": "mrkdwn",
             "text": "*[NTH][Instance Interruption] EventID:* `{{ .EventID }}`\n*Kind:* `{{ .Kind }}`\n*Instance:* `{{ .InstanceID }}`\n*Node:* `{{ .NodeName }}`\n*Description:* `{{ .Description }}`\n*Start Time:* `{{ .StartTime }}`"
