@@ -1,0 +1,67 @@
+
+gateway:
+  servers:
+  - hosts:
+      - '*.xquare.app'
+    port:
+      name: https-xquare
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: xquare-cert
+  - hosts:
+      - '*.dsm-pick.com'
+    port:
+      name: https-pick
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: pick-cert
+  - hosts:
+      - '*.dsm-repo.com'
+    port:
+      name: https-repo
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: repo-cert
+
+virtualServices:
+  - name: argocd-server
+    host: argo-cd.xquare.app
+    destination:
+      host: argocd-server.argocd.svc.cluster.local
+      port: 80
+  - name: kiali-server
+    host: kiali.xquare.app
+    destination:
+      host: kiali.istio-system.svc.cluster.local
+      port: 20001
+  - name: prometeus-server
+    host: prometheus.xquare.app
+    destination:
+      host: prometheus-server.prometheus.svc.cluster.local
+      port: 80
+  - name: jaeger-server
+    host: jaeger.xquare.app
+    destination:
+      host: tracing.istio-system.svc.cluster.local
+      port: 80
+  - name: grafana-server
+    host: grafana.xquare.app
+    destination:
+      host: argocd-server.argocd.svc.cluster.local
+      port: 80
+  - name: dex-server
+    host: dex.xquare.app
+    destination:
+      host: dex.dex.svc.cluster.local
+      port: 5556
+  - name: dex-login-server
+    host: dex-login.xquare.app
+    destination:
+      host: dex-k8s-authenticator.dex.svc.cluster.local
+      port: 5555

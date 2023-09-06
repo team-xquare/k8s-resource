@@ -13,9 +13,25 @@ projects:
     applications:
       - name: xquare-role
         source:
-          path: charts/xquare-role
+          path: apps/xquare-role
           repoURL: https://github.com/team-xquare/k8s-resource.git
         syncPolicy:
           automated:
             prune: true
+            selfHeal: true
+      - name: istio-resource
+        source:
+          path: apps/istio-resource
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
+      - name: xquare-certificate
+        source:
+          path: apps/xquare-certificate
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
             selfHeal: true

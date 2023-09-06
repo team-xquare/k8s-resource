@@ -1,0 +1,6 @@
+apiVersion: v2
+type: application
+name: istio-resource
+version: 1.0.0
+appVersion: "1.0.0"
+description: Istio resources for xquare
