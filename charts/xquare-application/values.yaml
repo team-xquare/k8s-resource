@@ -43,3 +43,11 @@ projects:
           automated:
             prune: false
             selfHeal: true
+      - name: karpenter-provisioner
+        source:
+          path: apps/karpenter-provisioner
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
