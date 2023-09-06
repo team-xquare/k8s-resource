@@ -1,0 +1,37 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: {{ .Values.provisioner.name }}
+spec:
+  labels:
+    {{- range $key, $value := .Values.provisioner.spec.labels }}
+    {{ $key }}: {{ $value }}
+    {{- end }}
+  requirements:
+    {{- range .Values.provisioner.spec.requirements }}
+    - key: {{ .key | quote }}
+      operator: {{ .operator | quote }}
+      values:
+        {{- range .values }}
+        - {{ . | quote }}
+        {{- end }}
+    {{- end }}
+  limits:
+    resources:
+      cpu: {{ .Values.provisioner.spec.limits.resources.cpu }}
+      memory: {{ .Values.provisioner.spec.limits.resources.memory }}
+  providerRef:
+    name: {{ .Values.provisioner.spec.providerRef.name }}
+  ttlSecondsAfterEmpty: {{ .Values.provisioner.spec.ttlSecondsAfterEmpty }}
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: {{ .Values.awsNodeTemplate.name }}
+spec:
+  subnetSelector:
+    karpenter.sh/discovery/xquare-cluster: '*'
+  securityGroupSelector:
+    aws:eks:cluster-name: {{ .Values.settings.aws.clusterName }}
+  tags:
+    karpenter.sh/discovery: {{ .Values.settings.aws.clusterName }}

@@ -1,0 +1,6 @@
+kube-prometheus-stack:
+  prometheus:
+    prometheusSpec:
+      thanos:
+        image: quay.io/thanos/thanos:v0.28.1
+  
