@@ -50,7 +50,7 @@ dexK8sAuthenticator:
 service:
   annotations: {}
   type: ClusterIP
-  port: 443
+  port: 5555
   # loadBalancerIP: 127.0.0.1
 
   # For nodeport, specify the following:
