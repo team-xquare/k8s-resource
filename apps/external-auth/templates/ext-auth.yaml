@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ext-authz
-          image: 471407337433.dkr.ecr.ap-northeast-2.amazonaws.com/envoy-middleware-be-prod:prod-be720ab17a23f02b5c91e229b5bff852f77d15ae
+          image: {{ .Value.image }}
           ports:
             - containerPort: 9000
               protocol: TCP
