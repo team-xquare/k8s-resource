@@ -65,3 +65,8 @@ virtualServices:
     destination:
       host: dex-k8s-authenticator.dex.svc.cluster.local
       port: 5555
+  - name: thanos-server
+    host: thanos.xquare.app
+    destination:
+      host: thanos-query-frontend.monitoring.svc.cluster.local
+      port: 9090
