@@ -53,7 +53,7 @@ virtualServices:
   - name: grafana-server
     host: grafana.xquare.app
     destination:
-      host: argocd-server.argocd.svc.cluster.local
+      host: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
       port: 80
   - name: dex-server
     host: dex.xquare.app
