@@ -37,6 +37,6 @@ addons:
     enable: true
   kiali:
     enable: true
-    prometheusUrl: http://prometheus.istio-system:9090
+    prometheusUrl: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
 
 
