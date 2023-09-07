@@ -1,0 +1,17 @@
+thanos:
+  existingObjstoreSecret: thanos-objstore-secret
+  query:
+    enabled: true
+  storegateway:    
+    serviceAccount:
+      create: true
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/thanos_s3_role
+    enabled: true
+    persistence:
+      enabled: false
+    logLevel: debug
+  receive:
+    enabled: true
+    persistence:
+      enabled: false

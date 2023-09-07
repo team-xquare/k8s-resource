@@ -1,0 +1,11 @@
+apiVersion: v2
+name: thanos
+description: Thanos is a highly available metrics system that can be added on top of existing Prometheus deployments, providing a global query view across all Prometheus installations.
+type: application
+version: 1.0.0
+appVersion: 0.32.2
+kubeVersion: ">=1.16.0-0"
+dependencies:
+  - name: thanos
+    version: v12.13.0
+    repository: https://charts.bitnami.com/bitnami
