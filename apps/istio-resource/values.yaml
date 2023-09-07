@@ -43,8 +43,8 @@ virtualServices:
   - name: prometeus-server
     host: prometheus.xquare.app
     destination:
-      host: prometheus-server.prometheus.svc.cluster.local
-      port: 80
+      host: kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
+      port: 9090
   - name: jaeger-server
     host: jaeger.xquare.app
     destination:
