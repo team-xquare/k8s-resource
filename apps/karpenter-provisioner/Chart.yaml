@@ -1,6 +1,0 @@
-apiVersion: v2
-name: karpenter-provisioner
-description: A Helm chart for Karpenter provisioner
-type: application
-version: 1.0.0
-appVersion: 0.30.0
