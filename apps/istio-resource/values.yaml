@@ -9,7 +9,7 @@ gateway:
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: xquare-cert
+      credentialName: oidc-proxy-cert
   - hosts:
       - '*.dsm-pick.com'
     port:
