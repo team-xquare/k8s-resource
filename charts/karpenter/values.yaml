@@ -1,0 +1,5 @@
+settings:
+  aws:
+    clusterName: ""
+    clusterEndpoint: ""
+    defaultInstanceProfile: ""
