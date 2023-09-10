@@ -34,6 +34,6 @@ spec:
   subnetSelector:
     karpenter.sh/discovery/xquare-cluster: '*'
   securityGroupSelector:
-    aws:eks:cluster-name: {{ .Values.karpenter.settings.aws.clusterName }}
+    aws:eks:cluster-name: $(metadata.name) 
   tags:
-    karpenter.sh/discovery: {{ .Values.karpenter.settings.aws.clusterName }}
+    karpenter.sh/discovery:  $(metadata.name) 
