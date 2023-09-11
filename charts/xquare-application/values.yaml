@@ -58,7 +58,7 @@ projects:
             prune: false
             selfHeal: true
       - name: aws-node-termination-handler
-        namespace: kube-system
+        namespace: spot-handler
         source:
           path: apps/aws-node-termination-handler
           repoURL: https://github.com/team-xquare/k8s-resource.git
