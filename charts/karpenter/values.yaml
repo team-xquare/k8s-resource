@@ -1,0 +1,6 @@
+karpenter:
+  settings:
+    aws:
+      clusterName: ""
+      clusterEndpoint: ""
+      defaultInstanceProfile: ""
