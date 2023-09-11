@@ -1,23 +1,13 @@
 aws-node-termination-handler: 
   image:
     repository: 471407337433.dkr.ecr.ap-northeast-2.amazonaws.com/node-termination-handler
-    tag: "v1.0.4"
+    tag: "v1.0.5"
   taintNode: true
   emitKubernetesEvents: true
   logLevel: debug
   webhookURLSecretName: "nth-webhook-secret"
   webhookTemplate: |
-    {
-      "blocks": [
-        {
-          "type": "section", 
-          "text": {
-            "type": "mrkdwn",
-            "text": "*[NTH][Instance Interruption] EventID:* `{{ .EventID }}`\n*Kind:* `{{ .Kind }}`\n*Instance:* `{{ .InstanceID }}`\n*Node:* `{{ .NodeName }}`\n*Description:* `{{ .Description }}`\n*Start Time:* `{{ .StartTime }}`"
-          }
-        }
-      ]
-    }
+    {"summary":"Node Termination Handler","themeColor":"FF00E8","title":"Node Termination Handler Spot Interruption","sections":[{"facts":[{"name":"Description:","value":"{{ .Description }}"},{"name":"Node Name","value":"{{ .NodeName }}"},{"name":"Instance ID","value":"{{ .InstanceID }}"},{"name":"StartTime","value":"{{ .StartTime }}"}]}]}
   enableSpotInterruptionDraining: true
   enableScheduledEventDraining: true
   enableRebalanceMonitoring: true
