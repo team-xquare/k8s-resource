@@ -3,6 +3,10 @@ kube-prometheus-stack:
     enabled: true
     thanosService:
       enabled: true
+      port: 10901
+      portName: grpc
+      targetPort: grpc
+      type: ClusterIP
     additionalRulesForClusterRole:
     - apiGroups:
         - ""
