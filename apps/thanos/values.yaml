@@ -20,5 +20,11 @@ thanos:
       bucket: "xquare-thanos-bucket"
       endpoint: "s3.ap-northeast-2.amazonaws.com"
       aws_sdk_auth: true
-
-  
+  stores: 
+  - kube-prometheus-stack-thanos-discovery:10901
+  compactor:
+    enabled: false
+    retentionResolutionRaw: 30d
+    retentionResolution5m: 30d
+    retentionResolution1h: 10y
+    consistencyDelay: 15m
