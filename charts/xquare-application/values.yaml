@@ -2,6 +2,7 @@ projects:
   - name: xquare-application
     applications:
       - name: xquare
+        namespace: argocd
         source:
           path: deploy
           repoURL: https://github.com/team-xquare/xquare-gitops-repo.git
@@ -12,6 +13,7 @@ projects:
   - name: xquare-resources
     applications:
       - name: xquare-role
+        namespace: argocd
         source:
           path: apps/xquare-role
           repoURL: https://github.com/team-xquare/k8s-resource.git
@@ -20,6 +22,7 @@ projects:
             prune: true
             selfHeal: true
       - name: istio-resource
+        namespace: argocd
         source:
           path: apps/istio-resource
           repoURL: https://github.com/team-xquare/k8s-resource.git
@@ -28,6 +31,7 @@ projects:
             prune: false
             selfHeal: true
       - name: xquare-certificate
+        namespace: argocd
         source:
           path: apps/xquare-certificate
           repoURL: https://github.com/team-xquare/k8s-resource.git
@@ -36,6 +40,7 @@ projects:
             prune: false 
             selfHeal: true
       - name: external-auth
+        namespace: xquare-prod
         source:
           path: apps/external-auth
           repoURL: https://github.com/team-xquare/k8s-resource.git
@@ -44,8 +49,54 @@ projects:
             prune: false
             selfHeal: true
       - name: karpenter-provisioner
+        namespace: karpenter
         source:
           path: apps/karpenter-provisioner
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
+      - name: aws-node-termination-handler
+        namespace: kube-system
+        source:
+          path: apps/aws-node-termination-handler
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
+      - name: dex
+        namespace: dex
+        source:
+          path: apps/dex
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
+      - name: dex-k8s-authenticator
+        namespace: dex
+        source:
+          path: apps/dex-k8s-authenticator
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
+      - name: kube-prometheus-stack
+        namespace: monitoring
+        source:
+          path: apps/kube-prometheus-stack
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
+      - name: thanos
+        namespace: monitoring
+        source:
+          path: apps/thanos
           repoURL: https://github.com/team-xquare/k8s-resource.git
         syncPolicy:
           automated:
