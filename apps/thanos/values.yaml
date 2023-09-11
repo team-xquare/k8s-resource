@@ -1,5 +1,4 @@
 thanos:
-  existingObjstoreSecret: thanos-objstore-secret
   query:
     enabled: true
   storegateway:    
@@ -15,3 +14,11 @@ thanos:
     enabled: true
     persistence:
       enabled: false
+  objstoreConfig: |
+    type: s3
+    config:
+      bucket: "xquare-thanos-bucket"
+      endpoint: "s3.ap-northeast-2.amazonaws.com"
+      aws_sdk_auth: true
+
+  
