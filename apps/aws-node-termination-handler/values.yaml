@@ -6,8 +6,7 @@ aws-node-termination-handler:
   emitKubernetesEvents: true
   logLevel: debug
   webhookURLSecretName: "nth-webhook-secret"
-  webhookTemplate: |
-    {"summary":"Node Termination Handler","themeColor":"FF00E8","title":"Node Termination Handler Spot Interruption","sections":[{"facts":[{"name":"Description:","value":"{{ .Description }}"},{"name":"Node Name","value":"{{ .NodeName }}"},{"name":"Instance ID","value":"{{ .InstanceID }}"},{"name":"StartTime","value":"{{ .StartTime }}"}]}]}
+  webhookTemplate: "{\"text\":\"*INSTANCE INTERRUPTION NOTICE*\n- **EventID:** {{ .EventID }}\n- **InstanceId:** {{ .InstanceID }}\n- **InstanceType:** {{ .InstanceType }}- \n- **Start Time:** {{ .StartTime }}\n- **Description:** {{ .Description }}\", \"icon_emoji\":\":spot-intstance:\", \"username\":\"Node Termination Handler\" }"
   enableSpotInterruptionDraining: true
   enableScheduledEventDraining: true
   enableRebalanceMonitoring: true
