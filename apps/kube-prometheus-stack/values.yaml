@@ -1,4 +1,10 @@
 kube-prometheus-stack:
+  alertmanager:
+    enabled: true
+    alertmanagerSpec:
+      logLevel: debug
+      useExistingSecret: true
+      configSecret: "prom-alertmanager-config-secret"
   thanosRuler:
     enabled: true
     thanosRulerSpec:
@@ -13,7 +19,7 @@ kube-prometheus-stack:
           secret:
             secretName: thanos-objstore-secret
       queryEndpoints:
-      - http://global-thanos-query-dns
+      - http://thanos-query.monitoring.svc.cluster.local
     extraSecret:
       name: thanosruler-alertmanager-config
       data:
@@ -23,12 +29,6 @@ kube-prometheus-stack:
             scheme: http
             timeout: 30s
             api_version: v1
-  alertmanager:
-    enabled: true
-    alertmanagerSpec:
-      logLevel: debug
-      useExistingSecret: true
-      configSecret: "prom-alertmanager-config-secret"
   prometheus:
     enabled: true
     prometheusSpec:
@@ -37,7 +37,10 @@ kube-prometheus-stack:
           key: objstore.yml
           name: thanos-objstore-secret
     thanosService:
+      annotations: {}
+      clusterIP: ""
       enabled: true
+      labels: {}
       port: 10901
       portName: grpc
       targetPort: grpc
