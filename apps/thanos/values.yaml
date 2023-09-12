@@ -8,7 +8,7 @@ thanos:
   query:
     enabled: true
     stores: 
-    - kube-prometheus-stack-thanos-discovery:10901
+    - 172.20.23.225:10901
     service:
       type: ClusterIP
       ports:
@@ -21,16 +21,12 @@ thanos:
         max_size: 512MB
         max_size_items: 100
         validity: 100s
-    extraFlags: 
-    - --query-range.split-interval=24h
-    - --query-range.max-retries-per-request=3
-    - --query-frontend.log-queries-longer-than=60s
     service:
       type: ClusterIP
       ports:
         http: 9090
   bucketweb:
-    enabled: false
+    enabled: true
   compactor:
     enabled: true
     retentionResolutionRaw: 30d
