@@ -1,6 +1,6 @@
 kube-prometheus-stack:
   crds:
-    enabled: false
+    enabled: false # 첫 설치시 true로 해야함
   prometheus:
     additionalRulesForClusterRole:
     - apiGroups:
@@ -43,7 +43,7 @@ kube-prometheus-stack:
       type: ClusterIP
     prometheusSpec:
       thanos:
-        minTime: -3h
+        minTime: -10m
         objectStorageConfig:
           key: objstore.yml
           name: thanos-objstore-secret
@@ -134,7 +134,7 @@ kube-prometheus-stack:
         - source_labels: [ __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name ]
           action: keep
           regex: istio-sidecar-injector;http-monitoring
-      
+
       ## pod
       - honor_labels: true
         job_name: 'kubernetes-pods'
