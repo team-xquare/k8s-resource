@@ -19,7 +19,7 @@ kube-prometheus-stack:
           secret:
             secretName: thanos-objstore-secret
       queryEndpoints:
-      - http://thanos-query.monitoring.svc.cluster.local
+      - http://thanos-query.monitoring.svc.cluster.local:10902
     extraSecret:
       name: thanosruler-alertmanager-config
       data:
@@ -33,6 +33,7 @@ kube-prometheus-stack:
     enabled: true
     prometheusSpec:
       thanos:
+        image: quay.io/thanos/thanos:v0.28.1
         objectStorageConfig:
           key: objstore.yml
           name: thanos-objstore-secret

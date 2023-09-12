@@ -8,7 +8,7 @@ thanos:
   query:
     enabled: true
     stores: 
-    - 172.20.23.225:10901
+    - thanos-storegateway:10901
     service:
       type: ClusterIP
       ports:
@@ -27,12 +27,18 @@ thanos:
         http: 9090
   bucketweb:
     enabled: true
+    serviceAccount:
+      create: true
+      name: ""
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/thanos_s3_role 
+      automountServiceAccountToken: true
   compactor:
     enabled: true
     retentionResolutionRaw: 30d
     retentionResolution5m: 30d
     retentionResolution1h: 10y
-    consistencyDelay: 30m # Compaction 실행주기 설정 
+    consistencyDelay: 30m
   storegateway:
     enabled: true
     serviceAccount:
