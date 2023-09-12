@@ -32,7 +32,7 @@ metadata:
   name: {{ .Values.awsNodeTemplate.name }}
 spec:
   subnetSelector:
-    karpenter.sh/discovery/xquare-cluster: '*'
+    karpenter.sh/discovery/xquare-v2-cluster: '*'
   securityGroupSelector:
     aws:eks:cluster-name: xquare-v2-cluster
   tags:
