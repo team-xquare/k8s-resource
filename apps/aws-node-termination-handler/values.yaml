@@ -1,7 +1,7 @@
 aws-node-termination-handler: 
   image:
     repository: 471407337433.dkr.ecr.ap-northeast-2.amazonaws.com/node-termination-handler
-    tag: "v1.0.13"
+    tag: "v1.0.18"
   taintNode: true
   emitKubernetesEvents: true
   logLevel: debug
@@ -12,3 +12,6 @@ aws-node-termination-handler:
   enableRebalanceMonitoring: true
   enableRebalanceDraining: true
   enableSqsTerminationDraining: false
+  serviceAccount:
+    create: false
+    name: aws-nth

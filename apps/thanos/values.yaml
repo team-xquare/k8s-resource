@@ -8,7 +8,7 @@ thanos:
   query:
     enabled: true
     stores: 
-    - kube-prometheus-stack-thanos-discovery:10901
+    - thanos-storegateway:10901
     service:
       type: ClusterIP
       ports:
@@ -21,22 +21,24 @@ thanos:
         max_size: 512MB
         max_size_items: 100
         validity: 100s
-    extraFlags: 
-    - --query-range.split-interval=24h
-    - --query-range.max-retries-per-request=3
-    - --query-frontend.log-queries-longer-than=60s
     service:
       type: ClusterIP
       ports:
         http: 9090
   bucketweb:
-    enabled: false
+    enabled: true
+    serviceAccount:
+      create: true
+      name: ""
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/thanos_s3_role 
+      automountServiceAccountToken: true
   compactor:
     enabled: true
     retentionResolutionRaw: 30d
     retentionResolution5m: 30d
     retentionResolution1h: 10y
-    consistencyDelay: 30m # Compaction 실행주기 설정 
+    consistencyDelay: 30m
   storegateway:
     enabled: true
     serviceAccount:
@@ -51,3 +53,10 @@ thanos:
     retentionResolution5m: 30d
     retentionResolution1h: 10y
     consistencyDelay: 15m
+  minio:
+    enabled: true
+    auth:
+      existingSecret: minio-secret
+    defaultBuckets: thanos
+    persistence:
+      enabled: false
