@@ -47,3 +47,10 @@ thanos:
     retentionResolution5m: 30d
     retentionResolution1h: 10y
     consistencyDelay: 15m
+  minio:
+    enabled: true
+    auth:
+      existingSecret: minio-secret
+    defaultBuckets: thanos
+    persistence:
+      enabled: false
