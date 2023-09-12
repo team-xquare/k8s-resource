@@ -41,7 +41,7 @@ provisioner:
           - "amd64"
     limits:
       resources:
-        cpu: 1000
+        cpu: 1k
         memory: 1000Gi
     providerRef:
       name: xquare
