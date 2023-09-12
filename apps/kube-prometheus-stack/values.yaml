@@ -1,8 +1,47 @@
 kube-prometheus-stack:
+  thanosRuler:
+    enabled: true
+    thanosRulerSpec:
+      alertmanagersConfig:
+        key: alertmanager-configs.yaml
+        name: thanosruler-alertmanager-config
+      objectStorageConfig:
+        key: objstore.yml
+        name: thanos-objstore-secret
+      volumes:
+        - name: object-storage
+          secret:
+            secretName: thanos-objstore-secret
+      queryEndpoints:
+      - http://global-thanos-query-dns
+    extraSecret:
+      name: thanosruler-alertmanager-config
+      data:
+        alertmanager-configs.yaml: |
+          alertmanagers:
+          - static_configs: ["kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local"]
+            scheme: http
+            timeout: 30s
+            api_version: v1
+  alertmanager:
+    enabled: true
+    alertmanagerSpec:
+      logLevel: debug
+      useExistingSecret: true
+      configSecret: "prom-alertmanager-config-secret"
   prometheus:
     enabled: true
+    prometheusSpec:
+      thanos:
+        objectStorageConfig:
+          key: objstore.yml
+          name: thanos-objstore-secret
     thanosService:
       enabled: true
+      port: 10901
+      portName: grpc
+      targetPort: grpc
+      type: ClusterIP
     additionalRulesForClusterRole:
     - apiGroups:
         - ""
@@ -335,28 +374,3 @@ kube-prometheus-stack:
           - source_labels:
               - __meta_kubernetes_service_name
             target_label: service
-
-  thanosRuler:
-    enabled: true
-    thanosRulerSpec:
-      alertmanagersConfig:
-        key: alertmanager-configs.yaml
-        name: thanosruler-alertmanager-config
-      objectStorageConfig:
-        key: objstore.yml
-        name: thanos-objstore-secret
-      volumes:
-        - name: object-storage
-          secret:
-            secretName: thanos-objstore-secret
-      queryEndpoints:
-      - http://global-thanos-query-dns
-    extraSecret:
-      name: thanosruler-alertmanager-config
-      data:
-        alertmanager-configs.yaml: |
-          alertmanagers:
-          - static_configs: ["kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local"]
-            scheme: http
-            timeout: 30s
-            api_version: v1
