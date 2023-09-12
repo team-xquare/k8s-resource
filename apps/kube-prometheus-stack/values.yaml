@@ -1,47 +1,7 @@
 kube-prometheus-stack:
-  thanosRuler:
-    enabled: true
-    thanosRulerSpec:
-      alertmanagersConfig:
-        key: alertmanager-configs.yaml
-        name: thanosruler-alertmanager-config
-      objectStorageConfig:
-        key: objstore.yml
-        name: thanos-objstore-secret
-      volumes:
-        - name: object-storage
-          secret:
-            secretName: thanos-objstore-secret
-      queryEndpoints:
-      - http://global-thanos-query-dns
-    extraSecret:
-      name: thanosruler-alertmanager-config
-      data:
-        alertmanager-configs.yaml: |
-          alertmanagers:
-          - static_configs: ["kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local"]
-            scheme: http
-            timeout: 30s
-            api_version: v1
-  alertmanager:
-    enabled: true
-    alertmanagerSpec:
-      logLevel: debug
-      useExistingSecret: true
-      configSecret: "prom-alertmanager-config-secret"
+  crds:
+    enabled: false
   prometheus:
-    enabled: true
-    prometheusSpec:
-      thanos:
-        objectStorageConfig:
-          key: objstore.yml
-          name: thanos-objstore-secret
-    thanosService:
-      enabled: true
-      port: 10901
-      portName: grpc
-      targetPort: grpc
-      type: ClusterIP
     additionalRulesForClusterRole:
     - apiGroups:
         - ""
@@ -72,9 +32,23 @@ kube-prometheus-stack:
         - "/metrics"
       verbs:
         - get
+    thanosService:
+      annotations: {}
+      clusterIP: ""
+      enabled: true
+      labels: {}
+      port: 10901
+      portName: grpc
+      targetPort: grpc
+      type: ClusterIP
     prometheusSpec:
+      thanos:
+        minTime: -3h
+        objectStorageConfig:
+          key: objstore.yml
+          name: thanos-objstore-secret
+        version: v0.18.0
       additionalScrapeConfigs:
-
       ## istio
       - job_name: 'istiod'
         kubernetes_sd_configs:
@@ -374,3 +348,34 @@ kube-prometheus-stack:
           - source_labels:
               - __meta_kubernetes_service_name
             target_label: service
+
+  alertmanager:
+    enabled: true
+    alertmanagerSpec:
+      logLevel: debug
+      useExistingSecret: true
+      configSecret: "prom-alertmanager-config-secret"
+  thanosRuler:
+    enabled: true
+    thanosRulerSpec:
+      alertmanagersConfig:
+        key: alertmanager-configs.yaml
+        name: thanosruler-alertmanager-config
+      objectStorageConfig:
+        key: objstore.yml
+        name: thanos-objstore-secret
+      volumes:
+        - name: object-storage
+          secret:
+            secretName: thanos-objstore-secret
+      queryEndpoints:
+      - http://thanos-query.monitoring.svc.cluster.local:10902
+    extraSecret:
+      name: thanosruler-alertmanager-config
+      data:
+        alertmanager-configs.yaml: |
+          alertmanagers:
+          - static_configs: ["kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local"]
+            scheme: http
+            timeout: 30s
+            api_version: v1

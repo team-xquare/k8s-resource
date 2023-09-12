@@ -9,7 +9,7 @@ gateway:
       protocol: HTTPS
     tls:
       mode: SIMPLE
-      credentialName: oidc-proxy-cert
+      credentialName: xquare-cert
   - hosts:
       - '*.dsm-pick.com'
     port:
@@ -69,4 +69,14 @@ virtualServices:
     host: thanos.xquare.app
     destination:
       host: thanos-query-frontend.monitoring.svc.cluster.local
+      port: 9090
+  - name: minio-server
+    host: minio.xquare.app
+    destination:
+      host: thanos-minio.monitoring.svc.cluster.local
+      port: 9001
+  - name: thanos-store-server
+    host: thanos-store.xquare.app
+    destination:
+      host: thanos-storegateway.monitoring.svc.cluster.local
       port: 9090
