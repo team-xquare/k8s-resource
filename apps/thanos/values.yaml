@@ -15,7 +15,7 @@ thanos:
       ports:
         http: 9090
   bucketweb:
-    enabled: true
+    enabled: false
   compactor:
     enabled: true
     retentionResolutionRaw: 30d

@@ -11,9 +11,44 @@ loki:
       path: /ready
       port: http-metrics
     initialDelaySeconds: 45
-  datasource:
-    jsonData: "{}"
-    uid: ""
+  serviceAccount:
+    create: true
+    name: xquare-loki
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/loki_s3_role 
+  monitoring:
+    selfMonitoring:
+      grafanaAgent:
+        installOperator: false
+  backend:
+    persistence:
+      enableStatefulSetAutoDeletePVC: false
+  write:
+    persistence:
+      enableStatefulSetAutoDeletePVC: false
+  read:
+    persistence:
+      enableStatefulSetAutoDeletePVC: false
+  loki:
+    storage_config:
+      type: s3
+      config:
+        bucket: "xquare-loki-bucket"
+        endpoint: "s3.ap-northeast-2.amazonaws.com"
+        aws_sdk_auth: true
+    schema_config:
+      configs:
+        - index:
+            period: 24h
+          chunks:
+            period: 24h
+    limits_config:
+      retention_period: 7d
+    compactor:
+      retention_enabled: true
+    table_manager:
+      retention_deletes_enabled: true
+      retention_period: 7d
 
 promtail:
   config:
@@ -54,10 +89,6 @@ promtail:
             target_label: component
           - replacement: kubernetes-pods
             target_label: scrape_job
-          # exclude logs
           - source_labels: [__meta_kubernetes_namespace]
-            action: drop
-            regex: kube-system|istio-system|elastic-system|loki
-          - source_labels: [__meta_kubernetes_pod_container_name]
-            action: drop
-            regex: metricbeat|filebeat|istio-proxy|istio-init
+            action: keep
+            regex: xquare-prod|xquare-stag|spot-handler
