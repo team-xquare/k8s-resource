@@ -31,12 +31,3 @@ operator:
     service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
-
-addons:
-  jeager:
-    enable: true
-  kiali:
-    enable: true
-    prometheusUrl: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
-
-
