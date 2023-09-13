@@ -102,3 +102,12 @@ projects:
           automated:
             prune: false
             selfHeal: true
+      - name: loki-stack
+        namespace: monitoring
+        source:
+          path: apps/loki-stack
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true

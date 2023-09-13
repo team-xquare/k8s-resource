@@ -14,11 +14,6 @@ dex:
       redirectURIs:
         - 'https://dex-login.xquare.app/callback'
       secret: ZXhhbXBsZS1hcHAtc2VjcmV0
-    - id: argocd
-      name: 'argocd'
-      redirectURIs:
-        - 'https://argo-cd.xquare.app/auth/callback'
-      secret: 9YtOzjlwzz8KijqDh0BVLO
     connectors:
     - type: github
       id: github

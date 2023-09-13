@@ -1,0 +1,14 @@
+apiVersion: v1
+name: loki-stack
+version: 1.0.0
+appVersion: v2.6.1
+kubeVersion: ">= 1.22.0-0"
+description: A Helm chart for loki-stack
+home: https://github.com/grafana
+dependencies:
+- name: "loki"
+  repository: "https://grafana.github.io/helm-charts"
+  version: "^2.15.2"
+- name: "promtail"
+  repository: "https://grafana.github.io/helm-charts"
+  version: "^6.7.4"
