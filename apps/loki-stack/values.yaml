@@ -24,20 +24,20 @@ loki:
     persistence:
       enabled: false
   write:
-    replicas: 0
+    replicas: 1
     persistence:
       enabled: false
   read:
-    replicas: 0
+    replicas: 1
     persistence:
       enabled: false
   loki:
-    # storage_config:
-    #   type: s3
-    #   config:
-    #     bucket: "xquare-loki-bucket"
-    #     endpoint: "s3.ap-northeast-2.amazonaws.com"
-    #     aws_sdk_auth: true
+    storage_config:
+      type: s3
+      config:
+        bucket: "xquare-loki-bucket"
+        endpoint: "s3.ap-northeast-2.amazonaws.com"
+        aws_sdk_auth: true
     schema_config:
       configs:
         - index:
