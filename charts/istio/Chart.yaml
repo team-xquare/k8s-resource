@@ -1,6 +1,6 @@
 apiVersion: v2
 type: application
 name: istio
-version: 1.0.26
+version: 1.0.27
 appVersion: "1.18.1"
 description: Istio setting for xquare

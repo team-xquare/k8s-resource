@@ -70,3 +70,11 @@ virtualServices:
     destination:
       host: thanos-storegateway.monitoring.svc.cluster.local
       port: 9090
+
+addons:
+  jeager:
+    enable: true
+  kiali:
+    enable: true
+    prometheusUrl: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+
