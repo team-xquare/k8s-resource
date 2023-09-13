@@ -39,6 +39,7 @@ jobs:
           helm repo add jetstaack https://charts.jetstack.io
           helm repo add dex https://charts.dexidp.io
           helm repo add karpenter https://charts.karpenter.sh/
+          helm repo add minio https://charts.min.io/
 
       - name: Helm build
         run: |
