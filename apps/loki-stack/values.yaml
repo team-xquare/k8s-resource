@@ -22,13 +22,13 @@ loki:
         installOperator: false
   backend:
     persistence:
-      enableStatefulSetAutoDeletePVC: false
+      enabled: false
   write:
     persistence:
-      enableStatefulSetAutoDeletePVC: false
+      enabled: false
   read:
     persistence:
-      enableStatefulSetAutoDeletePVC: false
+      enabled: false
   loki:
     storage_config:
       type: s3
