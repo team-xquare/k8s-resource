@@ -1,0 +1,28 @@
+descheduler:
+  strategies:
+    RemoveDuplicates:
+      enabled: false
+    RemovePodsHavingTooManyRestarts:
+      enabled: false
+    RemovePodsViolatingNodeTaints:
+      enabled: false
+    RemovePodsViolatingNodeAffinity:
+      enabled: false
+      params:
+        nodeAffinityType:
+          - requiredDuringSchedulingIgnoredDuringExecution
+    RemovePodsViolatingInterPodAntiAffinity:
+      enabled: false
+    RemovePodsViolatingTopologySpreadConstraint:
+      enabled: false
+      params:
+        includeSoftConstraints: false
+    LowNodeUtilization:
+      enabled: true
+      params:
+        nodeResourceUtilizationThresholds:
+          thresholds:
+            cpu: 20
+            memory: 20
+            pods: 10
+  schedule: "*/20 * * * *"
