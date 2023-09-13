@@ -51,7 +51,6 @@ kube-prometheus-stack:
       thanos:
         logLevel: debug
         minTime: -3h
-        blockSize: 1m
         objectStorageConfig:
           key: objstore.yml
           name: thanos-objstore-secret
