@@ -1153,7 +1153,7 @@ singleBinary:
   # -- Tolerations for single binary pods
   tolerations: []
   persistence:
-    enable: true
+    enable: true  
     # -- Enable StatefulSetAutoDeletePVC feature
     enableStatefulSetAutoDeletePVC: true
     # -- Enable persistent disk
