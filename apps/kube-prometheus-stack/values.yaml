@@ -4,7 +4,7 @@ kube-prometheus-stack:
   prometheus:  
     serviceAccount:
       create: true
-      name: "prometheus-stack"
+      name: "xquare-prometheus-stack"
       automountServiceAccountToken: true
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/thanos_s3_role 
