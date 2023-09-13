@@ -49,15 +49,8 @@ thanos:
     persistence:
       enabled: false
   compactor:
-    enabled: false
+    enabled: true
     retentionResolutionRaw: 30d
     retentionResolution5m: 30d
     retentionResolution1h: 10y
     consistencyDelay: 15m
-  minio:
-    enabled: true
-    auth:
-      existingSecret: minio-secret
-    defaultBuckets: thanos
-    persistence:
-      enabled: false
