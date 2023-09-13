@@ -57,6 +57,11 @@ kube-prometheus-stack:
           name: thanos-objstore-secret
         version: v0.18.0
       additionalScrapeConfigs:
+      ## actuator
+      - job_name: 'spring-actuator'
+        metrics_path: '/actuator/prometheus' # Application prometheus endpoint
+        static_configs:
+          - targets: ["${SERVICE_URL}:8080"] # Application host:port
       ## istio
       - job_name: 'istiod'
         kubernetes_sd_configs:
@@ -380,13 +385,13 @@ kube-prometheus-stack:
           secret:
             secretName: thanos-objstore-secret
       queryEndpoints:
-      - http://thanos-query.monitoring.svc.cluster.local:10902
+      - http://thanos-query.monitoring.svc.cluster.local:9090
     extraSecret:
       name: thanosruler-alertmanager-config
       data:
         alertmanager-configs.yaml: |
           alertmanagers:
-          - static_configs: ["kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local"]
+          - static_configs: ["kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local:9093"]
             scheme: http
             timeout: 30s
             api_version: v1
