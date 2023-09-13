@@ -1,19 +1,8 @@
 thanos:
-  objstoreConfig: |-
-    type: s3
-    config:
-      bucket: "xquare-thanos-bucket"
-      endpoint: "s3.ap-northeast-2.amazonaws.com"
-      region: "ap-northeast-2"
-      aws_sdk_auth: true
-      insecure: false
-      signature_version2: false
-      trace:
-        enable: true
+  existingObjstoreSecret: thanos-objstore-secret
   query:
     enabled: true
     stores: 
-    - thanos-storegateway:10901
     - kube-prometheus-stack-thanos-discovery:10901
     service:
       type: ClusterIP
@@ -33,34 +22,15 @@ thanos:
         http: 9090
   bucketweb:
     enabled: true
-    serviceAccount:
-      create: true
-      name: ""
-      annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/thanos_s3_role 
-      automountServiceAccountToken: true
   compactor:
-    enabled: false
+    enabled: true
     retentionResolutionRaw: 30d
     retentionResolution5m: 30d
     retentionResolution1h: 10y
     consistencyDelay: 30m
     persistence:
       enabled: false
-    cronJob:
-      enabled: true
-      schedule: "0 */6 * * *"
   storegateway:
     enabled: true
-    serviceAccount:
-      create: true
-      annotations:
-        eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/thanos_s3_role
     persistence:
       enabled: false
-  compactor:
-    enabled: true
-    retentionResolutionRaw: 30d
-    retentionResolution5m: 30d
-    retentionResolution1h: 10y
-    consistencyDelay: 15m
