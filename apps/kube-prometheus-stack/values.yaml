@@ -391,7 +391,7 @@ kube-prometheus-stack:
       data:
         alertmanager-configs.yaml: |
           alertmanagers:
-          - static_configs: ["kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local"]
+          - static_configs: ["kube-prometheus-stack-alertmanager.monitoring.svc.cluster.local:9093"]
             scheme: http
             timeout: 30s
             api_version: v1
