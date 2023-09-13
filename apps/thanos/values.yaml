@@ -10,12 +10,6 @@ thanos:
         http: 9090
   queryFrontend:
     enabled: true
-    config: |-
-      type: IN-MEMORY
-      config:
-        max_size: 512MB
-        max_size_items: 100
-        validity: 100s
     service:
       type: ClusterIP
       ports:
@@ -34,3 +28,9 @@ thanos:
     enabled: true
     persistence:
       enabled: false
+    serviceAccount:
+      create: true
+      name: "xquare-thanos-storegateway"
+      automountServiceAccountToken: true
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/thanos_s3_role 
