@@ -97,10 +97,6 @@ data:
         root_namespace: istio-system
       prometheus:
         url: {{ .Values.addons.kiali.prometheusUrl }}
-        thanos_proxy:
-          enabled: {{ .Values.addons.kiali.thanos_proxy.enabled }}
-          retention_period: {{ .Values.addons.kiali.thanos_proxy.retention_period }}
-          scrape_interval: {{ .Values.addons.kiali.thanos_proxy.scrape_interval }}
     identity:
       cert_file: ""
       private_key_file: ""
