@@ -45,6 +45,7 @@ provisioner:
         memory: 1000Gi
     providerRef:
       name: xquare
-    ttlSecondsAfterEmpty: 10
+    consolidation:
+      enabled: true
 awsNodeTemplate:
   name: xquare
