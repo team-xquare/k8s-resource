@@ -1,7 +1,13 @@
 kube-prometheus-stack:
   crds:
     enabled: false # 첫 설치시 true로 해야함
-  prometheus:
+  prometheus:  
+    serviceAccount:
+      create: true
+      name: "prometheus-stack"
+      automountServiceAccountToken: true
+      annotations:
+        eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/thanos_s3_role 
     additionalRulesForClusterRole:
     - apiGroups:
         - ""
@@ -43,7 +49,8 @@ kube-prometheus-stack:
       type: ClusterIP
     prometheusSpec:
       thanos:
-        minTime: -10m
+        logLevel: debug
+        minTime: -3h
         objectStorageConfig:
           key: objstore.yml
           name: thanos-objstore-secret
@@ -139,7 +146,11 @@ kube-prometheus-stack:
       - honor_labels: true
         job_name: 'kubernetes-pods'
         kubernetes_sd_configs:
-          - role: pod
+        - role: pod
+          namespaces:
+            names:
+            - xquare-prod
+            - xquare-stag
         relabel_configs:
           - action: keep
             regex: true
