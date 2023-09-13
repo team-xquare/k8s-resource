@@ -84,6 +84,9 @@ topologySpreadConstraints:
 tolerations:
   - key: CriticalAddonsOnly
     operator: Exists
+  - key: karpenter
+    value: "true"
+    effect: NoSchedule
 # -- Additional volumes for the pod.
 extraVolumes: []
 # - name: aws-iam-token
