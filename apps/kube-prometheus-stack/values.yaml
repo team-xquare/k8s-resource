@@ -51,7 +51,6 @@ kube-prometheus-stack:
       type: ClusterIP
     prometheusSpec:
       thanos:
-        logLevel: debug
         minTime: -3h
         objectStorageConfig:
           key: objstore.yml
@@ -365,7 +364,6 @@ kube-prometheus-stack:
   alertmanager:
     enabled: true
     alertmanagerSpec:
-      logLevel: debug
       useExistingSecret: true
       configSecret: "prom-alertmanager-config-secret"
   thanosRuler:

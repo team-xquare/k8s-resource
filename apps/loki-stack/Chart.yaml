@@ -8,7 +8,7 @@ home: https://github.com/grafana
 dependencies:
 - name: "loki"
   repository: "https://grafana.github.io/helm-charts"
-  version: "^2.15.2"
+  version: "5.20.0"
 - name: "promtail"
   repository: "https://grafana.github.io/helm-charts"
-  version: "^6.7.4"
+  version: "6.15.1"
