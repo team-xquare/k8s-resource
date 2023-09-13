@@ -40,11 +40,6 @@ virtualServices:
     destination:
       host: kiali.istio-system.svc.cluster.local
       port: 20001
-  - name: prometeus-server
-    host: prometheus.xquare.app
-    destination:
-      host: kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
-      port: 9090
   - name: jaeger-server
     host: jaeger.xquare.app
     destination:
@@ -70,11 +65,6 @@ virtualServices:
     destination:
       host: thanos-query-frontend.monitoring.svc.cluster.local
       port: 9090
-  - name: minio-server
-    host: minio.xquare.app
-    destination:
-      host: thanos-minio.monitoring.svc.cluster.local
-      port: 9001
   - name: thanos-store-server
     host: thanos-store.xquare.app
     destination:
