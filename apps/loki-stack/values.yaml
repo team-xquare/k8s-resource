@@ -21,6 +21,7 @@ loki:
       grafanaAgent:
         installOperator: false
   backend:
+    replicas: 1
     persistence:
       enabled: false
   write:
@@ -35,7 +36,6 @@ loki:
     storage:
       s3:
         bucketnames: xquare-loki-bucket
-        endpoint: s3.ap-northeast-2.amazonaws.com
         region: ap-northeast-2
     storage_config:
       boltdb_shipper:
