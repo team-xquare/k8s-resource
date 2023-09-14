@@ -33,5 +33,5 @@ descheduler:
             targetThresholds:
               cpu: 50
               memory: 70
-              pods: 60
+              pods: 90
   schedule: "*/20 * * * *"
