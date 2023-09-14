@@ -3,6 +3,10 @@ kind: Provisioner
 metadata:
   name: {{ .Values.provisioner.name }}
 spec:
+  taints:
+    - key: karpenter
+      value: "true"
+      effect: NoSchedule
   labels:
     {{- range $key, $value := .Values.provisioner.spec.labels }}
     {{ $key }}: {{ $value }}
