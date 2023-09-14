@@ -48,8 +48,6 @@ loki:
       aws:
         s3: s3://ap-northeast-2/xquare-loki-bucket
         region: ap-northeast-2
-        s3ForcePathStyle: false
-        insecure: false
       boltdb_shipper:
         active_index_directory: /var/loki/active
         shared_store: s3
