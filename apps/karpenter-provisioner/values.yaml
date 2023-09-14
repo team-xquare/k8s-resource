@@ -1,6 +1,8 @@
 provisioner:
   name: xquare
   spec:
+    labels:
+      Karpenter: enabled
     requirements:
       - key: kubernetes.io/os
         operator: In
