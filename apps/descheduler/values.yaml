@@ -1,16 +1,29 @@
 descheduler:
   strategies:
+    RemoveDuplicates:
+      enabled: false
+    RemovePodsHavingTooManyRestarts:
+      enabled: false
+    RemovePodsViolatingNodeTaints:
+      enabled: false
+    RemovePodsViolatingNodeAffinity:
+      enabled: false
+    RemovePodsViolatingInterPodAntiAffinity:
+      enabled: false
+    RemovePodsViolatingTopologySpreadConstraint:
+      enabled: false
     LowNodeUtilization:
-        name: "LowNodeUtilization"
-        args:
-            thresholds:
-              cpu: 5
-              memory: 30
-              pods: 10
-            targetThresholds:
-              "cpu": 50
-              "memory": 70
-              "pods": 60
+      enabled: true
+      params:
+        nodeResourceUtilizationThresholds:
+          thresholds:
+            cpu: 5
+            memory: 30
+            pods: 10
+          targetThresholds:
+            "cpu": 50
+            "memory": 70
+            "pods": 60
     PodLifeTime:
       name: "PodLifeTime"
       args:
