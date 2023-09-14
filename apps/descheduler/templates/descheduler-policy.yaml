@@ -18,6 +18,7 @@ profiles:
           maxPodLifeTimeSeconds: {{ .Values.descheduler.strategies.PodLifeTime.args.maxPodLifeTimeSeconds }}
             states:
               {{-range .Values.descheduler.strategies.PodLifeTime.args.states}}
+            {{- end}}
     plugins:
       balance:
         enabled:
