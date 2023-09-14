@@ -172,6 +172,10 @@ spec:
           {{- else }}
             secretName: enterprise-logs-license
           {{- end }}
+        {{- if not .Values.write.persistence.enabled }}
+        - name: data
+          emptyDir: {}
+        {{- end }}
         {{- end }}
         {{- with .Values.write.extraVolumes }}
         {{- toYaml . | nindent 8 }}

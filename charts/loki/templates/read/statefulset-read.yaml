@@ -158,6 +158,10 @@ spec:
             secretName: enterprise-logs-license
           {{- end }}
         {{- end }}
+        {{- if not .Values.read.persistence.enabled }}
+        - name: data
+          emptyDir: {}
+        {{- end }}
         {{- with .Values.read.extraVolumes }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
