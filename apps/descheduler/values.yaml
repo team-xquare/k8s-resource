@@ -38,8 +38,5 @@ descheduler:
         enabled: true
         params:
           nodeResourceUtilizationThresholds:
-            thresholds:
-              cpu: 20
-              memory: 40
               pods: 70
   schedule: "*/5 * * * *"
