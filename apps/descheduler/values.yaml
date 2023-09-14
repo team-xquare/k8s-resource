@@ -22,6 +22,18 @@ descheduler:
         enabled: false
         params:
           includeSoftConstraints: false
+      LowNodeUtilization:
+        enabled: false
+        params:
+          nodeResourceUtilizationThresholds:
+            thresholds:
+              cpu: 20
+              memory: 40
+              pods: 70
+            targetThresholds:
+              cpu: 50
+              memory: 70
+              pods: 90
       HighNodeUtilization:
         enabled: true
         params:
