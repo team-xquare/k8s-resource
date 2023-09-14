@@ -34,8 +34,12 @@ loki:
       enabled: false
   loki:
     storage:
-      s3:
-        bucketnames: xquare-loki-bucket
+      bucketNames:
+        chunks: xquare-loki-bucket
+        ruler: xquare-loki-bucket
+        admin: xquare-loki-bucket
+    storage_config:
+      aws:
         region: ap-northeast-2
     storage_config:
       boltdb_shipper:
