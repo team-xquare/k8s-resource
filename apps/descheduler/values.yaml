@@ -19,5 +19,6 @@ descheduler:
         enabled: true
         params:
           nodeResourceUtilizationThresholds:
+            threshold:
               pods: 60
   schedule: "*/5 * * * *"
