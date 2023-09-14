@@ -40,8 +40,8 @@ loki:
         admin: xquare-loki-bucket
     storage_config:
       aws:
+        s3: s3://ap-northeast-2/xquare-loki-bucket
         region: ap-northeast-2
-    storage_config:
       boltdb_shipper:
         active_index_directory: /tmp/loki/active
         shared_store: s3
