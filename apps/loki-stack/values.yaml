@@ -16,6 +16,7 @@ loki:
     name: xquare-loki
     annotations:
       eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/loki_s3_role 
+      eks.amazonaws.com/sts-regional-endpoints: "true"
   monitoring:
     selfMonitoring:
       grafanaAgent:
@@ -33,6 +34,11 @@ loki:
     persistence:
       enabled: false
   loki:
+    podSecurityContext:
+      fsGroup: 1000
+      runAsGroup: 1000
+      runAsNonRoot: true
+      runAsUser: 1000
     storage:
       bucketNames:
         chunks: xquare-loki-bucket
@@ -40,19 +46,20 @@ loki:
         admin: xquare-loki-bucket
     storage_config:
       aws:
+        s3: s3://ap-northeast-2/xquare-loki-bucket
         region: ap-northeast-2
-    storage_config:
       boltdb_shipper:
-        active_index_directory: /tmp/loki/active
+        active_index_directory: /var/loki/active
         shared_store: s3
-        cache_location: /tmp/loki/cache
+        cache_location: /var/loki/cache
         cache_ttl: 24h
     compactor:
-      working_directory: /tmp/loki/compactor
+      working_directory: /var/loki/compactor
       shared_store: s3
     schema_config:
       configs:
-        - index:
+        - object_store: s3
+          index:
             period: 24h
           chunks:
             period: 24h
