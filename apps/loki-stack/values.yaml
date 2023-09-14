@@ -32,12 +32,20 @@ loki:
     persistence:
       enabled: false
   loki:
+    storage:
+      s3:
+        bucketnames: xquare-loki-bucket
+        endpoint: s3.ap-northeast-2.amazonaws.com
+        region: ap-northeast-2
     storage_config:
-      type: s3
-      config:
-        bucket: "xquare-loki-bucket"
-        endpoint: "s3.ap-northeast-2.amazonaws.com"
-        aws_sdk_auth: true
+      boltdb_shipper:
+        active_index_directory: /tmp/loki/active
+        shared_store: s3
+        cache_location: /tmp/loki/cache
+        cache_ttl: 24h
+    compactor:
+      working_directory: /tmp/loki/compactor
+      shared_store: s3
     schema_config:
       configs:
         - index:
