@@ -64,10 +64,10 @@ loki:
   revisionHistoryLimit: 10
   # -- The SecurityContext for Loki pods
   podSecurityContext:
-    fsGroup: 10001
-    runAsGroup: 10001
+    fsGroup: 420
+    runAsGroup: 420
     runAsNonRoot: true
-    runAsUser: 10001
+    runAsUser: 420
   # -- The SecurityContext for Loki containers
   containerSecurityContext:
     readOnlyRootFilesystem: true
