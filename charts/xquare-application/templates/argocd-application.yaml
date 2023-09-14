@@ -38,7 +38,5 @@ spec:
     automated:
       prune: {{ .syncPolicy.automated.prune }}
       selfHeal: {{ .syncPolicy.automated.selfHeal }}
-  helm:
-    skipCrds: true
 {{- end }}
 {{- end }}

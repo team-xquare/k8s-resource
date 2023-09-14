@@ -8,7 +8,7 @@ home: https://github.com/grafana
 dependencies:
 - name: "loki"
   repository: "https://team-xquare.github.io/k8s-resource"
-  version: "5.20.0"
+  version: "5.20.1"
 - name: "promtail"
   repository: "https://grafana.github.io/helm-charts"
   version: "6.15.1"
