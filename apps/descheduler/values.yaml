@@ -5,38 +5,19 @@ descheduler:
         enabled: false
       RemovePodsHavingTooManyRestarts:
         enabled: false
-        params:
-          podsHavingTooManyRestarts:
-            podRestartThreshold: 100
-            includingInitContainers: false
       RemovePodsViolatingNodeTaints:
         enabled: false
       RemovePodsViolatingNodeAffinity:
         enabled: false
-        params:
-          nodeAffinityType:
-            - requiredDuringSchedulingIgnoredDuringExecution
       RemovePodsViolatingInterPodAntiAffinity:
         enabled: false
       RemovePodsViolatingTopologySpreadConstraint:
         enabled: false
-        params:
-          includeSoftConstraints: false
       LowNodeUtilization:
         enabled: false
-        params:
-          nodeResourceUtilizationThresholds:
-            thresholds:
-              cpu: 20
-              memory: 40
-              pods: 70
-            targetThresholds:
-              cpu: 50
-              memory: 70
-              pods: 90
       HighNodeUtilization:
         enabled: true
         params:
           nodeResourceUtilizationThresholds:
-              pods: 70
+              pods: 60
   schedule: "*/5 * * * *"
