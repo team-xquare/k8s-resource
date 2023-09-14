@@ -41,10 +41,7 @@ kube-prometheus-stack:
       verbs:
         - get
     thanosService:
-      annotations: {}
-      clusterIP: ""
       enabled: true
-      labels: {}
       port: 10901
       portName: grpc
       targetPort: grpc

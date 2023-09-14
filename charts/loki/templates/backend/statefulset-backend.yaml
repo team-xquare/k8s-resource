@@ -246,6 +246,10 @@ spec:
             sizeLimit: {{ .Values.sidecar.rules.sizeLimit }}
         {{- else }}
           emptyDir: {}
+        {{- if not .Values.write.persistence.enabled }}
+        - name: data
+          emptyDir: {}
+        {{- end }}
         {{- end -}}
         {{- end -}}
         {{- with .Values.backend.extraVolumes }}
