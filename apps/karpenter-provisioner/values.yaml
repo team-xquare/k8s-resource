@@ -2,7 +2,9 @@ provisioner:
   name: xquare
   spec:
     labels:
-      Karpenter: enabled
+      Karpenter: enabled    
+    kubeletConfiguration:
+      maxPods: 110
     requirements:
       - key: kubernetes.io/os
         operator: In
