@@ -3,7 +3,16 @@ kube-prometheus-stack:
     enabled: false # 첫 설치시 true로 해야함
   nodeExporter:
     enabled: false
-  prometheus:  
+  prometheusOperator:
+    enabled: true
+    nodeSelector:
+      Karpenter: enabled
+    tolerations:
+    - effect: "NoSchedule"
+      key: karpenter
+      operator: "Equal"
+      value: "true"
+  prometheus: 
     serviceAccount:
       create: true
       name: "xquare-prometheus-stack"
@@ -47,6 +56,13 @@ kube-prometheus-stack:
       targetPort: grpc
       type: ClusterIP
     prometheusSpec:
+      nodeSelector:
+        Karpenter: enabled
+      tolerations:
+      - effect: "NoSchedule"
+        key: karpenter
+        operator: "Equal"
+        value: "true"
       thanos:
         minTime: -3h
         objectStorageConfig:

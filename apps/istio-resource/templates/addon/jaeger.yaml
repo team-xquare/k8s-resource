@@ -54,6 +54,14 @@ spec:
       volumes:
         - name: data
           emptyDir: {}
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}
 ---
 apiVersion: v1
 kind: Service

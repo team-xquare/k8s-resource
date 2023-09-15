@@ -1,1 +1,8 @@
-cert-manager: {} 
+cert-manager:
+  nodeSelector:
+    Karpenter: enabled
+  tolerations:
+  - effect: "NoSchedule"
+    key: karpenter
+    operator: "Equal"
+    value: "true"

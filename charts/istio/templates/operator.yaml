@@ -44,3 +44,12 @@ spec:
     gateways:
       istio-ingressgateway:
         type: ClusterIP
+    global:
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+      {{- end }}
