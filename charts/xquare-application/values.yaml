@@ -84,6 +84,15 @@ projects:
           automated:
             prune: false
             selfHeal: true
+      - name: kube-oidc-proxy
+        namespace: dex
+        source:
+          path: apps/kube-oidc-proxy
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
       - name: kube-prometheus-stack
         namespace: monitoring
         source:
