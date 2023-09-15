@@ -3,6 +3,8 @@ kind: Provisioner
 metadata:
   name: {{ .Values.provisioner.name }}
 spec:
+  kubeletConfiguration:
+    maxPods: {{ .Values.provisioner.spec.kubeletConfiguration.maxPods }}
   taints:
     - key: karpenter
       value: "true"
