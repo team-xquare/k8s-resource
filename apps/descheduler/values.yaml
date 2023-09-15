@@ -21,6 +21,6 @@ descheduler:
           nodeResourceUtilizationThresholds:
             thresholds:
               cpu: 50
-              pods: 60
+              pods: 70
               memory: 50
-  schedule: "*/5 * * * *"
+  schedule: "*/30 * * * *"
