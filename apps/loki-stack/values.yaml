@@ -34,6 +34,13 @@ loki:
     replicas: 1
     persistence:
       enabled: false
+    nodeSelector:
+      Karpenter: enabled
+    tolerations:
+    - effect: "NoSchedule"
+      key: karpenter
+      operator: "Equal"
+      value: "true"
   write:
     replicas: 1
     persistence:
@@ -147,3 +154,10 @@ promtail:
           - source_labels: [__meta_kubernetes_namespace]
             action: keep
             regex: xquare-prod|xquare-stag|spot-handler
+  nodeSelector:
+    Karpenter: enabled
+  tolerations:
+  - effect: "NoSchedule"
+    key: karpenter
+    operator: "Equal"
+    value: "true"
