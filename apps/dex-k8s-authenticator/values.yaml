@@ -107,8 +107,13 @@ caCerts:
 
 envFrom: []
 
-nodeSelector: {}
-
-tolerations: []
+nodeSelector:
+  Karpenter: enabled
+  
+tolerations:
+- effect: "NoSchedule"
+  key: karpenter
+  operator: "Equal"
+  value: "true"
 
 affinity: {}

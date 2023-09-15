@@ -8,12 +8,26 @@ thanos:
       type: ClusterIP
       ports:
         http: 9090
+    nodeSelector:
+      Karpenter: enabled
+    tolerations:
+    - effect: "NoSchedule"
+      key: karpenter
+      operator: "Equal"
+      value: "true"
   queryFrontend:
     enabled: true
     service:
       type: ClusterIP
       ports:
         http: 9090
+    nodeSelector:
+      Karpenter: enabled
+    tolerations:
+    - effect: "NoSchedule"
+      key: karpenter
+      operator: "Equal"
+      value: "true"
   bucketweb:
     enabled: false
   compactor:
@@ -24,6 +38,13 @@ thanos:
     consistencyDelay: 30m
     persistence:
       enabled: false
+    nodeSelector:
+      Karpenter: enabled
+    tolerations:
+    - effect: "NoSchedule"
+      key: karpenter
+      operator: "Equal"
+      value: "true"
   storegateway:
     enabled: true
     persistence:
@@ -34,3 +55,10 @@ thanos:
       automountServiceAccountToken: true
       annotations:
         eks.amazonaws.com/role-arn: arn:aws:iam::471407337433:role/thanos_s3_role 
+    nodeSelector:
+      Karpenter: enabled
+    tolerations:
+    - effect: "NoSchedule"
+      key: karpenter
+      operator: "Equal"
+      value: "true"

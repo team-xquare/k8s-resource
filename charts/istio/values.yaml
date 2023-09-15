@@ -31,3 +31,12 @@ operator:
     service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+
+nodeSelector:
+  Karpenter: enabled
+
+tolerations:
+- effect: "NoSchedule"
+  key: karpenter
+  operator: "Equal"
+  value: "true"

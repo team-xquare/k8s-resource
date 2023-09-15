@@ -15,3 +15,10 @@ aws-node-termination-handler:
   serviceAccount:
     create: false
     name: aws-nth
+  nodeSelector:
+    Karpenter: enabled
+  tolerations:
+  - effect: "NoSchedule"
+    key: karpenter
+    operator: "Equal"
+    value: "true"

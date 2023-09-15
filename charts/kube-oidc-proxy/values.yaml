@@ -122,8 +122,13 @@ resources: {}
 
 initContainers: []
 
-nodeSelector: {}
+nodeSelector:
+  Karpenter: enabled
 
-tolerations: []
+tolerations:
+- effect: "NoSchedule"
+  key: karpenter
+  operator: "Equal"
+  value: "true"
 
 affinity: {}
