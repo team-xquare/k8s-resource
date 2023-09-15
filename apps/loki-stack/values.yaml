@@ -33,6 +33,9 @@ loki:
     replicas: 1
     persistence:
       enabled: false
+  memberlist:
+    service:
+      publishNotReadyAddresses: true
   loki:
     podSecurityContext:
       fsGroup: 1000
