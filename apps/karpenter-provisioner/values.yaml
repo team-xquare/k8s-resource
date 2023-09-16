@@ -21,6 +21,10 @@ provisioner:
           - m5a.large
           - m5.xlarge
           - m5.large
+      - key: kubernetes.io/arch	
+        operator: In	
+        values:	
+          - amd64
     limits:
       resources:
         cpu: 1k
