@@ -1,9 +1,9 @@
 karpenter:
   hostNetwork: true
   serviceAccount:
-    annotations.eks.amazonaws.com/role-arn: ""
-  settings:
-    aws:
-      clusterName: ""
-      clusterEndpoint: ""
-      defaultInstanceProfile: ""
+    annotations:
+      eks.amazonaws.com/role-arn: ""
+  clusterName: ""
+  clusterEndpoint: ""
+  aws:
+    defaultInstanceProfile: ""
