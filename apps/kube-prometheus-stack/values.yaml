@@ -408,3 +408,19 @@ kube-prometheus-stack:
             scheme: http
             timeout: 30s
             api_version: v1
+  kube-state-metrics:
+    nodeSelector:
+      Karpenter: enabled
+    tolerations:
+    - effect: "NoSchedule"
+      key: karpenter
+      operator: "Equal"
+      value: "true"
+  grafana:
+    nodeSelector:
+      Karpenter: enabled
+    tolerations:
+    - effect: "NoSchedule"
+      key: karpenter
+      operator: "Equal"
+      value: "true"
