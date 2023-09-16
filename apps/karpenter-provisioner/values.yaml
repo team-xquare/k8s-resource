@@ -14,35 +14,13 @@ provisioner:
         operator: In
         values:
           - "spot"
-      - key: "topology.kubernetes.io/zone"
+      - key: "node.kubernetes.io/instance-type"
         operator: In
         values:
-          - "ap-northeast-2a"
-          - "ap-northeast-2c"
-      - key: "karpenter.k8s.aws/instance-size"
-        operator: In
-        values:
-          - "m5a.xlarge"
-          - "medium"
-          - "large"
-          - "xlarge"
-          - "2xlarge"
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values:
-          - "1"
-          - "2"
-          - "3"
-          - "4"
-          - "8"
-      - key: "karpenter.k8s.aws/instance-category"
-        operator: In
-        values:
-          - "m5"
-      - key: "kubernetes.io/arch"
-        operator: In
-        values:
-          - "amd64"
+          - m5a.xlarge
+          - m5a.large
+          - m5.xlarge
+          - m5.large
     limits:
       resources:
         cpu: 1k
