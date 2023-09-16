@@ -10,20 +10,20 @@ argo-cd:
   configs:
     params:
       server.insecure: true 
-    cm:
-      url: https://argocd.xquare.app
-      timeout.reconciliation: 15s
-      admin.enabled: false
-      exec.enabled: true
-    rbac:
-      policy.default: role:readonly
-      policy.csv: |
-        g, team-xquare:DevOps, role:xquare-admin
-        p, role:xquare-admin, applications, *, */*, allow
-        p, role:xquare-admin, clusters, get, *, allow
-        p, role:xquare-admin, repositories, get, *, allow
-        p, role:xquare-admin, repositories, create, *, allow
-        p, role:xquare-admin, repositories, update, *, allow
-        p, role:xquare-admin, repositories, delete, *, allow
-        p, role:xquare-admin, exec, create, */*, allow
+    # cm:
+    #   url: https://argocd.xquare.app
+    #   timeout.reconciliation: 15s
+    #   admin.enabled: false
+    #   exec.enabled: true
+    # rbac:
+    #   policy.default: role:readonly
+    #   policy.csv: |
+    #     g, team-xquare:DevOps, role:xquare-admin
+    #     p, role:xquare-admin, applications, *, */*, allow
+    #     p, role:xquare-admin, clusters, get, *, allow
+    #     p, role:xquare-admin, repositories, get, *, allow
+    #     p, role:xquare-admin, repositories, create, *, allow
+    #     p, role:xquare-admin, repositories, update, *, allow
+    #     p, role:xquare-admin, repositories, delete, *, allow
+    #     p, role:xquare-admin, exec, create, */*, allow
         
