@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ext-authz
+  name: {{ .Values.name }}
   namespace: xquare-prod
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ext-authz
+      app: {{ .Values.name }}
   template:
     metadata:
       labels:
-        app: ext-authz
+        app: {{ .Values.name }}
     spec:
       containers:
-        - name: ext-authz
-          image: {{ .Value.image }}
+        - name: {{ .Values.name }}
+          image: {{ .Values.image }}
           ports:
             - containerPort: 9000
               protocol: TCP
@@ -34,8 +34,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: ext-authz
-  name: ext-authz
+    app: {{ .Values.name }}
+  name: {{ .Values.name }}
   namespace: xquare-prod
 spec:
   ports:
@@ -48,6 +48,6 @@ spec:
     protocol: TCP
     targetPort: 9000
   selector:
-    app: ext-authz
+    app: {{ .Values.name }}
   sessionAffinity: None
   type: ClusterIP
