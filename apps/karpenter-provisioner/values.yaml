@@ -2,8 +2,8 @@ provisioner:
   name: xquare
   spec:
     taints:
-    - key: xquare/server
-      value: true
+    - key: "xquare/server"
+      value: "true"
       effect: "PreferNoSchedule"
     labels:
       Karpenter: enabled    
