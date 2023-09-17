@@ -7,7 +7,7 @@ karpenter:
   clusterEndpoint: ""
   aws:
     defaultInstanceProfile: ""
-  replica: 1
+  replicas: 1
   controller:
     resources:
       requests:

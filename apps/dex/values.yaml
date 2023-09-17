@@ -22,3 +22,6 @@ dex:
         clientID: d486635d82817cb24ce9
         clientSecret: 792b92a7326af17adeed34241ae95bbd98c1785a
         redirectURI: 'https://dex.xquare.app/callback'
+  requests:
+    cpu: 1m
+    memory: 8Mi
