@@ -5,13 +5,22 @@ kube-prometheus-stack:
     enabled: false
   prometheusOperator:
     enabled: true
-    # nodeSelector:
-    #   Karpenter: enabled
-    # tolerations:
-    # - effect: "NoSchedule"
-    #   key: karpenter
-    #   operator: "Equal"
-    #   value: "true"
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+  grafana:
+    enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 256Mi
+  kubeStateMetrics:
+    enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
   prometheus: 
     serviceAccount:
       create: true
@@ -56,13 +65,10 @@ kube-prometheus-stack:
       targetPort: grpc
       type: ClusterIP
     prometheusSpec:
-      # nodeSelector:
-      #   Karpenter: enabled
-      # tolerations:
-      # - effect: "NoSchedule"
-      #   key: karpenter
-      #   operator: "Equal"
-      #   value: "true"
+      resources:
+        requests:
+          cpu: 516m
+          memory: 2048Mi
       thanos:
         minTime: -3h
         objectStorageConfig:
@@ -384,13 +390,10 @@ kube-prometheus-stack:
     alertmanagerSpec:
       useExistingSecret: true
       configSecret: "prom-alertmanager-config-secret"
-      # nodeSelector:
-      #   Karpenter: enabled
-      # tolerations:
-      # - effect: "NoSchedule"
-      #   key: karpenter
-      #   operator: "Equal"
-      #   value: "true"
+      resources:
+        requests:
+          cpu: 10m
+          memory: 32Mi
   thanosRuler:
     enabled: true
     thanosRulerSpec:
@@ -406,6 +409,11 @@ kube-prometheus-stack:
             secretName: thanos-objstore-secret
       queryEndpoints:
       - http://thanos-query.monitoring.svc.cluster.local:9090
+      resources:
+        requests:
+          cpu: 32m
+          memory: 128Mi
+      
     extraSecret:
       name: thanosruler-alertmanager-config
       data:
