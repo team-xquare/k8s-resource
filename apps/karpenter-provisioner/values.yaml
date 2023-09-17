@@ -25,10 +25,6 @@ provisioner:
         operator: In	
         values:	
           - amd64
-    limits:
-      resources:
-        cpu: 1k
-        memory: 1000Gi
     providerRef:
       name: xquare
     ttlSecondsAfterEmpty: 20
