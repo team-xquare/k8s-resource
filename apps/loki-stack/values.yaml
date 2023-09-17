@@ -23,16 +23,38 @@ loki:
         installOperator: false    
     lokiCanary:
       enabled: true
+      resources:
+        requests:
+          cpu: 10m
+          memory: 16Mi
+  gateway:
+    enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
   backend:
     replicas: 1
     persistence:
       enabled: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 128Mi
   write:
     replicas: 1
+    resources:
+      requests:
+        cpu: 10m
+        memory: 64Mi
   read:
     replicas: 1
     persistence:
       enabled: false
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
   memberlist:
     service:
       publishNotReadyAddresses: true
