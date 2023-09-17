@@ -1,12 +1,4 @@
 argo-cd:
-  global:
-    nodeSelector:
-      Karpenter: enabled
-    tolerations:
-    - effect: "NoSchedule"
-      key: karpenter
-      operator: "Equal"
-      value: "true"
   configs:
     params:
       server.insecure: true 
