@@ -4,11 +4,11 @@ metadata:
   name: istiocontrolplane
   namespace: istio-system
 spec:
-  profile: {{ .Values.operator.profile }}
+  profile: {{ .Values.istioOperator.profile }}
   meshConfig:
     accessLogFile: /dev/stdout
     extensionProviders:
-    {{- range .Values.operator.extensionProviders }}
+    {{- range .Values.istioOperator.extensionProviders }}
       - name: {{ .name }}
         envoyExtAuthzGrpc:
           service: {{ .envoyExtAuthzGrpc.service }}
@@ -31,10 +31,10 @@ spec:
           service.istio.io/canonical-name: istio-ingressgateway
         k8s:
           service:
-            externalTrafficPolicy: {{ .Values.operator.service.externalTrafficPolicy }}
+            externalTrafficPolicy: {{ .Values.istioOperator.service.externalTrafficPolicy }}
           hpaSpec:
-            minReplicas: {{ .Values.operator.hpaSpec.minReplicas }}
-            maxReplicas: {{ .Values.operator.hpaSpec.maxReplicas }}
+            minReplicas: {{ .Values.istioOperator.hpaSpec.minReplicas }}
+            maxReplicas: {{ .Values.istioOperator.hpaSpec.maxReplicas }}
           {{- with .Values.nodeSelector }}
           nodeSelector: {{ toYaml . | nindent 12 }}
           {{- end }}
@@ -44,12 +44,12 @@ spec:
           service:
             type: LoadBalancer
             ports:
-            {{- range .Values.operator.servicePorts }}
+            {{- range .Values.istioOperator.servicePorts }}
             - name: {{ .name }}
               port: {{ .port }}
               targetPort: {{ .targetPort }}
             {{- end }}
-          {{- with .Values.operator.serviceAnnotations }}
+          {{- with .Values.istioOperator.serviceAnnotations }}
           serviceAnnotations: {{ toYaml . | nindent 12 }}
           {{- end }}
   values:

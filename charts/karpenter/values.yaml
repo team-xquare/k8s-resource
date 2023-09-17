@@ -7,6 +7,11 @@ karpenter:
   clusterEndpoint: ""
   aws:
     defaultInstanceProfile: ""
+  controller:
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
   nodeSelector:
     Karpenter: enabled
   tolerations:
@@ -14,3 +19,12 @@ karpenter:
     key: karpenter
     operator: "Equal"
     value: "true"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: karpenter.sh/provisioner-name
+                operator: In
+                values:
+                - xquare
