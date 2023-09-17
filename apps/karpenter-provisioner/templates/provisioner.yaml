@@ -5,10 +5,10 @@ metadata:
 spec:
   kubeletConfiguration:
     maxPods: {{ .Values.provisioner.spec.kubeletConfiguration.maxPods }}
-  taints: {{ .Values.provisioner.spec.taints  | toYaml | nindent 4 }}
+  taints: {{ .Values.provisioner.spec.taints | toYaml | nindent 4 }}
   labels:
     {{- range $key, $value := .Values.provisioner.spec.labels }}
-    {{ $key }}: {{ $value }}
+    {{ $key }}: {{ $value }} 
     {{- end }}
   requirements:
     {{- range .Values.provisioner.spec.requirements }}
