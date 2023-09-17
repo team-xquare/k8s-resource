@@ -1,4 +1,4 @@
-operator:
+istioOperator:
   profile: default
   extensionProviders:
     - name: "xquare-middleware-grpc"
@@ -32,6 +32,30 @@ operator:
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 
+hub: gcr.io/istio-testing
+tag: latest
+
+imagePullSecrets: []
+imagePullPolicy: ""
+watchedNamespaces: istio-system
+waitForResourcesTimeout: 300s
+enableCRDTemplates: false
+revision: ""
+deploymentHistory: 10
+
+operator:
+  monitoring:
+    host: 127.0.0.1
+    port: 15014
+  resources:
+    limits:
+      cpu: 200m
+      memory: 256Mi
+    requests:
+      cpu: 50m
+      memory: 128Mi
+  seccompProfile: {}
+
 nodeSelector:
   Karpenter: enabled
 
@@ -40,3 +64,6 @@ tolerations:
   key: karpenter
   operator: "Equal"
   value: "true"
+affinity: {}
+podLabels: {}
+podAnnotations: {}
