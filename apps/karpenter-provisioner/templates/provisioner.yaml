@@ -22,10 +22,14 @@ spec:
         - {{ . | quote }}
         {{- end }}
     {{- end }}
+  {{- if .Values.provisioner.spec.limits }}
   limits:
+    {{- if .Values.provisioner.spec.limits.resources }}
     resources:
       cpu: {{ .Values.provisioner.spec.limits.resources.cpu }}
       memory: {{ .Values.provisioner.spec.limits.resources.memory }}
+    {{- end }}
+  {{- end }}
   providerRef:
     name: {{ .Values.provisioner.spec.providerRef.name }}
   ttlSecondsAfterEmpty: {{ .Values.provisioner.spec.ttlSecondsAfterEmpty }}

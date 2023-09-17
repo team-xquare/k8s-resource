@@ -75,6 +75,7 @@ loki:
       operator: "Equal"
       value: "true"
   loki:
+    auth_enabled: false
     podSecurityContext:
       fsGroup: 1000
       runAsGroup: 1000
