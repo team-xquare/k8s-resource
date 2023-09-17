@@ -5,10 +5,7 @@ metadata:
 spec:
   kubeletConfiguration:
     maxPods: {{ .Values.provisioner.spec.kubeletConfiguration.maxPods }}
-  taints:
-    - key: karpenter
-      value: "true"
-      effect: NoSchedule
+  taints: {{ .Values.provisioner.spec.taints  | toYaml | nindent 4 }}
   labels:
     {{- range $key, $value := .Values.provisioner.spec.labels }}
     {{ $key }}: {{ $value }}
