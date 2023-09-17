@@ -24,10 +24,3 @@ descheduler:
               pods: 70
               memory: 50
   schedule: "*/30 * * * *"
-  nodeSelector:
-    Karpenter: enabled
-  tolerations:
-  - effect: "NoSchedule"
-    key: karpenter
-    operator: "Equal"
-    value: "true"

@@ -18,4 +18,30 @@ argo-cd:
     #     p, role:xquare-admin, repositories, update, *, allow
     #     p, role:xquare-admin, repositories, delete, *, allow
     #     p, role:xquare-admin, exec, create, */*, allow
-        
+  applicationSet:
+    enabled: true
+    resources:
+      requests:
+        cpu: 1m
+        memory: 32Mi
+  dex: 
+    enabled: false
+  notifications:
+    enabled: false
+  redis:
+    enabled: true
+    resources:
+      requests:
+        cpu: 1m
+        memory: 32Mi
+  repoServer:
+    resources:
+      requests:
+        cpu: 3m
+        memory: 64Mi
+  controller:
+    resources:
+      requests:
+        cpu: 32m
+        memory: 516Mi
+  
