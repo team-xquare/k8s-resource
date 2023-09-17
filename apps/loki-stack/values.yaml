@@ -23,57 +23,19 @@ loki:
         installOperator: false    
     lokiCanary:
       enabled: true
-      nodeSelector:
-        Karpenter: enabled
-      tolerations:
-      - effect: "NoSchedule"
-        key: karpenter
-        operator: "Equal"
-        value: "true"
   backend:
     replicas: 1
     persistence:
       enabled: false
-    nodeSelector:
-      Karpenter: enabled
-    tolerations:
-    - effect: "NoSchedule"
-      key: karpenter
-      operator: "Equal"
-      value: "true"
   write:
     replicas: 1
-    persistence:
-      enabled: false
-    nodeSelector:
-      Karpenter: enabled
-    tolerations:
-    - effect: "NoSchedule"
-      key: karpenter
-      operator: "Equal"
-      value: "true"
   read:
     replicas: 1
     persistence:
       enabled: false
-    nodeSelector:
-      Karpenter: enabled
-    tolerations:
-    - effect: "NoSchedule"
-      key: karpenter
-      operator: "Equal"
-      value: "true"
   memberlist:
     service:
       publishNotReadyAddresses: true
-  gateway:
-    nodeSelector:
-      Karpenter: enabled
-    tolerations:
-    - effect: "NoSchedule"
-      key: karpenter
-      operator: "Equal"
-      value: "true"
   loki:
     auth_enabled: false
     podSecurityContext:

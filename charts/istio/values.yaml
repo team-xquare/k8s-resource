@@ -56,14 +56,6 @@ operator:
       memory: 128Mi
   seccompProfile: {}
 
-nodeSelector:
-  Karpenter: enabled
-
-tolerations:
-- effect: "NoSchedule"
-  key: karpenter
-  operator: "Equal"
-  value: "true"
 affinity: {}
 podLabels: {}
 podAnnotations: {}

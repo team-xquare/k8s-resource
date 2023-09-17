@@ -5,13 +5,13 @@ kube-prometheus-stack:
     enabled: false
   prometheusOperator:
     enabled: true
-    nodeSelector:
-      Karpenter: enabled
-    tolerations:
-    - effect: "NoSchedule"
-      key: karpenter
-      operator: "Equal"
-      value: "true"
+    # nodeSelector:
+    #   Karpenter: enabled
+    # tolerations:
+    # - effect: "NoSchedule"
+    #   key: karpenter
+    #   operator: "Equal"
+    #   value: "true"
   prometheus: 
     serviceAccount:
       create: true
@@ -56,13 +56,13 @@ kube-prometheus-stack:
       targetPort: grpc
       type: ClusterIP
     prometheusSpec:
-      nodeSelector:
-        Karpenter: enabled
-      tolerations:
-      - effect: "NoSchedule"
-        key: karpenter
-        operator: "Equal"
-        value: "true"
+      # nodeSelector:
+      #   Karpenter: enabled
+      # tolerations:
+      # - effect: "NoSchedule"
+      #   key: karpenter
+      #   operator: "Equal"
+      #   value: "true"
       thanos:
         minTime: -3h
         objectStorageConfig:
@@ -384,13 +384,13 @@ kube-prometheus-stack:
     alertmanagerSpec:
       useExistingSecret: true
       configSecret: "prom-alertmanager-config-secret"
-      nodeSelector:
-        Karpenter: enabled
-      tolerations:
-      - effect: "NoSchedule"
-        key: karpenter
-        operator: "Equal"
-        value: "true"
+      # nodeSelector:
+      #   Karpenter: enabled
+      # tolerations:
+      # - effect: "NoSchedule"
+      #   key: karpenter
+      #   operator: "Equal"
+      #   value: "true"
   thanosRuler:
     enabled: true
     thanosRulerSpec:
@@ -406,13 +406,6 @@ kube-prometheus-stack:
             secretName: thanos-objstore-secret
       queryEndpoints:
       - http://thanos-query.monitoring.svc.cluster.local:9090
-      nodeSelector:
-        Karpenter: enabled
-      tolerations:
-      - effect: "NoSchedule"
-        key: karpenter
-        operator: "Equal"
-        value: "true"
     extraSecret:
       name: thanosruler-alertmanager-config
       data:
@@ -422,19 +415,3 @@ kube-prometheus-stack:
             scheme: http
             timeout: 30s
             api_version: v1
-  kube-state-metrics:
-    nodeSelector:
-      Karpenter: enabled
-    tolerations:
-    - effect: "NoSchedule"
-      key: karpenter
-      operator: "Equal"
-      value: "true"
-  grafana:
-    nodeSelector:
-      Karpenter: enabled
-    tolerations:
-    - effect: "NoSchedule"
-      key: karpenter
-      operator: "Equal"
-      value: "true"
