@@ -384,6 +384,13 @@ kube-prometheus-stack:
     alertmanagerSpec:
       useExistingSecret: true
       configSecret: "prom-alertmanager-config-secret"
+      nodeSelector:
+        Karpenter: enabled
+      tolerations:
+      - effect: "NoSchedule"
+        key: karpenter
+        operator: "Equal"
+        value: "true"
   thanosRuler:
     enabled: true
     thanosRulerSpec:
@@ -399,6 +406,13 @@ kube-prometheus-stack:
             secretName: thanos-objstore-secret
       queryEndpoints:
       - http://thanos-query.monitoring.svc.cluster.local:9090
+      nodeSelector:
+        Karpenter: enabled
+      tolerations:
+      - effect: "NoSchedule"
+        key: karpenter
+        operator: "Equal"
+        value: "true"
     extraSecret:
       name: thanosruler-alertmanager-config
       data:
