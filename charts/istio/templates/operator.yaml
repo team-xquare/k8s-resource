@@ -15,6 +15,14 @@ spec:
           port: {{ .envoyExtAuthzGrpc.port }}
     {{- end }}
   components:
+    pilot:
+      k8s:
+        {{- with .Values.nodeSelector }}
+        nodeSelector: {{ toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.tolerations }}
+        tolerations: {{ toYaml . | nindent 10 }}
+        {{- end }}
     ingressGateways:
       - name: istio-ingressgateway
         namespace: istio-system
@@ -27,6 +35,12 @@ spec:
           hpaSpec:
             minReplicas: {{ .Values.operator.hpaSpec.minReplicas }}
             maxReplicas: {{ .Values.operator.hpaSpec.maxReplicas }}
+          {{- with .Values.nodeSelector }}
+          nodeSelector: {{ toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.tolerations }}
+          tolerations: {{ toYaml . | nindent 12 }}
+          {{- end }}
           service:
             type: LoadBalancer
             ports:
@@ -46,10 +60,15 @@ spec:
         type: ClusterIP
     global:
       {{- with .Values.nodeSelector }}
-      nodeSelector:
-{{ toYaml . | indent 8 }}
+      defaultNodeSelector: {{ toYaml . | nindent 8 }}
       {{- end }}
       {{- with .Values.tolerations }}
-      tolerations:
-{{ toYaml . | indent 8 }}
+      defaultTolerations: {{ toYaml . | nindent 8 }}
       {{- end }}
+  unvalidatedValues:
+    {{- with .Values.nodeSelector }}
+    nodeSelector: {{ toYaml . | nindent 6 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+    tolerations: {{ toYaml . | nindent 6 }}
+    {{- end }}
