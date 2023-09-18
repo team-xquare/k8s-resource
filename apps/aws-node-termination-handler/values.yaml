@@ -9,8 +9,8 @@ aws-node-termination-handler:
   webhookTemplate: "{\"text\":\"*INSTANCE INTERRUPTION NOTICE*\n- *EventID:* {{ .EventID }}\n- *InstanceId:* {{ .InstanceID }}\n- *InstanceType:* {{ .InstanceType }}- \n- *Start Time:* {{ .StartTime }}\n- *Description:* {{ .Description }}\", \"icon_emoji\":\":spot-intstance:\", \"username\":\"Node Termination Handler\" }"
   enableSpotInterruptionDraining: true
   enableScheduledEventDraining: true
-  enableRebalanceMonitoring: true
-  enableRebalanceDraining: true
+  enableRebalanceMonitoring: false
+  enableRebalanceDraining: false
   enableSqsTerminationDraining: false
   serviceAccount:
     create: false
