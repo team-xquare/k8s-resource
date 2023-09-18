@@ -41,7 +41,7 @@ watchedNamespaces: istio-system
 waitForResourcesTimeout: 300s
 enableCRDTemplates: false
 revision: ""
-deploymentHistory: 10
+deploymentHistory: 0
 
 nodeSelector:
   Karpenter: enabled
