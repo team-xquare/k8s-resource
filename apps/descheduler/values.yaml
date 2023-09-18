@@ -23,4 +23,4 @@ descheduler:
               cpu: 50
               pods: 70
               memory: 50
-  schedule: "*/30 * * * *"
+  schedule: "*/5 * * * *"
