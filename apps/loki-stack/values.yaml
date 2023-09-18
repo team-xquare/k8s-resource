@@ -1,6 +1,6 @@
 loki:
-  isDefault: false
-  url: http://loki-stack:3100
+  isDefault: true
+  url: http://loki-gateway
   readinessProbe:
     httpGet:
       path: /ready
@@ -60,20 +60,22 @@ loki:
       publishNotReadyAddresses: true
   loki:
     auth_enabled: false
-    podSecurityContext:
-      fsGroup: 1000
-      runAsGroup: 1000
-      runAsNonRoot: true
-      runAsUser: 1000
     storage:
       bucketNames:
         chunks: xquare-loki-bucket
         ruler: xquare-loki-bucket
         admin: xquare-loki-bucket
-    storage_config:
-      aws:
+      type: s3
+      s3:
         s3: s3://ap-northeast-2/xquare-loki-bucket
         region: ap-northeast-2
+    common:
+      storage:
+        s3:
+          s3: s3://ap-northeast-2/xquare-loki-bucket
+          bucketnames: xquare-loki-bucket
+          region: ap-northeast-2
+    storage_config:
       boltdb_shipper:
         active_index_directory: /var/loki/active
         shared_store: s3
@@ -102,7 +104,7 @@ promtail:
     logLevel: info
     serverPort: 3101
     clients:
-      - url: http://loki-stack:3100/loki/api/v1/push
+      - url: http://loki-gateway/loki/api/v1/push
   snippets:
     scrapeConfigs: |
       - job_name: kubernetes-pods
