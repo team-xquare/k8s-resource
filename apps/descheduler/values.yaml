@@ -24,3 +24,4 @@ descheduler:
               pods: 70
               memory: 50
   schedule: "*/5 * * * *"
+  successfulJobsHistoryLimit: 2
