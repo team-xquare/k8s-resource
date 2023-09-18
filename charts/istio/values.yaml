@@ -43,6 +43,15 @@ enableCRDTemplates: false
 revision: ""
 deploymentHistory: 10
 
+nodeSelector:
+  Karpenter: enabled
+  
+tolerations:
+- effect: "PreferNoSchedule"
+  key: "xquare/server"
+  operator: "Equal"
+  value: "true"
+
 operator:
   monitoring:
     host: 127.0.0.1
