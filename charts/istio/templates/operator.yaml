@@ -25,6 +25,7 @@ spec:
         {{- end }}
         hpaSpec:
           minReplicas: 2
+          maxReplicas: 3
     ingressGateways:
       - name: istio-ingressgateway
         namespace: istio-system
