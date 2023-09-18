@@ -42,13 +42,13 @@ loki:
         cpu: 10m
         memory: 128Mi
   write:
-    replicas: 1
+    replicas: 2
     resources:
       requests:
         cpu: 10m
         memory: 64Mi
   read:
-    replicas: 1
+    replicas: 2
     persistence:
       enabled: false
     resources:
