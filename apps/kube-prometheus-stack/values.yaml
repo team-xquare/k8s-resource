@@ -423,3 +423,21 @@ kube-prometheus-stack:
             scheme: http
             timeout: 30s
             api_version: v1
+
+  grafana:
+    grafana.ini:
+      server:
+        domain: https://grafana.xquare.app
+        root_url: https://grafana.xquare.app
+      auth.generic_oauth:
+        enabled: true
+        allow_sign_up: false
+        scopes: user:email,read:org
+        auth_url: http://dex-login.xquare.app
+        token_url: http://dex.xquare.app/dex/token
+        api_url: http://dex.xquare.app/dex/userinfo
+        client_id: grafana
+        client_secret: wnZOOiLE6rwwDK2
+      auth.generic_oauth.group_mapping:
+        role_attribute_path: contains(groups[*], 'sysstf') && 'Admin' || contains(groups[*], 'oscall') && 'Editor' || 'Viewer'
+        org_id: 1
