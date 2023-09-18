@@ -34,7 +34,7 @@ loki:
         cpu: 10m
         memory: 16Mi
   backend:
-    replicas: 1
+    replicas: 3
     persistence:
       enabled: false
     resources:
