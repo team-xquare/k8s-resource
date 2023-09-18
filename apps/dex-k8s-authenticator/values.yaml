@@ -52,7 +52,7 @@ dexK8sAuthenticator:
     client_id: argocd
     client_secret: DIKHZYN1kolN7d6
     issuer: https://dex.xquare.app
-    redirect_uri: http://argocd.xquare.app/api/dex/callback
+    redirect_uri: https://argocd.xquare.app/api/dex/callback
   - name: grafana
     short_description: "grafana"
     description: "DSM Xquare grafana for all student"
