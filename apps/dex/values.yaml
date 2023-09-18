@@ -9,11 +9,21 @@ dex:
       responseTypes: ["code", "token", "id_token"]
       skipApprovalScreen: true 
     staticClients:
-    - id: xquare
+    - id: xquare  
       name: 'xquare'
       redirectURIs:
         - 'https://dex-login.xquare.app/callback'
       secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+    - id: argocd
+      name: 'argocd'
+      redirectURIs:
+        - 'https://dex-login.xquare.app/callback'
+      secret: DIKHZYN1kolN7d6
+    - id: grafana
+      redirectURIs:
+      - 'https://grafana.xquare.app/login/generic_oauth'
+      name: 'grafana'
+      secret: wnZOOiLE6rwwDK2
     connectors:
     - type: github
       id: github

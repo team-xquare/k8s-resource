@@ -24,7 +24,7 @@ dexK8sAuthenticator:
     client_id: xquare
     client_secret: ZXhhbXBsZS1hcHAtc2VjcmV0
     issuer: https://dex.xquare.app
-    redirect_uri: https://dex-login.xquare.app/callback
+    redirect_uri: https://dex-login.xquare.app/callback/xquare
     k8s_master_uri: https://oidc-proxy.xquare.app
     k8s_ca_pem: |
       -----BEGIN CERTIFICATE-----
@@ -46,13 +46,20 @@ dexK8sAuthenticator:
       Xhtkk8+xvScW5MukJAorYbCiyVQqlF/psRXWjfr9AgSNW8lGph1hShxcdvZxn97f
       IvI=
       -----END CERTIFICATE-----
+  - name: argocd
+    short_description: "argocd"
+    description: "DSM Xquare argocd for all student"
+    client_id: argocd
+    client_secret: DIKHZYN1kolN7d6
+    issuer: https://dex.xquare.app
+    redirect_uri: http://argocd.xquare.app/api/dex/callback
   - name: grafana
     short_description: "grafana"
     description: "DSM Xquare grafana for all student"
     client_id: grafana
     client_secret: wnZOOiLE6rwwDK2
     issuer: https://dex.xquare.app
-    redirect_uri: http://grafana.xquare.app/login/generic_oauth
+    redirect_uri: https://grafana.xquare.app/login/generic_oauth
 
 service:
   annotations: {}
