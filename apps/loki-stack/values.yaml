@@ -28,6 +28,7 @@ loki:
           cpu: 10m
           memory: 16Mi
   gateway:
+    replicas: 3
     enabled: true
     resources:
       requests:
@@ -42,13 +43,13 @@ loki:
         cpu: 10m
         memory: 128Mi
   write:
-    replicas: 2
+    replicas: 3
     resources:
       requests:
         cpu: 10m
         memory: 64Mi
   read:
-    replicas: 2
+    replicas: 3
     persistence:
       enabled: false
     resources:
