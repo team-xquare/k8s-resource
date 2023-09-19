@@ -30,10 +30,20 @@ dex:
     - type: github
       id: github
       name: GitHub
+      scopes: ["openid", "profile", "email", "offline_access", "groups"]
+      teamNameField: slug
+      useLoginAsID: true
       config:
         clientID: d486635d82817cb24ce9
         clientSecret: 792b92a7326af17adeed34241ae95bbd98c1785a
         redirectURI: 'https://dex.xquare.app/callback'
+        loadAllGroups: true
+        orgs:
+          - name: team-xquare
+            teams:
+            - DevOps
+          - name: mukgen
+          - name: heiiwrd98
   requests:
     cpu: 1m
     memory: 8Mi
