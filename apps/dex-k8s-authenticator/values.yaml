@@ -46,21 +46,7 @@ dexK8sAuthenticator:
       Xhtkk8+xvScW5MukJAorYbCiyVQqlF/psRXWjfr9AgSNW8lGph1hShxcdvZxn97f
       IvI=
       -----END CERTIFICATE-----
-  - name: argocd
-    short_description: "argocd"
-    description: "DSM Xquare argocd for all student"
-    client_id: argocd
-    client_secret: DIKHZYN1kolN7d6
-    issuer: https://dex.xquare.app
-    redirect_uri: https://argocd.xquare.app/api/dex/callback
-  - name: grafana
-    short_description: "grafana"
-    description: "DSM Xquare grafana for all student"
-    client_id: grafana
-    client_secret: wnZOOiLE6rwwDK2
-    issuer: https://dex.xquare.app
-    redirect_uri: https://grafana.xquare.app/login/generic_oauth
-
+      
 service:
   annotations: {}
   type: ClusterIP
