@@ -24,7 +24,7 @@ spec:
         tolerations: {{ toYaml . | nindent 10 }}
         {{- end }}
         hpaSpec:
-          minReplicas: 2
+          minReplicas: 1
           maxReplicas: 3
     ingressGateways:
       - name: istio-ingressgateway
