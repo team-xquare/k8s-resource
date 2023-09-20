@@ -24,7 +24,7 @@ dexK8sAuthenticator:
     client_id: xquare
     client_secret: ZXhhbXBsZS1hcHAtc2VjcmV0
     issuer: https://dex.xquare.app
-    redirect_uri: https://dex-login.xquare.app/callback/xquare
+    redirect_uri: https://dex-login.xquare.app/callback
     k8s_master_uri: https://oidc-proxy.xquare.app
     k8s_ca_pem: |
       -----BEGIN CERTIFICATE-----
