@@ -130,9 +130,9 @@ projects:
             prune: false
             selfHeal: true
       - name: infisical
-        namespace: secret
+        namespace: infisical
         source:
-          path: apps/secrets-operator
+          path: apps/infisical
           repoURL: https://github.com/team-xquare/k8s-resource.git
         syncPolicy:
           automated:
