@@ -426,6 +426,8 @@ kube-prometheus-stack:
 
   grafana:
     grafana.ini:
+      log:
+        filters: oauth.generic_oauth:debug
       server:
         domain: grafana.xquare.app
         root_url: https://grafana.xquare.app
@@ -437,7 +439,7 @@ kube-prometheus-stack:
         enabled: true
         allow_sign_up: true
         auto_login: true
-        scopes: openid
+        scopes: openid, email, profile, offline_access, groups
         auth_url: https://dex.xquare.app/auth
         token_url: https://dex.xquare.app/token
         api_url: https://dex.xquare.app/userinfo
@@ -445,7 +447,7 @@ kube-prometheus-stack:
         client_secret: wnZOOiLE6rwwDK2
         email_attribute_path: email
       auth.generic_oauth.group_mapping:
-        role_attribute_path: contains(groups[*], 'sysstf') && 'Admin' || contains(groups[*], 'oscall') && 'Editor' || 'Viewer'
+        role_attribute_path: contains(groups[*], 'team-xquare:DevOps') && 'Admin'
         org_id: 1
       security:
         cookie_secure: true
