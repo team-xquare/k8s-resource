@@ -5,6 +5,6 @@ version: 0.2.1
 description: A Helm chart for Infisical secrets
 type: application
 dependencies:
-  - name: infisical
+  - name: secrets-operator
     version: 0.2.1
     repository: https://dl.cloudsmith.io/public/infisical/helm-charts/helm/charts/
