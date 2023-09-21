@@ -42,6 +42,7 @@ dex:
           - name: team-xquare
             teams:
             - DevOps
+            - backend
           - name: mukgen
           - name: heiiwrd98
   requests:
