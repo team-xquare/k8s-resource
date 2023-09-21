@@ -447,7 +447,7 @@ kube-prometheus-stack:
         client_secret: wnZOOiLE6rwwDK2
         email_attribute_path: email
       auth.generic_oauth.group_mapping:
-        role_attribute_path: contains(groups[*], 'team-xquare:DevOps') && 'Admin'
+        role_attribute_path: contains(groups[*], 'team-xquare:DevOps') && 'Admin' || contains(groups[*], 'team-xquare:backend') && 'Viewer'
         org_id: 1
       security:
         cookie_secure: true
