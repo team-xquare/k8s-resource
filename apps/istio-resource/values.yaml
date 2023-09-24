@@ -76,7 +76,11 @@ addons:
     enable: true
   kiali:
     enable: true
-    prometheusUrl: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+    prometheusUrl: http://thanos-query.monitoring.svc.cluster.local:9090
+    thanos_proxy:
+      enabled: true
+      retention_period: "7d" 
+      scrape_interval: "30s" 
 
 nodeSelector:
   Karpenter: enabled
