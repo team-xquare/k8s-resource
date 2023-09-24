@@ -51,20 +51,3 @@ tolerations:
   key: "xquare/server"
   operator: "Equal"
   value: "true"
-
-operator:
-  monitoring:
-    host: 127.0.0.1
-    port: 15014
-  resources:
-    limits:
-      cpu: 200m
-      memory: 256Mi
-    requests:
-      cpu: 50m
-      memory: 128Mi
-  seccompProfile: {}
-
-affinity: {}
-podLabels: {}
-podAnnotations: {}
