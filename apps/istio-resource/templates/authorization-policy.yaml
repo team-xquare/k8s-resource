@@ -2,6 +2,21 @@ apiVersion: security.istio.io/v1
 kind: AuthorizationPolicy
 metadata:
   name: xquare-authorization-policy
+  namespace: istio-system
+spec:
+  selector:
+    matchLabels:
+      type: be
+  action: CUSTOM
+  provider:
+    name: sample-ext-authz-grpc
+  rules:
+  - {}
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: xquare-authorization-policy
   namespace: xquare-prod
 spec:
   selector:
@@ -18,6 +33,36 @@ kind: AuthorizationPolicy
 metadata:
   name: xquare-authorization-policy
   namespace: xquare-stag
+spec:
+  selector:
+    matchLabels:
+      type: be
+  action: CUSTOM
+  provider:
+    name: sample-ext-authz-grpc
+  rules:
+  - {}
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: xquare-authorization-policy
+  namespace: pick-prod
+spec:
+  selector:
+    matchLabels:
+      type: be
+  action: CUSTOM
+  provider:
+    name: sample-ext-authz-grpc
+  rules:
+  - {}
+---
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: xquare-authorization-policy
+  namespace: pick-stag
 spec:
   selector:
     matchLabels:
