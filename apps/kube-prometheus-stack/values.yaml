@@ -424,6 +424,23 @@ kube-prometheus-stack:
       requests:
         cpu: 10m
         memory: 256Mi
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+        - name: 'default'
+          orgId: 1
+          folder: 'default'
+          type: file
+          disableDeletion: false
+          editable: true
+          options:
+            path: /var/lib/grafana/dashboards/default
+    sidecar:
+      dashboards: 
+        folderAnnotation: grafana_folder
+        provider:
+          foldersFromFilesStructure: true
     datasources:
       datasources.yaml:
         apiVersion: 1
@@ -439,11 +456,11 @@ kube-prometheus-stack:
           url: http://kube-prometheus-stack-alertmanager.monitoring:9093
           editable: false
           access: proxy
-        - name: loki
-          type: loki
-          access: proxy
-          editable: false
-          url: http://loki-gateway
+        # - name: Loki
+        #   type: Loki
+        #   access: proxy
+        #   editable: false
+        #   url: http://loki-gateway.monitoring
     # dashboardsConfigMaps:
     #   xquare: "xquare-dashboards"
     grafana.ini:

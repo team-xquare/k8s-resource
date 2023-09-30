@@ -1,0 +1,17 @@
+{{- range .Values.clubs }}
+{{- $clubname := .name }}
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $clubname }}-stag
+  labels:
+    name: {{ $clubname }}-stag
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ $clubname }}-prod
+  labels:
+    name: {{ $clubname }}-prod
+{{- end }}
