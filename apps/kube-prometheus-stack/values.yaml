@@ -9,12 +9,6 @@ kube-prometheus-stack:
       requests:
         cpu: 10m
         memory: 16Mi
-  grafana:
-    enabled: true
-    resources:
-      requests:
-        cpu: 10m
-        memory: 256Mi
   kubeStateMetrics:
     enabled: true
     resources:
@@ -425,6 +419,33 @@ kube-prometheus-stack:
             api_version: v1
 
   grafana:
+    enabled: true
+    resources:
+      requests:
+        cpu: 10m
+        memory: 256Mi
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+        - name: Prometheus
+          type: prometheus
+          url: http://kube-prometheus-stack-prometheus.monitoring:9090
+          editable: false
+          access: proxy
+          isDefault: true
+        - name: Alertmanager
+          type: Alertmanager
+          url: http://kube-prometheus-stack-alertmanager.monitoring:9093
+          editable: false
+          access: proxy
+        - name: loki
+          type: loki
+          access: proxy
+          editable: false
+          url: http://loki-gateway
+    # dashboardsConfigMaps:
+    #   xquare: "xquare-dashboards"
     grafana.ini:
       log:
         filters: oauth.generic_oauth:debug
