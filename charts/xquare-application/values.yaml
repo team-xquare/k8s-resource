@@ -12,10 +12,10 @@ projects:
             selfHeal: true
   - name: xquare-resources
     applications:
-      - name: xquare-role
+      - name: xquare-club
         namespace: argocd
         source:
-          path: apps/xquare-role
+          path: apps/xquare-club
           repoURL: https://github.com/team-xquare/k8s-resource.git
         syncPolicy:
           automated:

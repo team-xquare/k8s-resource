@@ -1,8 +1,11 @@
 clubs:
-  - name: dms
+  - name: xquare
     users:
     - "rlaisqls"
     - "alsdl0629"
+    - "alsco39"
+    - "tedsoftj1123"
+    - "jyk1029"
     projects:
     - application
     - attachment 
@@ -10,24 +13,31 @@ clubs:
     - point
     - meal       
     - school-meal
-  - name: pick
-    users:
-    - "alsco39"
-    - "tedsoftj1123"
-    projects:
-    - pick-admin     
-    - pick        
-    - pick-teacher   
-  - name: etc
-    users:
-    - "jyk1029"
-    projects:
     - report     
     - schedule   
     - timetable-be
     - feed 
     - git        
     - notification-be 
+  - name: pick
+    users:
+    - "rlaisqls"
+    - "alsdl0629"
+    - "alsco39"
+    - "tedsoftj1123"
+    - "jyk1029"
+    projects:
+    - pick-admin     
+    - pick        
+    - pick-teacher   
+  - name: repo
+    users:
+    - "rlaisqls"
+    projects:
+    - repo
+    - repo-admin
+    - repo-main
+    - repo-user
   - name: mukgen
     users: 
     - HyunSu1768
