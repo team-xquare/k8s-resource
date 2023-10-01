@@ -440,6 +440,7 @@ kube-prometheus-stack:
       dashboards: 
         enabled: true
         folderAnnotation: grafana_folder
+        reloadURL: "http://kube-prometheus-stack-grafana.monitoring/api/admin/provisioning/dashboards/reload"
         provider:
           foldersFromFilesStructure: true
     datasources:
@@ -451,17 +452,19 @@ kube-prometheus-stack:
           url: http://kube-prometheus-stack-prometheus.monitoring:9090
           editable: false
           access: proxy
-          isDefault: true
+          isDefault: false
         - name: Alertmanager
-          type: Alertmanager
+          type: alertmanager
           url: http://kube-prometheus-stack-alertmanager.monitoring:9093
           editable: false
           access: proxy
+          isDefault: false
         - name: Loki
-          type: Loki
+          type: loki
           access: proxy
           editable: false
-          url: http://loki-gateway.monitoring
+          url: http://loki-gateway.monitoring:80
+          isDefault: false
     grafana.ini:
       log:
         filters: oauth.generic_oauth:debug
