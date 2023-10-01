@@ -438,6 +438,7 @@ kube-prometheus-stack:
             path: /var/lib/grafana/dashboards/default
     sidecar:
       dashboards: 
+        enabled: true
         folderAnnotation: grafana_folder
         provider:
           foldersFromFilesStructure: true
@@ -456,13 +457,11 @@ kube-prometheus-stack:
           url: http://kube-prometheus-stack-alertmanager.monitoring:9093
           editable: false
           access: proxy
-        # - name: Loki
-        #   type: Loki
-        #   access: proxy
-        #   editable: false
-        #   url: http://loki-gateway.monitoring
-    # dashboardsConfigMaps:
-    #   xquare: "xquare-dashboards"
+        - name: Loki
+          type: Loki
+          access: proxy
+          editable: false
+          url: http://loki-gateway.monitoring
     grafana.ini:
       log:
         filters: oauth.generic_oauth:debug
