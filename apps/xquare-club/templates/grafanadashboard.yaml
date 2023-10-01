@@ -138,7 +138,7 @@ data:
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(count_over_time({job=\"$app\"} |= \"$search\" [$__interval]))",
+              "expr": "sum(count_over_time({job=\"$app\", container=\"$container\", stream=~\"$stream\"} |= \"$search\" [$__interval]))",
               "legendFormat": "",
               "refId": "A"
             }
@@ -210,7 +210,7 @@ data:
           },
           "targets": [
             {
-              "expr": "{job=\"$app\"} |= \"$search\" | logfmt",
+              "expr": "{job=\"$app\", container=\"$container\", stream=~\"$stream\"} |= \"$search\" | logfmt",
               "hide": false,
               "legendFormat": "",
               "refId": "A"
@@ -241,6 +241,50 @@ data:
             "name": "app",
             "options": [],
             "query": "label_values({job=~\"{{ $clubname }}.*\"}, job)",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tags": [],
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "allValue": null,
+            "current": {},
+            "datasource": "Loki",
+            "definition": "label_values({job=\"$job\"}, container)",
+            "hide": 0,
+            "includeAll": false,
+            "label": "Container",
+            "multi": false,
+            "name": "container",
+            "options": [],
+            "query": "label_values({job=$job}, container)",
+            "refresh": 1,
+            "regex": "",
+            "skipUrlSync": false,
+            "sort": 0,
+            "tagValuesQuery": "",
+            "tags": [],
+            "tagsQuery": "",
+            "type": "query",
+            "useTags": false
+          },
+          {
+            "allValue": null,
+            "current": {},
+            "datasource": "Loki",
+            "definition": "label_values({container=\"$container\"}, stream)",
+            "hide": 0,
+            "includeAll": false,
+            "label": "Container",
+            "multi": false,
+            "name": "container",
+            "options": [],
+            "query": "label_values({container=\"$container\"}, stream)",
             "refresh": 1,
             "regex": "",
             "skipUrlSync": false,
