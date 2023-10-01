@@ -61,6 +61,10 @@ loki:
       publishNotReadyAddresses: true
   loki:
     auth_enabled: false
+    query_range:
+      split_queries_by_interval: 168h
+    frontend:
+      max_outstanding_per_tenant: 1024
     storage:
       bucketNames:
         chunks: xquare-loki-bucket
@@ -81,12 +85,12 @@ loki:
         active_index_directory: /var/loki/active
         shared_store: s3
         cache_location: /var/loki/cache
-        cache_ttl: 24h
+        cache_ttl: 168h
     schema_config:
       configs:
         - object_store: s3
           index:
-            period: 24h
+            period: 168h
           chunks:
             period: 24h
     limits_config:
