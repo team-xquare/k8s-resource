@@ -474,11 +474,11 @@ kube-prometheus-stack:
         enforce_domain: false
         enable_gzip: true
       auth:
-        oauth_auto_login: true
+        oauth_auto_login: false
       auth.generic_oauth:
         enabled: true
         allow_sign_up: true
-        auto_login: true
+        auto_login: false
         scopes: openid, email, profile, offline_access, groups
         auth_url: https://dex.xquare.app/auth
         token_url: https://dex.xquare.app/token
@@ -487,7 +487,7 @@ kube-prometheus-stack:
         client_secret: wnZOOiLE6rwwDK2
         email_attribute_path: email
       auth.generic_oauth.group_mapping:
-        role_attribute_path: contains(groups[*], 'team-xquare:DevOps') && 'Admin' || contains(groups[*], 'team-xquare:backend') && 'Viewer'
+        role_attribute_path: contains(groups[*], 'team-xquare:DevOps') && 'Xquare' || contains(groups[*], 'team-xquare:backend') && 'Xquare'
         org_id: 1
       security:
         cookie_secure: true
