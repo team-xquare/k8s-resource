@@ -64,7 +64,7 @@ loki:
     query_range:
       split_queries_by_interval: 168h
     frontend:
-      max_outstanding_per_tenant: 1024
+      max_outstanding_per_tenant: 2048
     storage:
       bucketNames:
         chunks: xquare-loki-bucket
