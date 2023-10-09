@@ -1,7 +1,7 @@
 kind: Gateway
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: xquare-gateway
+  name: xquare-ingressgateway
   namespace: istio-system
 spec:
   selector:
@@ -29,7 +29,7 @@ spec:
 kind: Gateway
 apiVersion: networking.istio.io/v1alpha3
 metadata:
-  name: xquare-gateway
+  name: xquare-egressgateway
   namespace: istio-system
 spec:
   selector:
