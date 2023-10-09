@@ -1,4 +1,4 @@
-{{- range .Values.egress }}
+{{- range .Values.egressGateway.servers }}
 apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
