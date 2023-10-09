@@ -62,9 +62,7 @@ spec:
         label:
           service.istio.io/canonical-name: istio-egressgateway
         k8s:
-          service:
-            externalTrafficPolicy: {{ .Values.istioOperator.service.externalTrafficPolicy }}
-          hpaSpec:
+          hpaSpec:  
             minReplicas: {{ .Values.istioOperator.hpaSpec.minReplicas }}
             maxReplicas: {{ .Values.istioOperator.hpaSpec.maxReplicas }}
           {{- with .Values.nodeSelector }}
