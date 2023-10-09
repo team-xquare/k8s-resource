@@ -80,6 +80,14 @@ egress:
     protocol: TCP 
     host: "xquare-redis.kfd2wu.0001.apn2.cache.amazonaws.com" # "redis.xquare.app"
     port: 6379
+  - name: repo-mariadb
+    protocol: TCP 
+    host: "mariadb.dsm-repo.com"
+    port: 3316
+  - name: repo-mongodb
+    protocol: TCP 
+    host: "mongodb.dsm-repo.com"
+    port: 27017
 
 addons:
   jeager:
