@@ -15,7 +15,7 @@ spec:
         protocol: HTTP
       tls:
         httpsRedirect: true
-    {{- range .Values.ingressGateway.servers }}
+    {{- range .Values.gateway.servers }}
     - hosts: {{ .hosts | toYaml | nindent 6 }}
       port:
         name: {{ .port.name }}
@@ -25,26 +25,4 @@ spec:
         mode: {{ .tls.mode }}
         credentialName: {{ .tls.credentialName }}
     {{- end }}
----
-kind: Gateway
-apiVersion: networking.istio.io/v1alpha3
-metadata:
-  name: xquare-gateway
-  namespace: istio-system
-spec:
-  selector:
-    app: istio-egressgateway
-  servers:
-    {{- range .Values.egressGateway.servers }}
-    - hosts:
-        - {{ .host }}
-      port:
-        name: {{ .name }}-{{ .protocol }}
-        number: {{ .port }}
-        protocol: {{ .protocol }}
-      {{- if .tls }}
-      tls:
-        mode: {{ .tls.mode }}
-        credentialName: {{ .tls.credentialName }}
-      {{- end }}
-    {{- end }}
+
