@@ -138,12 +138,3 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: argo-rollout
-        namespace: argo-rollouts
-        source:
-          path: apps/argo-rollout
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: true
-            selfHeal: true
