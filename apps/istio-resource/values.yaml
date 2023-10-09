@@ -71,6 +71,16 @@ virtualServices:
       host: thanos-storegateway.monitoring.svc.cluster.local
       port: 9090
 
+egress:
+  - name: xquare-mysql
+    protocol: TCP 
+    host: "xquare-db.ctvh9cegfpii.ap-northeast-2.rds.amazonaws.com" # "mysql.xquare.app"
+    port: 3306
+  - name: xquare-redis
+    protocol: TCP 
+    host: "xquare-redis.kfd2wu.0001.apn2.cache.amazonaws.com" # "redis.xquare.app"
+    port: 6379
+
 addons:
   jeager:
     enable: true
