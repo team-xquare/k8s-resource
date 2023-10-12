@@ -1,0 +1,3 @@
+keycloak:
+  postgresql:
+    enabled: false
