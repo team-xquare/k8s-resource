@@ -88,11 +88,6 @@ virtualServices:
     destination:
       host: thanos-storegateway.monitoring.svc.cluster.local
       port: 9090
-  - name: keycloak
-    host: keycloak.xquare.app
-    destination:
-      host: keycloak-http.keycloak.svc.cluster.local
-      port: 80
 
 addons:
   jeager:
