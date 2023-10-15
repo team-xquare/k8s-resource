@@ -21,6 +21,6 @@ cluster의 **현 상태를 정확하고 투명**하게 파악하며, **누가 �
   - 해당 repository에서 helm 배포 및 전체 AWS 인프라를 Terraform으로 관리합니다 
 
   ### [xquare-gitops-repo](https://github.com/team-xquare/xquare-gitops-repo)
-  - 개발한 project에 대한 chart를 관리합니다. Argo CD로 관리됩니다.
+  - 개발한 project에 대한 chart를 관리합니다. Argo CD로 배포됩니다.
 
 
