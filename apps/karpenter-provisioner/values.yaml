@@ -18,11 +18,12 @@ provisioner:
         operator: In
         values:
           - "spot"
-      - key: "node.kubernetes.io/instance-type"
+      - key: "karpenter.k8s.aws/instance-cpu"
         operator: In
-        values:
-          - m5a.large
-          - m5.large
+        values: ["2"]
+      - key: "karpenter.k8s.aws/instance-hypervisor"
+        operator: In
+        values: ["nitro"]
       - key: kubernetes.io/arch	
         operator: In	
         values:	
