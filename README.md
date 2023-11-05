@@ -15,6 +15,9 @@ cluster의 **현 상태를 정확하고 투명**하게 파악하며, **누가 �
   - 오픈소스의 Chart를 바로 사용하지 않고, `dependencies`에 이들을 포함한 새로운 Chart를 정의하고 `values.yaml`로 필요한 부분을 override 하고 있습니다.
   - Github pages로 [`ghp_pages`](https://github.com/team-xquare/k8s-resource/tree/gh-pages) branch에 대해 chart를 배포하고 [Terraform helm provider](https://github.com/team-xquare/xquare-infrastructure-global/blob/main/helm.tf)를 통해 서버에 적용합니다.
 
+    <img width="370" alt="image" src="https://github.com/team-xquare/k8s-resource/assets/81006587/4f4fde95-694f-4203-9245-90d5ed1b5ce6">
+
+
 ## Related Repositories
 
   ### [xquare-infrastructure-global](https://github.com/team-xquare/xquare-infrastructure-global)
