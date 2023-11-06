@@ -29,11 +29,6 @@ keycloak:
         secretKeyRef:
           name: keycloak-secret
           key: db-password
-    - name: DB_PASSWORD
-      valueFrom:
-        secretKeyRef:
-          name: keycloak-secret
-          key: db-password
     - name: DB_VENDOR
       value: mysql
     - name: DB_ADDR
