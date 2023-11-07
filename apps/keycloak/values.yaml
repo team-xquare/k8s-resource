@@ -1,9 +1,6 @@
 keycloak:
   postgresql:
     enabled: false
-  auth:
-    adminUser: admin
-    adminPassword: anWYv3H
   externalDatabase:
     host: "mysql.xquare.app"
     port: 3306
@@ -12,6 +9,10 @@ keycloak:
     existingSecretUserKey: "db-user"
     existingSecretPasswordKey: "db-password"
   extraEnv: |
+    - name: KEYCLOAK_USER
+      value: user
+    - name: KEYCLOAK_PASSWORD
+      value: pass
     - name: DB_USER
       valueFrom:
         secretKeyRef:
