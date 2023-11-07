@@ -4,17 +4,12 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: xquare-prod
+  namespace: {{ $clubname }}-prod
   name: {{ $clubname }}
 rules:
 - apiGroups: ["apps"]
   resources: ["deployments"]
   verbs: ["get"]
-  resourceNames:
-  {{- range .projects }}
-    - {{ . }}-fe-prod
-    - {{ . }}-be-prod
-  {{- end }}
 - apiGroups: [""]
   resources: ["pods"]
   verbs: ["list"]
@@ -31,11 +26,6 @@ rules:
 - apiGroups: ["apps"]
   resources: ["deployments"]
   verbs: ["get"]
-  resourceNames:
-  {{- range .projects }}
-    - {{ . }}-fe-stag
-    - {{ . }}-be-stag
-  {{- end }}
 - apiGroups: [""]
   resources: ["pods"]
   verbs: ["list"]
@@ -48,7 +38,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ $clubname }}-{{ . }}
-  namespace: xquare-prod
+  namespace: {{ $clubname }}-prod
 subjects:
 - kind: User 
   name: {{ . }}
@@ -61,7 +51,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: {{ $clubname }}-{{ . }}
-  namespace: xquare-stag
+  namespace: {{ $clubname }}-stag
 subjects:
 - kind: User 
   name: {{ . }}
