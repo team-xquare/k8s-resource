@@ -5,8 +5,10 @@ xquare k8s-resource의 **명시적 관리**와 **GitOps** 를 위한 repository 
 cluster의 **현 상태를 정확하고 투명**하게 파악하며, **누가 언제 어떤 변경을 적용했는지 기록**하는 것을 목표로 합니다.
 
 ## Structures of Directory
+
   ### [`/apps/*`](https://github.com/team-xquare/k8s-resource/tree/main/apps)
   - Argo CD로 관리하는 서비스 Application들의 manifest 파일들이 위치합니다.
+  - 자주 변경되는 차트가 여기에 속합니다.
   - `main` branch의 변경이 Argo CD에 의해 cluster에 자동 적용됩니다.
 
   ### [`/charts/*`](https://github.com/team-xquare/k8s-resource/tree/main/charts)
