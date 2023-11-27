@@ -19,14 +19,14 @@ jobs:
       - name: Check Chart Version
         id: check-version
         run: |
-          echo "{\"include\":[]}" > test.json
+          echo "{\"include\":[]}" > chart.json
           git diff --name-only HEAD^ HEAD | grep Chart.yaml | while read line; do
             CHART=$(grep '^name: ' $line | cut -d ' ' -f 2)
             VERSION=$(grep '^version: ' $line | cut -d ' ' -f 2)
-            jq --arg CHART "$CHART" --arg VERSION "$VERSION" '.include += [{"chart":$CHART,"version":$VERSION}]' test.json > temp.json && mv temp.json test.json
+            jq --arg CHART "$CHART" --arg VERSION "$VERSION" '.include += [{"chart":$CHART,"version":$VERSION}]' chart.json > temp.json && mv temp.json chart.json
           done
-          echo "charts=$(jq -c . < ./test.json)" >> $GITHUB_OUTPUT
-          cat test.json
+          echo "charts=$(jq -c . < ./chart.json)" >> $GITHUB_OUTPUT
+          cat chart.json
 
   repository-dispatch:
     needs: check-version
