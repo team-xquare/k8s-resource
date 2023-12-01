@@ -24,6 +24,7 @@ dex:
     - id: grafana
       redirectURIs:
       - 'https://grafana.xquare.app/login/generic_oauth'
+      - 'http://localhost:3000/login/generic_oauth'
       name: 'grafana'
       secret: wnZOOiLE6rwwDK2
     connectors:
