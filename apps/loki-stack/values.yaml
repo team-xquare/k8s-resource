@@ -37,7 +37,9 @@ loki:
   backend:
     replicas: 3
     persistence:
-      enabled: false
+      volumeClaimsEnabled: false
+      dataVolumeParameters:
+        emptyDir: {}
     resources:
       requests:
         cpu: 10m
@@ -48,10 +50,14 @@ loki:
       requests:
         cpu: 10m
         memory: 64Mi
+    persistence:
+      volumeClaimsEnabled: false
+      dataVolumeParameters:
+        emptyDir: {}
+  deployment:
+    isScalable: true
   read:
     replicas: 3
-    persistence:
-      enabled: false
     resources:
       requests:
         cpu: 10m
