@@ -7,8 +7,8 @@ description: A Helm chart for loki-stack
 home: https://github.com/grafana
 dependencies:
 - name: "loki"
-  repository: "https://team-xquare.github.io/k8s-resource"
-  version: "5.20.3"
+  repository: "https://grafana.github.io/helm-charts"
+  version: "5.26.0"
 - name: "promtail"
   repository: "https://grafana.github.io/helm-charts"
   version: "6.15.1"
