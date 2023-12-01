@@ -489,7 +489,8 @@ kube-prometheus-stack:
       auth.generic_oauth.group_mapping:
         role_attribute_path: contains(groups[*], 'team-xquare:DevOps') && 'Admin' || contains(groups[*], 'team-xquare:backend') && 'Viewer'
         org_id: 1
-        groups_attribute_path: groups
+        team_ids_attribute_path: groups[*].split(':')[0]
+        teams_url: https://dex.xquare.app/userinfo
       security:
         cookie_secure: true
         cookie_samesite: lax
