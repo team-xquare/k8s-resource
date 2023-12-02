@@ -43,3 +43,8 @@ clubs:
     - HyunSu1768
     projects:
     - mukgen
+  - name: entry
+    users: 
+    - HyunSu1768
+    projects:
+    - entry-config-server
