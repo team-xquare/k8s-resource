@@ -488,7 +488,7 @@ kube-prometheus-stack:
         email_attribute_path: email
       auth.generic_oauth.group_mapping:
         role_attribute_path: contains(groups[*], 'team-xquare:DevOps') && 'Admin' || contains(groups[*], 'team-xquare:backend') && 'Viewer' || contains(groups[*], 'EntryDSM:DevOps') && 'Viewer' ||  
-contains(groups[*], 'INVINCIBLE-DMS:xquare') && 'Viewer'
+contains(groups[*], 'INVINCIBLE-DMS:xquare') && 'Viewer' || contains(groups[*], 'Team-SVAP:xquare') && 'Viewer'
         org_id: 1
         team_ids_attribute_path: groups[*].split(':')[0]
         teams_url: https://dex.xquare.app/userinfo
