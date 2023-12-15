@@ -75,24 +75,6 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: dex-k8s-authenticator
-        namespace: dex
-        source:
-          path: apps/dex-k8s-authenticator
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
-      - name: kube-oidc-proxy
-        namespace: dex
-        source:
-          path: apps/kube-oidc-proxy
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
       - name: kube-prometheus-stack
         namespace: monitoring
         source:
@@ -133,15 +115,6 @@ projects:
         namespace: infisical
         source:
           path: apps/infisical
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
-      - name: keycloak
-        namespace: keycloak
-        source:
-          path: apps/keycloak
           repoURL: https://github.com/team-xquare/k8s-resource.git
         syncPolicy:
           automated:
