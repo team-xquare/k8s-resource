@@ -93,6 +93,11 @@ virtualServices:
     destination:
       host: keycloak-http.keycloak.svc.cluster.local
       port: 80
+  - name: prometeus-server
+    host: prometheus.xquare.app
+    destination:
+      host: kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
+      port: 9090
 
 addons:
   jeager:
