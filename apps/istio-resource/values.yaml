@@ -98,6 +98,11 @@ virtualServices:
     destination:
       host: kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
       port: 9090
+  - name: infisical-backend
+    host: infisical.xquare.app
+    destination:
+      host: infisical-backend.infisical.svc.cluster.local
+      port: 8080
 
 addons:
   jeager:
