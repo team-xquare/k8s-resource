@@ -15,14 +15,3 @@ infisicalSecret:
     managedSecretReference:
       secretName: infisical-managed-secret
       secretNamespace: infisical
-
-infisical:
-  backend:
-    enabled: true
-    kubeSecretRef: "infisical-secret"
-  redis:
-    enabled: false
-  mongodb:
-    enabled: false
-  ingress:
-    enabled: false
