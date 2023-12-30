@@ -48,3 +48,10 @@ clubs:
     - HyunSu1768
     projects:
     - entry-config-server
+  - name: rma
+    users:
+    - "tedsoftj1123"
+    - "jyk1029"
+    projects:
+    - juso-batch
+    - juso
