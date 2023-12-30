@@ -22,7 +22,7 @@ loki:
       grafanaAgent:
         installOperator: false    
     lokiCanary:
-      enabled: false
+      enabled: true
       resources:
         requests:
           cpu: 10m
