@@ -1,17 +1,17 @@
-infisical:
-  infisicalSecret:
-    name: xquare-secret
-    spec:
-      hostAPI: https://app.infisical.com/api
-      resyncInterval: 60
-      authentication:
-        serviceToken:
-          serviceTokenSecretReference:
-            secretName: infisical-token-secret
-            secretNamespace: infisical
-          secretsScope:
-            envSlug: prod
-            secretsPath: "/"
-      managedSecretReference:
-        secretName: infisical-managed-secret
-        secretNamespace: infisical
+
+infisicalSecret:
+  name: xquare-secret
+  spec:
+    hostAPI: https://app.infisical.com/api
+    resyncInterval: 60
+    authentication:
+      serviceToken:
+        serviceTokenSecretReference:
+          secretName: infisical-token-secret
+          secretNamespace: infisical
+        secretsScope:
+          envSlug: prod
+          secretsPath: "/"
+    managedSecretReference:
+      secretName: infisical-managed-secret
+      secretNamespace: infisical
