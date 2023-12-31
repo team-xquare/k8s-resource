@@ -27,6 +27,15 @@ ingressGateway:
     tls:
       mode: SIMPLE
       credentialName: repo-cert
+  - hosts:
+      - '*.aliens-dms.com'
+    port:
+      name: https-dms
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: dms-cert
 
 egressGateway:
   servers:
