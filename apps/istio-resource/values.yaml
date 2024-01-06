@@ -97,10 +97,10 @@ virtualServices:
     destination:
       host: thanos-storegateway.monitoring.svc.cluster.local
       port: 9090
-  - name: keycloak
-    host: keycloak.xquare.app
+  - name: loki-server
+    host: loki.xquare.app
     destination:
-      host: keycloak-http.keycloak.svc.cluster.local
+      host: loki-gateway.monitoring.svc.cluster.local
       port: 80
   - name: prometeus-server
     host: prometheus.xquare.app
