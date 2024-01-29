@@ -55,9 +55,4 @@ clubs:
     projects:
     - juso-batch
     - juso
-  - name: dms
-    users:
-    - "ilyoil2"
-    projects:
-    - dms
 
