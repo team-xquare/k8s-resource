@@ -50,9 +50,9 @@ clubs:
     - entry-config-server
   - name: rma
     users:
+    - "ilyoil2"
     - "tedsoftj1123"
     - "jyk1029"
     projects:
-    - juso-batch
-    - juso
+    - dms
 
