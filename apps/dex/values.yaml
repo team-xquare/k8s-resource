@@ -46,6 +46,9 @@ dex:
           - name: mukgen
           - name: heiiwrd98
           - name: team-aliens
+          - name: MaeumgaGym
+            teams:
+            - backend
   requests:
     cpu: 1m
     memory: 8Mi
