@@ -8,6 +8,9 @@ spec:
       apiSecret:
         secretName: datadog-secret
         keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
   features:
     apm:
       enabled: true
