@@ -49,6 +49,7 @@ dex:
           - name: MaeumgaGym
             teams:
             - backend
+          - name: Team-jeong-ho-kim
   requests:
     cpu: 1m
     memory: 8Mi
