@@ -4,8 +4,12 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.1
+    meta.helm.sh/release-name: datadog-operator
+    meta.helm.sh/release-namespace: datadog
   creationTimestamp: null
   name: datadogagents.datadoghq.com
+  labels:
+    app.kubernetes.io/managed-by: Helm
 spec:
   group: datadoghq.com
   names:
