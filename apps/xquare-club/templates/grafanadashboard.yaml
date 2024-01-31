@@ -1056,7 +1056,7 @@ data:
       },
       "timezone": "",
       "title": "{{ $clubname }} Log Dashboard",
-      "uid": "{{ $clubname }}-loki-apps-dashboard-fRIvzUZMz",
+      "uid": "{{ $clubname }}-fRIvzUZMz",
       "version": 2,
       "description": "{{ $clubname }} Container/container Log Dashboard (Loki as DataSource)"
     }
