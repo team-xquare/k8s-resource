@@ -1,5 +1,5 @@
 name: ext-authz
-image: 471407337433.dkr.ecr.ap-northeast-2.amazonaws.com/envoy-middleware-be-prod:prod-bea3f29b5bff852sxzc2f7q373f022d15qz
+image: 471407337433.dkr.ecr.ap-northeast-2.amazonaws.com/envoy-middleware-be-prod:latest
 
 nodeSelector:
   Karpenter: enabled
