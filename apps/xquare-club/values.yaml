@@ -68,4 +68,8 @@ clubs:
     - "dkflfkd53"
     projects:
       - daedong
-
+  - name: jeong
+    users:
+      - "4mjeo"
+    projects:
+      - merge
