@@ -50,6 +50,7 @@ dex:
             teams:
             - backend
           - name: Team-jeong-ho-kim
+          - name: DSM-PICK
   requests:
     cpu: 1m
     memory: 8Mi
