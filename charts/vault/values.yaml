@@ -1,25 +1,26 @@
-global:
-  injector:
+vault:
+  global:
+    injector:
+      enabled: true
+      resources:
+        requests:
+          memory: 256Mi
+          cpu: 250m
+        limits:
+          memory: 256Mi
+          cpu: 250m
+
+  server:
     enabled: true
     resources:
       requests:
         memory: 256Mi
-        cpu: 250m
+        cpu: 200m
       limits:
-        memory: 256Mi
-        cpu: 250m
+        memory: 512Mi
+        cpu: 400m
 
-server:
-  enabled: true
-  resources:
-    requests:
-      memory: 256Mi
-      cpu: 200m
-    limits:
-      memory: 512Mi
-      cpu: 400m
-
-ui:
-  enabled: true
-  serviceType: "ClusterIP"
-  externalPort: 8200
+  ui:
+    enabled: true
+    serviceType: "ClusterIP"
+    externalPort: 8200
