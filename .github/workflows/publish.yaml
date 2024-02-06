@@ -41,6 +41,7 @@ jobs:
           helm repo add karpenter https://charts.karpenter.sh/
           helm repo add minio https://charts.min.io/
           helm repo add datadog https://helm.datadoghq.com
+          helm repo add vault https://helm.releases.hashicorp.com
 
       - name: Helm build
         run: |
