@@ -112,7 +112,11 @@ virtualServices:
     destination:
       host: infisical-backend.infisical.svc.cluster.local
       port: 8080
-
+  - name: vault-ui
+    host: vault.xquare.app
+    destination:
+      host: vault.vault.svc.cluster.local
+      port: 8200
 addons:
   jeager:
     enable: true
