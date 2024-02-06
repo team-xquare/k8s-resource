@@ -115,7 +115,7 @@ virtualServices:
   - name: vault-ui
     host: vault.xquare.app
     destination:
-      host: vault.vault.svc.cluster.local
+      host: vault-ui.vault.svc.cluster.local
       port: 8200
 addons:
   jeager:
