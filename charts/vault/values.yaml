@@ -1,8 +1,7 @@
-global:
-  namespace: vault
-
-ui:
-  enabled: true
-
-server:
-  affinity: null
+vault:
+  global:
+    namespace: vault
+  ui:
+    enabled: true
+  server:
+    affinity: null
