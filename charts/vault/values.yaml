@@ -8,14 +8,14 @@ global:
       limits:
         memory: 256Mi
         cpu: 250m
-      affinity: ""
-
-ui:
-  enabled: true
-  serviceType: "ClusterIP"
-  externalPort: 8200
 
 server:
+  enabled: true
+  ha:
+    enabled: true
+    replicas: 3
+    raft:
+      enabled: true
   resources:
     requests:
       memory: 256Mi
@@ -23,4 +23,8 @@ server:
     limits:
       memory: 512Mi
       cpu: 400m
-  affinity: ""
+
+ui:
+  enabled: true
+  serviceType: "ClusterIP"
+  externalPort: 8200
