@@ -4,8 +4,9 @@ global:
 ui:
   enabled: true
 
-tolerations:
-  - effect: "PreferNoSchedule"
-    key: "xquare/server"
-    operator: "Equal"
-    value: "true"
+server:
+  tolerations:
+    - effect: "PreferNoSchedule"
+      key: "xquare/server"
+      operator: "Equal"
+      value: "true"
