@@ -1,7 +1,26 @@
-vault:
-  global:
-    namespace: vault
-  ui:
+global:
+  injector:
     enabled: true
-  server:
-    affinity: null
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: 250m
+      limits:
+        memory: 256Mi
+        cpu: 250m
+      affinity: ""
+
+ui:
+  enabled: true
+  serviceType: "ClusterIP"
+  externalPort: 8200
+
+server:
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 200m
+    limits:
+      memory: 512Mi
+      cpu: 400m
+  affinity: ""
