@@ -1,2 +1,5 @@
 global:
   namespace: vault
+
+ui:
+  enabled: true
