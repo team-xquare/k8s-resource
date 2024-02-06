@@ -2,7 +2,7 @@ apiVersion: v2
 name: vault
 description: Vault for secret
 type: application
-version: 1.0.8
+version: 1.0.9
 appVersion: 1.15.2
 dependencies:
   - name: vault
