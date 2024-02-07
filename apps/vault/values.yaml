@@ -26,6 +26,16 @@ vault:
     externalPort: 8200
 
 # Vault Secret Operator 설정
+controller:
+  manager:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 10m
+        memory: 64Mi
+
 defaultVaultConnection:
   enabled: true
   address: http://vault-internal.vault.svc.cluster.local:8200
