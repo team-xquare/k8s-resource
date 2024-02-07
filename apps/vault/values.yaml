@@ -24,3 +24,8 @@ vault:
     enabled: true
     serviceType: "ClusterIP"
     externalPort: 8200
+
+# Vault Secret Operator 설정
+defaultVaultConnection:
+  enabled: true
+  address: http://vault-internal.vault.svc.cluster.local:8200
