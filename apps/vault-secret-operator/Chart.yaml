@@ -1,0 +1,10 @@
+apiVersion: v2
+name: vault
+description: Vault for secret
+type: application
+version: 1.0.0
+appVersion: 0.4.3
+dependencies:
+  - name: vault-secrets-operator
+    version: 0.4.3
+    repository: https://helm.releases.hashicorp.com
