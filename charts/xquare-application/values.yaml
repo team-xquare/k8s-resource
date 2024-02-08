@@ -111,15 +111,6 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: infisical
-        namespace: infisical
-        source:
-          path: apps/infisical
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
       - name: vault
         namespace: vault
         source:
