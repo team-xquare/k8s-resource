@@ -11,5 +11,5 @@ karpenter:
   controller:
     resources:
       requests:
-        cpu: 100m
-        memory: 256Mi
+        cpu: 16m
+        memory: 244Mi
