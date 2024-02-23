@@ -112,6 +112,11 @@ virtualServices:
     destination:
       host: vault-ui.vault.svc.cluster.local
       port: 8200
+  - name: kube-cost
+    host: kube-cost.xquare.app
+    destination:
+      host: kubecost-cost-analyzer.kubecost.svc.cluster.local
+      port: 9090
 addons:
   jeager:
     enable: true
