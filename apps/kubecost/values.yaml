@@ -5,3 +5,4 @@ global:
   grafana:
     enabled: false
     domainName: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
+  kubecostToken: dGVhbXhxdWFyZUBkc20uaHMua3I=xm343yadf98
