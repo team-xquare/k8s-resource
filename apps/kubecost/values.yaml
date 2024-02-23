@@ -1,7 +1,7 @@
 global:
   prometheus:
     enabled: false
-    fqdn: kube-prometheus-stack-prometheus.monitoring.svc.cluster.local
+    fqdn: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
   grafana:
     enabled: false
     domainName: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
