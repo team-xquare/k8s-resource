@@ -54,6 +54,10 @@ spec:
           {{- with .Values.istioOperator.serviceAnnotations }}
           serviceAnnotations: {{ toYaml . | nindent 12 }}
           {{- end }}
+          resources:
+            requests:
+              cpu: 30m
+              memory: 180Mi
 
     egressGateways:
       - name: istio-egressgateway
@@ -74,6 +78,10 @@ spec:
           {{- with .Values.istioOperator.serviceAnnotations }}
           serviceAnnotations: {{ toYaml . | nindent 12 }}
           {{- end }}
+          resources:
+            requests:
+              cpu: 10m
+              memory: 80Mi
   values:
     sidecarInjectorWebhook:
       rewriteAppHTTPProbe: true
