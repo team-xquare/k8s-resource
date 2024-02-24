@@ -26,6 +26,10 @@ spec:
         hpaSpec:
           minReplicas: 1
           maxReplicas: 3
+        resources:
+          requests:
+            cpu: 189m
+            memory: 250Mi
     ingressGateways:
       - name: istio-ingressgateway
         namespace: istio-system
