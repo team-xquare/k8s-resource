@@ -6,5 +6,5 @@ version: 1.0.39
 appVersion: 0.32.0
 dependencies:
 - name: karpenter
-  version: 0.32.0
-  repository: oci://public.ecr.aws/karpenter/karpenter
+  version: 0.16.3
+  repository: https://charts.karpenter.sh/
