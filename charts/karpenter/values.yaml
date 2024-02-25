@@ -2,7 +2,7 @@ karpenter:
   hostNetwork: true
   serviceAccount:
     annotations:
-      eks.amazonaws.com/role-arn: ""
+      eks.amazonaws.com/role-arn: "arn:aws:iam:::role/KarpenterControllerRole-xquare-v2-cluster"
   clusterName: ""
   clusterEndpoint: ""
   aws:
