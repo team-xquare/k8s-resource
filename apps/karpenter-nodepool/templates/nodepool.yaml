@@ -15,11 +15,11 @@ spec:
       taints: {{ .Values.provisioner.spec.taints | toYaml | nindent 8 }}
       requirements:
         {{- range .Values.provisioner.spec.requirements }}
-          - key: {{ .key | quote }}
-            operator: {{ .operator | quote }}
-            values:
+        - key: {{ .key | quote }}
+          operator: {{ .operator | quote }}
+          values:
             {{- range .values }}
-              - {{ . | quote }}
+            - {{ . | quote }}
             {{- end }}
         {{- end }}
       kubelet:
