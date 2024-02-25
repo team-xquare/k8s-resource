@@ -12,7 +12,7 @@ spec:
     spec:
       nodeClassRef:
         name: {{ .Values.provisioner.name }}-nodeclass
-      taints: {{ .Values.provisioner.spec.taints | toYaml | nindent 4 }}
+      taints: {{ .Values.provisioner.spec.taints | toYaml | nindent 8 }}
       requirements:
         {{- range .Values.provisioner.spec.requirements }}
           - key: {{ .key | quote }}
