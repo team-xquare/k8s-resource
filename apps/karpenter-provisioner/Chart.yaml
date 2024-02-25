@@ -1,0 +1,6 @@
+apiVersion: v2
+type: application
+name: karpenter-provisioner
+version: 1.0.3
+appVersion: "1.0.0"
+description: Karpenter provisioner for xquare
