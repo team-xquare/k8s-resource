@@ -3,8 +3,6 @@ karpenter:
   serviceAccount:
     annotations:
       eks.amazonaws.com/role-arn: "arn:aws:iam:::role/KarpenterControllerRole-xquare-v2-cluster"
-  aws:
-    defaultInstanceProfile: ""
   replicas: 1
   controller:
     resources:
