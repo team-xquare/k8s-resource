@@ -3,7 +3,6 @@ kind: NodePool
 metadata:
   name: {{ .Values.provisioner.name }}-nodepool
 spec:
-  role: KarpenterIRSA-xquare-v2-cluster-20230912025141421600000001
   template:
     metadata:
       labels:
@@ -31,7 +30,7 @@ kind: EC2NodeClass
 metadata:
   name: {{ .Values.provisioner.name }}-nodeclass
 spec:
-  # Required, resolves a default ami and userdata
+  role: KarpenterIRSA-xquare-v2-cluster-20230912025141421600000001
   amiFamily: AL2
   subnetSelectorTerms:
     - tags:
