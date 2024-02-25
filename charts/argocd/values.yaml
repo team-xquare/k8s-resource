@@ -5,7 +5,7 @@ argo-cd:
     cm:
       url: https://argo-cd.xquare.app
       timeout.reconciliation: 15s
-      admin.enabled: false
+      admin.enabled: true
       exec.enabled: true
       oidc.config: |
         name: dex
