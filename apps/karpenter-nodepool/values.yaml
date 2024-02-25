@@ -18,7 +18,7 @@ provisioner:
         values: [ "8", "16" ]
       - key: "karpenter.k8s.aws/instance-generation"
         operator: Gt
-        values: [ "2", "3" ]
+        values: [ 2, 3 ]
       - key: "topology.kubernetes.io/zone"
         operator: In
         values: [ "ap-northeast-2a", "ap-northeast-2b", "ap-northeast-2c"]
