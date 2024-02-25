@@ -138,3 +138,12 @@ projects:
           automated:
             prune: false
             selfHeal: true
+      - name: karpenter-nodepool
+        namespace: karpenter
+        source:
+          path: apps/karpenter-nodepool
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
