@@ -15,7 +15,7 @@ provisioner:
         values: [ "t" ]
       - key: "karpenter.k8s.aws/instance-cpu"
         operator: In
-        values: [ "8", "16" ]
+        values: [ "2","4","8"]
       - key: "karpenter.k8s.aws/instance-generation"
         operator: Gt
         values: [ "2" ]
@@ -28,3 +28,6 @@ provisioner:
       - key: "karpenter.sh/capacity-type"
         operator: In
         values: [ "spot" ]
+      - key: "karpenter.k8s.aws/instance-hypervisor"
+        operator: In
+        values: [ "nitro" ]
