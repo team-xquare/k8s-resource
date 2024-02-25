@@ -3,6 +3,7 @@ kind: NodePool
 metadata:
   name: {{ .Values.provisioner.name }}-nodepool
 spec:
+  role: KarpenterIRSA-xquare-v2-cluster-20230912025141421600000001
   template:
     metadata:
       labels:
