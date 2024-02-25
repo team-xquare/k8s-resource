@@ -13,6 +13,5 @@ karpenter:
       requests:
         cpu: 16m
         memory: 244Mi
-
-settings:
-  clusterName: "xquare-v2-cluster"
+  settings:
+    clusterName: "xquare-v2-cluster"
