@@ -17,10 +17,7 @@ spec:
         {{- range .Values.provisioner.spec.requirements }}
         - key: {{ .key | quote }}
           operator: {{ .operator | quote }}
-          values:
-            {{- range .values }}
-            - {{ . | quote }}
-            {{- end }}
+          values: {{ .values }}
         {{- end }}
       kubelet:
         maxPods: {{ .Values.provisioner.spec.kubeletConfiguration.maxPods }}
