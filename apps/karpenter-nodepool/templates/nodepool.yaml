@@ -30,7 +30,7 @@ kind: EC2NodeClass
 metadata:
   name: {{ .Values.provisioner.name }}-nodeclass
 spec:
-  role: "arn:aws:iam::471407337433:role/KarpenterNodeRole-xquare-v2-cluster"
+{{/*  role: "arn:aws:iam::471407337433:role/KarpenterNodeRole-xquare-v2-cluster"*/}}
   amiFamily: AL2
   subnetSelectorTerms:
     - tags:
