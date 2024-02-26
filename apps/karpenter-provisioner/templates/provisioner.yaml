@@ -3,6 +3,7 @@ kind: Provisioner
 metadata:
   name: {{ .Values.provisioner.name }}
 spec:
+  ttlSecondsUntilExpired: 300
   kubeletConfiguration:
     maxPods: {{ .Values.provisioner.spec.kubeletConfiguration.maxPods }}
   taints: {{ .Values.provisioner.spec.taints | toYaml | nindent 4 }}
