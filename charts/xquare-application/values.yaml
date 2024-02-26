@@ -48,15 +48,6 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: karpenter-provisioner
-        namespace: karpenter
-        source:
-          path: apps/karpenter-provisioner
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
       - name: aws-node-termination-handler
         namespace: spot-handler
         source:
