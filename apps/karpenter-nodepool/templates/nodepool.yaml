@@ -4,8 +4,9 @@ metadata:
   name: {{ .Values.provisioner.name }}-nodepool
 spec:
   disruption:
-    consolidationPolicy: WhenEmpty
     consolidateAfter: 20s
+    consolidationPolicy: WhenEmpty
+    expireAfter: Never
   template:
     metadata:
       labels:
@@ -35,12 +36,11 @@ metadata:
 spec:
   role: "KarpenterNodeRole-xquare-v2-cluster"
   amiFamily: AL2
-  subnetSelectorTerms:
-    - tags:
-        karpenter.sh/discovery/xquare-v2-cluster: '*'
-
   securityGroupSelectorTerms:
-    - tags:
-        aws:eks:cluster-name: xquare-v2-cluster
+  - tags:
+      aws:eks:cluster-name: xquare-v2-cluster
+  subnetSelectorTerms:
+  - tags:
+      karpenter.sh/discovery/xquare-v2-cluster: '*'
   tags:
     karpenter.sh/discovery: xquare-v2-cluster
