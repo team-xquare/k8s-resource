@@ -3,6 +3,9 @@ kind: NodePool
 metadata:
   name: {{ .Values.provisioner.name }}-nodepool
 spec:
+  disruption:
+    consolidationPolicy: WhenEmpty
+    consolidateAfter: 20s
   template:
     metadata:
       labels:
