@@ -93,15 +93,6 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: descheduler
-        namespace: kube-system
-        source:
-          path: apps/descheduler
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
       - name: vault
         namespace: vault
         source:
