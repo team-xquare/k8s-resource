@@ -10,12 +10,6 @@ provisioner:
     kubeletConfiguration:
       maxPods: 110
     requirements:
-      - key: "karpenter.k8s.aws/instance-cpu"
-        operator: In
-        values: [ "2", "4","8" ]
-      - key: "karpenter.k8s.aws/instance-generation"
-        operator: Gt
-        values: [ "3" ]
       - key: "topology.kubernetes.io/zone"
         operator: In
         values: [ "ap-northeast-2a", "ap-northeast-2b", "ap-northeast-2c"]
