@@ -4,9 +4,8 @@ metadata:
   name: {{ .Values.provisioner.name }}-nodepool
 spec:
   disruption:
-    consolidateAfter: 20s
-    consolidationPolicy: WhenEmpty
-    expireAfter: Never
+    consolidationPolicy: WhenUnderutilized
+    expireAfter: 720h
   template:
     metadata:
       labels:

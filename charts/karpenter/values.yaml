@@ -11,3 +11,6 @@ karpenter:
         memory: 244Mi
   settings:
     clusterName: "xquare-v2-cluster"
+
+featureGates:
+  spotToSpotConsolidation: true
