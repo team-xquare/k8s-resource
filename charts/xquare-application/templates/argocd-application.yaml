@@ -34,11 +34,6 @@ spec:
     path: {{ .source.path }}
     repoURL: {{ .source.repoURL }}
     targetRevision: HEAD
-    helm:
-      valueFiles:
-      {{- range .source.valueFiles}}
-        - {{ . | quote }}
-      {{ end }}
   syncPolicy:
     automated:
       prune: {{ .syncPolicy.automated.prune }}
