@@ -16,4 +16,4 @@ spec:
       automountServiceAccountToken: true
       containers:
         - name: xquare-event-listener
-          image: 471407337433.dkr.ecr.ap-northeast-2.amazonaws.com/xquare-event-listener-prod:1.0.8
+          image: 471407337433.dkr.ecr.ap-northeast-2.amazonaws.com/xquare-event-listener-prod:1.0.9
