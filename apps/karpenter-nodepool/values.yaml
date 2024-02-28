@@ -5,7 +5,7 @@ nodepools:
         taints:
           - key: "xquare/platform"
             value: "true"
-            effect: "PrferNoSchedule"
+            effect: "PreferNoSchedule"
         labels:
           Karpenter: enabled
         kubeletConfiguration:
