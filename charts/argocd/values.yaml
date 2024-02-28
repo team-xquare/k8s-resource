@@ -1,4 +1,6 @@
 argo-cd:
+  global:
+    priorityClassName: system-cluster-critical
   configs:
     params:
       server.insecure: true 
