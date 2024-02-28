@@ -24,7 +24,7 @@ spec:
         tolerations: {{ toYaml . | nindent 10 }}
         {{- end }}
         hpaSpec:
-          minReplicas: 1
+          minReplicas: 2
           maxReplicas: 3
         resources:
           requests:
