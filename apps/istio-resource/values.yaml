@@ -133,6 +133,6 @@ nodeSelector:
   
 tolerations:
 - effect: "PreferNoSchedule"
-  key: xquare/server
+  key: xquare/platform
   operator: "Equal"
   value: "true"
