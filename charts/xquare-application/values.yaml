@@ -138,7 +138,7 @@ projects:
         source:
           path: apps/karpenter-nodepool
           repoURL: https://github.com/team-xquare/k8s-resource.git
-          valueFiles: ["values-platform.yaml", "values-service.yaml"]
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false

@@ -1,7 +1,8 @@
+{{ range .Values.nodepools.services }}
 apiVersion: karpenter.sh/v1beta1
 kind: NodePool
 metadata:
-  name: {{ .Values.provisioner.name }}-nodepool
+  name: {{ .name }}-nodepool
 spec:
   disruption:
     consolidationPolicy: WhenUnderutilized
@@ -9,37 +10,38 @@ spec:
   template:
     metadata:
       labels:
-        {{- range $key, $value := .Values.provisioner.spec.labels }}
+        {{- range $key, $value := .spec.labels }}
         {{ $key }}: {{ $value }}
         {{- end }}
     spec:
       nodeClassRef:
-        name: {{ .Values.provisioner.name }}-nodeclass
-      taints: {{ .Values.provisioner.spec.taints | toYaml | nindent 8 }}
+        name: {{ .name }}-nodeclass
+      taints: {{ .spec.taints | toYaml | nindent 8 }}
       requirements:
-        {{- range .Values.provisioner.spec.requirements }}
+        {{- range .spec.requirements }}
         - key: {{ .key | quote }}
           operator: {{ .operator | quote }}
           values:
           {{- range .values }}
-          - {{ . | quote }}
+            - {{ . | quote }}
           {{- end }}
         {{- end }}
       kubelet:
-        maxPods: {{ .Values.provisioner.spec.kubeletConfiguration.maxPods }}
+        maxPods: {{ .spec.kubeletConfiguration.maxPods }}
 ---
 apiVersion: karpenter.k8s.aws/v1beta1
 kind: EC2NodeClass
 metadata:
-  name: {{ .Values.provisioner.name }}-nodeclass
+  name: {{ .name }}-nodeclass
 spec:
   role: "KarpenterNodeRole-xquare-v2-cluster"
   amiFamily: AL2
   securityGroupSelectorTerms:
-  - tags:
-      aws:eks:cluster-name: xquare-v2-cluster
+    - tags:
+        aws:eks:cluster-name: xquare-v2-cluster
   subnetSelectorTerms:
-  - tags:
-      karpenter.sh/discovery/xquare-v2-cluster: '*'
+    - tags:
+        karpenter.sh/discovery/xquare-v2-cluster: '*'
   tags:
     karpenter.sh/discovery: xquare-v2-cluster
+{{ end }}
