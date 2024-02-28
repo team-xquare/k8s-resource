@@ -6,7 +6,7 @@ metadata:
 spec:
   disruption:
     consolidationPolicy: WhenUnderutilized
-    expireAfter: 720h
+    expireAfter: 60s
   template:
     metadata:
       labels:
