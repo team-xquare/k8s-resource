@@ -17,6 +17,7 @@ spec:
   components:
     pilot:
       k8s:
+        priorityClassName: system-cluster-critical
         {{- with .Values.nodeSelector }}
         nodeSelector: {{ toYaml . | nindent 10 }}
         {{- end }}
@@ -37,6 +38,7 @@ spec:
         label:
           service.istio.io/canonical-name: istio-ingressgateway
         k8s:
+          priorityClassName: system-cluster-critical
           hpaSpec:
             minReplicas: {{ .Values.istioOperator.hpaSpec.minReplicas }}
             maxReplicas: {{ .Values.istioOperator.hpaSpec.maxReplicas }}
@@ -70,6 +72,7 @@ spec:
         label:
           service.istio.io/canonical-name: istio-egressgateway
         k8s:
+          priorityClassName: system-cluster-critical
           hpaSpec:  
             minReplicas: {{ .Values.istioOperator.hpaSpec.minReplicas }}
             maxReplicas: {{ .Values.istioOperator.hpaSpec.maxReplicas }}
