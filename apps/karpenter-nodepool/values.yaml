@@ -5,7 +5,7 @@ nodepools:
         taints:
           - key: "xquare/platform"
             value: "true"
-            effect: "NoSchedule"
+            effect: "PrferNoSchedule"
         labels:
           Karpenter: enabled
         kubeletConfiguration:
@@ -28,7 +28,7 @@ nodepools:
         taints:
           - key: "xquare/service"
             value: "true"
-            effect: "NoSchedule"
+            effect: "PreferNoSchedule"
         labels:
           Karpenter: enabled
         kubeletConfiguration:
