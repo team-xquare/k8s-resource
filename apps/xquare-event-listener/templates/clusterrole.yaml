@@ -3,9 +3,12 @@ kind: ClusterRole
 metadata:
   name: event-listen
 rules:
-  - apiGroups: [""]
-    #
-    # at the HTTP level, the name of the resource for accessing Secret
-    # objects is "secrets"
-    resources: ["events"]
-    verbs: ["watch", "list"]
+  - apiGroups: [ "" ]
+    resources: [ "events" ]
+    verbs: [ "get", "list", "watch" ]
+  - apiGroups: [ "" ]
+    resources: [ "pods" ]
+    verbs: [ "get", "list" ]
+  - apiGroups: [ "apps" ]
+    resources: [ "deployments" ]
+    verbs: [ "get", "list", "update" ]
