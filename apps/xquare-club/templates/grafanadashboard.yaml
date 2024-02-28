@@ -5,9 +5,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: xquare-{{ $clubname }}-dashboards
-  app: monitoring
   labels:
     grafana_dashboard: "1"
+    app: monitoring
   annotations:
     grafana_folder: {{ $clubname }}
 data:
