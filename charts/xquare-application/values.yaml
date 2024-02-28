@@ -6,6 +6,7 @@ projects:
         source:
           path: deploy
           repoURL: https://github.com/team-xquare/xquare-gitops-repo.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: true
@@ -17,6 +18,7 @@ projects:
         source:
           path: apps/xquare-club
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: true
@@ -26,6 +28,7 @@ projects:
         source:
           path: apps/istio-resource
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
@@ -35,6 +38,7 @@ projects:
         source:
           path: apps/xquare-certificate
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false 
@@ -44,6 +48,7 @@ projects:
         source:
           path: apps/external-auth
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
@@ -53,6 +58,7 @@ projects:
         source:
           path: apps/aws-node-termination-handler
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
@@ -62,6 +68,7 @@ projects:
         source:
           path: apps/dex
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
@@ -71,6 +78,7 @@ projects:
         source:
           path: apps/kube-prometheus-stack
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
@@ -80,6 +88,7 @@ projects:
         source:
           path: apps/thanos
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
@@ -89,6 +98,7 @@ projects:
         source:
           path: apps/loki-stack
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
@@ -98,6 +108,7 @@ projects:
         source:
           path: apps/vault
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
@@ -107,6 +118,7 @@ projects:
         source:
           path: apps/vault-secret-operator
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
@@ -116,6 +128,7 @@ projects:
         source:
           path: apps/kubecost
           repoURL: https://github.com/team-xquare/k8s-resource.git
+          valueFiles: ["values.yaml"]
         syncPolicy:
           automated:
             prune: false
