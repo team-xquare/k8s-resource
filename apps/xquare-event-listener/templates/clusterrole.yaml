@@ -8,4 +8,4 @@ rules:
     # at the HTTP level, the name of the resource for accessing Secret
     # objects is "secrets"
     resources: ["events"]
-    verbs: ["watch"]
+    verbs: ["watch", "list"]
