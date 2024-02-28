@@ -13,4 +13,3 @@ spec:
         karpenter.sh/discovery/xquare-v2-cluster: '*'
   tags:
     karpenter.sh/discovery: xquare-v2-cluster
-{{ end }}
