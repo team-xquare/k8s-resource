@@ -28,3 +28,4 @@ spec:
         {{- end }}
       kubelet:
         maxPods: {{ .spec.kubeletConfiguration.maxPods }}
+{{ end }}
