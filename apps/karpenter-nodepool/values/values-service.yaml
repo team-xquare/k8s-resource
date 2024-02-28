@@ -1,5 +1,5 @@
 provisioner:
-  name: xquare-platform
+  name: xquare-service
   spec:
     taints:
       - key: "xquare/server"
