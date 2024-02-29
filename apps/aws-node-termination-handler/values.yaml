@@ -17,11 +17,11 @@ aws-node-termination-handler:
   nodeSelector:
     Karpenter: enabled
   tolerations:
-  - effect: "PreferNoSchedule"
+  - effect: "NoSchedule"
     key: xquare/server
     operator: "Equal"
     value: "true"
-  - effect: "PreferNoSchedule"
+  - effect: "NoSchedule"
     key: xquare/platform
     operator: "Equal"
     value: "true"
