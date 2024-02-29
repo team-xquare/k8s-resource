@@ -23,10 +23,10 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-hypervisor"
             operator: In
             values: [ "nitro" ]
-    - name: xquare-service
+    - name: xquare-server
       spec:
         taints:
-          - key: "xquare/service"
+          - key: "xquare/server"
             value: "true"
             effect: "NoSchedule"
         labels:
