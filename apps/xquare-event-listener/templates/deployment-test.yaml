@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      tolerations:
+        - effect: "NoSchedule"
+          key: xquare/test
+          operator: "Equal"
+          value: "true"
+      serviceAccountName: xquare-event-sa
+      automountServiceAccountToken: true
+      containers:
+        - name: nginx
+          image: nginx
