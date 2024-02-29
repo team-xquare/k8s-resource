@@ -6,13 +6,13 @@ global:
     enabled: false
     domainName: kube-prometheus-stack-grafana.monitoring.svc.cluster.local
   kubecostToken: dGVhbXhxdWFyZUBkc20uaHMua3I=xm343yadf98
+  forecasting:
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
 
 clusterController:
   enabled: true
 
-forecasting:
-  tolerations:
-    - effect: "NoSchedule"
-      key: xquare/platform
-      operator: "Equal"
-      value: "true"
