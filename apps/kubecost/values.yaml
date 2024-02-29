@@ -9,3 +9,10 @@ global:
 
 clusterController:
   enabled: true
+
+forecasting:
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
