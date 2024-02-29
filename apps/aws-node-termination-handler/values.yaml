@@ -25,3 +25,7 @@ aws-node-termination-handler:
     key: xquare/platform
     operator: "Equal"
     value: "true"
+  - effect: "NoSchedule"
+    key: xquare/test
+    operator: "Equal"
+    value: "true"
