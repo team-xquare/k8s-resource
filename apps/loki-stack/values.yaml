@@ -162,3 +162,7 @@ promtail:
     key: xquare/platform
     operator: "Equal"
     value: "true"
+  - effect: "NoSchedule"
+    key: xquare/server
+    operator: "Equal"
+    value: "true"
