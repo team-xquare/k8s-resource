@@ -39,10 +39,6 @@ loki:
         key: xquare/platform
         operator: "Equal"
         value: "true"
-      - effect: "NoSchedule"
-        key: xquare/server
-        operator: "Equal"
-        value: "true"
   backend:
     replicas: 3
     persistence:
@@ -56,10 +52,6 @@ loki:
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
-        operator: "Equal"
-        value: "true"
-      - effect: "NoSchedule"
-        key: xquare/server
         operator: "Equal"
         value: "true"
   write:
@@ -77,10 +69,6 @@ loki:
         key: xquare/platform
         operator: "Equal"
         value: "true"
-      - effect: "NoSchedule"
-        key: xquare/server
-        operator: "Equal"
-        value: "true"
   deployment:
     isScalable: true
   read:
@@ -92,10 +80,6 @@ loki:
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
-        operator: "Equal"
-        value: "true"
-      - effect: "NoSchedule"
-        key: xquare/server
         operator: "Equal"
         value: "true"
   memberlist:
