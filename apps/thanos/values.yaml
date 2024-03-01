@@ -8,6 +8,11 @@ thanos:
       type: ClusterIP
       ports:
         http: 9090
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
   queryFrontend:
     enabled: true
     service:
@@ -17,6 +22,11 @@ thanos:
       requests:
         cpu: 1m
         memory: 16Mi
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
   bucketweb:
     enabled: false
   compactor:
@@ -31,6 +41,11 @@ thanos:
       requests:
         cpu: 1m
         memory: 16Mi
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
   storegateway:
     enabled: true
     persistence:
