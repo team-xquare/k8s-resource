@@ -45,3 +45,8 @@ thanos:
       requests:
         cpu: 128m
         memory: 64Mi
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
