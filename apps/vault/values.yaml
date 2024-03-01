@@ -1,42 +1,33 @@
-vault:
-  global:
-    injector:
-      enabled: true
-      resources:
-        requests:
-          memory: 60Mi
-          cpu: 80m
-        limits:
-          memory: 120Mi
-          cpu: 120m
-      tolerations:
-        - effect: "NoSchedule"
-          key: xquare/platform
-          operator: "Equal"
-          value: "true"
-  server:
+global:
+  injector:
     enabled: true
     resources:
       requests:
-        memory: 200Mi
-        cpu: 100m
+        memory: 60Mi
+        cpu: 80m
       limits:
-        memory: 512Mi
-        cpu: 256m
+        memory: 120Mi
+        cpu: 120m
+    tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
+server:
+  enabled: true
+  resources:
+    requests:
+      memory: 200Mi
+      cpu: 100m
+    limits:
+      memory: 512Mi
+      cpu: 256m
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
         operator: "Equal"
         value: "true"
-  ui:
-    enabled: true
-    serviceType: "ClusterIP"
-    externalPort: 8200
-  pod:
-    tolerations:
-      - effect: "NoSchedule"
-        key: xquare/platform
-        operator: "Equal"
-        value: "true"
-
-
+ui:
+  enabled: true
+  serviceType: "ClusterIP"
+  externalPort: 8200
