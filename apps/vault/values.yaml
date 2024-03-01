@@ -9,6 +9,11 @@ vault:
         limits:
           memory: 120Mi
           cpu: 120m
+      tolerations:
+        - effect: "NoSchedule"
+          key: xquare/platform
+          operator: "Equal"
+          value: "true"
   server:
     enabled: true
     resources:
