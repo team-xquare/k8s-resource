@@ -1,1 +1,8 @@
 cert-manager: {}
+
+global:
+  tolerations:
+    - effect: "NoSchedule"
+      key: "xquare/platform"
+      operator: "Equal"
+      value: "true"
