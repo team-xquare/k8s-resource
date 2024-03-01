@@ -22,17 +22,11 @@ vault:
       limits:
         memory: 512Mi
         cpu: 256m
-    tolerations:
-      - effect: "NoSchedule"
-        key: xquare/platform
-        operator: "Equal"
-        value: "true"
-  vault:
-    tolerations:
-      - effect: "NoSchedule"
-        key: xquare/platform
-        operator: "Equal"
-        value: "true"
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
   ui:
     enabled: true
     serviceType: "ClusterIP"
