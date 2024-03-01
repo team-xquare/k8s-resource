@@ -2,7 +2,8 @@ argo-cd:
   global:
     tolerations:
       - key: "xquare/critical-pods"
-        operator: "true"
+        operator: "Equal"
+        value: "true"
         effect: "NoSchedule"
     priorityClassName: system-cluster-critical
   configs:
