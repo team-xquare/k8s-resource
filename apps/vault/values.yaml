@@ -7,6 +7,11 @@ injector:
     limits:
       memory: 120Mi
       cpu: 120m
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
 server:
   enabled: true
   resources:
@@ -16,6 +21,11 @@ server:
     limits:
       memory: 512Mi
       cpu: 256m
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
 vault:
   tolerations:
     - effect: "NoSchedule"
