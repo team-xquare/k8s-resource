@@ -86,7 +86,11 @@ data:
       security_context: {}
       service_annotations: {}
       service_type: ""
-      tolerations: []
+      tolerations:
+      - effect: "NoSchedule"
+        key: "xquare/platform"
+        operator: "Equal"
+        value: "true"
       version_label: v1.75.0
       view_only_mode: true
     external_services:
