@@ -11,14 +11,11 @@ karpenter:
         memory: 244Mi
   settings:
     clusterName: "xquare-v2-cluster"
+  tolerations:
+    - key: "xquare/critical-pods"
+      value: "true"
+      effect: "NoSchedule"
 
 featureGates:
   spotToSpotConsolidation: true
 
-tolerations:
-  - key: "xquare/platform"
-    value: "true"
-    effect: "NoSchedule"
-  - key: "xquare/critical-pods"
-    value: "true"
-    effect: "NoSchedule"
