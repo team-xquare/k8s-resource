@@ -398,6 +398,11 @@ kube-prometheus-stack:
         requests:
           cpu: 10m
           memory: 32Mi
+      tolerations:
+        - effect: "NoSchedule"
+          key: xquare/platform
+          operator: "Equal"
+          value: "true"
   thanosRuler:
     enabled: true
     thanosRulerSpec:
@@ -417,7 +422,11 @@ kube-prometheus-stack:
         requests:
           cpu: 32m
           memory: 128Mi
-      
+      tolerations:
+        - effect: "NoSchedule"
+          key: xquare/platform
+          operator: "Equal"
+          value: "true"
     extraSecret:
       name: thanosruler-alertmanager-config
       data:
