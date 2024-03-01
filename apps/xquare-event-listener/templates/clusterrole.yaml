@@ -12,3 +12,6 @@ rules:
   - apiGroups: [ "apps" ]
     resources: [ "deployments" ]
     verbs: [ "get", "list", "update" ]
+  - apiGroups: [ "argoproj.io" ]
+    resources: [ "Applications" ]
+    verbs: [ "get", "list", "update" ]
