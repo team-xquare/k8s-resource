@@ -13,5 +13,5 @@ rules:
     resources: [ "deployments" ]
     verbs: [ "get", "list", "update" ]
   - apiGroups: [ "argoproj.io" ]
-    resources: [ "Applications" ]
+    resources: [ "applications" ]
     verbs: [ "get", "list", "update" ]
