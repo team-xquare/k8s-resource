@@ -120,7 +120,7 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: nginx-deploy
+      - name: xquare-event-listener
         namespace: xquare-event
         source:
           path: apps/xquare-event-listener
