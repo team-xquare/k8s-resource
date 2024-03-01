@@ -26,6 +26,11 @@ metadata:
   name: {{ .name }}
   namespace: argocd
 spec:
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
   destination:
     namespace: {{ .namespace }}
     server: https://kubernetes.default.svc
