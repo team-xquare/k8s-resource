@@ -54,3 +54,8 @@ dex:
   requests:
     cpu: 1m
     memory: 8Mi
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
