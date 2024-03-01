@@ -20,6 +20,11 @@ kube-prometheus-stack:
       requests:
         cpu: 10m
         memory: 16Mi
+    tolerations:
+      - effect: "NoSchedule"
+        key: "xquare/platform"
+        operator: "Equal"
+        value: "true"
   prometheus: 
     serviceAccount:
       create: true
