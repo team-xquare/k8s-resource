@@ -25,4 +25,10 @@ vault:
     serviceType: "ClusterIP"
     externalPort: 8200
 
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
+
 
