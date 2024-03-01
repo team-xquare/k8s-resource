@@ -63,6 +63,11 @@ kube-prometheus-stack:
         requests:
           cpu: 516m
           memory: 2048Mi
+      tolerations:
+        - effect: "NoSchedule"
+          key: xquare/platform
+          operator: "Equal"
+          value: "true"
       thanos:
         minTime: -3h
         objectStorageConfig:
