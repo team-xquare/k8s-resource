@@ -9,7 +9,6 @@ vault:
         limits:
           memory: 120Mi
           cpu: 120m
-
   server:
     enabled: true
     resources:
@@ -19,16 +18,15 @@ vault:
       limits:
         memory: 512Mi
         cpu: 256m
-
   ui:
     enabled: true
     serviceType: "ClusterIP"
     externalPort: 8200
-
-  tolerations:
-    - effect: "NoSchedule"
-      key: xquare/platform
-      operator: "Equal"
-      value: "true"
+  pod:
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
 
 
