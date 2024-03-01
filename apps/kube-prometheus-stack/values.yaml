@@ -448,6 +448,11 @@ kube-prometheus-stack:
       requests:
         cpu: 10m
         memory: 256Mi
+    tolerations:
+      - effect: "NoSchedule"
+        key: "xquare/platform"
+        operator: "Equal"
+        value: "true"
     dashboardProviders:
       dashboardproviders.yaml:
         apiVersion: 1
