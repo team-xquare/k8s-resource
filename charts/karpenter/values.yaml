@@ -13,7 +13,7 @@ karpenter:
     clusterName: "xquare-v2-cluster"
   tolerations:
     - key: "xquare/critical-pods"
-      value: "true"
+      operator: "true"
       effect: "NoSchedule"
 
 featureGates:
