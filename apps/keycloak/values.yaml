@@ -37,3 +37,8 @@ keycloak:
       value: "edge"
     - name: PROXY_ADDRESS_FORWARDING
       value: "true"
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
