@@ -19,14 +19,17 @@ vault:
       requests:
         memory: 200Mi
         cpu: 100m
-      limits:
-        memory: 512Mi
-        cpu: 256m
-  tolerations:
-    - effect: "NoSchedule"
-      key: xquare/platform
-      operator: "Equal"
-      value: "true"
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
+  pod:
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
   ui:
     enabled: true
     serviceType: "ClusterIP"
