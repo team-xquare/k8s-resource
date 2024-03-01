@@ -14,3 +14,11 @@ karpenter:
 
 featureGates:
   spotToSpotConsolidation: true
+
+tolerations:
+  - key: "xquare/platform"
+    value: "true"
+    effect: "NoSchedule"
+  - key: "xquare/critical-pods"
+    value: "true"
+    effect: "NoSchedule"
