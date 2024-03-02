@@ -28,7 +28,7 @@ ingressGateway:
       mode: SIMPLE
       credentialName: repo-cert
   - hosts:
-      - '*.aliens-dms.com'
+      - '*.dms-dsm.com'
     port:
       name: https-dms
       number: 443
