@@ -23,6 +23,9 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-hypervisor"
             operator: In
             values: [ "nitro" ]
+          - key: "karpenter.k8s.aws/instance-cpu"
+            operator: Gt
+            values: [ "4" ]
     - name: xquare-server
       spec:
         taints:
@@ -46,6 +49,9 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-hypervisor"
             operator: In
             values: [ "nitro" ]
+          - key: "karpenter.k8s.aws/instance-cpu"
+            operator: Gt
+            values: [ "4" ]
     - name: xquare-test
       spec:
         taints:
