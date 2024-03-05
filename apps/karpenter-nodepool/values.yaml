@@ -25,7 +25,7 @@ nodepools:
             values: [ "nitro" ]
           - key: "karpenter.k8s.aws/instance-cpu"
             operator: Gt
-            values: [ "4" ]
+            values: [ "2" ]
     - name: xquare-server
       spec:
         taints:
