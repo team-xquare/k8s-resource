@@ -11,9 +11,6 @@ nodepools:
         kubeletConfiguration:
           maxPods: 110
         requirements:
-          - key: "karpenter.k8s.aws/instance-category"
-            operator: In
-            values: [ "i3en", "t"]
           - key: "topology.kubernetes.io/zone"
             operator: In
             values: [ "ap-northeast-2a", "ap-northeast-2b", "ap-northeast-2c"]
@@ -37,9 +34,6 @@ nodepools:
         kubeletConfiguration:
           maxPods: 110
         requirements:
-          - key: "karpenter.k8s.aws/instance-category"
-            operator: In
-            values: [ "i3en", "t" ]
           - key: "topology.kubernetes.io/zone"
             operator: In
             values: [ "ap-northeast-2a", "ap-northeast-2b", "ap-northeast-2c" ]
