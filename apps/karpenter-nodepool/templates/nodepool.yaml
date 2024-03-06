@@ -28,5 +28,7 @@ spec:
           {{- end }}
         {{- end }}
       kubelet:
+        evictionSoft:
+          memory.available: 15%
         maxPods: {{ .spec.kubeletConfiguration.maxPods }}
 {{ end }}
