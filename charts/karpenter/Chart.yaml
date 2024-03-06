@@ -3,8 +3,8 @@ name: karpenter
 description: A Helm chart for Karpenter, an open-source node provisioning project built for Kubernetes.
 type: application
 version: 1.0.57
-appVersion: 0.32.7
+appVersion: 0.35.0
 dependencies:
 - name: karpenter
-  version: "v0.34.1"
+  version: "v0.35.0"
   repository: oci://public.ecr.aws/karpenter
