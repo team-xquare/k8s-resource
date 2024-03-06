@@ -119,7 +119,7 @@ virtualServices:
       port: 9090
 addons:
   jeager:
-    enable: true
+    enable: false
   kiali:
     enable: true
     prometheusUrl: http://thanos-query.monitoring.svc.cluster.local:9090
