@@ -24,6 +24,11 @@ vault:
         key: xquare/platform
         operator: "Equal"
         value: "true"
+    ha:
+      enabled: true
+      replicas: 2
+      raft:
+        enabled: true
   pod:
     tolerations:
       - effect: "NoSchedule"
