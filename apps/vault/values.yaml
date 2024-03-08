@@ -21,14 +21,9 @@ vault:
         cpu: 100m
     tolerations:
       - effect: "NoSchedule"
-        key: xquare/platform
+        key: xquare/critical-pods
         operator: "Equal"
         value: "true"
-    ha:
-      enabled: true
-      replicas: 2
-      raft:
-        enabled: true
   pod:
     tolerations:
       - effect: "NoSchedule"
