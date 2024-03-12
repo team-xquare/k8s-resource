@@ -29,7 +29,7 @@ spec:
         {{- end }}
       kubelet:
         evictionSoft:
-          memory.available: 300Mi
+          memory.available: 600Mi
         evictionSoftGracePeriod:
           memory.available: 1m
         maxPods: {{ .spec.kubeletConfiguration.maxPods }}
