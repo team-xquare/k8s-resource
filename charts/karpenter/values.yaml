@@ -18,5 +18,5 @@ karpenter:
       effect: "NoSchedule"
 
 featureGates:
-  spotToSpotConsolidation: false
+  spotToSpotConsolidation: true
 
