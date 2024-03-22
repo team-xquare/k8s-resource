@@ -16,7 +16,6 @@ karpenter:
       operator: "Equal"
       value: "true"
       effect: "NoSchedule"
-
-featureGates:
-  spotToSpotConsolidation: true
+  featureGates:
+    spotToSpotConsolidation: true
 
