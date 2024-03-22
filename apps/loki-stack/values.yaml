@@ -191,11 +191,15 @@ promtail:
   nodeSelector:
     Karpenter: enabled
   tolerations:
-  - effect: "NoSchedule"
-    key: xquare/platform
-    operator: "Equal"
-    value: "true"
-  - effect: "NoSchedule"
-    key: xquare/server
-    operator: "Equal"
-    value: "true"
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
+    - effect: "NoSchedule"
+      key: xquare/server
+      operator: "Equal"
+      value: "true"
+    - effect: "NoSchedule"
+      key: xquare/critical-pods
+      operator: "Equal"
+      value: "true"
