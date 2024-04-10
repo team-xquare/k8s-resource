@@ -41,7 +41,7 @@ loki:
           operator: "Equal"
           value: "true"
   gateway:
-    replicas: 2
+    replicas: 1
     enabled: true
     resources:
       requests:
@@ -53,7 +53,7 @@ loki:
         operator: "Equal"
         value: "true"
   backend:
-    replicas: 2
+    replicas: 1
     persistence:
       volumeClaimsEnabled: false
       dataVolumeParameters:
@@ -68,7 +68,7 @@ loki:
         operator: "Equal"
         value: "true"
   write:
-    replicas: 2
+    replicas: 1
     resources:
       requests:
         cpu: 10m
@@ -85,7 +85,7 @@ loki:
   deployment:
     isScalable: true
   read:
-    replicas: 2
+    replicas: 1
     resources:
       requests:
         cpu: 10m
@@ -120,7 +120,7 @@ loki:
     common:
       storage:
         s3:
-          s3: s3://ap-northeast-2/xquare-loki-bucket
+          s3: s3://ap-northeast-2/  xquare-loki-bucket
           bucketnames: xquare-loki-bucket
           region: ap-northeast-2
     storage_config:
