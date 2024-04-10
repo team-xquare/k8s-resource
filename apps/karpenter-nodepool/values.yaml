@@ -103,6 +103,10 @@ nodepools:
             values: [ "2048" ]
     - name: maeumgagym-node
       spec:
+        taints:
+          - key: "xquare/maeumgagym-node"
+            value: "true"
+            effect: "NoSchedule"
         labels:
           Karpenter: enabled
         kubeletConfiguration:
