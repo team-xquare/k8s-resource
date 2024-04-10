@@ -28,7 +28,7 @@ nodepools:
             values: [ "4096" ]
           - key: "karpenter.k8s.aws/instance-category"
             operator: In
-            values: [ "i3en" ]
+            values: [ "i3en", "i3", "i4g", "i4i" ]
     - name: xquare-server
       spec:
         taints:
@@ -57,7 +57,7 @@ nodepools:
             values: [ "4096" ]
           - key: "karpenter.k8s.aws/instance-category"
             operator: In
-            values: [ "i3en" ]
+            values: [ "i3en", "i3", "i4g", "i4i" ]
     - name: xquare-test
       spec:
         taints:
