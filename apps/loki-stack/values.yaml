@@ -41,7 +41,7 @@ loki:
           operator: "Equal"
           value: "true"
   gateway:
-    replicas: 1
+    replicas: 3
     enabled: true
     resources:
       requests:
@@ -53,7 +53,7 @@ loki:
         operator: "Equal"
         value: "true"
   backend:
-    replicas: 1
+    replicas: 3
     persistence:
       volumeClaimsEnabled: false
       dataVolumeParameters:
@@ -68,7 +68,7 @@ loki:
         operator: "Equal"
         value: "true"
   write:
-    replicas: 1
+    replicas: 3
     resources:
       requests:
         cpu: 10m
@@ -85,7 +85,7 @@ loki:
   deployment:
     isScalable: true
   read:
-    replicas: 1
+    replicas: 3
     resources:
       requests:
         cpu: 10m
