@@ -26,6 +26,9 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-memory"
             operator: Gt
             values: [ "4096" ]
+          - key: karpenter.k8s.aws/instance-category
+            operator: In
+            values: [ "i3en" ]
     - name: xquare-server
       spec:
         taints:
@@ -52,6 +55,9 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-memory"
             operator: Gt
             values: [ "4096" ]
+          - key: karpenter.k8s.aws/instance-category
+            operator: In
+            values: [ "i3en" ]
     - name: xquare-test
       spec:
         taints:
