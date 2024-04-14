@@ -117,6 +117,11 @@ virtualServices:
     destination:
       host: kubecost-cost-analyzer.kubecost.svc.cluster.local
       port: 9090
+  - name: maeumgagym-prow-hook
+    host: maeumgagym-prow-hook.xquare.app
+    destination:
+      host: hook.svc.cluster.local
+      port: 8888
 addons:
   jeager:
     enable: false
