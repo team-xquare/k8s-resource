@@ -120,7 +120,7 @@ virtualServices:
   - name: maeumgagym-prow-hook
     host: maeumgagym-prow-hook.xquare.app
     destination:
-      host: hook.svc.cluster.local
+      host: hook.prow.svc.cluster.local
       port: 8888
 addons:
   jeager:
