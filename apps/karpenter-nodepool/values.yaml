@@ -126,4 +126,4 @@ nodepools:
             values: [ "nitro" ]
           - key: "karpenter.k8s.aws/instance-memory"
             operator: In
-            values: [ "2048" ]
+            values: [ "4096" ]
