@@ -113,7 +113,7 @@ virtualServices:
       host: vault-ui.vault.svc.cluster.local
       port: 8200
   - name: maeumgagym-prow-hook-server
-    host: maeumgagym-prow-hook.xquare.app
+    host: maeumgagym-hook.xquare.app
     destination:
       host: hook.prow.svc.cluster.local
       port: 8888
