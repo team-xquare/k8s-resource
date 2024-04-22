@@ -25,7 +25,7 @@ nodepools:
             values: [ "nitro" ]
           - key: "karpenter.k8s.aws/instance-memory"
             operator: Gt
-            values: [ "2048" ]
+            values: [ "4096" ]
     - name: xquare-server
       spec:
         taints:
@@ -51,7 +51,7 @@ nodepools:
             values: [ "nitro" ]
           - key: "karpenter.k8s.aws/instance-memory"
             operator: Gt
-            values: [ "2048" ]
+            values: [ "4096" ]
     - name: xquare-test
       spec:
         taints:
