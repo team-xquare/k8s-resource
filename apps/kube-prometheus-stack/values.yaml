@@ -533,10 +533,3 @@ kube-prometheus-stack:
       security:
         cookie_secure: true
         cookie_samesite: lax
-  admissionWebhooks:
-    patch:
-      tolerations:
-        - effect: "NoSchedule"
-          key: xquare/platform
-          operator: "Equal"
-          value: "true"
