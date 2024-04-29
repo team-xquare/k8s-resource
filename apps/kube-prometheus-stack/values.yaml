@@ -10,11 +10,12 @@ kube-prometheus-stack:
         cpu: 10m
         memory: 16Mi
     admissionWebhooks:
-      tolerations:
-        - effect: "NoSchedule"
-          key: "xquare/platform"
-          operator: "Equal"
-          value: "true"
+      patch:
+        tolerations:
+          - effect: "NoSchedule"
+            key: "xquare/platform"
+            operator: "Equal"
+            value: "true"
     tolerations:
       - effect: "NoSchedule"
         key: "xquare/platform"
