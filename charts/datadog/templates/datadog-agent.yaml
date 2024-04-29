@@ -13,8 +13,6 @@ spec:
         keyName: app-key
   override:
     nodeAgent:
-      image:
-        name: gcr.io/datadoghq/agent:latest
       tolerations:
         - effect: "NoSchedule"
           key: xquare/platform
