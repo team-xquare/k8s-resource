@@ -18,7 +18,14 @@ spec:
       hostPort: 8125
       collectEvents: true
       tolerations:
-        - operator: Exists
+        - effect: "NoSchedule"
+          key: xquare/server
+          operator: "Equal"
+          value: "true"
+        - effect: "NoSchedule"
+          key: xquare/platform
+          operator: "Equal"
+          value: "true"
       env:
         - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC # Java JVM Metrics를 받기 위해 필요
           value: "true"
