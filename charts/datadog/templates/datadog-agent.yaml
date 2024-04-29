@@ -1,58 +1,31 @@
-apiVersion: datadoghq.com/v1alpha1
+apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
-  namespace: datadog
   name: datadog
 spec:
-  credentials:
-    apiSecret:
-      secretName: datadog-secrets
-      keyName: api-key
-    appSecret:
-      secretName: datadog-secrets
-      keyName: app-key
-  agent:
-    image:
-      name: "gcr.io/datadoghq/agent:latest"
-    config:
-      hostPort: 8125
-      collectEvents: true
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+      appSecret:
+        secretName: datadog-secret
+        keyName: app-key
+  override:
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
       tolerations:
-        - effect: "NoSchedule"
-          key: xquare/server
-          operator: "Equal"
-          value: "true"
         - effect: "NoSchedule"
           key: xquare/platform
           operator: "Equal"
           value: "true"
-      env:
-        - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC # Java JVM Metrics를 받기 위해 필요
+        - effect: "NoSchedule"
+          key: xquare/server
+          operator: "Equal"
           value: "true"
-    log:
-      enabled: true
-      logsConfigContainerCollectAll: true
+  features:
     apm:
       enabled: true
-      hostPort: 8126
-    process:
+    logCollection:
       enabled: true
-      processCollectionEnabled: true
-    systemProbe:
-      bpfDebugEnabled: true
-  features:
-    kubeStateMetricsCore:
-      enabled: true
-    networkMonitoring:
-      enabled: true
-  clusterAgent:
-    image:
-      name: "gcr.io/datadoghq/cluster-agent:latest"
-    config:
-      clusterChecksEnabled: true
-    replicas: 2
-  clusterChecksRunner:
-    image:
-      name: "gcr.io/datadoghq/agent:latest
-    replicas: 2
-  clusterName: xquare-cluster
