@@ -35,6 +35,10 @@ spec:
     repoURL: {{ .source.repoURL }}
     targetRevision: HEAD
   syncPolicy:
+    {{- if eq .name "kube-prometheus-stack" }}
+    syncOptions:
+      - ServerSideApply=true
+    {{- end }}
     automated:
       prune: {{ .syncPolicy.automated.prune }}
       selfHeal: {{ .syncPolicy.automated.selfHeal }}
