@@ -1,6 +1,6 @@
 kube-prometheus-stack:
   crds:
-    enabled: false # 첫 설치시 true로 해야함
+    enabled: true # 첫 설치시 true로 해야함
   nodeExporter:
     enabled: false
   prometheusOperator:
