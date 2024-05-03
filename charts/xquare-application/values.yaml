@@ -120,12 +120,3 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: xquare-event-listener
-        namespace: xquare-event
-        source:
-          path: apps/xquare-event-listener
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
