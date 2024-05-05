@@ -51,7 +51,7 @@ nodepools:
             values: [ "nitro" ]
           - key: "node.kubernetes.io/instance-type"
             operator: In
-            values: [ "x1e.xlarge", "r5.2xlarge" ]
+            values: [ "x1e.xlarge", "r5.2xlarge", "r5.xlarge"]
     - name: xquare-test
       spec:
         taints:
