@@ -2,7 +2,7 @@ karpenter:
   hostNetwork: true
   serviceAccount:
     annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam:::role/KarpenterControllerRole-xquare-v2-cluster"
+      eks.amazonaws.com/role-arn: "arn:aws:iam:::role/KarpenterControllerRole-xquare-v3-cluster"
   replicas: 1
   controller:
     resources:
@@ -10,7 +10,7 @@ karpenter:
         cpu: 16m
         memory: 244Mi
   settings:
-    clusterName: "xquare-v2-cluster"
+    clusterName: "xquare-v3-cluster"
   tolerations:
     - key: "xquare/critical-pods"
       operator: "Equal"
