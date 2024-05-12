@@ -23,9 +23,6 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-hypervisor"
             operator: In
             values: [ "nitro" ]
-          - key: "node.kubernetes.io/instance-type"
-            operator: In
-            values: [ "i3en.large" ]
     - name: xquare-server
       spec:
         taints:
