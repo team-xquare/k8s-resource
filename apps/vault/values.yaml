@@ -14,13 +14,6 @@ vault:
         operator: "Equal"
         value: "true"
   server:
-    extraVolumes:
-      - type: persistentVolumeClaim
-        name: vault-data
-        path: /vault/data
-    extraVolumeMounts:
-      - name: vault-data
-        mountPath: /vault/file
     enabled: true
     resources:
       requests:
@@ -31,6 +24,8 @@ vault:
         key: xquare/critical-pods
         operator: "Equal"
         value: "true"
+    dataStorage:
+      enabled: false
   pod:
     tolerations:
       - effect: "NoSchedule"
