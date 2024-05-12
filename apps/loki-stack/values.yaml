@@ -110,18 +110,18 @@ loki:
       max_outstanding_per_tenant: 8192
     storage:
       bucketNames:
-        chunks: xquare-loki-bucket
-        ruler: xquare-loki-bucket
-        admin: xquare-loki-bucket
+        chunks: xquare-loki
+        ruler: xquare-loki
+        admin: xquare-loki
       type: s3
       s3:
-        s3: s3://ap-northeast-2/xquare-loki-bucket
+        s3: s3://ap-northeast-2/xquare-loki
         region: ap-northeast-2
     common:
       storage:
         s3:
-          s3: s3://ap-northeast-2/  xquare-loki-bucket
-          bucketnames: xquare-loki-bucket
+          s3: s3://ap-northeast-2/  xquare-loki
+          bucketnames: xquare-loki
           region: ap-northeast-2
     storage_config:
       boltdb_shipper:
