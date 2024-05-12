@@ -92,9 +92,6 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-hypervisor"
             operator: In
             values: [ "nitro" ]
-          - key: "karpenter.k8s.aws/instance-memory"
-            operator: Gt
-            values: [ "2048" ]
     - name: maeumgagym-node
       spec:
         taints:
