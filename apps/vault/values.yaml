@@ -24,8 +24,6 @@ vault:
         key: xquare/critical-pods
         operator: "Equal"
         value: "true"
-    dataStorage:
-      enabled: false
   pod:
     tolerations:
       - effect: "NoSchedule"
