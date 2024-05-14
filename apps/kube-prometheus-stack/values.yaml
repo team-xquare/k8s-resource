@@ -188,10 +188,6 @@ kube-prometheus-stack:
         job_name: 'kubernetes-pods'
         kubernetes_sd_configs:
         - role: pod
-          namespaces:
-            names:
-            - xquare-prod
-            - xquare-stag
         relabel_configs:
           - action: keep
             regex: true
