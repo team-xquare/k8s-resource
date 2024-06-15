@@ -9,7 +9,6 @@ spec:
         protocols:
           grpc: null
           http: null
-    processors:
 
     exporters:
       logging: null
