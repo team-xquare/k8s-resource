@@ -1,5 +1,8 @@
 apiVersion: v2
 name: opentelemetry
+type: application
 version: 1.0.0
-appVersion: "1.0.0"
-description: Xquare application
+dependencies:
+  - name: opentelemetry-operator
+    version: 0.62.0
+    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
