@@ -7,12 +7,12 @@ spec:
     receivers:
       otlp:
         protocols:
-          grpc:
-          http:
+          grpc: null
+          http: null
     processors:
 
     exporters:
-      logging:
+      logging: null
 
     service:
       pipelines:
