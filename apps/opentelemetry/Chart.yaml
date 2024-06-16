@@ -6,3 +6,6 @@ dependencies:
   - name: "opentelemetry-operator"
     version: 0.62.0
     repository: "https://open-telemetry.github.io/opentelemetry-helm-charts"
+  - name: "opentelemetry-collector"
+    version: 0.93.3
+    repository: "https://open-telemetry.github.io/opentelemetry-helm-charts"
