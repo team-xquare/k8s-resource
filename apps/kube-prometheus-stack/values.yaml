@@ -500,7 +500,7 @@ kube-prometheus-stack:
           type: tempo
           access: proxy
           editable: false
-          url: http://grafana-tempo-query-frontend-discovery:3100
+          url: http://grafana-tempo-query-frontend-discovery.monitoring:3100
           isDefault: false
     grafana.ini:
       log:
