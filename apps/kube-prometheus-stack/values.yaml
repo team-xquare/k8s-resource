@@ -496,6 +496,12 @@ kube-prometheus-stack:
           editable: false
           url: http://loki-gateway.monitoring:80
           isDefault: false
+        - name: Tempo
+          type: tempo
+          access: proxy
+          editable: false
+          url: http://grafana-tempo-query-frontend-discovery:3100
+          isDefault: false
     grafana.ini:
       log:
         filters: oauth.generic_oauth:debug
