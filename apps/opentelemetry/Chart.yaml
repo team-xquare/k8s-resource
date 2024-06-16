@@ -3,6 +3,6 @@ name: opentelemetry
 type: application
 version: 1.0.0
 dependencies:
-  - name: opentelemetry-operator
+  - name: "opentelemetry-operator"
     version: 0.62.0
-    repository: https://open-telemetry.github.io/opentelemetry-helm-charts
+    repository: "https://open-telemetry.github.io/opentelemetry-helm-charts"
