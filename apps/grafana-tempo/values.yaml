@@ -1,4 +1,10 @@
 tempo-distributed:
+  serviceAccount:
+    create: true
+    name: xquare-tempo
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::786584124104:role/tempo_s3_role
+      eks.amazonaws.com/sts-regional-endpoints: "true"
   ingester:
     persistence:
       enabled: true
@@ -11,11 +17,24 @@ tempo-distributed:
       grpc:
         enabled: true
         receiverConfig: { }
-
   storage:
     trace:
-      block:
-        version: vParquet
-      backend: local
+      backend: s3
+      s3:
+        bucket: xquare-tempo
+        endpoint: s3.amazonaws.com
+        insecure: false
     admin:
-      backend: filesystem
+      backend: s3
+      s3:
+        bucket: xquare-tempo
+        endpoint: s3.amazonaws.com
+        insecure: false
+  compactor:
+    storage:
+      trace:
+        backend: s3
+        s3:
+          bucket: xquare-tempo
+          endpoint: s3.amazonaws.com
+          insecure: false
