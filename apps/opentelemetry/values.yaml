@@ -2,3 +2,46 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: "otel/opentelemetry-collector-k8s"
+
+opentelemetry-collector:
+  mode: "deployment"
+  config:
+    exporters:
+      otlp:
+        endpoint: grafana-tempo-distributor-discovery.monitoring:4317
+        tls:
+          insecure: true
+    extensions:
+      # The health_check extension is mandatory for this chart.
+      # Without the health_check extension the collector will fail the readiness and liveliness probes.
+      # The health_check extension can be modified, but should never be removed.
+      health_check: { }
+      memory_ballast: { }
+    processors:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 75
+        spike_limit_percentage: 15
+      batch:
+        send_batch_size: 10000
+        timeout: 10s
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: ${env:MY_POD_IP}:4317
+          http:
+            endpoint: ${env:MY_POD_IP}:4318
+    service:
+      extensions:
+        - health_check
+        - memory_ballast
+      pipelines:
+        traces:
+          exporters:
+            - otlp
+          processors:
+            - memory_limiter
+            - batch
+          receivers:
+            - otlp
