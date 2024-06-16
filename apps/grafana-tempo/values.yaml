@@ -1,0 +1,21 @@
+tempo-distributed:
+  ingester:
+    persistence:
+      enabled: true
+      size: 10Gi
+  traces:
+    otlp:
+      http:
+        enabled: true
+        receiverConfig: { }
+      grpc:
+        enabled: true
+        receiverConfig: { }
+
+  storage:
+    trace:
+      block:
+        version: vParquet
+      backend: local
+    admin:
+      backend: filesystem
