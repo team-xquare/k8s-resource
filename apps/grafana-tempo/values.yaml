@@ -9,6 +9,11 @@ tempo-distributed:
     persistence:
       enabled: true
       size: 10Gi
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
   traces:
     otlp:
       http:
@@ -31,6 +36,11 @@ tempo-distributed:
         endpoint: s3.amazonaws.com
         insecure: false
   compactor:
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
     storage:
       trace:
         backend: s3
@@ -38,3 +48,9 @@ tempo-distributed:
           bucket: xquare-tempo
           endpoint: s3.amazonaws.com
           insecure: false
+  distributor:
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
