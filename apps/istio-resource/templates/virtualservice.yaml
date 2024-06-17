@@ -11,7 +11,24 @@ spec:
   hosts:
     - {{ .host }}
   http:
-  - route:
+  - corsPolicy:
+      allowOrigin:
+        - "*"
+      allowMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
+        - OPTIONS
+      allowHeaders:
+        - authorization
+        - content-type
+        - accept
+      exposeHeaders:
+        - x-custom-header
+      maxAge: "24h"
+      allowCredentials: true
+    route:
     - destination:
         host: {{ .destination.host }}
         port:
