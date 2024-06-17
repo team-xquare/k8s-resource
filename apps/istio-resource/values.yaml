@@ -117,6 +117,11 @@ virtualServices:
     destination:
       host: hook.prow.svc.cluster.local
       port: 8888
+  - name: grafana-tempo
+    host: grafana-tempo.xquare.app
+    destination:
+      host: grafana-tempo-distributor-discovery.monitoring.svc.cluster.local
+      port: 3100
 addons:
   jeager:
     enable: false
