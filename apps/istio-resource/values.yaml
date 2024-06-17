@@ -120,7 +120,7 @@ virtualServices:
   - name: grafana-tempo
     host: grafana-tempo.xquare.app
     destination:
-      host: grafana-tempo-distributor-discovery.monitoring.svc.cluster.local
+      host: grafana-tempo-query-frontend-discovery.monitoring.svc.cluster.local
       port: 3100
 addons:
   jeager:
