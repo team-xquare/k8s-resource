@@ -21,6 +21,7 @@ tempo-distributed:
         key: xquare/platform
         operator: "Equal"
         value: "true"
+    affinity: 
   queryFrontend:
     tolerations:
       - effect: "NoSchedule"
