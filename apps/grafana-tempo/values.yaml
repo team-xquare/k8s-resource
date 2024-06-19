@@ -5,7 +5,7 @@ tempo-distributed:
     annotations:
       eks.amazonaws.com/role-arn: arn:aws:iam::786584124104:role/tempo_s3_role
       eks.amazonaws.com/sts-regional-endpoints: "true"
-  memcached:
+  querier:
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
