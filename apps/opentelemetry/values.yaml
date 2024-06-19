@@ -2,8 +2,18 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: "otel/opentelemetry-collector-k8s"
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
 
 opentelemetry-collector:
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
   image:
     repository: "otel/opentelemetry-collector-k8s"
   mode: "deployment"
