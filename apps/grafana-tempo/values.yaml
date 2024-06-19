@@ -12,11 +12,9 @@ tempo-distributed:
         operator: "Equal"
         value: "true"
   ingester:
-    replicas: 1
     persistence:
       enabled: true
       size: 10Gi
-    affinity: |
   queryFrontend:
     tolerations:
       - effect: "NoSchedule"
