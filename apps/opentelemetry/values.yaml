@@ -23,6 +23,8 @@ opentelemetry-collector:
         endpoint: grafana-tempo-distributor-discovery.monitoring:4317
         tls:
           insecure: true
+      prometheus:
+        endpoint: "0.0.0.0:8888"
     extensions:
       # The health_check extension is mandatory for this chart.
       # Without the health_check extension the collector will fail the readiness and liveliness probes.
@@ -43,14 +45,6 @@ opentelemetry-collector:
             endpoint: ${env:MY_POD_IP}:4317
           http:
             endpoint: ${env:MY_POD_IP}:4318
-      prometheus:
-        config:
-          scrape_configs:
-            - job_name: opentelemetry-collector
-              scrape_interval: 10s
-              static_configs:
-                - targets:
-                    - ${env:MY_POD_IP}:8888
     service:
       extensions:
         - health_check
@@ -66,10 +60,9 @@ opentelemetry-collector:
             - otlp
         metrics:
           exporters:
-            - debug
+            - prometheus
           processors:
             - memory_limiter
             - batch
           receivers:
             - otlp
-            - prometheus
