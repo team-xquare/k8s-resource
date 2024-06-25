@@ -92,6 +92,10 @@ kube-prometheus-stack:
           name: thanos-objstore-secret
         version: v0.18.0
       additionalScrapeConfigs:
+      - job_name: 'otel-collector'
+        scrape_interval: 10s
+        static_configs:
+          - targets: [ 'opentelemetry-opentelemetry-collector.monitoring.svc.cluster.local:4317' ]
       ## actuator
       - job_name: 'spring-actuator'
         metrics_path: '/actuator/prometheus' # Application prometheus endpoint
