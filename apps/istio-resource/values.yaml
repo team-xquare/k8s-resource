@@ -36,6 +36,15 @@ ingressGateway:
     tls:
       mode: SIMPLE
       credentialName: dms-cert
+  - hosts:
+      - '*.entrydsm.hs.kr'
+    port:
+      name: https-entrydsm
+      number: 443
+      protocol: HTTPS
+    tls:
+      mode: SIMPLE
+      credentialName: entrydsm-cert
 
 egressGateway:
   servers:
