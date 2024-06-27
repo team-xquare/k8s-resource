@@ -16,7 +16,7 @@ spec:
   blockDeviceMappings:
     - deviceName: /dev/xvda
       ebs:
-        volumeSize: 40Gi
+        volumeSize: 100Gi
         volumeType: gp3
         encrypted: true
         deleteOnTermination: true
