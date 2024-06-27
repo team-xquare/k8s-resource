@@ -13,3 +13,10 @@ spec:
         karpenter.sh/discovery/xquare-v3-cluster: '*'
   tags:
     karpenter.sh/discovery: xquare-v3-cluster
+  blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 100Gi
+        volumeType: gp3
+        encrypted: true
+        deleteOnTermination: true
