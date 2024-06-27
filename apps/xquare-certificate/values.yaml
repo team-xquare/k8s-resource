@@ -23,3 +23,9 @@ certificates:
     dnsNames: 
     - '*.xquare.app'
     - 'xquare.app'
+  - name: entrydsm-cert
+    commonName: entrydsm.hs.kr
+    namespace: istio-system
+    dnsNames:
+    - '*.entrydsm.hs.kr'
+    - 'entrydsm.hs.kr'
