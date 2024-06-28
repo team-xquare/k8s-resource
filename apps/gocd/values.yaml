@@ -26,7 +26,7 @@ gocd:
   agent:
     image:
       repository: 786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/gocd-agent
-      tag: latest
+      tag: 0.0.0
       pullPolicy: Always
     replicaCount: 1
     toleration:
