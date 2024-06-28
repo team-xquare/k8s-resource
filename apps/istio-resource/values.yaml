@@ -131,6 +131,11 @@ virtualServices:
     destination:
       host: grafana-tempo-query-frontend-discovery.monitoring.svc.cluster.local
       port: 3100
+  - name: gocd
+    host: gocd.xquare.app
+    destination:
+      host: gocd-server.gocd.svc.cluster.local
+      port: 8153
 addons:
   jeager:
     enable: false
