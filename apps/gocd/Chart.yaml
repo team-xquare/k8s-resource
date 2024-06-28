@@ -1,0 +1,9 @@
+apiVersion: v2
+name: gocd
+type: application
+version: 1.0.0
+dependencies:
+  - name: gocd
+    version: 2.8.0
+    repository: https://gocd.github.io/helm-chart
+
