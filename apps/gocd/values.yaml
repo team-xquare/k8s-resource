@@ -24,6 +24,9 @@ gocd:
         - name: GOCD_PLUGIN_INSTALL_docker-elastic-agents-plugin
           value: https://github.com/gocd-contrib/docker-elastic-agents-plugin/releases/download/v3.3.0-458/docker-elastic-agents-3.3.0-458.jar
   agent:
+    image:
+      repository: 786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/gocd-agent
+      tag: latest
     replicaCount: 1
     toleration:
       - effect: "NoSchedule"
