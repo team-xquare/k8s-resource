@@ -39,6 +39,14 @@ gocd:
     extraVolumes:
       - name: docker-bin
         emptyDir: { }
+      - name: docker-socket
+        hostPath:
+          path: /var/run/docker.sock
+    extraVolumeMounts:
+      - name: docker-bin
+        mountPath: /usr/bin/docker
+      - name: docker-socket
+        mountPath: /var/run/docker.sock
     initContainers:
       - name: install-docker
         image: docker:24.0.9
