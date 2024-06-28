@@ -1,0 +1,29 @@
+gocd:
+  server:
+    toleration:
+      - effect: "NoSchedule"
+        key: xquare/server
+        operator: "Equal"
+        value: "true"
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
+      - effect: "NoSchedule"
+        key: xquare/test
+        operator: "Equal"
+        value: "true"
+  agent:
+    toleration:
+      - effect: "NoSchedule"
+        key: xquare/server
+        operator: "Equal"
+        value: "true"
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
+      - effect: "NoSchedule"
+        key: xquare/test
+        operator: "Equal"
+        value: "true"
