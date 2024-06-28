@@ -21,6 +21,8 @@ gocd:
       extraEnvVars:
         - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
           value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
+        - name: GOCD_PLUGIN_INSTALL_docker-elastic-agents-plugin
+          value: https://github.com/gocd-contrib/docker-elastic-agents-plugin/releases/download/v3.3.0-458/docker-elastic-agents-3.3.0-458.jar
   agent:
     replicaCount: 1
     toleration:
@@ -36,37 +38,3 @@ gocd:
         key: xquare/test
         operator: "Equal"
         value: "true"
-    extraVolumes:
-      - name: docker-bin
-        emptyDir: { }
-      - name: docker-socket
-        hostPath:
-          path: /var/run/docker.sock
-    extraVolumeMounts:
-      - name: docker-bin
-        mountPath: /usr/bin/docker
-      - name: docker-socket
-        mountPath: /var/run/docker.sock
-    initContainers:
-      - name: install-docker
-        image: docker:24.0.9
-        command: [ 'sh', '-c', 'apk add --no-cache docker && cp /usr/bin/docker /target/' ]
-        volumeMounts:
-          - name: docker-bin
-            mountPath: /target
-      - name: ecr-login
-        image: amazon/aws-cli:latest
-        env:
-          - name: AWS_ACCESS_KEY_ID
-            valueFrom:
-              secretKeyRef:
-                name: aws-credentials
-                key: accesskey
-          - name: AWS_SECRET_ACCESS_KEY
-            valueFrom:
-              secretKeyRef:
-                name: aws-credentials
-                key: secretkey
-          - name: AWS_DEFAULT_REGION
-            value: ap-northeast-2
-        command: [ 'sh', '-c', '$(aws ecr get-login --no-include-email)' ]
