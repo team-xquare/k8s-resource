@@ -36,6 +36,9 @@ gocd:
         key: xquare/test
         operator: "Equal"
         value: "true"
+    extraVolumes:
+      - name: docker-bin
+        emptyDir: { }
     initContainers:
       - name: install-docker
         image: docker:24.0.9
