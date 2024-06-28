@@ -13,6 +13,8 @@ gocd:
         key: xquare/test
         operator: "Equal"
         value: "true"
+    ingress:
+      enabled: false
   agent:
     toleration:
       - effect: "NoSchedule"
@@ -27,3 +29,5 @@ gocd:
         key: xquare/test
         operator: "Equal"
         value: "true"
+  service:
+    type: "ClusterIP"
