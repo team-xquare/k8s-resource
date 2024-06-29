@@ -45,7 +45,7 @@ gocd:
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
-          - name: helm
+          - name: extra
             mountPath: /download
         workingDir: /download
         command: [ "/bin/sh" ]
