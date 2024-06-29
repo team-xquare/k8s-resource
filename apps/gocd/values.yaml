@@ -42,17 +42,16 @@ gocd:
           emptyDir: {}
     initContainers:
       - name: download-helm
-        image: "alpine:latest"
+        image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
-          - name: extra
+          - name: helm
             mountPath: /download
         workingDir: /download
         command: [ "/bin/sh" ]
         args:
           - "-c"
           - |
-            apk add --no-cache curl tar gzip && \
             curl -LO https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz && \
             tar -zxvf helm-v3.8.0-linux-amd64.tar.gz && \
             mv linux-amd64/helm . && \
