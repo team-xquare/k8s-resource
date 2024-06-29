@@ -22,7 +22,7 @@ gocd:
         - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
           value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
   agent:
-    replicaCount: 0
+    replicaCount: 1
     toleration:
       - effect: "NoSchedule"
         key: xquare/server
@@ -36,3 +36,31 @@ gocd:
         key: xquare/test
         operator: "Equal"
         value: "true"
+    initContainers:
+      - name: download-helm
+        image: "alpine:latest"
+        imagePullPolicy: "IfNotPresent"
+        volumeMounts:
+          - name: helm
+            mountPath: /download
+        workingDir: /download
+        command: [ "/bin/sh" ]
+        args:
+          - "-c"
+          - |
+            apk add --no-cache curl tar gzip && \
+            curl -LO https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz && \
+            tar -zxvf helm-v3.8.0-linux-amd64.tar.gz && \
+            mv linux-amd64/helm . && \
+            chmod +x ./helm
+      - name: download-kubectl
+        image: "ellerbrock/alpine-bash-curl-ssl:latest"
+        imagePullPolicy: "IfNotPresent"
+        volumeMounts:
+          - name: kubectl
+            mountPath: /download
+        workingDir: /download
+        command: ["/bin/bash"]
+        args:
+          - "-c"
+          - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl'
