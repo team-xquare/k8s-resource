@@ -17,12 +17,12 @@ gocd:
       enabled: false
     service:
       type: "ClusterIP"
-    env:
+    env: # 처음에는 Plugin 없이 배포 해야함.
       extraEnvVars:
         - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
           value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
   agent:
-    replicaCount: 1
+    replicaCount: 0
     toleration:
       - effect: "NoSchedule"
         key: xquare/server
