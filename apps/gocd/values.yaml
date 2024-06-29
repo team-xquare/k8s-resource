@@ -37,7 +37,7 @@ gocd:
       repository: gocd/gocd-agent-docker-dind
       tag: v24.2.0
       pullPolicy: Always
-    replicaCount: 1
+    replicaCount: 0
     toleration:
       - effect: "NoSchedule"
         key: xquare/server
