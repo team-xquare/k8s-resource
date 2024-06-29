@@ -61,7 +61,7 @@ gocd:
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
           - name: extra
-            mountPath: /usr/local/bin/kubectl
+            mountPath: /download
         workingDir: /download
         command: ["/bin/bash"]
         args:
