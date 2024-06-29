@@ -37,9 +37,13 @@ gocd:
         operator: "Equal"
         value: "true"
     postStart:
-      - "cd /home/go"
-      - "git clone https://github.com/team-xquare/xquare-gitops-repo"
-      - "cd xquare-gitops-repo && git checkout v2"
+      - "sh"
+      - "-c"
+      - |
+        cd /home/go && \
+        git clone https://github.com/team-xquare/xquare-gitops-repo && \
+        cd xquare-gitops-repo && \
+        git checkout v2
     persistence:
       extraVolumes:
         - name: kubectl
