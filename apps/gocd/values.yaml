@@ -37,6 +37,7 @@ gocd:
         operator: "Equal"
         value: "true"
     postStart:
+      - "/bin/bash"
       - "cd /home/go"
       - "git clone https://github.com/team-xquare/xquare-gitops-repo"
       - "cd xquare-gitops-repo && git checkout v2"
