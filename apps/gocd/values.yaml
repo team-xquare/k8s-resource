@@ -25,8 +25,8 @@ gocd:
           value: https://github.com/gocd-contrib/docker-elastic-agents-plugin/releases/download/v3.3.0-458/docker-elastic-agents-3.3.0-458.jar
   agent:
     image:
-      repository: 786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/gocd-agent
-      tag: 0.0.0
+      repository: gocd/gocd-agent-docker-dind
+      tag: v24.2.0
       pullPolicy: Always
     replicaCount: 1
     toleration:
