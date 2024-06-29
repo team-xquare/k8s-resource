@@ -62,8 +62,9 @@ gocd:
         args:
           - "-c"
           - |
-            curl -LO https://get.helm.sh/helm-v3.8.0-linux-amd64.tar.gz && \
-            tar -zxvf helm-v3.8.0-linux-amd64.tar.gz && \
+            HELM_VERSION=$(curl -s https://api.github.com/repos/helm/helm/releases/latest | grep tag_name | cut -d '"' -f 4) && \
+            curl -LO https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
+            tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
             mv linux-amd64/helm . && \
             chmod +x ./helm
       - name: download-kubectl
