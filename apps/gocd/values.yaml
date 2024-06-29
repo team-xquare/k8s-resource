@@ -38,14 +38,24 @@ gocd:
         value: "true"
     persistence:
       extraVolumes:
-        - name: extra
-          emptyDir: {}
+        - name: kubectl
+          emptyDir: { }
+        - name: helm
+          emptyDir: { }
+      extraVolumeMounts:
+        - name: kubectl
+          mountPath: /usr/local/bin/kubectl
+          subPath: kubectl
+        - name: kubectl
+          mountPath: /usr/local/bin/helm
+          subPath: helm
+
     initContainers:
       - name: download-helm
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
-          - name: extra
+          - name: helm
             mountPath: /download
         workingDir: /download
         command: [ "/bin/sh" ]
@@ -60,7 +70,7 @@ gocd:
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
-          - name: extra
+          - name: kubectl
             mountPath: /download
         workingDir: /download
         command: ["/bin/bash"]
