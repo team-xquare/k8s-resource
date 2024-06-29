@@ -24,6 +24,9 @@ gocd:
       - apiGroups: [ "storage.k8s.io" ]
         resources: [ "*" ]
         verbs: [ "*" ]
+      - apiGroups: [ "secrets.hashicorp.com" ]
+        resources: [ "vaultauths", "vaultdynamicsecrets" ]
+        verbs: [ "get", "list", "watch", "create", "update", "delete" ]
   server:
     toleration:
       - effect: "NoSchedule"
