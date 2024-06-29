@@ -1,4 +1,29 @@
 gocd:
+  rbac:
+    create: true
+    apiVersion: v1
+    extraRules:
+      - apiGroups: [ "" ]
+        resources: [ "*" ]
+        verbs: [ "*" ]
+      - apiGroups: [ "apps", "extensions" ]
+        resources: [ "*" ]
+        verbs: [ "*" ]
+      - apiGroups: [ "batch" ]
+        resources: [ "*" ]
+        verbs: [ "*" ]
+      - apiGroups: [ "autoscaling" ]
+        resources: [ "*" ]
+        verbs: [ "*" ]
+      - apiGroups: [ "policy" ]
+        resources: [ "*" ]
+        verbs: [ "*" ]
+      - apiGroups: [ "rbac.authorization.k8s.io" ]
+        resources: [ "*" ]
+        verbs: [ "*" ]
+      - apiGroups: [ "storage.k8s.io" ]
+        resources: [ "*" ]
+        verbs: [ "*" ]
   server:
     toleration:
       - effect: "NoSchedule"
@@ -22,6 +47,10 @@ gocd:
         - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
           value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
   agent:
+    serviceAccount:
+      # specifies whether the top level service account (also used by the server) should be reused as the service account for gocd agents
+      reuseTopLevelServiceAccount: true
+      automountServiceAccountToken: true
     replicaCount: 1
     toleration:
       - effect: "NoSchedule"
