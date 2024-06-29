@@ -24,6 +24,15 @@ gocd:
         - name: GOCD_PLUGIN_INSTALL_docker-elastic-agents-plugin
           value: https://github.com/gocd-contrib/docker-elastic-agents-plugin/releases/download/v3.3.0-458/docker-elastic-agents-3.3.0-458.jar
   agent:
+    persistence:
+      enabled: true
+      extraVolumes:
+        - name: dockersock
+          hostPath:
+            path: /var/run/docker.sock
+      extraVolumeMounts:
+        - name: dockersock
+          mountPath: /var/run/docker.sock
     image:
       repository: gocd/gocd-agent-docker-dind
       tag: v24.2.0
