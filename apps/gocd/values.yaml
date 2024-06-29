@@ -46,7 +46,7 @@ gocd:
         - name: kubectl
           mountPath: /usr/local/bin/kubectl
           subPath: kubectl
-        - name: kubectl
+        - name: helm
           mountPath: /usr/local/bin/helm
           subPath: helm
 
@@ -67,6 +67,7 @@ gocd:
             tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
             mv linux-amd64/helm . && \
             chmod +x ./helm
+            ls
       - name: download-kubectl
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
