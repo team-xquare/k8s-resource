@@ -85,13 +85,17 @@ gocd:
         git checkout v2
         git config --global user.name "xquare-admin"
         git config --global user.email "teamxquare@gmail.com"
-        git remote set-url origin https://$(GITHUB_TOKEN)@github.com/team-xquare/xquare-gitops-repo.git
+        git remote set-url origin https://xquare-admin:$(cat /etc/config/keys/GITHUB_TOKEN)@github.com/team-xquare/xquare-gitops-repo.git
     persistence:
       extraVolumes:
         - name: kubectl
           emptyDir: { }
         - name: helm
           emptyDir: { }
+        - name: github-token
+          secret:
+            secretName: github-token
+            defaultMode: 0744
       extraVolumeMounts:
         - name: kubectl
           mountPath: /usr/local/bin/kubectl
@@ -99,6 +103,9 @@ gocd:
         - name: helm
           mountPath: /usr/local/bin/helm
           subPath: helm
+        - name: github-token
+          mountPath: /etc/config/keys/
+          readOnly: true
 
     initContainers:
       - name: download-helm
