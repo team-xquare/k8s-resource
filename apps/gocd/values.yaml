@@ -68,6 +68,13 @@ gocd:
         key: xquare/test
         operator: "Equal"
         value: "true"
+    env:
+      extraEnvVars:
+        - name: GITHUB_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: github-token
+              key: GITHUB_TOKEN
     postStart:
       - "sh"
       - "-c"
@@ -76,6 +83,9 @@ gocd:
         git clone https://github.com/team-xquare/xquare-gitops-repo && \
         cd xquare-gitops-repo && \
         git checkout v2
+        git config --global user.name "xquare-admin"
+        git config --global user.email "teamxquare@gmail.com"
+        git remote set-url origin https://$(GITHUB_TOKEN)@github.com/team-xquare/xquare-gitops-repo.git
     persistence:
       extraVolumes:
         - name: kubectl
