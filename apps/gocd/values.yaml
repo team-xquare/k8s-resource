@@ -28,17 +28,9 @@ gocd:
         resources: [ "vaultauths", "vaultdynamicsecrets" ]
         verbs: [ "get", "list", "watch", "create", "update", "delete" ]
   server:
-    toleration:
-      - effect: "NoSchedule"
-        key: xquare/server
-        operator: "Equal"
-        value: "true"
+    tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
-        operator: "Equal"
-        value: "true"
-      - effect: "NoSchedule"
-        key: xquare/test
         operator: "Equal"
         value: "true"
     ingress:
@@ -55,17 +47,9 @@ gocd:
       reuseTopLevelServiceAccount: true
       automountServiceAccountToken: true
     replicaCount: 1
-    toleration:
-      - effect: "NoSchedule"
-        key: xquare/server
-        operator: "Equal"
-        value: "true"
+    tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
-        operator: "Equal"
-        value: "true"
-      - effect: "NoSchedule"
-        key: xquare/test
         operator: "Equal"
         value: "true"
     env:
