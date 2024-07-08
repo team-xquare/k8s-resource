@@ -24,6 +24,7 @@ vault:
         key: xquare/critical-pods
         operator: "Equal"
         value: "true"
+    affinity: |
   pod:
     tolerations:
       - effect: "NoSchedule"
