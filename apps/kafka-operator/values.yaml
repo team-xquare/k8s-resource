@@ -1,0 +1,13 @@
+strimzi-kafka-operator:
+  fullnameOverride: kafka-operator
+  kafka:
+    version: 3.0.0
+    replicas: 1
+    listeners:
+      external:
+        type: route
+  zookeeper:
+    replicas: 1
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
