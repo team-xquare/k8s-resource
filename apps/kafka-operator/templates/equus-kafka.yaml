@@ -32,17 +32,20 @@ spec:
       min.insync.replicas: 1
       inter.broker.protocol.version: "3.7"
     storage:
-      type: persistent-claim
-      size: 10Gi
-      class: gp2
-      deleteClaim: false
+      type: jbod
+      volumes:
+        - id: 0
+          type: persistent-claim
+          size: 10Gi
+          deleteClaim: false
+          storageClass: gp2
   zookeeper:
     replicas: 1
     storage:
       type: persistent-claim
       size: 10Gi
-      class: gp2
       deleteClaim: false
+      storageClass: gp2
   entityOperator:
     topicOperator: {}
     userOperator: {}
