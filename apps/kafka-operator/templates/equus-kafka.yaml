@@ -34,14 +34,14 @@ spec:
     storage:
       type: persistent-claim
       size: 10Gi
-      class: standard
+      class: gp2
       deleteClaim: false
   zookeeper:
     replicas: 1
     storage:
       type: persistent-claim
       size: 10Gi
-      class: standard
+      class: gp2
       deleteClaim: false
   entityOperator:
     topicOperator: {}
