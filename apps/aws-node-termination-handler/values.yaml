@@ -18,15 +18,4 @@ aws-node-termination-handler:
   nodeSelector:
     Karpenter: enabled
   tolerations:
-  - effect: "NoSchedule"
-    key: xquare/server
-    operator: "Equal"
-    value: "true"
-  - effect: "NoSchedule"
-    key: xquare/platform
-    operator: "Equal"
-    value: "true"
-  - effect: "NoSchedule"
-    key: xquare/test
-    operator: "Equal"
-    value: "true"
+    - operator: "Exists"
