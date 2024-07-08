@@ -16,10 +16,14 @@ tempo-distributed:
       trace_idle_period: 5s
       flush_check_period: 5s
       max_block_duration: 1m
-
     persistence:
       enabled: true
       size: 10Gi
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/platform
+        operator: "Equal"
+        value: "true"
   queryFrontend:
     tolerations:
       - effect: "NoSchedule"
