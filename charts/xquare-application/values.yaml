@@ -147,3 +147,12 @@ projects:
           automated:
             prune: false
             selfHeal: true
+      - name: kafka-operator
+        namespace: kafka
+        source:
+          path: apps/kafka-operator
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
