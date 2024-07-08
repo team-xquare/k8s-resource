@@ -19,6 +19,7 @@ tempo-distributed:
     persistence:
       enabled: true
       size: 10Gi
+    affinity: |
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
