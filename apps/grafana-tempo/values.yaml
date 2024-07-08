@@ -22,10 +22,7 @@ tempo-distributed:
       size: 10Gi
     affinity: |
     tolerations:
-      - effect: "NoSchedule"
-        key: xquare/platform
-        operator: "Equal"
-        value: "true"
+      - operator: "Exists"
   queryFrontend:
     tolerations:
       - effect: "NoSchedule"
