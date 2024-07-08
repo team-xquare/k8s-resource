@@ -10,19 +10,19 @@ spec:
     listeners:
       - name: plain
         port: 9092
-        type: clusterip
+        type: internal
         tls: false
         authentication:
           type: scram-sha-512
       - name: tls
         port: 9093
-        type: clusterip
+        type: internal
         tls: true
         authentication:
           type: scram-sha-512
       - name: external
         port: 9094
-        type: clusterip
+        type: internal
         tls: false
     config:
       offsets.topic.replication.factor: 3
