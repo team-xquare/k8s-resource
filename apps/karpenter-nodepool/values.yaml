@@ -69,7 +69,7 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-hypervisor"
             operator: In
             values: [ "nitro" ]
-    - name: xquare-critical-pods
+    - name: xquare-critical
       spec:
         taints:
           - key: "xquare/critical"
