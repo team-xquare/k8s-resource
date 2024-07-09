@@ -12,7 +12,7 @@ karpenter:
   settings:
     clusterName: "xquare-v3-cluster"
   tolerations:
-    - key: "xquare/critical-pods"
+    - key: "xquare/critical"
       operator: "Equal"
       value: "true"
       effect: "NoSchedule"

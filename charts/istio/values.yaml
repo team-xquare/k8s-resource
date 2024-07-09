@@ -48,6 +48,6 @@ nodeSelector:
   
 tolerations:
 - effect: "NoSchedule"
-  key: "xquare/critical-pods"
+  key: "xquare/critical"
   operator: "Equal"
   value: "true"
