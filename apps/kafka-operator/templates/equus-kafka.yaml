@@ -5,6 +5,11 @@ metadata:
   namespace: kafka
 spec:
   kafka:
+    tolerations:
+      - key: "xquare/critical"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
     version: 3.7.0
     replicas: 1
     listeners:
@@ -40,6 +45,11 @@ spec:
           deleteClaim: false
           storageClass: gp2
   zookeeper:
+    tolerations:
+      - key: "xquare/critical"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
     replicas: 1
     storage:
       type: persistent-claim
