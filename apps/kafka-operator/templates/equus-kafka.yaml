@@ -102,20 +102,15 @@ spec:
     acls:
       - resource:
           type: topic
-          name: "*"
+          name: '*'
           patternType: literal
         operation: All
       - resource:
           type: group
-          name: "*"
+          name: '*'
           patternType: literal
         operation: All
       - resource:
           type: cluster
-          name: kafka-cluster
-        operation: All
-      - resource:
-          type: transactionalId
-          name: "*"
           patternType: literal
         operation: All
