@@ -5,11 +5,6 @@ metadata:
   namespace: kafka
 spec:
   kafka:
-    tolerations:
-      - key: "xquare/critical"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
     version: 3.7.0
     replicas: 1
     listeners:
@@ -36,6 +31,11 @@ spec:
       default.replication.factor: 1
       min.insync.replicas: 1
       inter.broker.protocol.version: "3.7"
+    tolerations:
+      - key: "xquare/critical"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
     storage:
       type: jbod
       volumes:
