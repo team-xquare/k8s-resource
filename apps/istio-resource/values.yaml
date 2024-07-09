@@ -136,6 +136,11 @@ virtualServices:
     destination:
       host: gocd-server.gocd.svc.cluster.local
       port: 8153
+  - name: equus-stag-kafka
+    host: equus-stag-kafka.xquare.app
+    destination:
+      host: equus-stag-kafka-cluster-kafka-bootstrap.kafka.svc.cluster.local
+      port: 9092
 addons:
   jeager:
     enable: false
