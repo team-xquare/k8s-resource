@@ -82,7 +82,7 @@ nodepools:
         requirements:
           - key: "topology.kubernetes.io/zone"
             operator: In
-            values: [ "ap-northeast-2a", "ap-northeast-2c"]
+            values: [ "ap-northeast-2a"]
           - key: "kubernetes.io/arch"
             operator: In
             values: [ "amd64" ]
