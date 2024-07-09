@@ -72,7 +72,7 @@ nodepools:
     - name: xquare-critical-pods
       spec:
         taints:
-          - key: "xquare/critical-pods"
+          - key: "xquare/critical"
             value: "true"
             effect: "NoSchedule"
         labels:
