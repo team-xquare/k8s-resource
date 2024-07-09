@@ -1,7 +1,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
-  name: equus-kafka-cluster
+  name: equus-stag-kafka-cluster
   namespace: kafka
 spec:
   kafka:
@@ -78,10 +78,10 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  name: equus-topic
+  name: equus-stag-topic
   namespace: kafka
   labels:
-    strimzi.io/cluster: equus-kafka-cluster
+    strimzi.io/cluster: equus-stag-kafka-cluster
 spec:
   partitions: 1
   replicas: 1
@@ -92,10 +92,10 @@ spec:
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaUser
 metadata:
-  name: equus-user
+  name: equus-stag-user
   namespace: kafka
   labels:
-    strimzi.io/cluster: equus-kafka-cluster
+    strimzi.io/cluster: equus-stag-kafka-cluster
 spec:
   authentication:
     type: scram-sha-512
