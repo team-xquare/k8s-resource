@@ -13,6 +13,7 @@ vault:
         key: xquare/platform
         operator: "Equal"
         value: "true"
+    affinity: |
   server:
     enabled: true
     resources:
@@ -26,12 +27,14 @@ vault:
         value: "true"
     affinity: |
   pod:
+    affinity: |
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
         operator: "Equal"
         value: "true"
   ui:
+    affinity: |
     enabled: true
     serviceType: "ClusterIP"
     externalPort: 8200
