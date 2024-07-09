@@ -53,6 +53,8 @@ spec:
           size: 10Gi
           deleteClaim: false
           storageClass: gp2
+    authorization:
+      type: simple
   zookeeper:
     replicas: 1
     storage:
