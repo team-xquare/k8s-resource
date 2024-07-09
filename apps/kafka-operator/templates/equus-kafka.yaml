@@ -31,6 +31,15 @@ spec:
       default.replication.factor: 1
       min.insync.replicas: 1
       inter.broker.protocol.version: "3.7"
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "xquare/critical"
+                  operator: "In"
+                  values:
+                    - "true"
     tolerations:
       - key: "xquare/critical"
         operator: "Equal"
@@ -51,6 +60,15 @@ spec:
       size: 10Gi
       deleteClaim: false
       storageClass: gp2
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "xquare/critical"
+                  operator: "In"
+                  values:
+                    - "true"
   entityOperator:
     topicOperator: {}
     userOperator: {}
