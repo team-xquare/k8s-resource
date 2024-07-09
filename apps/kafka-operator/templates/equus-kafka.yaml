@@ -92,6 +92,8 @@ kind: KafkaUser
 metadata:
   name: equus-user
   namespace: kafka
+  labels:
+    strimzi.io/cluster: equus-kafka-cluster
 spec:
   authentication:
     type: scram-sha-512
