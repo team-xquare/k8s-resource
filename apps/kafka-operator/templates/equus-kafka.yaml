@@ -45,11 +45,6 @@ spec:
           deleteClaim: false
           storageClass: gp2
   zookeeper:
-    tolerations:
-      - key: "xquare/critical"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
     replicas: 1
     storage:
       type: persistent-claim
