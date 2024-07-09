@@ -54,7 +54,7 @@ spec:
           deleteClaim: false
           storageClass: gp2
   zookeeper:
-    replicas: 2
+    replicas: 1
     storage:
       type: persistent-claim
       size: 10Gi
