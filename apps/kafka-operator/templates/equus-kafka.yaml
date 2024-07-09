@@ -104,13 +104,16 @@ spec:
           type: topic
           name: '*'
           patternType: literal
-        operation: All
+        operations:
+          - All
       - resource:
           type: group
           name: '*'
           patternType: literal
-        operation: All
+        operations:
+          - All
       - resource:
           type: cluster
           patternType: literal
-        operation: All
+        operations:
+          - All
