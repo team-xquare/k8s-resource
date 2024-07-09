@@ -26,6 +26,8 @@ vault:
         operator: "Equal"
         value: "true"
     affinity: |
+    dataStorage:
+      enabled: false
   pod:
     affinity: |
     tolerations:
