@@ -10,7 +10,7 @@ spec:
     listeners:
       - name: plain
         port: 9092
-        type: internal
+        type: loadbalancer
         tls: false
         authentication:
           type: scram-sha-512
