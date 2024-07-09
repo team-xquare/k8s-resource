@@ -28,13 +28,13 @@ vault:
     affinity: |
     dataStorage:
       enabled: false
-#    extraVolumes:
-#      - name: vault-storage
-#        persistentVolumeClaim:
-#          claimName: vault-pvc
-#    volumeMounts:
-#      - mountPath: "/vault/data"
-#        name: vault-storage
+    volumes:
+      - name: vault-storage
+        persistentVolumeClaim:
+          claimName: vault-pvc
+    volumeMounts:
+      - mountPath: "/vault/data"
+        name: vault-storage
   pod:
     affinity: |
     tolerations:
