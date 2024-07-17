@@ -27,6 +27,7 @@ spec:
         - x-identifier
       exposeHeaders:
         - x-custom-header
+        - x-identifier
       maxAge: "24h"
       allowCredentials: true
     route:
