@@ -24,6 +24,7 @@ spec:
         - authorization
         - content-type
         - accept
+        - x-identifier
       exposeHeaders:
         - x-custom-header
       maxAge: "24h"
