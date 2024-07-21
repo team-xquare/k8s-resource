@@ -136,14 +136,18 @@ gocd:
           - "-c"
           - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl'
       - name: download-aws-cli
-        image: "amazon/aws-cli:latest"
+        image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
           - name: aws-cli
             mountPath: /download
+        workingDir: /download
         command: [ "/bin/sh" ]
         args:
           - "-c"
           - |
-            cp /usr/local/bin/aws /download/aws && \
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+            unzip awscliv2.zip && \
+            ./aws/install -i /download/aws-cli -b /download/aws-cli/bin && \
+            cp /download/aws-cli/bin/aws /download/aws && \
             chmod +x /download/aws
