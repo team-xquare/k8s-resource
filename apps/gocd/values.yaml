@@ -87,8 +87,6 @@ gocd:
           emptyDir: { }
         - name: helm
           emptyDir: { }
-        - name: aws-cli
-          emptyDir: { }
         - name: github-token
           secret:
             secretName: github-token
@@ -100,9 +98,6 @@ gocd:
         - name: helm
           mountPath: /usr/local/bin/helm
           subPath: helm
-        - name: aws-cli
-          mountPath: /usr/local/bin/aws
-          subPath: aws
         - name: github-token
           mountPath: /etc/config/keys/
           readOnly: true
@@ -135,8 +130,8 @@ gocd:
         args:
           - "-c"
           - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl'
-      - name: download-aws-cli
-        image: "ellerbrock/alpine-bash-curl-ssl:latest"
+      - name: install-aws-cli
+        image: "amazonlinux:2"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
           - name: aws-cli
@@ -146,8 +141,22 @@ gocd:
         args:
           - "-c"
           - |
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-            unzip awscliv2.zip && \
-            ./aws/install -i /download/aws-cli -b /download/aws-cli/bin && \
-            cp /download/aws-cli/bin/aws /download/aws && \
-            chmod +x /download/aws
+            yum install -y aws-cli && \
+            cp /usr/local/bin/aws /download/aws
+      - name: move-aws-cli
+        image: "alpine:latest"
+        imagePullPolicy: "IfNotPresent"
+        volumeMounts:
+          - name: aws-cli
+            mountPath: /download
+          - name: aws-bin
+            mountPath: /usr/local/bin
+        command: [ "/bin/sh" ]
+        args:
+          - "-c"
+          - 'cp /download/aws /usr/local/bin/aws && chmod +x /usr/local/bin/aws'
+    volumes:
+      - name: aws-cli
+        emptyDir: { }
+      - name: aws-bin
+        emptyDir: { }
