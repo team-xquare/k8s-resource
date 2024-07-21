@@ -91,8 +91,6 @@ gocd:
           secret:
             secretName: github-token
             defaultMode: 0744
-        - name: aws-cli
-          emptyDir: { }
       extraVolumeMounts:
         - name: kubectl
           mountPath: /usr/local/bin/kubectl
@@ -103,9 +101,6 @@ gocd:
         - name: github-token
           mountPath: /etc/config/keys/
           readOnly: true
-        - name: aws-cli
-          mountPath: /usr/local/bin/aws
-          subPath: aws
     initContainers:
       - name: download-helm
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
@@ -135,15 +130,3 @@ gocd:
         args:
           - "-c"
           - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl'
-      - name: install-aws-cli
-        image: "amazonlinux:2"
-        imagePullPolicy: "IfNotPresent"
-        volumeMounts:
-          - name: aws-cli
-            mountPath: /aws
-        command: [ "/bin/sh" ]
-        args:
-          - "-c"
-          - |
-            yum install -y aws-cli && \
-            cp /usr/local/bin/aws /aws/aws
