@@ -45,6 +45,8 @@ gocd:
       requests:
         memory: 1024Mi
   agent:
+    image:
+      repository: "gocd/gocd-agent-docker-dind"
     serviceAccount:
       # specifies whether the top level service account (also used by the server) should be reused as the service account for gocd agents
       reuseTopLevelServiceAccount: true
