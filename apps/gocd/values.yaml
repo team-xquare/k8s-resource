@@ -48,7 +48,6 @@ gocd:
     image:
       repository: "gocd/gocd-agent-docker-dind"
     serviceAccount:
-      # specifies whether the top level service account (also used by the server) should be reused as the service account for gocd agents
       reuseTopLevelServiceAccount: true
       automountServiceAccountToken: true
     replicaCount: 1
@@ -63,6 +62,7 @@ gocd:
       fsGroup: 0
       fsGroupChangePolicy: "OnRootMismatch"
     privileged: true
+
     env:
       extraEnvVars:
         - name: GITHUB_TOKEN
@@ -91,6 +91,8 @@ gocd:
           secret:
             secretName: github-token
             defaultMode: 0744
+        - name: shared-bin
+          emptyDir: { }
       extraVolumeMounts:
         - name: kubectl
           mountPath: /usr/local/bin/kubectl
@@ -98,17 +100,35 @@ gocd:
         - name: helm
           mountPath: /usr/local/bin/helm
           subPath: helm
+        - name: shared-bin
+          mountPath: /usr/local/bin/aws
+          subPath: aws
         - name: github-token
           mountPath: /etc/config/keys/
           readOnly: true
 
     initContainers:
+      - name: install-aws-cli
+        image: amazonlinux:2
+        command: [ "/bin/sh", "-c" ]
+        args:
+          - yum install -y curl unzip && \
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+            unzip awscliv2.zip && \
+            ./aws/install && \
+            rm -rf awscliv2.zip aws && \
+            cp /usr/local/bin/aws /target/
+        volumeMounts:
+          - name: shared-bin
+            mountPath: /target
       - name: download-helm
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
           - name: helm
             mountPath: /download
+          - name: shared-bin
+            mountPath: /target
         workingDir: /download
         command: [ "/bin/sh" ]
         args:
@@ -117,16 +137,18 @@ gocd:
             HELM_VERSION=$(curl -s https://api.github.com/repos/helm/helm/releases/latest | grep tag_name | cut -d '"' -f 4) && \
             curl -LO https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
             tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
-            mv linux-amd64/helm . && \
-            chmod +x ./helm
+            mv linux-amd64/helm /target/helm && \
+            chmod +x /target/helm
       - name: download-kubectl
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
           - name: kubectl
             mountPath: /download
+          - name: shared-bin
+            mountPath: /target
         workingDir: /download
-        command: ["/bin/bash"]
+        command: ["/bin/sh"]
         args:
           - "-c"
-          - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl'
+          - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /target/kubectl'
