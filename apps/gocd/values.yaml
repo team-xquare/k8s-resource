@@ -136,7 +136,7 @@ gocd:
           - "-c"
           - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl'
       - name: install-aws-cli
-        image: "alpine:latest"
+        image: "ubuntu:latest"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
           - name: aws-cli
@@ -145,7 +145,8 @@ gocd:
         args:
           - "-c"
           - |
-            apk --no-cache add curl && \
+            apt-get update && \
+            apt-get install -y curl unzip && \
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
             unzip awscliv2.zip && \
             ./aws/install && \
