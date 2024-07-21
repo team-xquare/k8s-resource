@@ -105,8 +105,6 @@ gocd:
         - name: github-token
           mountPath: /etc/config/keys/
           readOnly: true
-        - name: aws-cli
-          mountPath: /download
         - name: aws-bin
           mountPath: /usr/local/bin
     initContainers:
@@ -150,7 +148,7 @@ gocd:
           - "-c"
           - |
             yum install -y aws-cli && \
-            cp /usr/local/bin/aws /download/aws
+            cp /usr/bin/aws /download/aws
       - name: move-aws-cli
         image: "alpine:latest"
         imagePullPolicy: "IfNotPresent"
