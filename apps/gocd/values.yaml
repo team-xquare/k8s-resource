@@ -57,6 +57,12 @@ gocd:
         key: xquare/platform
         operator: "Equal"
         value: "true"
+    securityContext:
+      runAsUser: 0
+      runAsGroup: 0
+      fsGroup: 0
+      fsGroupChangePolicy: "OnRootMismatch"
+    privileged: true
     env:
       extraEnvVars:
         - name: GITHUB_TOKEN
