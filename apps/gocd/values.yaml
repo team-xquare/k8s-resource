@@ -53,7 +53,7 @@ gocd:
       requests:
         memory: 12G
     image:
-      repository: "gocd/gocd-agent-docker-dind"
+      repository: "786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/gocd-agent:1.0.0"
     serviceAccount:
       reuseTopLevelServiceAccount: true
       automountServiceAccountToken: true
