@@ -91,6 +91,10 @@ gocd:
           secret:
             secretName: github-token
             defaultMode: 0744
+        - name: aws-cli
+          emptyDir: { }
+        - name: aws-bin
+          emptyDir: { }
       extraVolumeMounts:
         - name: kubectl
           mountPath: /usr/local/bin/kubectl
@@ -101,6 +105,10 @@ gocd:
         - name: github-token
           mountPath: /etc/config/keys/
           readOnly: true
+        - name: aws-cli
+          mountPath: /download
+        - name: aws-bin
+          mountPath: /usr/local/bin
     initContainers:
       - name: download-helm
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
@@ -155,8 +163,3 @@ gocd:
         args:
           - "-c"
           - 'cp /download/aws /usr/local/bin/aws && chmod +x /usr/local/bin/aws'
-    volumes:
-      - name: aws-cli
-        emptyDir: { }
-      - name: aws-bin
-        emptyDir: { }
