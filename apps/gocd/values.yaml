@@ -73,7 +73,8 @@ gocd:
               key: GITHUB_TOKEN
     tolerations:
       - key: "xquare/build-server"
-        operator: "Exists"
+        operator: "Equal"
+        value: "true"
         effect: "NoSchedule"
     affinity:
       nodeAffinity:
@@ -81,7 +82,9 @@ gocd:
           nodeSelectorTerms:
             - matchExpressions:
                 - key: "xquare/build-server"
-                  operator: "Exists"
+                  operator: "In"
+                  values:
+                    - "true"
     postStart:
       - "sh"
       - "-c"
