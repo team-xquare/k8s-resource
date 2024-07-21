@@ -91,7 +91,7 @@ gocd:
           secret:
             secretName: github-token
             defaultMode: 0744
-        - name: shared-bin
+        - name: aws-cli
           emptyDir: { }
       extraVolumeMounts:
         - name: kubectl
@@ -100,7 +100,7 @@ gocd:
         - name: helm
           mountPath: /usr/local/bin/helm
           subPath: helm
-        - name: shared-bin
+        - name: aws-cli
           mountPath: /usr/local/bin/aws
           subPath: aws
         - name: github-token
@@ -109,26 +109,24 @@ gocd:
 
     initContainers:
       - name: install-aws-cli
-        image: amazonlinux:2
+        image: "ellerbrock/alpine-bash-curl-ssl:latest"
         command: [ "/bin/sh", "-c" ]
         args:
-          - yum install -y curl unzip && \
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+          - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
             unzip awscliv2.zip && \
             ./aws/install && \
             rm -rf awscliv2.zip aws && \
-            cp /usr/local/bin/aws /target/
+            cp /usr/local/bin/aws /download/
         volumeMounts:
-          - name: shared-bin
-            mountPath: /target
+          - name: aws-cli
+            mountPath: /download
+        workingDir: /download
       - name: download-helm
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
         volumeMounts:
           - name: helm
             mountPath: /download
-          - name: shared-bin
-            mountPath: /target
         workingDir: /download
         command: [ "/bin/sh" ]
         args:
@@ -145,8 +143,6 @@ gocd:
         volumeMounts:
           - name: kubectl
             mountPath: /download
-          - name: shared-bin
-            mountPath: /target
         workingDir: /download
         command: ["/bin/sh"]
         args:
