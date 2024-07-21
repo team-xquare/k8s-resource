@@ -53,7 +53,8 @@ gocd:
       requests:
         memory: 12G
     image:
-      repository: "786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/gocd-agent:1.0.0"
+      repository: "786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/gocd-agent"
+      tag: "1.0.0"
     serviceAccount:
       reuseTopLevelServiceAccount: true
       automountServiceAccountToken: true
