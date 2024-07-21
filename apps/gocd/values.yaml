@@ -87,12 +87,12 @@ gocd:
           emptyDir: { }
         - name: helm
           emptyDir: { }
+        - name: aws-cli
+          emptyDir: { }
         - name: github-token
           secret:
             secretName: github-token
             defaultMode: 0744
-        - name: aws-cli
-          emptyDir: { }
       extraVolumeMounts:
         - name: kubectl
           mountPath: /usr/local/bin/kubectl
@@ -106,21 +106,19 @@ gocd:
         - name: github-token
           mountPath: /etc/config/keys/
           readOnly: true
-
     initContainers:
-      - name: install-aws-cli
-        image: amazonlinux:2
-        command: [ "/bin/sh", "-c" ]
-        args:
-          - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
-            unzip awscliv2.zip && \
-            ./aws/install && \
-            rm -rf awscliv2.zip aws && \
-            cp /usr/local/bin/aws /download/
+      - name: download-aws-cli
+        image: "amazon/aws-cli:latest"
+        imagePullPolicy: "IfNotPresent"
         volumeMounts:
           - name: aws-cli
-            mountPath: /download
-        workingDir: /download
+            mountPath: /target
+        command: [ "/bin/sh" ]
+        args:
+          - "-c"
+          - |
+            cp /usr/local/bin/aws /target/aws && \
+            chmod +x /target/aws
       - name: download-helm
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
