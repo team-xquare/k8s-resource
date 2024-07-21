@@ -81,10 +81,9 @@ gocd:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: "xquare/build-server"
-                  operator: "In"
-                  values:
-                    - "true"
+                - key: "Karpenter"
+                  operator: In
+                  values: ["enabled"]
     postStart:
       - "sh"
       - "-c"
