@@ -107,18 +107,6 @@ gocd:
           mountPath: /etc/config/keys/
           readOnly: true
     initContainers:
-      - name: download-aws-cli
-        image: "amazon/aws-cli:latest"
-        imagePullPolicy: "IfNotPresent"
-        volumeMounts:
-          - name: aws-cli
-            mountPath: /target
-        command: [ "/bin/sh" ]
-        args:
-          - "-c"
-          - |
-            cp /usr/local/bin/aws /target/aws && \
-            chmod +x /target/aws
       - name: download-helm
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
@@ -133,8 +121,9 @@ gocd:
             HELM_VERSION=$(curl -s https://api.github.com/repos/helm/helm/releases/latest | grep tag_name | cut -d '"' -f 4) && \
             curl -LO https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
             tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
-            mv linux-amd64/helm /target/helm && \
-            chmod +x /target/helm
+            mv linux-amd64/helm helm && \
+            chmod +x helm && \
+            mv helm /download/helm
       - name: download-kubectl
         image: "ellerbrock/alpine-bash-curl-ssl:latest"
         imagePullPolicy: "IfNotPresent"
@@ -142,7 +131,19 @@ gocd:
           - name: kubectl
             mountPath: /download
         workingDir: /download
-        command: ["/bin/sh"]
+        command: [ "/bin/sh" ]
         args:
           - "-c"
-          - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /target/kubectl'
+          - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl'
+      - name: download-aws-cli
+        image: "amazon/aws-cli:latest"
+        imagePullPolicy: "IfNotPresent"
+        volumeMounts:
+          - name: aws-cli
+            mountPath: /download
+        command: [ "/bin/sh" ]
+        args:
+          - "-c"
+          - |
+            cp /usr/local/bin/aws /download/aws && \
+            chmod +x /download/aws
