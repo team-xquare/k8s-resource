@@ -49,24 +49,21 @@ gocd:
       requests:
         memory: 1024Mi
   agent:
+    resources:
+      requests:
+        memory: 12G
     image:
       repository: "gocd/gocd-agent-docker-dind"
     serviceAccount:
       reuseTopLevelServiceAccount: true
       automountServiceAccountToken: true
     replicaCount: 1
-    tolerations:
-      - effect: "NoSchedule"
-        key: xquare/platform
-        operator: "Equal"
-        value: "true"
     securityContext:
       runAsUser: 0
       runAsGroup: 0
       fsGroup: 0
       fsGroupChangePolicy: "OnRootMismatch"
     privileged: true
-
     env:
       extraEnvVars:
         - name: GITHUB_TOKEN
@@ -74,6 +71,17 @@ gocd:
             secretKeyRef:
               name: github-token
               key: GITHUB_TOKEN
+    tolerations:
+      - key: "xquare/build-server"
+        operator: "Exists"
+        effect: "NoSchedule"
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "xquare/build-server"
+                  operator: "Exists"
     postStart:
       - "sh"
       - "-c"
