@@ -1,4 +1,8 @@
 gocd:
+  serviceAccount:
+    create: true
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::786584124104:role/xquare-deployer-git-oidc-role
   rbac:
     create: true
     apiVersion: v1
