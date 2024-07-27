@@ -106,8 +106,6 @@ gocd:
         git config --global user.name "xquare-admin"
         git config --global user.email "teamxquare@gmail.com"
         git remote set-url origin https://xquare-admin:$(cat /etc/config/keys/GITHUB_TOKEN)@github.com/team-xquare/xquare-gitops-repo.git
-        export VAULT_TOKEN=$(cat /etc/config/vault/VAULT_TOKEN)
-        vault login $VAULT_TOKEN
     persistence:
       extraVolumes:
         - name: kubectl
@@ -122,10 +120,6 @@ gocd:
           secret:
             secretName: aws-credentials
             defaultMode: 0744
-        - name: vault-token
-          secret:
-            secretName: vault-token
-            defaultMode: 0744
       extraVolumeMounts:
         - name: kubectl
           mountPath: /usr/local/bin/kubectl
@@ -138,9 +132,6 @@ gocd:
           readOnly: true
         - name: aws-credentials
           mountPath: /etc/config/aws/
-          readOnly: true
-        - name: vault-token
-          mountPath: /etc/config/vault/
           readOnly: true
     initContainers:
       - name: download-helm
