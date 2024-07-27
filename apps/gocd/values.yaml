@@ -72,6 +72,16 @@ gocd:
             secretKeyRef:
               name: github-token
               key: GITHUB_TOKEN
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials
+              key: aws_access_key_id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-credentials
+              key: aws_secret_access_key
     tolerations:
       - key: "xquare/build-server"
         operator: "Equal"
@@ -106,6 +116,10 @@ gocd:
           secret:
             secretName: github-token
             defaultMode: 0744
+        - name: aws-credentials
+          secret:
+            secretName: aws-credentials
+            defaultMode: 0744
       extraVolumeMounts:
         - name: kubectl
           mountPath: /usr/local/bin/kubectl
@@ -115,6 +129,9 @@ gocd:
           subPath: helm
         - name: github-token
           mountPath: /etc/config/keys/
+          readOnly: true
+        - name: aws-credentials
+          mountPath: /etc/config/aws/
           readOnly: true
     initContainers:
       - name: download-helm
