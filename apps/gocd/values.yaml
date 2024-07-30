@@ -31,6 +31,9 @@ gocd:
       - apiGroups: [ "secrets.hashicorp.com" ]
         resources: [ "vaultauths", "vaultdynamicsecrets" ]
         verbs: [ "get", "list", "watch", "create", "update", "delete" ]
+      - apiGroups: [ "networking.istio.io" ]
+        resources: [ "virtualservices" ]
+        verbs: [ "get", "list", "watch", "create", "update", "delete" ]
   server:
     tolerations:
       - effect: "NoSchedule"
