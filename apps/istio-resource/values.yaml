@@ -144,7 +144,7 @@ virtualServices:
   - name: grafana-tempo-distributor
     host: grafana-tempo-distributor.xquare.app
     destination:
-      host: grafana-tempo-distributor-discovery.monitoring
+      host: grafana-tempo-distributor-discovery.monitoring.svc.cluster.local
       port: 4317
 addons:
   jeager:
