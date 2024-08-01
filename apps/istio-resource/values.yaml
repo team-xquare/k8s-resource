@@ -141,6 +141,11 @@ virtualServices:
     destination:
       host: equus-stag-kafka-cluster-kafka-bootstrap.kafka.svc.cluster.local
       port: 9092
+  - name: grafana-tempo-distributor
+    host: grafana-tempo-distributor.xquare.app
+    destination:
+      host: grafana-tempo-distributor-discovery.monitoring
+      port: 4317
 addons:
   jeager:
     enable: false
