@@ -19,8 +19,12 @@ opentelemetry-collector:
   mode: "deployment"
   config:
     exporters:
-      otlp:
+      otlp/tempo:
         endpoint: grafana-tempo-distributor-discovery.monitoring:4317
+        tls:
+          insecure: true
+      otlp/springboot:
+        endpoint: xquare-infra-prod.xquare-prod.svc.cluster.local:4317
         tls:
           insecure: true
     extensions:
@@ -50,12 +54,10 @@ opentelemetry-collector:
       pipelines:
         traces:
           exporters:
-            - otlp
+            - otlp/tempo
+            - otlp/springboot
           processors:
             - memory_limiter
-            - batch
-          receivers:
-            - otlp
             - batch
           receivers:
             - otlp
