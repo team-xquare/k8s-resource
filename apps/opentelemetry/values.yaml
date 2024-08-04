@@ -21,9 +21,9 @@ opentelemetry-collector:
   config:
     exporters:
       otlp/tempo:
-        endpoint: grafana-tempo-distributor-discovery.monitoring.svc.cluster.local
+        endpoint: grafana-tempo-distributor-discovery.monitoring.svc.cluster.local:4317
       otlp/springboot:
-        endpoint: xquare-infra-prod.xquare-prod.svc.cluster.local
+        endpoint: xquare-infra-prod.xquare-prod.svc.cluster.local:4317
       prometheus:
         endpoint: "0.0.0.0:8889"
     extensions:
