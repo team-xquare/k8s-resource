@@ -8,7 +8,7 @@ metadata:
   namespace: {{ $clubname }}-prod
 spec:
   exporter:
-    endpoint: http://localhost:4317
+    endpoint: "http://$(HOST_IP):4317"
   propagators:
     - tracecontext
     - baggage
@@ -25,7 +25,7 @@ metadata:
   namespace: {{ $clubname }}-stag
 spec:
   exporter:
-    endpoint: http://localhost:4317
+    endpoint: "http://$(HOST_IP):4317"
   propagators:
     - tracecontext
     - baggage
