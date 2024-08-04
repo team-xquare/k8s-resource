@@ -28,7 +28,7 @@ opentelemetry-collector:
         endpoint: xquare-infra-prod.xquare-prod.svc.cluster.local:4317
         tls:
           insecure: true
-      prometheusexporter:
+      prometheus:
         endpoint: "0.0.0.0:8889"
     extensions:
       # The health_check extension is mandatory for this chart.
@@ -71,4 +71,4 @@ opentelemetry-collector:
             - memory_limiter
             - batch
           exporters:
-            - prometheusexporter
+            - prometheus
