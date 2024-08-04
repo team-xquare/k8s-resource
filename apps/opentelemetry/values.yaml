@@ -15,7 +15,7 @@ opentelemetry-collector:
       operator: "Equal"
       value: "true"
   image:
-    repository: "otel/opentelemetry-collector-contrib"
+    repository: "otel/opentelemetry-collector-k8s"
   mode: "deployment"
   hostNetwork: true
   config:
@@ -28,11 +28,14 @@ opentelemetry-collector:
         endpoint: xquare-infra-prod.xquare-prod.svc.cluster.local:4317
         tls:
           insecure: true
-      prometheus:
+      prometheusexporter:
         endpoint: "0.0.0.0:8889"
     extensions:
-      health_check: {}
-      memory_ballast: {}
+      # The health_check extension is mandatory for this chart.
+      # Without the health_check extension the collector will fail the readiness and liveliness probes.
+      # The health_check extension can be modified, but should never be removed.
+      health_check: { }
+      memory_ballast: { }
     processors:
       memory_limiter:
         check_interval: 1s
@@ -68,4 +71,4 @@ opentelemetry-collector:
             - memory_limiter
             - batch
           exporters:
-            - prometheus
+            - prometheusexporter
