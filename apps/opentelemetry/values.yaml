@@ -18,13 +18,10 @@ opentelemetry-collector:
       servicePort: 8889
       protocol: TCP
   tolerations:
-    - effect: "NoSchedule"
-      key: xquare/platform
-      operator: "Equal"
-      value: "true"
+    - operator: "Exists"
   image:
     repository: "otel/opentelemetry-collector-contrib"
-  mode: "deployment"
+  mode: "daemonset"
   config:
     exporters:
       otlp/tempo:
