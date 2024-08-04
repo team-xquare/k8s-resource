@@ -15,8 +15,9 @@ opentelemetry-collector:
       operator: "Equal"
       value: "true"
   image:
-    repository: "otel/opentelemetry-collector-k8s"
+    repository: "otel/opentelemetry-collector-contrib"
   mode: "deployment"
+  hostNetwork: true
   config:
     exporters:
       otlp/tempo:
