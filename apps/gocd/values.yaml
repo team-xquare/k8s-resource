@@ -51,6 +51,7 @@ gocd:
     resources:
       requests:
         memory: 1024Mi
+  # 2024-08-04 Elastic Agent 로 이전
   agent:
     resources:
       requests:
@@ -63,7 +64,7 @@ gocd:
     serviceAccount:
       reuseTopLevelServiceAccount: true
       automountServiceAccountToken: true
-    replicaCount: 1
+    replicaCount: 0
     securityContext:
       runAsUser: 0
       runAsGroup: 0
