@@ -8,7 +8,7 @@ metadata:
   namespace: {{ $clubname }}-prod
 spec:
   exporter:
-    endpoint: "http://$(OTEL_NODE_IP):4317"
+    endpoint: "$(OTEL_EXPORTER_OTLP_ENDPOINT)"
   propagators:
     - tracecontext
     - baggage
@@ -25,7 +25,7 @@ metadata:
   namespace: {{ $clubname }}-stag
 spec:
   exporter:
-    endpoint: "http://$(OTEL_NODE_IP):4317"
+    endpoint: "$(OTEL_EXPORTER_OTLP_ENDPOINT)"
   propagators:
     - tracecontext
     - baggage
