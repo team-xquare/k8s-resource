@@ -71,6 +71,7 @@ opentelemetry-collector:
         metrics:
           receivers:
             - otlp
+            - prometheus
           processors:
             - memory_limiter
             - batch
