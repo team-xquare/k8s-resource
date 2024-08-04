@@ -93,7 +93,7 @@ kube-prometheus-stack:
         version: v0.18.0
       additionalScrapeConfigs:
       - job_name: 'opentelemetry-collector'
-        scrape_interval: 10s
+        scrape_interval: 1s
         static_configs:
           - targets: [ 'opentelemetry-opentelemetry-collector.monitoring.svc.cluster.local:8889' ]
       ## actuator
