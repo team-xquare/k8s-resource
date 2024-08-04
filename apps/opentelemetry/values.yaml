@@ -36,7 +36,7 @@ opentelemetry-collector:
         tls:
           insecure: true
       prometheus:
-        endpoint: ${env:MY_POD_IP}:8889
+        endpoint: "0.0.0.0:8889"
     extensions:
       health_check: {}
       memory_ballast: {}
