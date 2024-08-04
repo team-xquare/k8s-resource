@@ -27,6 +27,8 @@ opentelemetry-collector:
         endpoint: xquare-infra-prod.xquare-prod.svc.cluster.local:4317
         tls:
           insecure: true
+      prometheus:
+        endpoint: kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
     extensions:
       # The health_check extension is mandatory for this chart.
       # Without the health_check extension the collector will fail the readiness and liveliness probes.
@@ -61,3 +63,11 @@ opentelemetry-collector:
             - batch
           receivers:
             - otlp
+        metrics:
+          receivers:
+            - otlp
+          processors:
+            - memory_limiter
+            - batch
+          exporters:
+            - prometheus
