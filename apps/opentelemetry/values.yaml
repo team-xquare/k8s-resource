@@ -29,13 +29,10 @@ opentelemetry-collector:
         tls:
           insecure: true
       prometheus:
-        endpoint: kube-prometheus-stack-prometheus.monitoring:9090
+        endpoint: "0.0.0.0:8889"
     extensions:
-      # The health_check extension is mandatory for this chart.
-      # Without the health_check extension the collector will fail the readiness and liveliness probes.
-      # The health_check extension can be modified, but should never be removed.
-      health_check: { }
-      memory_ballast: { }
+      health_check: {}
+      memory_ballast: {}
     processors:
       memory_limiter:
         check_interval: 1s
