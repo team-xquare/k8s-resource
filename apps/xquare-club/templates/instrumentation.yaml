@@ -17,10 +17,6 @@ spec:
     argument: "1"
   java:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:1.32.0
-  metrics:
-    enabled: true
-    resourceAttributes:
-      service.name: {{ $clubname }}-prod
 ---
 apiVersion: opentelemetry.io/v1alpha1
 kind: Instrumentation
@@ -38,8 +34,4 @@ spec:
     argument: "1"
   java:
     image: ghcr.io/open-telemetry/opentelemetry-operator/autoinstrumentation-java:1.32.0
-  metrics:
-    enabled: true
-    resourceAttributes:
-      service.name: {{ $clubname }}-stag
 {{- end }}
