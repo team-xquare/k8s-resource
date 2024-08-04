@@ -95,7 +95,7 @@ kube-prometheus-stack:
       - job_name: 'opentelemetry-collector'
         scrape_interval: 10s
         static_configs:
-          - targets: [ 'opentelemetry-opentelemetry-collector.monitoring.svc.cluster.local:4317' ]
+          - targets: [ 'opentelemetry-opentelemetry-collector.monitoring.svc.cluster.local:8889' ]
       ## actuator
       - job_name: 'spring-actuator'
         metrics_path: '/actuator/prometheus' # Application prometheus endpoint
