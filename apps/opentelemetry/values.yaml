@@ -22,12 +22,8 @@ opentelemetry-collector:
     exporters:
       otlp/tempo:
         endpoint: grafana-tempo-distributor-discovery.monitoring:4317
-        tls:
-          insecure: true
       otlp/springboot:
         endpoint: xquare-infra-prod.xquare-prod.svc.cluster.local:4317
-        tls:
-          insecure: true
       prometheus:
         endpoint: "0.0.0.0:8889"
     extensions:
