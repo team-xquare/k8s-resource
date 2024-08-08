@@ -72,7 +72,7 @@ nodepools:
     - name: xquare-critical
       spec:
         taints:
-          - key: "xquare/critical"
+          - key: "xquare/critical_service"
             value: "true"
             effect: "NoSchedule"
         labels:
