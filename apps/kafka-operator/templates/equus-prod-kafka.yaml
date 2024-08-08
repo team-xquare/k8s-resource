@@ -36,12 +36,12 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: "xquare/critical"
+                - key: "xquare/critical_service"
                   operator: "In"
                   values:
                     - "true"
     tolerations:
-      - key: "xquare/critical"
+      - key: "xquare/critical_service"
         operator: "Equal"
         value: "true"
         effect: "NoSchedule"
@@ -67,7 +67,7 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: "xquare/critical"
+                - key: "xquare/critical_service"
                   operator: "In"
                   values:
                     - "true"
