@@ -18,5 +18,6 @@ spec:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
           - matchExpressions:
-              - key: xquare/build-server
-                operator: Exists
+              - key: "Karpenter"
+                operator: In
+                values: [ "enabled" ]
