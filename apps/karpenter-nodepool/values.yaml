@@ -57,21 +57,15 @@ nodepools:
         kubeletConfiguration:
           maxPods: 110
         requirements:
+          - key: "node.kubernetes.io/instance-type"
+            operator: In
+            values: [ "t3.xlarge" ]
           - key: "topology.kubernetes.io/zone"
             operator: In
-            values: [ "ap-northeast-2a"]
-          - key: "kubernetes.io/arch"
-            operator: In
-            values: [ "amd64" ]
+            values: [ "ap-northeast-2a" ]
           - key: "karpenter.sh/capacity-type"
             operator: In
             values: [ "spot" ]
-          - key: "karpenter.k8s.aws/instance-hypervisor"
-            operator: In
-            values: [ "nitro" ]
-          - key: "karpenter.k8s.aws/instance-memory"
-            operator: Gt
-            values: [ "7168" ]
     - name: xquare-critical
       spec:
         taints:
