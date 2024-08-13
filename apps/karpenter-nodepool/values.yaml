@@ -69,6 +69,9 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-hypervisor"
             operator: In
             values: [ "nitro" ]
+          - key: "karpenter.k8s.aws/instance-memory"
+            operator: Gt
+            values: [ "7168Mi" ]
     - name: xquare-critical
       spec:
         taints:
