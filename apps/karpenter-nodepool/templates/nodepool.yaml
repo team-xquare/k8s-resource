@@ -19,7 +19,7 @@ spec:
         {{- if eq .nodeClass "default" }}
         name: xquare-nodeclass
         {{- else if eq .nodeClass "io2" }}
-        name: xquare-nodecalss-io2
+        name: xquare-nodeclass-io2
         {{- end }}
 
       taints: {{ .spec.taints | toYaml | nindent 8 }}
