@@ -21,4 +21,3 @@ spec:
         iops: 10000
         encrypted: true
         deleteOnTermination: true
-        throughput: 125
