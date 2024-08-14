@@ -66,6 +66,12 @@ nodepools:
           - key: "karpenter.sh/capacity-type"
             operator: In
             values: [ "spot" ]
+        provider:
+          blockDeviceMappings:
+            - deviceName: /dev/xvdb
+              ebs:
+                volumeID: vol-04b8f91aaf0c15161
+                deleteOnTermination: false
     - name: xquare-critical
       spec:
         taints:
