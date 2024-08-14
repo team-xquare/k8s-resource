@@ -16,5 +16,6 @@ spec:
   blockDeviceMappings:
     - deviceName: /dev/xvdb
       ebs:
+        volumeSize: 100Gi
         volumeID: vol-04b8f91aaf0c15161
         deleteOnTermination: false
