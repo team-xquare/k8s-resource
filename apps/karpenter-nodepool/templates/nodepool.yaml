@@ -16,7 +16,12 @@ spec:
         {{- end }}
     spec:
       nodeClassRef:
+        {{- if eq .nodeClass "default" }}
         name: xquare-nodeclass
+        {{- else if eq .nodeClass "io2" }}
+        name: xquare-nodecalss-io2
+        {{- end }}
+
       taints: {{ .spec.taints | toYaml | nindent 8 }}
       requirements:
         {{- range .spec.requirements }}
