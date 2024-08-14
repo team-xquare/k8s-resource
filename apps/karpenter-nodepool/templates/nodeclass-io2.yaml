@@ -17,7 +17,7 @@ spec:
     - deviceName: /dev/xvda
       ebs:
         volumeSize: 20Gi
-        volumeType: io2
+        volumeType: gp3
         iops: 10000
         encrypted: true
         deleteOnTermination: true
