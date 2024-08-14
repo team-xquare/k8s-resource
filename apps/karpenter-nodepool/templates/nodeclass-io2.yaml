@@ -17,5 +17,8 @@ spec:
     - deviceName: /dev/xvdb
       ebs:
         volumeSize: 100Gi
-        volumeID: vol-04b8f91aaf0c15161
-        deleteOnTermination: false
+        volumeType: gp3
+        iops: 10000
+        encrypted: true
+        deleteOnTermination: true
+        throughput: 125
