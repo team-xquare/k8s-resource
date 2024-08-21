@@ -29,6 +29,9 @@ tempo-distributed:
         key: xquare/platform
         operator: "Equal"
         value: "true"
+    resources:
+      requests:
+        memory: 1Gi
   traces:
     otlp:
       http:
