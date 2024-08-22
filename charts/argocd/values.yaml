@@ -52,4 +52,9 @@ argo-cd:
       requests:
         cpu: 32m
         memory: 516Mi
+  server:
+    resources:
+      requests:
+        cpu: 32m
+        memory: 516Mi
   
