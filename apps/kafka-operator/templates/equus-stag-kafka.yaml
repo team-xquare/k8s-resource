@@ -36,21 +36,20 @@ spec:
         memory: "8Gi"
     template:
       pod:
-        properties:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: "xquare/server"
-                        operator: "In"
-                        values:
-                          - "true"
-          tolerations:
-            - key: "xquare/server"
-              operator: "Equal"
-              value: "true"
-              effect: "NoSchedule"
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: "xquare/server"
+                      operator: "In"
+                      values:
+                        - "true"
+        tolerations:
+          - key: "xquare/server"
+            operator: "Equal"
+            value: "true"
+            effect: "NoSchedule"
     storage:
       type: jbod
       volumes:
@@ -73,21 +72,20 @@ spec:
       storageClass: gp2
     template:
       pod:
-        properties:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                  - matchExpressions:
-                      - key: "xquare/server"
-                        operator: "In"
-                        values:
-                          - "true"
-          tolerations:
-            - key: "xquare/server"
-              operator: "Equal"
-              value: "true"
-              effect: "NoSchedule"
+        affinity:
+          nodeAffinity:
+            requiredDuringSchedulingIgnoredDuringExecution:
+              nodeSelectorTerms:
+                - matchExpressions:
+                    - key: "xquare/server"
+                      operator: "In"
+                      values:
+                        - "true"
+        tolerations:
+          - key: "xquare/server"
+            operator: "Equal"
+            value: "true"
+            effect: "NoSchedule"
   entityOperator:
     topicOperator: {}
     userOperator: {}
