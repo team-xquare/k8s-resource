@@ -36,15 +36,6 @@ spec:
         memory: "8Gi"
     template:
       pod:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "xquare/critical_service"
-                      operator: "In"
-                      values:
-                        - "true"
         tolerations:
           - key: "xquare/critical_service"
             operator: "Equal"
@@ -72,15 +63,6 @@ spec:
       storageClass: gp2
     template:
       pod:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "xquare/critical_service"
-                      operator: "In"
-                      values:
-                        - "true"
         tolerations:
           - key: "xquare/critical_service"
             operator: "Equal"
