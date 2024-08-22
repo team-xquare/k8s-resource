@@ -31,20 +31,23 @@ spec:
       default.replication.factor: 1
       min.insync.replicas: 1
       inter.broker.protocol.version: "3.7"
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: "xquare/server"
-                  operator: "In"
-                  values:
-                    - "true"
-    tolerations:
-      - key: "xquare/server"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
+    template:
+      pod:
+        properties:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: "xquare/server"
+                        operator: "In"
+                        values:
+                          - "true"
+          tolerations:
+            - key: "xquare/server"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
     storage:
       type: jbod
       volumes:
@@ -62,20 +65,23 @@ spec:
       size: 10Gi
       deleteClaim: false
       storageClass: gp2
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: "xquare/server"
-                  operator: "In"
-                  values:
-                    - "true"
-    tolerations:
-      - key: "xquare/server"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
+    template:
+      pod:
+        properties:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: "xquare/server"
+                        operator: "In"
+                        values:
+                          - "true"
+          tolerations:
+            - key: "xquare/server"
+              operator: "Equal"
+              value: "true"
+              effect: "NoSchedule"
   entityOperator:
     topicOperator: {}
     userOperator: {}
