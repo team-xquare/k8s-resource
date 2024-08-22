@@ -31,10 +31,11 @@ spec:
       default.replication.factor: 1
       min.insync.replicas: 1
       inter.broker.protocol.version: "3.7"
-    resources:
-      requests:
-        memory: "8Gi"
     template:
+      pod:
+        resources:
+          requests:
+            memory: "8Gi"
         tolerations:
           - key: "xquare/server"
             operator: "Equal"
@@ -52,9 +53,6 @@ spec:
       type: simple
   zookeeper:
     replicas: 1
-    resources:
-      requests:
-        memory: "1Gi"
     storage:
       type: persistent-claim
       size: 10Gi
@@ -62,6 +60,9 @@ spec:
       storageClass: gp2
     template:
       pod:
+        resources:
+          requests:
+            memory: "1Gi"
         tolerations:
           - key: "xquare/server"
             operator: "Equal"
