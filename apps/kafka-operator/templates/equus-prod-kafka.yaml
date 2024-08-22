@@ -34,22 +34,20 @@ spec:
     resources:
       requests:
         memory: "8Gi"
-    template:
-      pod:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "xquare/critical_service"
-                      operator: "In"
-                      values:
-                        - "true"
-        tolerations:
-          - key: "xquare/critical_service"
-            operator: "Equal"
-            value: "true"
-            effect: "NoSchedule"
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "xquare/critical_service"
+                  operator: "In"
+                  values:
+                    - "true"
+    tolerations:
+      - key: "xquare/critical_service"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
     storage:
       type: jbod
       volumes:
@@ -70,22 +68,20 @@ spec:
       size: 10Gi
       deleteClaim: false
       storageClass: gp2
-    template:
-      pod:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "xquare/critical_service"
-                      operator: "In"
-                      values:
-                        - "true"
-        tolerations:
-          - key: "xquare/critical_service"
-            operator: "Equal"
-            value: "true"
-            effect: "NoSchedule"
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "xquare/critical_service"
+                  operator: "In"
+                  values:
+                    - "true"
+    tolerations:
+      - key: "xquare/critical_service"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
   entityOperator:
     topicOperator: {}
     userOperator: {}

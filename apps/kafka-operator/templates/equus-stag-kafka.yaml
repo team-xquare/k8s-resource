@@ -39,12 +39,12 @@ spec:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: "xquare/critical"
+                - key: "xquare/server"
                   operator: "In"
                   values:
                     - "true"
     tolerations:
-      - key: "xquare/critical"
+      - key: "xquare/server"
         operator: "Equal"
         value: "true"
         effect: "NoSchedule"
@@ -68,22 +68,20 @@ spec:
       size: 10Gi
       deleteClaim: false
       storageClass: gp2
-    template:
-      pod:
-        affinity:
-          nodeAffinity:
-            requiredDuringSchedulingIgnoredDuringExecution:
-              nodeSelectorTerms:
-                - matchExpressions:
-                    - key: "xquare/server"
-                      operator: "In"
-                      values:
-                        - "true"
-        tolerations:
-          - key: "xquare/server"
-            operator: "Equal"
-            value: "true"
-            effect: "NoSchedule"
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: "xquare/server"
+                  operator: "In"
+                  values:
+                    - "true"
+    tolerations:
+      - key: "xquare/server"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
   entityOperator:
     topicOperator: {}
     userOperator: {}
