@@ -33,14 +33,14 @@ spec:
       inter.broker.protocol.version: "3.7"
     template:
       pod:
-        resources:
-          requests:
-            memory: "8Gi"
         tolerations:
           - key: "xquare/critical_service"
             operator: "Equal"
             value: "true"
             effect: "NoSchedule"
+    resources:
+      requests:
+        memory: 8Gi
     storage:
       type: jbod
       volumes:
@@ -53,6 +53,9 @@ spec:
       type: simple
   zookeeper:
     replicas: 1
+    resources:
+      requests:
+        memory: 1Gi
     storage:
       type: persistent-claim
       size: 10Gi
@@ -60,9 +63,6 @@ spec:
       storageClass: gp2
     template:
       pod:
-        resources:
-          requests:
-            memory: "1Gi"
         tolerations:
           - key: "xquare/critical_service"
             operator: "Equal"

@@ -5,6 +5,9 @@ metadata:
   namespace: kafka
 spec:
   kafka:
+    resources:
+      requests:
+        memory: 8Gi
     version: 3.7.0
     replicas: 1
     listeners:
@@ -53,6 +56,9 @@ spec:
       type: simple
   zookeeper:
     replicas: 1
+    resources:
+      requests:
+        memory: 1Gi
     storage:
       type: persistent-claim
       size: 10Gi
