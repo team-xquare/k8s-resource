@@ -1,0 +1,10 @@
+apiVersion: v2
+name: mongodb
+description: A Helm chart for mongodb
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+dependencies:
+  - name: mongodb
+    version: 15.6.21
+    repository: https://charts.bitnami.com/bitnami
