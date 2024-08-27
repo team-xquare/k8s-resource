@@ -146,6 +146,11 @@ virtualServices:
     destination:
       host: grafana-tempo-distributor-discovery.monitoring.svc.cluster.local
       port: 4317
+  - name: mongodb
+    host: mongodb.xquare.app
+    destination:
+      host: mongodb.mongodb.svc.cluster.local
+      port: 27017
 addons:
   jeager:
     enable: false
