@@ -1,0 +1,19 @@
+mongodb:
+  architecture: standalone
+
+  useStatefulSet: true
+
+  auth:
+    enabled: false
+
+  persistence:
+    enabled: true
+    storageClass: "gp2"
+    accessModes:
+      - ReadWriteOnce
+    size: 40Gi
+
+  service:
+    type: ClusterIP
+    port: 27017
+    portName: mongodb
