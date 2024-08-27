@@ -23,3 +23,10 @@ mongodb:
       key: xquare/platform
       operator: "Equal"
       value: "true"
+  resources:
+    requests:
+      cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 4
+      memory: 6Gi
