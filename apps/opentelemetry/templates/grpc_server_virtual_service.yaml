@@ -1,0 +1,27 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: xquare-application-prod-otel-trace-reciever-domain-ingress
+  namespace: xquare-prod
+spec:
+  gateways:
+    - istio-system/xquare-ingressgateway
+  hosts:
+    - otel-trace-reciever.xquare.app
+  http:
+      name: otel-trace-reciever
+      route:
+        - destination:
+            host: otel-trace-reciever-be-prod.xquare-prod.svc.cluster.local
+            port:
+              number: 4317
+      headers:
+        request:
+          set:
+            x-envoy-force-trace: "true"
+        retries:
+          attempts: 3
+          perTryTimeout: 2s
+          retryOn: 5xx
+        timeout: 10s
+
