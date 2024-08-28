@@ -13,4 +13,4 @@ spec:
       targetPort: 4317
   selector:
     app: otel-trace-reciever-be-prod
-  type: ClusterIP
+  type: LoadBalancer
