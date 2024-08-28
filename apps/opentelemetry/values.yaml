@@ -32,6 +32,7 @@ opentelemetry-collector:
         endpoint: grpc-nginx-service.xquare-prod.svc.cluster.local:80
         tls:
           insecure: true
+        compression: none
       prometheus:
         endpoint: "0.0.0.0:8889"
     extensions:
