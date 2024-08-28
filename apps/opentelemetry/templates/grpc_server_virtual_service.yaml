@@ -9,7 +9,7 @@ spec:
   hosts:
     - otel-trace-reciever.xquare.app
   http:
-      name: otel-trace-reciever
+    - name: otel-trace-reciever
       route:
         - destination:
             host: otel-trace-reciever-be-prod.xquare-prod.svc.cluster.local
