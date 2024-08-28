@@ -30,7 +30,8 @@ opentelemetry-collector:
           insecure: true
       otlp/go:
         endpoint: otel-trace-reciever-be-prod.xquare-prod.svc.cluster.local:4317
-        insecure: true
+        tls:
+          insecure: false
       prometheus:
         endpoint: "0.0.0.0:8889"
     extensions:
