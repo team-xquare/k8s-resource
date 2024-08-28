@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: otel-trace-reciever-be-prod
+    environment: prod
+  name: otel-trace-reciever-be-prod
+  namespace: xquare-prod
+spec:
+  ports:
+    - name: port
+      port: 4317
+      targetPort: 4317
+  selector:
+    app: otel-trace-reciever-be-prod
+  type: ClusterIP
