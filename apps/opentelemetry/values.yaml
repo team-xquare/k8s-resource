@@ -29,7 +29,7 @@ opentelemetry-collector:
         tls:
           insecure: true
       otlp/go:
-        endpoint: grpc-nginx-service.xquare-prod
+        endpoint: grpc-nginx-service.xquare-prod.svc.cluster.local:80
         tls:
           insecure: true
       prometheus:
