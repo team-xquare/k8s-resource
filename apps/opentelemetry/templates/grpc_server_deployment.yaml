@@ -43,7 +43,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - image: >-
-            786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/otel-trace-reciever-be-prod:prod-bd1b42302d9cebe3da38552e9476fd640bbf3f27
+            786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/otel-trace-reciever-be-prod:prod-886ec564067e29f8f71440e621591b08acc7b2d3
           env:
             - name: MONGO_URI
               value: mongodb://mongodb.mongodb.svc.cluster.local:27017/xquare_infra
