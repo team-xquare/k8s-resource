@@ -129,15 +129,6 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: grafana-tempo
-        namespace: monitoring
-        source:
-          path: apps/grafana-tempo
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
       - name: gocd
         namespace: gocd
         source:

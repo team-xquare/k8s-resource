@@ -1,3 +1,4 @@
+# 2024 9/2 이후로 쓰이지 않음
 apiVersion: v2
 name: grafana-tempo
 type: application
