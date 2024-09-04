@@ -1,9 +1,0 @@
-# 2024 9/2 이후로 쓰이지 않음
-apiVersion: v2
-name: grafana-tempo
-type: application
-version: 1.0.0
-dependencies:
-  - name: tempo-distributed
-    version: 1.11.0
-    repository: https://grafana.github.io/helm-charts
