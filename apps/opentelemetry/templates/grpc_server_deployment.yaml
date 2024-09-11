@@ -46,7 +46,10 @@ spec:
             786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/otel-trace-reciever-be-prod:prod-886ec564067e29f8f71440e621591b08acc7b2d3
           env:
             - name: MONGO_URI
-              value: mongodb://mongodb.mongodb.svc.cluster.local:27017/xquare_infra
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: mongo-uri
           imagePullPolicy: Always
           name: otel-trace-reciever-be-prod
           ports:
