@@ -64,6 +64,10 @@ egressGateway:
     protocol: TCP 
     host: "mongodb.dsm-repo.com"
     port: 27017
+  - name: xquare-mongodb
+    protocol: TCP
+    host: "xquare-docdb-cluster.cluster-c31jdrca4ayb.ap-northeast-2.docdb.amazonaws.com"
+    port: 27017
 
 virtualServices:
   - name: argocd-server
