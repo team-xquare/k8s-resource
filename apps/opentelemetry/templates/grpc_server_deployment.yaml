@@ -43,7 +43,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
         - image: >-
-            786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/otel-trace-reciever-be-prod:prod-07d01c2afc37bbaf2ef6f76a9294eb8551293c18
+            786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/otel-trace-reciever-be-prod:prod-d941ed4ad4142da92f12ac4ab4ec29ece6f736dd
           env:
             - name: MONGO_URI
               valueFrom:
