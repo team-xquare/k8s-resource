@@ -8,7 +8,6 @@ spec:
   disruption:
     consolidationPolicy: WhenUnderutilized
     expireAfter: 720h
-    consolidateAfter: 5m
   template:
     metadata:
       labels:
@@ -17,7 +16,11 @@ spec:
         {{- end }}
     spec:
       nodeClassRef:
+        {{- if eq .nodeClass "default" }}
         name: xquare-nodeclass
+        {{- else if eq .nodeClass "io2" }}
+        name: xquare-nodeclass-io2
+        {{- end }}
 
       taints: {{ .spec.taints | toYaml | nindent 8 }}
       requirements:
@@ -29,4 +32,10 @@ spec:
             - {{ . | quote }}
           {{- end }}
         {{- end }}
+      kubelet:
+        evictionSoft:
+          memory.available: 1000Mi
+        evictionSoftGracePeriod:
+          memory.available: 1m
+        maxPods: {{ .spec.kubeletConfiguration.maxPods }}
 {{ end }}
