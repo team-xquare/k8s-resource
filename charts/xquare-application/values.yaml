@@ -147,12 +147,3 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: mongodb
-        namespace: mongodb
-        source:
-          path: apps/mongodb
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
