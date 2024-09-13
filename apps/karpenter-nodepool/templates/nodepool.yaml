@@ -6,7 +6,7 @@ metadata:
   name: {{ .name }}-nodepool
 spec:
   disruption:
-    consolidationPolicy: WhenUnderutilized
+    consolidationPolicy: WhenEmptyOrUnderutilized
     expireAfter: 720h
   template:
     metadata:
@@ -16,11 +16,9 @@ spec:
         {{- end }}
     spec:
       nodeClassRef:
-        {{- if eq .nodeClass "default" }}
+        group: karpenter.k8s.aws
+        kind: EC2NodeClass
         name: xquare-nodeclass
-        {{- else if eq .nodeClass "io2" }}
-        name: xquare-nodeclass-io2
-        {{- end }}
 
       taints: {{ .spec.taints | toYaml | nindent 8 }}
       requirements:
@@ -32,10 +30,4 @@ spec:
             - {{ . | quote }}
           {{- end }}
         {{- end }}
-      kubelet:
-        evictionSoft:
-          memory.available: 1000Mi
-        evictionSoftGracePeriod:
-          memory.available: 1m
-        maxPods: {{ .spec.kubeletConfiguration.maxPods }}
 {{ end }}

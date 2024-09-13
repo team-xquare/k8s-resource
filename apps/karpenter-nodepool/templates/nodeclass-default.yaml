@@ -5,6 +5,8 @@ metadata:
 spec:
   role: "KarpenterNodeRole-xquare-v3-cluster"
   amiFamily: AL2
+  amiSelectorTerms:
+    - id: ami-055a279ce49cf8270
   securityGroupSelectorTerms:
     - tags:
         aws:eks:cluster-name: xquare-v3-cluster
@@ -20,3 +22,9 @@ spec:
         volumeType: gp3
         encrypted: true
         deleteOnTermination: true
+  kubelet:
+    evictionSoft:
+      memory.available: 1000Mi
+    evictionSoftGracePeriod:
+      memory.available: 1m
+    maxPods: {{ .spec.kubeletConfiguration.maxPods }}
