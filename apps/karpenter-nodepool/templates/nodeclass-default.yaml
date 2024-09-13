@@ -27,4 +27,4 @@ spec:
       memory.available: 1000Mi
     evictionSoftGracePeriod:
       memory.available: 1m
-    maxPods: {{ .spec.kubeletConfiguration.maxPods }}
+    maxPods: 110
