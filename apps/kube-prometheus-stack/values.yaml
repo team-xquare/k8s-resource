@@ -473,6 +473,7 @@ kube-prometheus-stack:
 
   grafana:
     enabled: true
+    assertNoLeakedSecrets: false
     resources:
       requests:
         cpu: 10m
