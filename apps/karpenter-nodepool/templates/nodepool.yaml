@@ -1,13 +1,14 @@
 {{- range .Values.nodepools.services }}
 ---
-apiVersion: karpenter.sh/v1beta1
+apiVersion: karpenter.sh/v1
 kind: NodePool
 metadata:
   name: {{ .name }}-nodepool
 spec:
   disruption:
-    consolidationPolicy: WhenUnderutilized
+    consolidationPolicy: WhenEmptyOrUnderutilized
     expireAfter: 720h
+    consolidationAfter: 5m
   template:
     metadata:
       labels:
@@ -16,11 +17,7 @@ spec:
         {{- end }}
     spec:
       nodeClassRef:
-        {{- if eq .nodeClass "default" }}
-        name: xquare-nodeclass
-        {{- else if eq .nodeClass "io2" }}
-        name: xquare-nodeclass-io2
-        {{- end }}
+        name: xquare-nodeclass-default
 
       taints: {{ .spec.taints | toYaml | nindent 8 }}
       requirements:
