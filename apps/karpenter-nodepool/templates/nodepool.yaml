@@ -6,7 +6,7 @@ metadata:
   name: {{ .name }}-nodepool
 spec:
   disruption:
-    consolidationPolicy: WhenEmptyOrUnderutilized
+    consolidationPolicy: WhenUnderutilized
     expireAfter: 720h
     consolidateAfter: 5m
   template:
