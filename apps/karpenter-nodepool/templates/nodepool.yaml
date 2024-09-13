@@ -17,8 +17,6 @@ spec:
         {{- end }}
     spec:
       nodeClassRef:
-        group: karpenter.k8s.aws
-        kind: EC2NodeClass
         name: xquare-nodeclass
 
       taints: {{ .spec.taints | toYaml | nindent 8 }}
