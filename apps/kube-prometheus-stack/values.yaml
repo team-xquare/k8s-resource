@@ -88,8 +88,9 @@ kube-prometheus-stack:
       thanos:
         minTime: -3h
         objectStorageConfig:
-          key: objstore.yml
-          name: thanos-objstore-secret
+          existingSecret:
+            key: objstore.yml
+            name: thanos-objstore-secret
         version: v0.18.0
       additionalScrapeConfigs:
       - job_name: 'opentelemetry-collector'
@@ -438,11 +439,13 @@ kube-prometheus-stack:
     enabled: true
     thanosRulerSpec:
       alertmanagersConfig:
-        key: alertmanager-configs.yaml
-        name: thanosruler-alertmanager-config
+        existingSecret:
+          key: alertmanager-configs.yaml
+          name: thanosruler-alertmanager-config
       objectStorageConfig:
-        key: objstore.yml
-        name: thanos-objstore-secret
+        existingSecret:
+          key: objstore.yml
+          name: thanos-objstore-secret
       volumes:
         - name: object-storage
           secret:
