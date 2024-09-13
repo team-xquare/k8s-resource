@@ -48,6 +48,6 @@ nodeSelector:
   
 tolerations:
 - effect: "NoSchedule"
-  key: "xquare/critical"
+  key: "xquare/critical_service"
   operator: "Equal"
   value: "true"
