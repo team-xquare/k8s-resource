@@ -1,7 +1,7 @@
 apiVersion: karpenter.k8s.aws/v1
 kind: EC2NodeClass
 metadata:
-  name: xquare-nodeclass
+  name: xquare-nodeclass-default
 spec:
   role: "KarpenterNodeRole-xquare-v3-cluster"
   amiFamily: AL2
