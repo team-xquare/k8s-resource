@@ -8,7 +8,7 @@ spec:
   disruption:
     consolidationPolicy: WhenEmptyOrUnderutilized
     expireAfter: 720h
-    consolidationAfter: 5m
+    consolidateAfter: 5m
   template:
     metadata:
       labels:
