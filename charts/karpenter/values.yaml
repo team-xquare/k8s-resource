@@ -12,7 +12,7 @@ karpenter:
   settings:
     clusterName: "xquare-v3-cluster"
   tolerations:
-    - key: "xquare/critical"
+    - key: "xquare/critical_service"
       operator: "Equal"
       value: "true"
       effect: "NoSchedule"
