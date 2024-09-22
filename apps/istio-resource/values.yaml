@@ -130,11 +130,6 @@ virtualServices:
     destination:
       host: hook.prow.svc.cluster.local
       port: 8888
-  - name: grafana-tempo
-    host: grafana-tempo.xquare.app
-    destination:
-      host: grafana-tempo-query-frontend-discovery.monitoring.svc.cluster.local
-      port: 3100
   - name: gocd
     host: gocd.xquare.app
     destination:
@@ -145,11 +140,6 @@ virtualServices:
     destination:
       host: equus-stag-kafka-cluster-kafka-bootstrap.kafka.svc.cluster.local
       port: 9092
-  - name: grafana-tempo-distributor
-    host: grafana-tempo-distributor.xquare.app
-    destination:
-      host: grafana-tempo-distributor-discovery.monitoring.svc.cluster.local
-      port: 4317
   - name: mongodb
     host: mongodb.xquare.app
     destination:
