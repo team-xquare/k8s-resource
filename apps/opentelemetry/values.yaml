@@ -55,7 +55,6 @@ opentelemetry-collector:
       pipelines:
         traces:
           exporters:
-            - otlp/tempo
             - otlp/go
           processors:
             - memory_limiter
