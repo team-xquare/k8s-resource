@@ -109,12 +109,12 @@ gocd:
       - "-c"
       - |
         cd /home/go && \
-        git clone https://github.com/team-xquare/xquare-gitops-repo && \
-        cd xquare-gitops-repo && \
-        git checkout v2
+        git clone https://github.com/team-xquare/xquare-gitops-repo-v2 && \
+        cd xquare-gitops-repo-v2 && \
+        git checkout main
         git config --global user.name "xquare-admin"
         git config --global user.email "teamxquare@gmail.com"
-        git remote set-url origin https://xquare-admin:$(cat /etc/config/keys/GITHUB_TOKEN)@github.com/team-xquare/xquare-gitops-repo.git
+        git remote set-url origin https://xquare-admin:$(cat /etc/config/keys/GITHUB_TOKEN)@github.com/team-xquare/xquare-gitops-repo-v2.git
     persistence:
       extraVolumes:
         - name: kubectl
