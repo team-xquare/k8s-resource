@@ -48,32 +48,6 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-hypervisor"
             operator: In
             values: [ "nitro" ]
-    - name: xquare-build-server
-      nodeClass: "io2"
-      spec:
-        taints:
-          - key: "xquare/build-server"
-            value: "true"
-            effect: "NoSchedule"
-        labels:
-          Karpenter: enabled
-        kubeletConfiguration:
-          maxPods: 110
-        requirements:
-          - key: "node.kubernetes.io/instance-type"
-            operator: In
-            values: [ "t3.xlarge" ]
-          - key: "topology.kubernetes.io/zone"
-            operator: In
-            values: [ "ap-northeast-2a" ]
-          - key: "karpenter.sh/capacity-type"
-            operator: In
-            values: [ "spot" ]
-        blockDeviceMappings:
-          - deviceName: /dev/xvdb
-            ebs:
-              volumeID: vol-04b8f91aaf0c15161
-              deleteOnTermination: false
     - name: xquare-critical
       nodeClass: "default"
       spec:
