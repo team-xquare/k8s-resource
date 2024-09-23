@@ -64,7 +64,7 @@ spec:
     template:
       pod:
         tolerations:
-          - key: "xquare/critical_service"
+          - key: "xquare/critical_platform"
             operator: "Equal"
             value: "true"
             effect: "NoSchedule"
