@@ -48,7 +48,7 @@ nodepools:
           - key: "karpenter.k8s.aws/instance-hypervisor"
             operator: In
             values: [ "nitro" ]
-    - name: xquare-critical
+    - name: xquare-critical-service
       nodeClass: "default"
       spec:
         taints:
@@ -63,6 +63,27 @@ nodepools:
           - key: "topology.kubernetes.io/zone"
             operator: In
             values: [ "ap-northeast-2a"]
+          - key: "kubernetes.io/arch"
+            operator: In
+            values: [ "amd64" ]
+          - key: "karpenter.sh/capacity-type"
+            operator: In
+            values: [ "on-demand" ]
+    - name: xquare-critical-platform
+      nodeClass: "default"
+      spec:
+        taints:
+          - key: "xquare/critical_platform"
+            value: "true"
+            effect: "NoSchedule"
+        labels:
+          Karpenter: enabled
+        kubeletConfiguration:
+          maxPods: 110
+        requirements:
+          - key: "topology.kubernetes.io/zone"
+            operator: In
+            values: [ "ap-northeast-2a" ]
           - key: "kubernetes.io/arch"
             operator: In
             values: [ "amd64" ]
