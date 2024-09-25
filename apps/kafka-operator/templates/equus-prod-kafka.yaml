@@ -40,7 +40,7 @@ spec:
             effect: "NoSchedule"
     resources:
       requests:
-        memory: 8Gi
+        memory: 3Gi
     storage:
       type: jbod
       volumes:
