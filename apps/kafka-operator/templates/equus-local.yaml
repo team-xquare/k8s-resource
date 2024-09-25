@@ -9,7 +9,7 @@ spec:
     replicas: 1
     resources:
       requests:
-        memory: 8Gi
+        memory: 3Gi
     listeners:
       - name: plain
         port: 9092
