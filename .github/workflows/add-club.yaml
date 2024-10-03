@@ -1,0 +1,29 @@
+name: Add Club to List
+
+on:
+  repository_dispatch:
+    types: [add_club]
+
+jobs:
+  update-club-list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Add club name to clubs.yaml
+        run: |
+          echo "  - name: ${{ github.event.inputs.club_name }}" >> ./apps/xquare-club/values.yaml
+          
+      - name: Commit The New Image Reference
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "release :: new club"
+          branch: main
+          commit_options: '--no-verify --signoff'
+          repository: .
+          commit_user_name: XQUARE GitOps Bot
+          commit_user_email: teamxquare@gmail.com
+          commit_author: XQUARE GitOps Bot <teamxquare@gmail.com>
+
+      
