@@ -13,7 +13,7 @@ jobs:
 
       - name: Add club name to clubs.yaml
         run: |
-          echo "  - name: ${{ github.event.inputs.club_name }}" >> ./apps/xquare-club/values.yaml
+          echo "  - name: ${{ github.event.client_payload.club_name }}" >> ./apps/xquare-club/values.yaml
           
       - name: Commit The New Image Reference
         uses: stefanzweifel/git-auto-commit-action@v4
