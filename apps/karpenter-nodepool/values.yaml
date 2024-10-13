@@ -90,7 +90,7 @@ nodepools:
           - key: "karpenter.sh/capacity-type"
             operator: In
             values: [ "on-demand" ]
-    - name: xquare-ci
+    - name: xquare-ci-server
       nodeClass: "default"
       spec:
         taints:
