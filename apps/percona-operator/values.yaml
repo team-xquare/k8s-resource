@@ -19,6 +19,8 @@ psmdb-db:
           key: xquare/database
           operator: "Equal"
           value: "true"
+      expose:
+        exposeType: LoadBalancer
   backup:
     enabled: false
     storages:
