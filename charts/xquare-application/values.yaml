@@ -147,3 +147,12 @@ projects:
           automated:
             prune: false
             selfHeal: true
+      - name: percona-operator
+        namespace: percona
+        source:
+          path: apps/percona-operator
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
