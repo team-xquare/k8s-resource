@@ -13,6 +13,12 @@ psmdb-db:
           key: xquare/database
           operator: "Equal"
           value: "true"
+  mongos:
+    tolerations:
+      - effect: "NoSchedule"
+        key: xquare/database
+        operator: "Equal"
+        value: "true"
   backup:
     enabled: false
     storages:
