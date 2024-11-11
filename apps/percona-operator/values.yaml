@@ -1,6 +1,8 @@
 psmdb-db:
-  tolerations:
-    - effect: "NoSchedule"
-      key: xquare/database
-      operator: "Equal"
-      value: "true"
+  replsets:
+    rs0:
+      tolerations:
+        - effect: "NoSchedule"
+          key: xquare/database
+          operator: "Equal"
+          value: "true"
