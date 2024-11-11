@@ -22,13 +22,13 @@ psmdb-db:
       expose:
         exposeType: LoadBalancer
 
-    users:
-      - name: admin
-        passwordSecretRef:
-          name: mongo-admin
-          key: password
-        roles:
-          - name: dbOwner
+  users:
+    - name: admin
+      passwordSecretRef:
+        name: mongo-admin
+        key: password
+      roles:
+        - name: dbOwner
   backup:
     enabled: false
     storages:
