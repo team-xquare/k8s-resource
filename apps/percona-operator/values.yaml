@@ -6,3 +6,5 @@ psmdb-db:
           key: xquare/database
           operator: "Equal"
           value: "true"
+  backup:
+    enabled: false
