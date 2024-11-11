@@ -6,6 +6,13 @@ psmdb-db:
           key: xquare/database
           operator: "Equal"
           value: "true"
+  sharding:
+    configrs:
+      tolerations:
+        - effect: "NoSchedule"
+          key: xquare/database
+          operator: "Equal"
+          value: "true"
   backup:
     enabled: false
     storages:
