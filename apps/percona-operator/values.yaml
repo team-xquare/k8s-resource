@@ -31,6 +31,14 @@ psmdb-db:
       roles:
         - name: clusterAdmin
           db: admin
+    - name: dsm-repo
+      db: dsm-repo
+      passwordSecretRef:
+        name: dsm-repo
+        key: password
+      roles:
+        - name: dbOwner
+          db: dsm-repo
   backup:
     enabled: false
     storages:
