@@ -21,6 +21,14 @@ psmdb-db:
           value: "true"
       expose:
         exposeType: LoadBalancer
+
+    users:
+      - name: admin
+        passwordSecretRef:
+          name: mongo-admin
+          key: password
+        roles:
+          - name: dbOwner
   backup:
     enabled: false
     storages:
