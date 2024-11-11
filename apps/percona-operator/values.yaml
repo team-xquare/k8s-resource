@@ -24,13 +24,13 @@ psmdb-db:
 
   users:
     - name: admin
-      db: *
+      db: admin
       passwordSecretRef:
         name: mongo-admin
         key: password
       roles:
         - name: clusterAdmin
-          db: *
+          db: admin
   backup:
     enabled: false
     storages:
