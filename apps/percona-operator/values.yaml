@@ -15,9 +15,9 @@ psmdb-db:
         limits:
           cpu: "300m"
           memory: "2G"
-          requests:
-            cpu: "300m"
-            memory: "2G"
+        requests:
+          cpu: "300m"
+          memory: "2G"
   sharding:
     configrs:
       tolerations:
