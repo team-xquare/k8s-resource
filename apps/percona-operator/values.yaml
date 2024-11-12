@@ -29,7 +29,7 @@ psmdb-db:
         name: mongo-admin
         key: password
       roles:
-        - name: clusterAdmin
+        - name: root
           db: admin
     - name: dsm-repo
       db: dsm-repo
