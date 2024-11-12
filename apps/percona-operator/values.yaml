@@ -6,6 +6,11 @@ psmdb-db:
           key: xquare/database
           operator: "Equal"
           value: "true"
+      volumeSpec:
+        pvc:
+          resources:
+            requests:
+              storage: 30Gi
   sharding:
     configrs:
       tolerations:
