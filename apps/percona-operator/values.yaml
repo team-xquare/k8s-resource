@@ -63,3 +63,8 @@ psmdb-db:
         keep: 3
         storageName: s3-us-west
         compressionType: gzip
+
+prometheus-mongodb-exporter:
+  existingSecret:
+    name: "mongodb-secret"
+    key: "mongodb-uri"
