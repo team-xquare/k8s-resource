@@ -93,6 +93,9 @@ kube-prometheus-stack:
             name: thanos-objstore-secret
         version: v0.18.0
       additionalScrapeConfigs:
+      - job_name: 'mongodb-exporter'
+        static_configs:
+          - targets: [ 'percona-operator-prometheus-mongodb-exporter.percona.svc.cluster.local:9216' ]
       - job_name: 'opentelemetry-collector'
         kubernetes_sd_configs:
           - role: pod
