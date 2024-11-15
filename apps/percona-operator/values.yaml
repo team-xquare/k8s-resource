@@ -13,11 +13,11 @@ psmdb-db:
               storage: 10Gi
       resources:
         limits:
-          cpu: "300m"
-          memory: "2G"
+          cpu: "500m"
+          memory: "3G"
         requests:
-          cpu: "300m"
-          memory: "2G"
+          cpu: "500m"
+          memory: "3G"
   sharding:
     configrs:
       tolerations:
