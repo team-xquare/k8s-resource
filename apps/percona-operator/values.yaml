@@ -72,4 +72,4 @@ prometheus-mongodb-exporter:
   serviceMonitor:
     enabled: true
     additionalLabels:
-      release: prometheus-stack
+      prometheus: prometheus-stack
