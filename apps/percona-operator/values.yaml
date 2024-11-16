@@ -69,3 +69,9 @@ prometheus-mongodb-exporter:
   existingSecret:
     name: "mongodb-secret"
     key: "mongodb-uri"
+  extraArgs:
+    - --collect.collection
+    - --collect.database
+    - --collect.indexusage
+    - --collect.topmetrics
+    - --collect.connpoolstats
