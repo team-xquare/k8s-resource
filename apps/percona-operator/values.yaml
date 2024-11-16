@@ -26,6 +26,7 @@ psmdb-db:
           operator: "Equal"
           value: "true"
     mongos:
+      size: 1
       tolerations:
         - effect: "NoSchedule"
           key: xquare/database
