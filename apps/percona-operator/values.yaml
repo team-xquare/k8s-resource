@@ -72,3 +72,5 @@ prometheus-mongodb-exporter:
   podAnnotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "metrics"
+  serviceMonitor:
+    enabled: false
