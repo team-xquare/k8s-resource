@@ -76,6 +76,9 @@ kube-prometheus-stack:
       targetPort: grpc
       type: ClusterIP
     prometheusSpec:
+      serviceMonitorSelector:
+        matchLabels:
+          release: prometheus-stack
       resources:
         requests:
           cpu: 1024m
