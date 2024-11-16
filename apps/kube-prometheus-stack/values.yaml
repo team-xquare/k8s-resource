@@ -78,7 +78,7 @@ kube-prometheus-stack:
     prometheusSpec:
       serviceMonitorSelector:
         matchLabels:
-          release: prometheus-stack
+          prometheus: prometheus-stack
       resources:
         requests:
           cpu: 1024m
