@@ -70,27 +70,24 @@ gocd:
         volumeMounts:
           - name: auth-config
             mountPath: /godata/config/password
-      - name: update-cruise-config
-        image: "busybox:latest"
-        command: ["sh", "-c"]
-        args:
-          - |
-            while [ ! -f /godata/config/cruise-config.xml ]; do
-              sleep 1
-            done
 
-            if ! grep -q "<security>" /godata/config/cruise-config.xml; then
-              sed -i '/<artifacts>/i\    <security>\n      <authConfigs>\n        <authConfig id="pw" pluginId="cd.go.authentication.passwordfile">\n          <property>\n            <key>PasswordFilePath</key>\n            <value>\/godata\/config\/password\/passwd<\/value>\n          <\/property>\n        <\/authConfig>\n      <\/authConfigs>\n    <\/security>' /godata/config/cruise-config.xml
-            fi
-        volumeMounts:
-          - name: cruise-config
-            mountPath: /godata/config
+    postStart:
+      - "sh"
+      - "-c"
+      - |
+        while [ ! -f /godata/config/cruise-config.xml ]; do
+          sleep 1
+        done
+
+        if ! grep -q "<security>" /godata/config/cruise-config.xml; then
+          sed -i '/<artifacts>/i\    <security>\n      <authConfigs>\n        <authConfig id="pw" pluginId="cd.go.authentication.passwordfile">\n          <property>\n            <key>PasswordFilePath</key>\n            <value>\/godata\/config\/password\/passwd<\/value>\n          <\/property>\n        <\/authConfig>\n      <\/authConfigs>\n    <\/security>' /godata/config/cruise-config.xml
+        fi
 
     ingress:
       enabled: false
     service:
       type: "ClusterIP"
-    env: # 처음에는 Plugin 없이 배포 해야함.
+    env:
       extraEnvVars:
         - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
           value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
@@ -98,91 +95,3 @@ gocd:
     resources:
       requests:
         memory: 1024Mi
-  # 2024-08-04 Elastic Agent 로 이전
-  agent:
-    resources:
-      requests:
-        memory: 12G
-      limits:
-        memory: 16G
-    image:
-      repository: "786584124104.dkr.ecr.ap-northeast-2.amazonaws.com/gocd-agent"
-      tag: "1.0.0"
-    serviceAccount:
-      reuseTopLevelServiceAccount: true
-      automountServiceAccountToken: true
-    replicaCount: 0
-    securityContext:
-      runAsUser: 0
-      runAsGroup: 0
-      fsGroup: 0
-      fsGroupChangePolicy: "OnRootMismatch"
-    privileged: true
-    env:
-      extraEnvVars:
-        - name: GITHUB_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: github-token
-              key: GITHUB_TOKEN
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: aws-credentials
-              key: aws_access_key_id
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: aws-credentials
-              key: aws_secret_access_key
-    tolerations:
-      - key: "xquare/build-server"
-        operator: "Equal"
-        value: "true"
-        effect: "NoSchedule"
-    affinity:
-      nodeAffinity:
-        requiredDuringSchedulingIgnoredDuringExecution:
-          nodeSelectorTerms:
-            - matchExpressions:
-                - key: "Karpenter"
-                  operator: In
-                  values: ["enabled"]
-    postStart:
-      - "sh"
-      - "-c"
-      - |
-        cd /home/go && \
-        git clone https://github.com/team-xquare/xquare-gitops-repo-v2 && \
-        cd xquare-gitops-repo-v2 && \
-        git checkout main
-        git config --global user.name "xquare-admin"
-        git config --global user.email "teamxquare@gmail.com"
-        git remote set-url origin https://xquare-admin:$(cat /etc/config/keys/GITHUB_TOKEN)@github.com/team-xquare/xquare-gitops-repo-v2.git
-    persistence:
-      extraVolumes:
-        - name: kubectl
-          emptyDir: { }
-        - name: helm
-          emptyDir: { }
-        - name: github-token
-          secret:
-            secretName: github-token
-            defaultMode: 0744
-        - name: aws-credentials
-          secret:
-            secretName: aws-credentials
-            defaultMode: 0744
-      extraVolumeMounts:
-        - name: kubectl
-          mountPath: /usr/local/bin/kubectl
-          subPath: kubectl
-        - name: helm
-          mountPath: /usr/local/bin/helm
-          subPath: helm
-        - name: github-token
-          mountPath: /etc/config/keys/
-          readOnly: true
-        - name: aws-credentials
-          mountPath: /etc/config/aws/
-          readOnly: true
