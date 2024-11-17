@@ -1,6 +1,8 @@
 psmdb-db:
   replsets:
     rs0:
+      expose:
+        enabled: true
       tolerations:
         - effect: "NoSchedule"
           key: xquare/database
