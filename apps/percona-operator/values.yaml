@@ -34,6 +34,13 @@ psmdb-db:
           value: "true"
       expose:
         exposeType: LoadBalancer
+      resources:
+        limits:
+          cpu: "700m"
+          memory: "3G"
+        requests:
+          cpu: "700m"
+          memory: "3G"
 
   users:
     - name: admin
