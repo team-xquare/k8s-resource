@@ -81,6 +81,7 @@ prometheus-mongodb-exporter:
     additionalLabels:
       prometheus: prometheus-stack
   extraArgs:
+    - --collector.diagnosticdata
     - --discovering-mode
     - --compatible-mode
     - --collect-all
