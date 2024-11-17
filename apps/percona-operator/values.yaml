@@ -73,3 +73,14 @@ prometheus-mongodb-exporter:
     enabled: true
     additionalLabels:
       prometheus: prometheus-stack
+  extraArgs:
+  - --collect.collection
+  - --collect.database
+  - --collect.indexusage
+  - --collect.topmetrics
+  - --collect.connpoolstats
+  - --collect.opcounters
+  - --collect.replicaset
+  - --collect.dbstats
+  - --collect.collstats
+  - --collect.indexstats
