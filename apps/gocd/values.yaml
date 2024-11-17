@@ -59,6 +59,16 @@ gocd:
           mountPath: /godata/config
 
     initContainers:
+      - name: install-xq-jq
+        image: "python:3.10-slim"
+        command:
+          - "sh"
+          - "-c"
+          - |
+            apt-get update && \
+            apt-get install -y jq curl && \
+            pip install yq && \
+            touch /installed
       - name: create-password-file
         image: "busybox:latest"
         command: ["sh", "-c"]
@@ -75,12 +85,23 @@ gocd:
       - "sh"
       - "-c"
       - |
-        while [ ! -f /godata/config/cruise-config.xml ]; do
-          sleep 1
-        done
-
         if ! grep -q "<security>" /godata/config/cruise-config.xml; then
-          sed -i '/<artifacts>/i\    <security>\n      <authConfigs>\n        <authConfig id="pw" pluginId="cd.go.authentication.passwordfile">\n          <property>\n            <key>PasswordFilePath</key>\n            <value>\/godata\/config\/password\/passwd<\/value>\n          <\/property>\n        <\/authConfig>\n      <\/authConfigs>\n    <\/security>' /godata/config/cruise-config.xml
+          cat /godata/config/cruise-config.xml | xq | jq '
+            .cruise += {
+              "security": {
+                "authConfigs": {
+                  "authConfig": {
+                    "@id": "pw",
+                    "@pluginId": "cd.go.authentication.passwordfile",
+                    "property": {
+                      "key": "PasswordFilePath",
+                      "value": "/godata/config/password/passwd"
+                    }
+                  }
+                }
+              }
+            }
+          ' | xq -x > /godata/config/cruise-config.xml
         fi
 
     ingress:
