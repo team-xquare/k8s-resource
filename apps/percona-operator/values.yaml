@@ -81,11 +81,6 @@ prometheus-mongodb-exporter:
     additionalLabels:
       prometheus: prometheus-stack
   extraArgs:
-    - --collector.collstats
-    - --collector.dbstats
-    - --collector.indexstats
-    - --collector.topmetrics
-    - --collector.connpoolstats
     - --discovering-mode
     - --compatible-mode
     - --collect-all
