@@ -74,7 +74,7 @@ gocd:
         - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
           value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
         - name: GO_SERVER_SYSTEM_PROPERTIES
-          value: "-Dplugin.cd.go.authentication.passwordfile.PasswordFilePath=/godata/config/password/passwd"
+          value: "-Dgo.security.xframeoptions.enabled=true -Dplugin.cd.go.authentication.passwordfile.PasswordFilePath=/godata/config/password/passwd"
 
     resources:
       requests:
