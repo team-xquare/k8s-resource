@@ -49,10 +49,14 @@ gocd:
       extraVolumes:
         - name: auth-config
           emptyDir: {}
+        - name: cruise-config
+          emptyDir: {}
 
       extraVolumeMounts:
         - name: auth-config
           mountPath: /godata/config/password
+        - name: cruise-config
+          mountPath: /godata/config
 
     initContainers:
       - name: create-password-file
@@ -60,10 +64,27 @@ gocd:
         command: ["sh", "-c"]
         args:
           - |
-            echo 'teamxquare:$2y$05$aRLoH6R/gy9Hiw0RW9c.redlwI2zwVun8.7bjWIdvarxFQJI/OBYC' > /godata/config/password/passwd
+            if [ ! -f /godata/config/password/passwd ]; then
+              echo 'teamxquare:$2y$05$aRLoH6R/gy9Hiw0RW9c.redlwI2zwVun8.7bjWIdvarxFQJI/OBYC' > /godata/config/password/passwd
+            fi
         volumeMounts:
           - name: auth-config
             mountPath: /godata/config/password
+      - name: update-cruise-config
+        image: "busybox:latest"
+        command: ["sh", "-c"]
+        args:
+          - |
+            while [ ! -f /godata/config/cruise-config.xml ]; do
+              sleep 1
+            done
+
+            if ! grep -q "<security>" /godata/config/cruise-config.xml; then
+              sed -i '/<artifacts>/i\    <security>\n      <authConfigs>\n        <authConfig id="pw" pluginId="cd.go.authentication.passwordfile">\n          <property>\n            <key>PasswordFilePath</key>\n            <value>\/godata\/config\/password\/passwd<\/value>\n          <\/property>\n        <\/authConfig>\n      <\/authConfigs>\n    <\/security>' /godata/config/cruise-config.xml
+            fi
+        volumeMounts:
+          - name: cruise-config
+            mountPath: /godata/config
 
     ingress:
       enabled: false
@@ -73,8 +94,6 @@ gocd:
       extraEnvVars:
         - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
           value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
-        - name: GO_SERVER_SYSTEM_PROPERTIES
-          value: "-Dgo.security.xframeoptions.enabled=true -Dplugin.cd.go.authentication.passwordfile.PasswordFilePath=/godata/config/password/passwd"
 
     resources:
       requests:
