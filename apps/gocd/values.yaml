@@ -43,6 +43,28 @@ gocd:
         key: xquare/platform
         operator: "Equal"
         value: "true"
+
+    persistence:
+      enabled: true
+      extraVolumes:
+        - name: auth-config
+          emptyDir: {}
+
+      extraVolumeMounts:
+        - name: auth-config
+          mountPath: /godata/config/password
+
+    initContainers:
+      - name: create-password-file
+        image: "busybox:latest"
+        command: ["sh", "-c"]
+        args:
+          - |
+            echo "teamxquare:$2y$05$aRLoH6R/gy9Hiw0RW9c.redlwI2zwVun8.7bjWIdvarxFQJI/OBYC" > /godata/config/password/passwd
+        volumeMounts:
+          - name: auth-config
+            mountPath: /godata/config/password
+
     ingress:
       enabled: false
     service:
@@ -51,6 +73,11 @@ gocd:
       extraEnvVars:
         - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
           value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
+        - name: GOCD_PLUGIN_INSTALL_password-file-auth
+          value: https://github.com/gocd/gocd-filebased-authentication-plugin/releases/download/2.2.0-272/gocd-filebased-authentication-plugin-2.2.0-272.jar
+        - name: GO_SERVER_SYSTEM_PROPERTIES
+          value: "-Dplugin.cd.go.authentication.passwordfile.PasswordFilePath=/godata/config/password/passwd"
+
     resources:
       requests:
         memory: 1024Mi
@@ -142,32 +169,3 @@ gocd:
         - name: aws-credentials
           mountPath: /etc/config/aws/
           readOnly: true
-    initContainers:
-      - name: download-helm
-        image: "ellerbrock/alpine-bash-curl-ssl:latest"
-        imagePullPolicy: "IfNotPresent"
-        volumeMounts:
-          - name: helm
-            mountPath: /download
-        workingDir: /download
-        command: [ "/bin/sh" ]
-        args:
-          - "-c"
-          - |
-            HELM_VERSION=$(curl -s https://api.github.com/repos/helm/helm/releases/latest | grep tag_name | cut -d '"' -f 4) && \
-            curl -LO https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz && \
-            tar -zxvf helm-${HELM_VERSION}-linux-amd64.tar.gz && \
-            mv linux-amd64/helm helm && \
-            chmod +x helm && \
-            mv helm /download/helm
-      - name: download-kubectl
-        image: "ellerbrock/alpine-bash-curl-ssl:latest"
-        imagePullPolicy: "IfNotPresent"
-        volumeMounts:
-          - name: kubectl
-            mountPath: /download
-        workingDir: /download
-        command: [ "/bin/sh" ]
-        args:
-          - "-c"
-          - 'curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl'
