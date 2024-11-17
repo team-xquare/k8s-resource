@@ -66,7 +66,7 @@ egressGateway:
     port: 27017
   - name: xquare-mongodb
     protocol: TCP
-    host: "xquare-docdb-cluster.cluster-c31jdrca4ayb.ap-northeast-2.docdb.amazonaws.com"
+    host: "percona-operator-psmd-mongos.percona.svc.cluster.local"
     port: 27017
 
 virtualServices:
