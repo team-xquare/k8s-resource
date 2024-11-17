@@ -60,7 +60,7 @@ gocd:
         command: ["sh", "-c"]
         args:
           - |
-            echo "teamxquare:$2y$05$aRLoH6R/gy9Hiw0RW9c.redlwI2zwVun8.7bjWIdvarxFQJI/OBYC" > /godata/config/password/passwd
+            echo 'teamxquare:$2y$05$aRLoH6R/gy9Hiw0RW9c.redlwI2zwVun8.7bjWIdvarxFQJI/OBYC' > /godata/config/password/passwd
         volumeMounts:
           - name: auth-config
             mountPath: /godata/config/password
