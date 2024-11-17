@@ -81,14 +81,13 @@ prometheus-mongodb-exporter:
     additionalLabels:
       prometheus: prometheus-stack
   extraArgs:
-    - --collect.collection
-    - --collect.database
-    - --collect.indexusage
-    - --collect.topmetrics
-    - --collect.connpoolstats
+    - --collector.collstats
+    - --collector.dbstats
+    - --collector.indexstats
+    - --collector.topmetrics
+    - --collector.connpoolstats
     - --discovering-mode
     - --compatible-mode
     - --collect-all
-    - --mongodb.collstats-colls=config.App,config.ApplicationOverride,config.Caller,config.CommonRules,config.HabilitationOverride,config.IconSvg,config.UpdateStatusEntity,config.feature
+    - --collector.collstats-limit=0
     - --log.level=debug
-    - --mongodb.connect-timeout-ms=30000
