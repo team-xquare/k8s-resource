@@ -49,16 +49,12 @@ gocd:
     persistence:
       enabled: true
       extraVolumes:
-        - name: auth-config
-          emptyDir: {}
-        - name: cruise-config
+        - name: godata-config
           persistentVolumeClaim:
             claimName: gocd-server
 
       extraVolumeMounts:
-        - name: auth-config
-          mountPath: /godata/config/password
-        - name: cruise-config
+        - name: godata-config
           mountPath: /godata/config
 
     initContainers:
@@ -71,7 +67,7 @@ gocd:
               echo 'teamxquare:$2y$05$aRLoH6R/gy9Hiw0RW9c.redlwI2zwVun8.7bjWIdvarxFQJI/OBYC' > /godata/config/password/passwd
             fi
         volumeMounts:
-          - name: auth-config
+          - name: godata-config
             mountPath: /godata/config/password
 
       - name: configure-cruise-config
@@ -102,7 +98,7 @@ gocd:
               -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
               /godata/config/cruise-config.xml > /godata/config/cruise-config.xml.tmp && mv /godata/config/cruise-config.xml.tmp /godata/config/cruise-config.xml
         volumeMounts:
-          - name: cruise-config
+          - name: godata-config
             mountPath: /godata/config
 
     ingress:
