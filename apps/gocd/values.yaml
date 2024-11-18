@@ -59,6 +59,9 @@ gocd:
         command: ["sh", "-c"]
         args:
           - |
+            pwd
+            
+            cat /godata/config/cruise-config.xml
             # Create the cruise-config.xml file with the desired content
             echo '<?xml version="1.0" encoding="utf-8"?>' > /godata/config/cruise-config.xml
             echo '<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="139">' >> /godata/config/cruise-config.xml
