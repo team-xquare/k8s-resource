@@ -60,16 +60,15 @@ gocd:
 
     initContainers:
       - name: install-xmlstarlet
-        image: "python:3.10-slim"
-        securityContext:
-          runAsUser: 0
-        command:
-          - "sh"
-          - "-c"
+        image: "busybox:latest"
+        command: [ "sh", "-c" ]
+        args:
           - |
-            apt-get update && \
-            apt-get install -y xmlstarlet curl && \
-            touch /installed
+            # Install xmlstarlet
+            apk add --no-cache xmlstarlet
+        volumeMounts:
+          - name: cruise-config
+            mountPath: /godata/config
       - name: create-password-file
         image: "busybox:latest"
         command: ["sh", "-c"]
