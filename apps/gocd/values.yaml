@@ -74,7 +74,9 @@ gocd:
             mountPath: /godata/config/password
 
       - name: configure-cruise-config
-        image: "busybox:latest"
+        image: "alpine:latest"
+        securityContext:
+          runAsUser: 0
         command: ["sh", "-c"]
         args:
           - |
