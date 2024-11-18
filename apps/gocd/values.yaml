@@ -87,6 +87,8 @@ gocd:
             
             echo "ls -al"
             ls -al
+            
+            cat /godata/config/cruise-config.xml
 
             xmlstarlet ed \
               -s "/cruise" -t elem -n "security" -v "" \
