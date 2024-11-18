@@ -55,32 +55,36 @@ gocd:
           mountPath: /godata/config/password
     initContainers:
       - name: create-cruise-config
-        image: "busybox:latest"
+        image: "alpine:latest"
         command: ["sh", "-c"]
         args:
           - |
-            pwd
+            apk add --no-cache xmlstarlet
+            
+            ls
+            
+            ls /godata/config
             
             cat /godata/config/cruise-config.xml
-            # Create the cruise-config.xml file with the desired content
-            echo '<?xml version="1.0" encoding="utf-8"?>' > /godata/config/cruise-config.xml
-            echo '<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="139">' >> /godata/config/cruise-config.xml
-            echo '  <server agentAutoRegisterKey="500087f0-3877-4333-82a4-bbf5050d0b58" webhookSecret="286a3886-589c-4d77-97a5-6ccf29d96ab3" serverId="803fa1e7-a998-4c4c-b9d2-734895555b97" tokenGenerationKey="a0699a6e-4f92-49bc-98a8-6a575f7466c0">' >> /godata/config/cruise-config.xml
-            echo '    <artifacts>' >> /godata/config/cruise-config.xml
-            echo '      <artifactsDir>artifacts</artifactsDir>' >> /godata/config/cruise-config.xml
-            echo '    </artifacts>' >> /godata/config/cruise-config.xml
-            echo '  </server>' >> /godata/config/cruise-config.xml
-            echo '  <security>' >> /godata/config/cruise-config.xml
-            echo '    <authConfigs>' >> /godata/config/cruise-config.xml
-            echo '      <authConfig id="pw" pluginId="cd.go.authentication.passwordfile">' >> /godata/config/cruise-config.xml
-            echo '        <property>' >> /godata/config/cruise-config.xml
-            echo '          <key>PasswordFilePath</key>' >> /godata/config/cruise-config.xml
-            echo '          <value>/godata/config/password/passwd</value>' >> /godata/config/cruise-config.xml
-            echo '        </property>' >> /godata/config/cruise-config.xml
-            echo '      </authConfig>' >> /godata/config/cruise-config.xml
-            echo '    </authConfigs>' >> /godata/config/cruise-config.xml
-            echo '  </security>' >> /godata/config/cruise-config.xml
-            echo '</cruise>' >> /godata/config/cruise-config.xml
+            
+            xmlstarlet ed \
+              -s "/cruise" -t elem -n "security" -v "" \
+              -s "/cruise/security" -t elem -n "authConfigs" -v "" \
+              -s "/cruise/security/authConfigs" -t elem -n "authConfig" -v "" \
+              -i "/cruise/security/authConfigs/authConfig" -t attr -n "id" -v "pw" \
+              -i "/cruise/security/authConfigs/authConfig" -t attr -n "pluginId" -v "cd.go.authentication.passwordfile" \
+              -s "/cruise/security/authConfigs/authConfig" -t elem -n "property" -v "" \
+              -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "key" -v "PasswordFilePath" \
+              -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
+              cruise.xml > cruise.xml.tmp && mv cruise.xml.tmp cruise.xml
+      - name: create-auth-config
+        image: "busybox:latest"
+        command: [ "sh", "-c" ]
+        args:
+          - |
+            if [ ! -f /godata/config/password/passwd ]; then
+              echo 'teamxquare:$2y$05$aRLoH6R/gy9Hiw0RW9c.redlwI2zwVun8.7bjWIdvarxFQJI/OBYC' > /godata/config/password/passwd
+            fi
         volumeMounts:
           - name: auth-config
             mountPath: /godata/config/password
