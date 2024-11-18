@@ -56,6 +56,8 @@ gocd:
     initContainers:
       - name: create-cruise-config
         image: "alpine:latest"
+        securityContext:
+          runAsUser: 0
         command: ["sh", "-c"]
         args:
           - |
