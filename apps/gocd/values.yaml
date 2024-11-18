@@ -73,7 +73,7 @@ gocd:
       - -s "/cruise/security/authConfigs/authConfig" -t elem -n "property" -v "" \
       - -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "key" -v "PasswordFilePath" \
       - -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
-      - cruise.xml > cruise.xml.tmp && mv cruise.xml.tmp cruise.xml
+      - /godata/config/cruise-config.xml > /godata/config/cruise-config.xml.tmp && mv /godata/config/cruise-config.xml.tmp /godata/config/cruise-config.xml
     initContainers:
       - name: create-auth-config
         image: "busybox:latest"
