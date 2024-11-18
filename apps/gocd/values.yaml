@@ -81,6 +81,12 @@ gocd:
         args:
           - |
             apk add --no-cache xmlstarlet
+            
+            echo "pwd"
+            pwd
+            
+            echo "ls -al"
+            ls -al
 
             xmlstarlet ed \
               -s "/cruise" -t elem -n "security" -v "" \
