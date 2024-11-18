@@ -61,6 +61,8 @@ gocd:
     initContainers:
       - name: install-xq-jq
         image: "python:3.10-slim"
+        securityContext:
+          runAsUser: 0
         command:
           - "sh"
           - "-c"
