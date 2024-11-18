@@ -59,7 +59,7 @@ gocd:
           mountPath: /godata/config
 
     initContainers:
-      - name: install-xq-jq
+      - name: install-xmlstarlet
         image: "python:3.10-slim"
         securityContext:
           runAsUser: 0
@@ -68,8 +68,7 @@ gocd:
           - "-c"
           - |
             apt-get update && \
-            apt-get install -y jq curl && \
-            pip install yq && \
+            apt-get install -y xmlstarlet curl && \
             touch /installed
       - name: create-password-file
         image: "busybox:latest"
@@ -87,34 +86,25 @@ gocd:
       - "sh"
       - "-c"
       - |
-        if ! grep -q "<security>" /godata/config/cruise-config.xml; then
-          cat /godata/config/cruise-config.xml | xq | jq '
-            .cruise += {
-              "security": {
-                "authConfigs": {
-                  "authConfig": {
-                    "@id": "pw",
-                    "@pluginId": "cd.go.authentication.passwordfile",
-                    "property": {
-                      "key": "PasswordFilePath",
-                      "value": "/godata/config/password/passwd"
-                    }
-                  }
-                }
-              }
-            }
-          ' | xq -x > /godata/config/cruise-config.xml
-        fi
+        xmlstarlet ed \
+          -s "/cruise" -t elem -n "security" -v "" \
+          -s "/cruise/security" -t elem -n "authConfigs" -v "" \
+          -s "/cruise/security/authConfigs" -t elem -n "authConfig" -v "" \
+          -i "/cruise/security/authConfigs/authConfig" -t attr -n "id" -v "pw" \
+          -i "/cruise/security/authConfigs/authConfig" -t attr -n "pluginId" -v "cd.go.authentication.passwordfile" \
+          -s "/cruise/security/authConfigs/authConfig" -t elem -n "property" -v "" \
+          -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "key" -v "PasswordFilePath" \
+          -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
+          /godata/config/cruise-config.xml > cruise-config.tmp && mv cruise-config.xml.tmp cruise-config.xml
 
-    ingress:
+  ingress:
       enabled: false
-    service:
-      type: "ClusterIP"
-    env:
-      extraEnvVars:
-        - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
-          value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
-
-    resources:
-      requests:
-        memory: 1024Mi
+  service:
+    type: "ClusterIP"
+  env:
+    extraEnvVars:
+      - name: GOCD_PLUGIN_INSTALL_gocd-yaml-config-plugin
+        value: https://github.com/tomzo/gocd-yaml-config-plugin/releases/download/v1.0.0-364/yaml-config-plugin-1.0.0-364.jar
+  resources:
+    requests:
+      memory: 1024Mi
