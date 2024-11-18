@@ -51,10 +51,15 @@ gocd:
       extraVolumes:
         - name: auth-config
           emptyDir: {}
+        - name: cruise-config
+          persistentVolumeClaim:
+            claimName: gocd-server
 
       extraVolumeMounts:
         - name: auth-config
           mountPath: /godata/config/password
+        - name: cruise-config
+          mountPath: /godata/config
 
     initContainers:
       - name: create-password-file
@@ -96,6 +101,9 @@ gocd:
               -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "key" -v "PasswordFilePath" \
               -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
               /godata/config/cruise-config.xml > /godata/config/cruise-config.xml.tmp && mv /godata/config/cruise-config.xml.tmp /godata/config/cruise-config.xml
+        volumeMounts:
+          - name: cruise-config
+            mountPath: /godata/config
 
     ingress:
       enabled: false
