@@ -55,6 +55,7 @@ gocd:
           mountPath: /godata/config/password
     preconfigureCommand:
       - "/bin/bash"
+      - "/preconfigure_server.sh"
       - apk add --no-cache xmlstarlet
 
       - ls
@@ -73,7 +74,6 @@ gocd:
       - -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "key" -v "PasswordFilePath" \
       - -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
       - cruise.xml > cruise.xml.tmp && mv cruise.xml.tmp cruise.xml
-      - "/preconfigure_server.sh"
     initContainers:
       - name: create-auth-config
         image: "busybox:latest"
