@@ -38,6 +38,8 @@ gocd:
         resources: [ "verticalpodautoscalers" ]
         verbs: [ "*" ]
   server:
+    securityContext:
+      runAsUser: 0
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
@@ -59,18 +61,6 @@ gocd:
           mountPath: /godata/config
 
     initContainers:
-      - name: install-xmlstarlet
-        image: "alpine:latest"
-        securityContext:
-          runAsUser: 0
-        command: [ "sh", "-c" ]
-        args:
-          - |
-            # Install xmlstarlet
-            apk add --no-cache xmlstarlet
-        volumeMounts:
-          - name: cruise-config
-            mountPath: /godata/config
       - name: create-password-file
         image: "busybox:latest"
         command: ["sh", "-c"]
@@ -87,6 +77,8 @@ gocd:
       - "sh"
       - "-c"
       - |
+        apk add --no-cache xmlstarlet
+        
         xmlstarlet ed \
           -s "/cruise" -t elem -n "security" -v "" \
           -s "/cruise/security" -t elem -n "authConfigs" -v "" \
