@@ -73,24 +73,28 @@ gocd:
           - name: auth-config
             mountPath: /godata/config/password
 
-    postStart:
-      - "sh"
-      - "-c"
-      - |
-        apk add --no-cache xmlstarlet
-        
-        xmlstarlet ed \
-          -s "/cruise" -t elem -n "security" -v "" \
-          -s "/cruise/security" -t elem -n "authConfigs" -v "" \
-          -s "/cruise/security/authConfigs" -t elem -n "authConfig" -v "" \
-          -i "/cruise/security/authConfigs/authConfig" -t attr -n "id" -v "pw" \
-          -i "/cruise/security/authConfigs/authConfig" -t attr -n "pluginId" -v "cd.go.authentication.passwordfile" \
-          -s "/cruise/security/authConfigs/authConfig" -t elem -n "property" -v "" \
-          -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "key" -v "PasswordFilePath" \
-          -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
-          /godata/config/cruise-config.xml > cruise-config.xml.tmp && mv cruise-config.xml.tmp cruise-config.xml
+      - name: configure-cruise-config
+        image: "busybox:latest"
+        command: ["sh", "-c"]
+        args:
+          - |
+            apk add --no-cache xmlstarlet
 
-  ingress:
+            xmlstarlet ed \
+              -s "/cruise" -t elem -n "security" -v "" \
+              -s "/cruise/security" -t elem -n "authConfigs" -v "" \
+              -s "/cruise/security/authConfigs" -t elem -n "authConfig" -v "" \
+              -i "/cruise/security/authConfigs/authConfig" -t attr -n "id" -v "pw" \
+              -i "/cruise/security/authConfigs/authConfig" -t attr -n "pluginId" -v "cd.go.authentication.passwordfile" \
+              -s "/cruise/security/authConfigs/authConfig" -t elem -n "property" -v "" \
+              -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "key" -v "PasswordFilePath" \
+              -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
+              /godata/config/cruise-config.xml > /godata/config/cruise-config.xml.tmp && mv /godata/config/cruise-config.xml.tmp /godata/config/cruise-config.xml
+        volumeMounts:
+          - name: cruise-config
+            mountPath: /godata/config
+
+    ingress:
       enabled: false
   service:
     type: "ClusterIP"
