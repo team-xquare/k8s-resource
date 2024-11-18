@@ -58,25 +58,17 @@ gocd:
           mountPath: /godata/config
 
     initContainers:
-      - name: create-password-file
-        image: "busybox:latest"
-        command: ["sh", "-c"]
-        args:
-          - |
-            if [ ! -f /godata/config/password/passwd ]; then
-              echo 'teamxquare:$2y$05$aRLoH6R/gy9Hiw0RW9c.redlwI2zwVun8.7bjWIdvarxFQJI/OBYC' > /godata/config/password/passwd
-            fi
-        volumeMounts:
-          - name: godata-config
-            mountPath: /godata/config/password
-
-      - name: configure-cruise-config
+      - name: configure-config
         image: "alpine:latest"
         securityContext:
           runAsUser: 0
         command: ["sh", "-c"]
         args:
           - |
+            if [ ! -f /godata/config/password/passwd ]; then
+              echo 'teamxquare:$2y$05$aRLoH6R/gy9Hiw0RW9c.redlwI2zwVun8.7bjWIdvarxFQJI/OBYC' > /godata/config/password/passwd
+            fi
+            
             apk add --no-cache xmlstarlet
 
             echo "pwd"
