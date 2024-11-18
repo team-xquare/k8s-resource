@@ -60,7 +60,7 @@ gocd:
 
     initContainers:
       - name: install-xmlstarlet
-        image: "busybox:latest"
+        image: "alpine:latest"
         command: [ "sh", "-c" ]
         args:
           - |
