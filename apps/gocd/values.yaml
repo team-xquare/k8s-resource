@@ -53,32 +53,28 @@ gocd:
       extraVolumeMounts:
         - name: auth-config
           mountPath: /godata/config/password
+    preconfigureCommand:
+      - "/bin/bash"
+      - apk add --no-cache xmlstarlet
+
+      - ls
+
+      - ls /godata/config
+
+      - cat /godata/config/cruise-config.xml
+
+      - xmlstarlet ed \
+      - -s "/cruise" -t elem -n "security" -v "" \
+      - -s "/cruise/security" -t elem -n "authConfigs" -v "" \
+      - -s "/cruise/security/authConfigs" -t elem -n "authConfig" -v "" \
+      - -i "/cruise/security/authConfigs/authConfig" -t attr -n "id" -v "pw" \
+      - -i "/cruise/security/authConfigs/authConfig" -t attr -n "pluginId" -v "cd.go.authentication.passwordfile" \
+      - -s "/cruise/security/authConfigs/authConfig" -t elem -n "property" -v "" \
+      - -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "key" -v "PasswordFilePath" \
+      - -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
+      - cruise.xml > cruise.xml.tmp && mv cruise.xml.tmp cruise.xml
+      - "/preconfigure_server.sh"
     initContainers:
-      - name: create-cruise-config
-        image: "alpine:latest"
-        securityContext:
-          runAsUser: 0
-        command: ["sh", "-c"]
-        args:
-          - |
-            apk add --no-cache xmlstarlet
-            
-            ls
-            
-            ls /godata/config
-            
-            cat /godata/config/cruise-config.xml
-            
-            xmlstarlet ed \
-              -s "/cruise" -t elem -n "security" -v "" \
-              -s "/cruise/security" -t elem -n "authConfigs" -v "" \
-              -s "/cruise/security/authConfigs" -t elem -n "authConfig" -v "" \
-              -i "/cruise/security/authConfigs/authConfig" -t attr -n "id" -v "pw" \
-              -i "/cruise/security/authConfigs/authConfig" -t attr -n "pluginId" -v "cd.go.authentication.passwordfile" \
-              -s "/cruise/security/authConfigs/authConfig" -t elem -n "property" -v "" \
-              -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "key" -v "PasswordFilePath" \
-              -s "/cruise/security/authConfigs/authConfig/property" -t elem -n "value" -v "/godata/config/password/passwd" \
-              cruise.xml > cruise.xml.tmp && mv cruise.xml.tmp cruise.xml
       - name: create-auth-config
         image: "busybox:latest"
         command: [ "sh", "-c" ]
