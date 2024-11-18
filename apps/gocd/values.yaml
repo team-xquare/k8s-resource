@@ -85,8 +85,8 @@ gocd:
             echo "pwd"
             pwd
             
-            echo "ls -al"
-            ls -al
+            echo "ls /godata/config"
+            ls /godata/config
             
             cat /godata/config/cruise-config.xml
 
