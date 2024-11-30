@@ -161,6 +161,6 @@ nodeSelector:
   
 tolerations:
 - effect: "NoSchedule"
-  key: xquare/platform
+  key: xquare/critical_platform
   operator: "Equal"
   value: "true"
