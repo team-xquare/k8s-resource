@@ -22,7 +22,7 @@ vault:
         cpu: 100m
     tolerations:
       - effect: "NoSchedule"
-        key: xquare/critical
+        key: xquare/critical_platform
         operator: "Equal"
         value: "true"
     affinity: |
