@@ -1,7 +1,7 @@
 argo-cd:
   global:
     tolerations:
-      - key: "xquare/critical"
+      - key: "xquare/critical_platform"
         operator: "Equal"
         value: "true"
         effect: "NoSchedule"
