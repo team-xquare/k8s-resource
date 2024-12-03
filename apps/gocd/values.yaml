@@ -29,7 +29,7 @@ gocd:
         resources: [ "*" ]
         verbs: [ "*" ]
       - apiGroups: [ "secrets.hashicorp.com" ]
-        resources: [ "vaultauths", "vaultdynamicsecrets" ]
+        resources: [ "vaultauths", "vaultdynamicsecrets", "vaultstaticsecrets" ]
         verbs: [ "*" ]
       - apiGroups: [ "networking.istio.io" ]
         resources: [ "virtualservices" ]
