@@ -26,3 +26,8 @@ spec:
         - name: nginx-config-volume
           configMap:
             name: grpc-nginx-config
+      tolerations:
+        - effect: NoSchedule
+          key: xquare/server
+          operator: Equal
+          value: 'true'
