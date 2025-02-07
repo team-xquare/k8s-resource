@@ -12,7 +12,7 @@ psmdb-db:
         pvc:
           resources:
             requests:
-              storage: 20Gi
+              storage: 40Gi
       resources:
         limits:
           cpu: "600m"
