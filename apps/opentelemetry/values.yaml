@@ -100,3 +100,8 @@ opentelemetry-collector:
             - batch
           exporters:
             - datadog/exporter
+
+opentelemetry-operator:
+  manager:
+    collectorImage:
+      repository: "otel/opentelemetry-collector-contrib"
