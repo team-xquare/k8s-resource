@@ -92,14 +92,6 @@ opentelemetry-collector:
             - batch
           exporters:
             - datadog/exporter
-        logs:
-          receivers:
-            - otlp
-            - filelog   # "filelo" → "filelog"
-          processors:
-            - batch
-          exporters:
-            - datadog/exporter
 
 opentelemetry-operator:
   manager:
