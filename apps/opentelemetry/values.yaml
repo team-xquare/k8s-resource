@@ -10,12 +10,9 @@ opentelemetry-collector:
   image:
     repository: "otel/opentelemetry-collector-contrib"
   mode: "daemonset"
-  extraEnvs:
-    - name: DD_API_KEY
-      valueFrom:
-        secretKeyRef:
-          name: datadog-secret
-          key: DD_API_KEY
+  extraEnvsFrom:
+    - secretRef:
+        name: datadog-secret
   config:
     exporters:
       datadog/exporter:
