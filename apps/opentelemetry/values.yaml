@@ -7,8 +7,9 @@ opentelemetry-collector:
       protocol: TCP
   tolerations:
     - operator: "Exists"
-  image:
-    repository: "otel/opentelemetry-collector-contrib"
+  manager:
+    collectorImage:
+      repository: "otel/opentelemetry-collector-contrib"
   mode: "daemonset"
   extraEnvsFrom:
     - secretRef:
