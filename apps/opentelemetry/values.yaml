@@ -1,18 +1,6 @@
-opentelemetry-operator:
-  manager:
-    collectorImage:
-      repository: "otel/opentelemetry-collector-contrib"
-  tolerations:
-    - effect: "NoSchedule"
-      key: xquare/platform
-      operator: "Equal"
-      value: "true"
-
 opentelemetry-collector:
   ports:
     metrics:
-      # The metrics port is disabled by default. However you need to enable the port
-      # in order to use the ServiceMonitor (serviceMonitor.enabled) or PodMonitor (podMonitor.enabled).
       enabled: true
       containerPort: 8889
       servicePort: 8889
@@ -22,8 +10,18 @@ opentelemetry-collector:
   image:
     repository: "otel/opentelemetry-collector-contrib"
   mode: "daemonset"
+  env:
+    - name: DD_API_KEY
+      valueFrom:
+        secretKeyRef:
+          name: datadog-secret
+          key: DD_API_KEY
   config:
     exporters:
+      datadog/exporter:
+        api:
+          site: us5.datadoghq.com
+          key: ${env:DD_API_KEY}
       otlp/go:
         endpoint: grpc-nginx-service.xquare-prod.svc.cluster.local:80
         tls:
@@ -48,6 +46,33 @@ opentelemetry-collector:
             endpoint: ${env:MY_POD_IP}:4317
           http:
             endpoint: ${env:MY_POD_IP}:4318
+      hostmetrics:
+        collection_interval: 10s
+        scrapers:
+          paging:
+            metrics:
+              system.paging.utilization:
+                enabled: true
+          cpu:
+            metrics:
+              system.cpu.utilization:
+                enabled: true
+          disk: {}
+          filesystem:
+            metrics:
+              system.filesystem.utilization:
+                enabled: true
+          load: {}
+          memory: {}
+          network: {}
+          processes: {}
+      prometheus:
+        config:
+          scrape_configs:
+            - job_name: 'otelcol'
+              scrape_interval: 10s
+              static_configs:
+                - targets: [ '0.0.0.0:8888' ]
     service:
       extensions:
         - health_check
@@ -56,17 +81,29 @@ opentelemetry-collector:
         traces:
           exporters:
             - otlp/go
+            - otlp
           processors:
-            - memory_limiter
             - batch
           receivers:
             - otlp
+            - datadog/connector
+            - datadog/exporter
         metrics:
           receivers:
             - otlp
             - prometheus
+            - hostmetrics
+            - otlp
+            - datadog/connector
           processors:
-            - memory_limiter
             - batch
           exporters:
-            - prometheus
+            - datadog/exporter
+        logs:
+          receivers:
+            - otlp
+            - filelo
+          processors:
+            - batch
+          exporters:
+            - datadog/exporter
