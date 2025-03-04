@@ -80,6 +80,7 @@ opentelemetry-collector:
         traces:
           receivers:
             - otlp
+            - datadog/connector
           processors:
             - batch
           exporters:
@@ -90,6 +91,7 @@ opentelemetry-collector:
             - otlp
             - prometheus
             - hostmetrics
+            - datadog/connector
           processors:
             - batch
           exporters:
