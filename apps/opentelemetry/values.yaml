@@ -7,14 +7,15 @@ opentelemetry-collector:
       protocol: TCP
   tolerations:
     - operator: "Exists"
-  manager:
-    collectorImage:
-      repository: "otel/opentelemetry-collector-contrib"
+  image:
+    repository: "otel/opentelemetry-collector-contrib"
   mode: "daemonset"
   extraEnvsFrom:
     - secretRef:
         name: datadog-secret
   config:
+    connectors:
+      datadog/connector:
     exporters:
       datadog/exporter:
         api:
@@ -77,22 +78,18 @@ opentelemetry-collector:
         - memory_ballast
       pipelines:
         traces:
-          exporters:
-            - otlp/go
+          receivers:
             - otlp
           processors:
             - batch
-          receivers:
-            - otlp
-            - datadog/connector
+          exporters:
+            - otlp/go
             - datadog/exporter
         metrics:
           receivers:
             - otlp
             - prometheus
             - hostmetrics
-            - otlp
-            - datadog/connector
           processors:
             - batch
           exporters:
@@ -100,7 +97,7 @@ opentelemetry-collector:
         logs:
           receivers:
             - otlp
-            - filelo
+            - filelog   # "filelo" → "filelog"
           processors:
             - batch
           exporters:
