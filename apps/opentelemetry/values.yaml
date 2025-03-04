@@ -99,7 +99,7 @@ opentelemetry-collector:
         logs:
           receivers:
             - otlp
-            - filelog   # "filelo" → "filelog"
+            - filelog
           processors:
             - batch
           exporters:
