@@ -105,3 +105,8 @@ opentelemetry-operator:
   manager:
     collectorImage:
       repository: "otel/opentelemetry-collector-contrib"
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
