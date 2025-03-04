@@ -14,8 +14,6 @@ opentelemetry-collector:
     - secretRef:
         name: datadog-secret
   config:
-    connectors:
-      datadog/connector:
     exporters:
       datadog/exporter:
         api:
@@ -80,7 +78,6 @@ opentelemetry-collector:
         traces:
           receivers:
             - otlp
-            - datadog/connector
           processors:
             - batch
           exporters:
@@ -91,7 +88,6 @@ opentelemetry-collector:
             - otlp
             - prometheus
             - hostmetrics
-            - datadog/connector
           processors:
             - batch
           exporters:
@@ -99,7 +95,7 @@ opentelemetry-collector:
         logs:
           receivers:
             - otlp
-            - filelog
+            - filelog   # "filelo" → "filelog"
           processors:
             - batch
           exporters:
