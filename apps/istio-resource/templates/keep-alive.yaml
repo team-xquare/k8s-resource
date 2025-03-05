@@ -1,6 +1,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 spec:
+  metadata:
+    name: gateway-keep-alive-filter
   configPatches:
     - applyTo: LISTENER
       match:
