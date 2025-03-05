@@ -1,8 +1,9 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
+metadata:
+  name: ingress-gateway-keepalive
+  namespace: istio-system
 spec:
-  metadata:
-    name: gateway-keep-alive-filter
   configPatches:
     - applyTo: LISTENER
       match:
