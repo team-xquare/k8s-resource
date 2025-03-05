@@ -1,37 +1,27 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: EnvoyFilter
 metadata:
-  name: ingress-gateway-keepalive
+  name: preserve-connection-header
   namespace: istio-system
 spec:
+  workloadSelector:
+    labels:
+      app: mozu-server-prod
   configPatches:
-    - applyTo: LISTENER
+    - applyTo: HTTP_FILTER
       match:
-        context: GATEWAY
+        context: SIDECAR_INBOUND
         listener:
-          name: 0.0.0.0_8443
-          portNumber: 8443
+          filterChain:
+            filter:
+              name: "envoy.filters.network.http_connection_manager"
       patch:
-        operation: MERGE
+        operation: INSERT_AFTER
         value:
-          socket_options:
-            - description: enable keep-alive
-              int_value: 1
-              level: 1
-              name: 9
-              state: STATE_PREBIND
-            - description: idle time before first keep-alive probe is sent
-              int_value: 7
-              level: 6
-              name: 4
-              state: STATE_PREBIND
-            - description: keep-alive interval
-              int_value: 5
-              level: 6
-              name: 5
-              state: STATE_PREBIND
-            - description: keep-alive probes count
-              int_value: 2
-              level: 6
-              name: 6
-              state: STATE_PREBIND
+          name: envoy.filters.http.lua
+          typed_config:
+            "@type": type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua
+            inline_code: |
+              function envoy_on_response(response_handle)
+                response_handle:headers():add("Connection", "keep-alive")
+              end
