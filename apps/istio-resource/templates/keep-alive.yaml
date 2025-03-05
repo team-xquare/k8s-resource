@@ -1,0 +1,39 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: EnvoyFilter
+metadata:
+  name: ingress-gateway-keepalive
+  namespace: istio-system
+spec:
+  workloadSelector:
+    labels:
+      app: istio-ingressgateway
+  configPatches:
+    - applyTo: LISTENER
+      match:
+        context: GATEWAY
+        listener:
+          portNumber: 80
+      patch:
+        operation: MERGE
+        value:
+          socket_options:
+            # 1. SO_KEEPALIVE 활성화 (SOL_SOCKET, 옵션 번호 9)
+            - int_value: 1
+              level: 1
+              name: 9
+              state: STATE_PREBIND
+            # 2. TCP_KEEPIDLE: 첫 keepalive probe 전 대기 시간
+            - int_value: 9
+              level: 6
+              name: 6
+              state: STATE_PREBIND
+            # 3. TCP_KEEPALIVE / TCP_KEEPINTVL: keepalive probe 간격
+            - int_value: 120
+              level: 6
+              name: 4
+              state: STATE_PREBIND
+            # 4. TCP_KEEPINTVL: keepalive probe 간격
+            - int_value: 30
+              level: 6
+              name: 5
+              state: STATE_PREBIND
