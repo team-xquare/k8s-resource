@@ -9,8 +9,8 @@ spec:
       match:
         context: GATEWAY
         listener:
-          name: 0.0.0.0_443
-          portNumber: 443
+          name: 0.0.0.0_8443
+          portNumber: 8443
       patch:
         operation: MERGE
         value:
