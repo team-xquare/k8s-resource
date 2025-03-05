@@ -15,16 +15,9 @@ spec:
       allowOrigin:
         - "*"
       allowMethods:
-        - GET
-        - POST
-        - PUT
-        - DELETE
-        - OPTIONS
+        - "*"
       allowHeaders:
-        - authorization
-        - content-type
-        - accept
-        - x-identifier
+        - "*"
       exposeHeaders:
         - x-custom-header
         - x-identifier
