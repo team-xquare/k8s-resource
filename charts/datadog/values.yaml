@@ -1,4 +1,4 @@
-datadog:
+datadog-operator:
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
   site: us5.datadoghq.com
@@ -18,3 +18,6 @@ datadog:
       datadogDashboards: true
       # datadogCRDs.crds.datadogGenericResources -- Set to true to deploy the DatadogGenericResource CRD
       datadogGenericResources: false
+  datadogDashboard:
+    # datadogDashboard.enabled -- Enables the Datadog Dashboard controller
+    enabled: true
