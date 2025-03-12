@@ -8,7 +8,7 @@ argo-cd:
     priorityClassName: system-cluster-critical
   configs:
     params:
-      server.insecure: true 
+      server.insecure: true
     cm:
       url: https://argo-cd.xquare.app
       timeout.reconciliation: 15s
@@ -20,7 +20,8 @@ argo-cd:
         clientID: argocd
         clientSecret: DIKHZYN1kolN7d6
         requestedScopes: ["openid", "profile", "email", "groups"]
-      resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
+      resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration:
+        |
         jqPathExpressions:
         - '.webhooks[]?.clientConfig.caBundle'
     rbac:
@@ -32,7 +33,7 @@ argo-cd:
       requests:
         cpu: 1m
         memory: 32Mi
-  dex: 
+  dex:
     enabled: false
   notifications:
     enabled: false
@@ -47,6 +48,54 @@ argo-cd:
       requests:
         cpu: 3m
         memory: 64Mi
+    rbac:
+      - verbs: ["get", "list", "watch"]
+        apiGroups: [""]
+        resources: ["secrets", "configmaps"]
+
+    initContainers:
+      - name: download-tools
+        image: alpine/curl
+        env:
+          - name: AVP_VERSION
+            value: "1.18.1"
+        command: [sh, -c]
+        args:
+          - >-
+            curl -L https://github.com/argoproj-labs/argocd-vault-plugin/releases/download/v$(AVP_VERSION)/argocd-vault-plugin_$(AVP_VERSION)_linux_amd64 -o argocd-vault-plugin &&
+            chmod +x argocd-vault-plugin &&
+            mv argocd-vault-plugin /custom-tools/
+        volumeMounts:
+          - mountPath: /custom-tools
+            name: custom-tools
+
+    extraContainers:
+      - name: avp-helm
+        command: ["/var/run/argocd/argocd-cmp-server"]
+        image: quay.io/argoproj/argocd:v2.13.2
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 999
+        volumeMounts:
+          - mountPath: /var/run/argocd
+            name: var-files
+          - mountPath: /home/argocd/cmp-server/plugins
+            name: plugins
+          - mountPath: /tmp
+            name: tmp-dir
+          - mountPath: /home/argocd/cmp-server/config
+            name: cmp-plugin
+          - name: custom-tools
+            subPath: argocd-vault-plugin
+            mountPath: /usr/local/bin/argocd-vault-plugin
+    volumes:
+      - configMap:
+          name: cmp-plugin
+        name: cmp-plugin
+      - name: custom-tools
+        emptyDir: {}
+      - name: tmp-dir
+        emptyDir: {}
   controller:
     resources:
       requests:
@@ -57,4 +106,3 @@ argo-cd:
       requests:
         cpu: 32m
         memory: 516Mi
-  
