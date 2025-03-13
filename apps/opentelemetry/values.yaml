@@ -19,11 +19,6 @@ opentelemetry-collector:
         api:
           site: us5.datadoghq.com
           key: ${env:DD_API_KEY}
-      otlp/go:
-        endpoint: grpc-nginx-service.xquare-prod.svc.cluster.local:80
-        tls:
-          insecure: true
-        compression: none
       prometheus:
         endpoint: "0.0.0.0:8889"
     extensions:
@@ -81,7 +76,6 @@ opentelemetry-collector:
           processors:
             - batch
           exporters:
-            - otlp/go
             - datadog/exporter
         metrics:
           receivers:
