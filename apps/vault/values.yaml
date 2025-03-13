@@ -14,6 +14,7 @@ vault:
         operator: "Equal"
         value: "true"
     affinity: null
+
   server:
     enabled: true
     resources:
@@ -26,8 +27,11 @@ vault:
         operator: "Equal"
         value: "true"
     affinity: null
+
     dataStorage:
-      enabled: false
+      enabled: true
+      size: 10Gi
+
     volumes:
       - name: vault-storage
         persistentVolumeClaim:
@@ -54,17 +58,22 @@ vault:
       annotations:
         eks.amazonaws.com/role-arn: "<path:avp/data/aws/vault-kms#role_arn>"
 
-    standalone:
+    ha:
       enabled: true
-      config: |
-        ui = true
-        listener "tcp" {
-          tls_disable = 1
-          address = "[::]:8200"
-        }
-        storage "file" {
-          path = "/vault/data"
-        }
+      replicas: 1
+      raft:
+        enabled: true
+        config: |
+          ui = true
+          listener "tcp" {
+            tls_disable = 1
+            address = "[::]:8200"
+            cluster_address = "[::]:8201"
+          }
+          storage "raft" {
+            path = "/vault/data"
+          }
+          service_registration "kubernetes" {}
 
   pod:
     affinity: null
@@ -73,6 +82,7 @@ vault:
         key: xquare/platform
         operator: "Equal"
         value: "true"
+
   ui:
     affinity: null
     enabled: true
