@@ -13,8 +13,7 @@ vault:
         key: xquare/platform
         operator: "Equal"
         value: "true"
-    affinity: null
-
+    affinity: |
   server:
     enabled: true
     resources:
@@ -26,60 +25,47 @@ vault:
         key: xquare/critical_platform
         operator: "Equal"
         value: "true"
-    affinity: null
+    affinity: |
 
     dataStorage:
-      enabled: true
-      size: 10Gi
-
+      enabled: false
     volumes:
       - name: vault-storage
         persistentVolumeClaim:
           claimName: vault-pvc
-      - name: userconfig-vault-seal-config
-        secret:
-          defaultMode: 420
-          secretName: vault-seal-config
-
     volumeMounts:
       - mountPath: "/vault/data"
         name: vault-storage
-      - mountPath: /vault/userconfig/vault-seal-config
-        name: userconfig-vault-seal-config
-        readOnly: true
-
-    extraArgs: "-config=/vault/userconfig/vault-seal-config/config.hcl"
 
     extraEnvironmentVars:
       VAULT_SEAL_TYPE: awskms
       AWS_REGION: ap-northeast-2
+      VAULT_AWSKMS_SEAL_KEY_ID: alias/vault-auto-unseal-key
+
+    extraVolumes:
+      - type: configMap
+        name: vault-seal-config
+        path: /vault/config
+
+    extraArgs: "-config=/vault/config/seal.hcl"
 
     serviceAccount:
+      create: true
       annotations:
-        eks.amazonaws.com/role-arn: "<path:avp/data/aws/vault-kms#role_arn>"
+        eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/vault-kms-role"
 
     standalone:
       enabled: true
-      config: |
-        ui = true
-        listener "tcp" {
-          tls_disable = 1
-          address = "[::]:8200"
-        }
-        storage "file" {
-          path = "/vault/data"
-        }
 
   pod:
-    affinity: null
+    affinity: |
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
         operator: "Equal"
         value: "true"
-
   ui:
-    affinity: null
+    affinity: |
     enabled: true
     serviceType: "ClusterIP"
     externalPort: 8200
