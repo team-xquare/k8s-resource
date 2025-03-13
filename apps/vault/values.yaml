@@ -35,6 +35,24 @@ vault:
     volumeMounts:
       - mountPath: "/vault/data"
         name: vault-storage
+
+    extraEnvironmentVars:
+      VAULT_SEAL_TYPE: awskms
+      AWS_REGION: ap-northeast-2
+      VAULT_AWSKMS_SEAL_KEY_ID: alias/vault-auto-unseal-key
+
+    extraArgs:
+      - "-config=/vault/config/seal.hcl"
+
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/vault-kms-role"
+
+    extraVolumes:
+      - type: configMap
+        name: vault-seal-config
+        path: /vault/config
+
   pod:
     affinity: |
     tolerations:
