@@ -48,14 +48,9 @@ vault:
         eks.amazonaws.com/role-arn: "<path:avp/data/aws/vault-kms#role_arn>"
 
     extraVolumes:
-      - name: vault-seal-config
-        configMap:
-          name: vault-seal-config
-
-    extraVolumeMounts:
-      - name: vault-seal-config
-        mountPath: /vault/config
-        readOnly: true
+      - type: configMap
+        name: vault-seal-config
+        path: /vault/config/seal.hcl
 
   pod:
     affinity: |
