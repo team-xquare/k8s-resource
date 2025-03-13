@@ -41,8 +41,7 @@ vault:
       AWS_REGION: ap-northeast-2
       VAULT_AWSKMS_SEAL_KEY_ID: alias/vault-auto-unseal-key
 
-    extraArgs:
-      - "-config=/vault/config/seal.hcl"
+    extraArgs: "-config=/vault/config/seal.hcl"
 
     serviceAccount:
       annotations:
