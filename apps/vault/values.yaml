@@ -13,7 +13,7 @@ vault:
         key: xquare/platform
         operator: "Equal"
         value: "true"
-    affinity: |
+    affinity: null
   server:
     enabled: true
     resources:
@@ -25,16 +25,23 @@ vault:
         key: xquare/critical_platform
         operator: "Equal"
         value: "true"
-    affinity: |
+    affinity: null
     dataStorage:
       enabled: false
+
     volumes:
       - name: vault-storage
         persistentVolumeClaim:
           claimName: vault-pvc
+      - name: vault-seal-config
+        configMap:
+          name: vault-seal-config
+
     volumeMounts:
       - mountPath: "/vault/data"
         name: vault-storage
+      - mountPath: "/vault/config"
+        name: vault-seal-config
 
     extraEnvironmentVars:
       VAULT_SEAL_TYPE: awskms
@@ -47,20 +54,15 @@ vault:
       annotations:
         eks.amazonaws.com/role-arn: "<path:avp/data/aws/vault-kms#role_arn>"
 
-    extraVolumes:
-      - type: configMap
-        name: vault-seal-config
-        path: /vault/config/seal.hcl
-
   pod:
-    affinity: |
+    affinity: null
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
         operator: "Equal"
         value: "true"
   ui:
-    affinity: |
+    affinity: null
     enabled: true
     serviceType: "ClusterIP"
     externalPort: 8200
