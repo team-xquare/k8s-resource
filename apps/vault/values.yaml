@@ -58,22 +58,17 @@ vault:
       annotations:
         eks.amazonaws.com/role-arn: "<path:avp/data/aws/vault-kms#role_arn>"
 
-    ha:
+    standalone:
       enabled: true
-      replicas: 1
-      raft:
-        enabled: true
-        config: |
-          ui = true
-          listener "tcp" {
-            tls_disable = 1
-            address = "[::]:8200"
-            cluster_address = "[::]:8201"
-          }
-          storage "raft" {
-            path = "/vault/data"
-          }
-          service_registration "kubernetes" {}
+      config: |
+        ui = true
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+        }
+        storage "file" {
+          path = "/vault/data"
+        }
 
   pod:
     affinity: null
