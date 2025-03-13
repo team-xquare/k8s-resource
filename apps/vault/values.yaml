@@ -28,31 +28,38 @@ vault:
     affinity: null
     dataStorage:
       enabled: false
-
     volumes:
       - name: vault-storage
         persistentVolumeClaim:
           claimName: vault-pvc
-      - name: vault-seal-config
-        configMap:
-          name: vault-seal-config
-
     volumeMounts:
       - mountPath: "/vault/data"
         name: vault-storage
-      - mountPath: "/vault/config"
-        name: vault-seal-config
 
     extraEnvironmentVars:
       VAULT_SEAL_TYPE: awskms
       AWS_REGION: ap-northeast-2
       VAULT_AWSKMS_SEAL_KEY_ID: alias/vault-auto-unseal-key
 
-    extraArgs: "-config=/vault/config/seal.hcl"
-
     serviceAccount:
       annotations:
         eks.amazonaws.com/role-arn: "<path:avp/data/aws/vault-kms#role_arn>"
+
+    standalone:
+      enabled: true
+      config: |
+        ui = true
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+        }
+        storage "file" {
+          path = "/vault/data"
+        }
+        seal "awskms" {
+          region     = "ap-northeast-2"
+          kms_key_id = "alias/vault-auto-unseal-key"
+        }
 
   pod:
     affinity: null
