@@ -32,14 +32,23 @@ vault:
       - name: vault-storage
         persistentVolumeClaim:
           claimName: vault-pvc
+      - name: userconfig-vault-seal-config
+        secret:
+          defaultMode: 420
+          secretName: vault-seal-config
+
     volumeMounts:
       - mountPath: "/vault/data"
         name: vault-storage
+      - mountPath: /vault/userconfig/vault-seal-config
+        name: userconfig-vault-seal-config
+        readOnly: true
+
+    extraArgs: "-config=/vault/userconfig/vault-seal-config/config.hcl"
 
     extraEnvironmentVars:
       VAULT_SEAL_TYPE: awskms
       AWS_REGION: ap-northeast-2
-      VAULT_AWSKMS_SEAL_KEY_ID: alias/vault-auto-unseal-key
 
     serviceAccount:
       annotations:
@@ -55,10 +64,6 @@ vault:
         }
         storage "file" {
           path = "/vault/data"
-        }
-        seal "awskms" {
-          region     = "ap-northeast-2"
-          kms_key_id = "alias/vault-auto-unseal-key"
         }
 
   pod:
