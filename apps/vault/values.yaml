@@ -33,9 +33,16 @@ vault:
       - name: vault-storage
         persistentVolumeClaim:
           claimName: vault-pvc
+      - name: userconfig-vault-seal-config
+        secret:
+          defaultMode: 420
+          secretName: vault-seal-config
     volumeMounts:
       - mountPath: "/vault/data"
         name: vault-storage
+      - mountPath: /vault/userconfig/vault-seal-config
+        name: userconfig-vault-seal-config
+        readOnly: true
 
     extraEnvironmentVars:
       VAULT_SEAL_TYPE: awskms
@@ -47,12 +54,12 @@ vault:
         name: vault-seal-config
         path: /vault/config
 
-    extraArgs: "-config=/vault/config/seal.hcl"
+    extraArgs: "-config=/vault/userconfig/vault-seal-config/config.hcl"
 
     serviceAccount:
       create: true
       annotations:
-        eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/vault-kms-role"
+        eks.amazonaws.com/role-arn: <path:avp/data/aws/vault-kms#role_arn>
 
     standalone:
       enabled: true
