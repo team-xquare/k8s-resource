@@ -13,6 +13,7 @@ vault:
         key: xquare/platform
         operator: "Equal"
         value: "true"
+    affinity: |
   server:
     enabled: true
     resources:
@@ -24,6 +25,7 @@ vault:
         key: xquare/critical_platform
         operator: "Equal"
         value: "true"
+    affinity: |
 
     dataStorage:
       enabled: false
@@ -57,18 +59,20 @@ vault:
     serviceAccount:
       create: true
       annotations:
-        eks.amazonaws.com/role-arn: <path:avp/data/aws/vault-kms#role_arn>
+        eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/vault-kms-role"
 
     standalone:
       enabled: true
 
   pod:
+    affinity: |
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
         operator: "Equal"
         value: "true"
   ui:
+    affinity: |
     enabled: true
     serviceType: "ClusterIP"
     externalPort: 8200
