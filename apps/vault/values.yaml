@@ -36,12 +36,16 @@ vault:
       - name: vault-seal-config
         configMap:
           name: vault-seal-config
+          items:
+            - key: seal.hcl
+              path: seal.hcl
 
     volumeMounts:
       - mountPath: "/vault/data"
         name: vault-storage
-      - mountPath: "/vault/config"
+      - mountPath: "/vault/config/seal.hcl"
         name: vault-seal-config
+        subPath: seal.hcl
 
     extraEnvironmentVars:
       VAULT_SEAL_TYPE: awskms
