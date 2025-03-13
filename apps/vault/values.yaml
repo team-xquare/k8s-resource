@@ -45,7 +45,7 @@ vault:
 
     serviceAccount:
       annotations:
-        eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/vault-kms-role"
+        eks.amazonaws.com/role-arn: <path:avp/data/aws/vault-kms#role_arn>
 
     extraVolumes:
       - type: configMap
