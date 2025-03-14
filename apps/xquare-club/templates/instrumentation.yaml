@@ -7,6 +7,10 @@ metadata:
   name: otel-instrumentation-{{ $clubname }}-prod
   namespace: {{ $clubname }}-prod
 spec:
+  signals:
+    - traces
+    - metrics
+    - logs
   exporter:
     endpoint: "http://$(OTEL_NODE_IP):4317"
   propagators:
@@ -22,6 +26,10 @@ metadata:
   name: otel-instrumentation-{{ $clubname }}-stag
   namespace: {{ $clubname }}-stag
 spec:
+  signals:
+    - traces
+    - metrics
+    - logs
   exporter:
     endpoint: "http://$(OTEL_NODE_IP):4317"
   propagators:
