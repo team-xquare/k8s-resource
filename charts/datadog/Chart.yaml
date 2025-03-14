@@ -7,3 +7,6 @@ dependencies:
   - name: datadog-operator
     version: 2.7.0
     repository: https://helm.datadoghq.com
+  - name: datadog
+    version: 3.109.2
+    repository: https://helm.datadoghq.com
