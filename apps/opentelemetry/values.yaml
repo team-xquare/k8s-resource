@@ -65,34 +65,35 @@ opentelemetry-collector:
               scrape_interval: 10s
               static_configs:
                 - targets: [ '0.0.0.0:8888' ]
+      filelog:
+        include:
+          - /var/log/**/*.log
+        start_at: beginning
+        poll_interval: 500ms
+        operators:
+          - id: json_parser
+            type: json_parser
+            parse_from: body
+          - id: trace_parser
+            type: trace_parser
+            trace_id:
+              parse_from: attributes.trace_id
+            span_id:
+              parse_from: attributes.span_id
     service:
       extensions:
         - health_check
         - memory_ballast
       pipelines:
         traces:
-          receivers:
-            - otlp
-          processors:
-            - batch
-          exporters:
-            - datadog/exporter
+          receivers: [ otlp ]
+          processors: [ batch ]
+          exporters: [ datadog/exporter ]
         metrics:
-          receivers:
-            - otlp
-            - prometheus
-            - hostmetrics
-          processors:
-            - batch
-          exporters:
-            - datadog/exporter
-
-opentelemetry-operator:
-  manager:
-    collectorImage:
-      repository: "otel/opentelemetry-collector-contrib"
-  tolerations:
-    - effect: "NoSchedule"
-      key: xquare/platform
-      operator: "Equal"
-      value: "true"
+          receivers: [ otlp, prometheus, hostmetrics ]
+          processors: [ batch ]
+          exporters: [ datadog/exporter ]
+        logs:
+          receivers: [ otlp, filelog ]
+          processors: [ batch ]
+          exporters: [ datadog/exporter ]
