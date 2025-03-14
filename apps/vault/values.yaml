@@ -36,10 +36,10 @@ vault:
       - mountPath: "/vault/data"
         name: vault-storage
 
-    extraEnvironmentVars:
-      VAULT_SEAL_TYPE: awskms
-      AWS_REGION: ap-northeast-2
-      VAULT_AWSKMS_SEAL_KEY_ID: alias/vault-auto-unseal-key
+    # extraEnvironmentVars:
+    #   VAULT_SEAL_TYPE: awskms
+    #   AWS_REGION: ap-northeast-2
+    #   VAULT_AWSKMS_SEAL_KEY_ID: alias/vault-auto-unseal-key
 
     serviceAccount:
       annotations:
