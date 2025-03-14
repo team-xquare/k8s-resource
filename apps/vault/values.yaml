@@ -13,7 +13,7 @@ vault:
         key: xquare/platform
         operator: "Equal"
         value: "true"
-    affinity: |
+    affinity: null
   server:
     enabled: true
     resources:
@@ -25,7 +25,7 @@ vault:
         key: xquare/critical_platform
         operator: "Equal"
         value: "true"
-    affinity: |
+    affinity: null
     dataStorage:
       enabled: false
     volumes:
@@ -35,15 +35,25 @@ vault:
     volumeMounts:
       - mountPath: "/vault/data"
         name: vault-storage
+
+    extraEnvironmentVars:
+      VAULT_SEAL_TYPE: awskms
+      AWS_REGION: ap-northeast-2
+      VAULT_AWSKMS_SEAL_KEY_ID: alias/vault-auto-unseal-key
+
+    serviceAccount:
+      annotations:
+        eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/vault-kms-role"
+
   pod:
-    affinity: |
+    affinity: null
     tolerations:
       - effect: "NoSchedule"
         key: xquare/platform
         operator: "Equal"
         value: "true"
   ui:
-    affinity: |
+    affinity: null
     enabled: true
     serviceType: "ClusterIP"
     externalPort: 8200
