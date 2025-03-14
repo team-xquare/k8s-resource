@@ -30,3 +30,7 @@ datadog:
     logs:
       enabled: true
       containerCollectAll: true
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
