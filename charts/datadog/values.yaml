@@ -21,3 +21,12 @@ datadog-operator:
   datadogDashboard:
     # datadogDashboard.enabled -- Enables the Datadog Dashboard controller
     enabled: true
+
+datadog:
+  datadog:
+    apiKeyExistingSecret: datadog-secret
+    appKeyExistingSecret: datadog-secret
+    site: us5.datadoghq.com
+    logs:
+      enabled: true
+      containerCollectAll: true
