@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: psmdb-ebs-pv-rs-0-0
+  namespace: database
+spec:
+  capacity:
+    storage: 55Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual-ebs
+  awsElasticBlockStore:
+    volumeID: vol-00721ed1fad682b21
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: psmdb-ebs-pv-rs-0-1
+  namespace: database
+spec:
+  capacity:
+    storage: 40Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual-ebs
+  awsElasticBlockStore:
+    volumeID: vol-02cce3332aa6bc3f4
+    fsType: ext4
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: psmdb-ebs-pv-rs-0-2
+  namespace: database
+spec:
+  capacity:
+    storage: 40Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: manual-ebs
+  awsElasticBlockStore:
+    volumeID: vol-01cd1c78c9b414927
+    fsType: ext4
