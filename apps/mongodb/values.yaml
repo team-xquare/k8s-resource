@@ -20,7 +20,7 @@ psmdb-db:
         pvc:
           resources:
             requests:
-              storage: 55Gi
+              storage: 40Gi
   sharding:
     configrs:
       tolerations:
