@@ -5,10 +5,10 @@ type: application
 version: 1.0.0
 dependencies:
   - name: psmdb-db
-    version: 1.17.1
+    version: 1.19.1
     repository: https://percona.github.io/percona-helm-charts
   - name: psmdb-operator
-    version: 1.17.1
+    version: 1.19.1
     repository: https://percona.github.io/percona-helm-charts
   - name: prometheus-mongodb-exporter
     version: 3.9.0
