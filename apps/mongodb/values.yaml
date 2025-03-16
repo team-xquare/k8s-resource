@@ -36,7 +36,7 @@ psmdb-db:
           memory: "5G"
         requests:
           cpu: "600m"
-          memory: "5G"
+          memory: "1G"
       volumeSpec:
         pvc:
           resources:
@@ -57,7 +57,7 @@ psmdb-db:
           memory: "5G"
         requests:
           cpu: "600m"
-          memory: "5G"
+          memory: "1G"
       volumeSpec:
         pvc:
           resources:
