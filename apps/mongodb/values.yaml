@@ -1,7 +1,7 @@
 psmdb-db:
   replsets:
     rs0:
-      size: 1
+      size: 3
       expose:
         enabled: true
       tolerations:
