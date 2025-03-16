@@ -35,7 +35,7 @@ spec:
     repoURL: {{ .source.repoURL }}
     targetRevision: HEAD
   syncPolicy:
-    {{- if or (eq .name "kube-prometheus-stack") (eq .name "mongodb") }}
+    {{- if or (eq .name "kube-prometheus-stack") (eq .name "mongodb") (eq "percona-operator") }}
     syncOptions:
       - ServerSideApply=true
     {{- end }}
