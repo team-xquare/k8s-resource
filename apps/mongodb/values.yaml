@@ -16,10 +16,25 @@ psmdb-db:
         requests:
           cpu: "600m"
           memory: "5G"
+      volumeSpec:
+        pvc:
+          resources:
+            requests:
+              storage: 55Gi
     rs01:
       size: 1
+      volumeSpec:
+        pvc:
+          resources:
+            requests:
+              storage: 40Gi
     rs02:
       size: 1
+      volumeSpec:
+        pvc:
+          resources:
+            requests:
+              storage: 40Gi
   sharding:
     configrs:
       tolerations:
