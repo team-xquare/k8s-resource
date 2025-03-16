@@ -21,48 +21,6 @@ psmdb-db:
           resources:
             requests:
               storage: 55Gi
-    rs01:
-      size: 1
-      expose:
-        enabled: true
-      tolerations:
-        - effect: "NoSchedule"
-          key: xquare/database
-          operator: "Equal"
-          value: "true"
-      resources:
-        limits:
-          cpu: "600m"
-          memory: "5G"
-        requests:
-          cpu: "600m"
-          memory: "1G"
-      volumeSpec:
-        pvc:
-          resources:
-            requests:
-              storage: 40Gi
-    rs02:
-      size: 1
-      expose:
-        enabled: true
-      tolerations:
-        - effect: "NoSchedule"
-          key: xquare/database
-          operator: "Equal"
-          value: "true"
-      resources:
-        limits:
-          cpu: "600m"
-          memory: "5G"
-        requests:
-          cpu: "600m"
-          memory: "1G"
-      volumeSpec:
-        pvc:
-          resources:
-            requests:
-              storage: 40Gi
   sharding:
     configrs:
       tolerations:
