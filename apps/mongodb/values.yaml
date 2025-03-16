@@ -1,6 +1,7 @@
 psmdb-db:
   replsets:
     rs0:
+      size: 1
       expose:
         enabled: true
       tolerations:
@@ -19,10 +20,12 @@ psmdb-db:
           cpu: "600m"
           memory: "5G"
     rs01:
+      size: 1
       volumeSpec:
         pvc:
           existingClaim: psmdb-ebs-pvc-rs-0-1
     rs02:
+      size: 1
       volumeSpec:
         pvc:
           existingClaim: psmdb-ebs-pvc-rs-0-2
