@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: psmdb-ebs-pvc-rs-0-0
+  name: mongod-data-percona-operator-psmd-rs0-0
   namespace: database
 spec:
   accessModes:
@@ -15,7 +15,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: psmdb-ebs-pvc-rs-0-1
+  name: mongod-data-percona-operator-psmd-rs0-1
   namespace: database
 spec:
   accessModes:
@@ -29,7 +29,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: psmdb-ebs-pvc-rs-0-2
+  name: mongod-data-percona-operator-psmd-rs0-2
   namespace: database
 spec:
   accessModes:

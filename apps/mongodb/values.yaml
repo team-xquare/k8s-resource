@@ -9,9 +9,6 @@ psmdb-db:
           key: xquare/database
           operator: "Equal"
           value: "true"
-      volumeSpec:
-        pvc:
-          existingClaim: psmdb-ebs-pvc-rs-0-0
       resources:
         limits:
           cpu: "600m"
@@ -21,14 +18,8 @@ psmdb-db:
           memory: "5G"
     rs01:
       size: 1
-      volumeSpec:
-        pvc:
-          existingClaim: psmdb-ebs-pvc-rs-0-1
     rs02:
       size: 1
-      volumeSpec:
-        pvc:
-          existingClaim: psmdb-ebs-pvc-rs-0-2
   sharding:
     configrs:
       tolerations:
