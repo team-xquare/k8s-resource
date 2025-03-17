@@ -19,7 +19,7 @@ psmdb-db:
           memory: "5G"
         requests:
           cpu: "600m"
-          memory: "5G"
+          memory: "4G"
   sharding:
     configrs:
       tolerations:
@@ -39,10 +39,10 @@ psmdb-db:
       resources:
         limits:
           cpu: "700m"
-          memory: "3G"
+          memory: "2G"
         requests:
           cpu: "700m"
-          memory: "3G"
+          memory: "2G"
 
   users:
     - name: admin
