@@ -165,12 +165,3 @@ projects:
       #          automated:
       #            prune: false
       #            selfHeal: true
-      - name: avptest
-        namespace: avptest
-        source:
-          path: apps/avptest
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
