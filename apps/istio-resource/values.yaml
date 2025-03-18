@@ -143,7 +143,7 @@ virtualServices:
   - name: mongodb
     host: mongodb.xquare.app
     destination:
-      host: percona-operator-psmd-mongos.database.svc.cluster.local
+      host: a40a99a7501254d8e90fee695b88dd5d-875139687.ap-northeast-2.elb.amazonaws.com
       port: 27017
 addons:
   jeager:
