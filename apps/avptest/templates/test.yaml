@@ -5,4 +5,4 @@ metadata:
   namespace: avptest
 data:
   database.properties: |
-    db.host="<path:avp/data/test#test>"
+    db.host=<path:avp/data/test#test>
