@@ -147,15 +147,15 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: mongodb
-        namespace: database
-        source:
-          path: apps/mongodb
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
+#      - name: mongodb
+#        namespace: database
+#        source:
+#          path: apps/mongodb
+#          repoURL: https://github.com/team-xquare/k8s-resource.git
+#        syncPolicy:
+#          automated:
+#            prune: false
+#            selfHeal: true
       - name: percona-operator
         namespace: percona
         source:
