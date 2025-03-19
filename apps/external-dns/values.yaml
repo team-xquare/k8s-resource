@@ -1,15 +1,16 @@
-provider: cloudflare
+external-dns:
+  provider: cloudflare
 
-env:
-  - name: CF_API_TOKEN
-    value: <path:avp/data/cloudflare/external-dns#CF_API_TOKEN>
+  env:
+    - name: CF_API_TOKEN
+      value: <path:avp/data/cloudflare/external-dns#CF_API_TOKEN>
 
-sources:
-  - istio-virtualservice
-  - ingress
+  sources:
+    - istio-virtualservice
+    - ingress
 
-tolerations:
-  - effect: "NoSchedule"
-    key: xquare/platform
-    operator: "Equal"
-    value: "true"
+  tolerations:
+    - effect: "NoSchedule"
+      key: xquare/platform
+      operator: "Equal"
+      value: "true"
