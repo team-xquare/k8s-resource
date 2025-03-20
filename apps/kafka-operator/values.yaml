@@ -11,3 +11,8 @@ strimzi-kafka-operator:
   entityOperator:
     topicOperator: {}
     userOperator: {}
+  tolerations:
+    - key: "xquare/platform"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"

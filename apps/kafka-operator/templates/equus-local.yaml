@@ -37,7 +37,7 @@ spec:
     template:
       pod:
         tolerations:
-          - key: "xquare/server"
+          - key: "xquare/platform"
             operator: "Equal"
             value: "true"
             effect: "NoSchedule"
@@ -64,7 +64,7 @@ spec:
     template:
       pod:
         tolerations:
-          - key: "xquare/server"
+          - key: "xquare/platform"
             operator: "Equal"
             value: "true"
             effect: "NoSchedule"
