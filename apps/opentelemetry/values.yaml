@@ -13,9 +13,19 @@ opentelemetry-collector:
     - key: "xquare/critical_service"
       operator: "Exists"
       effect: "NoSchedule"
-  nodeSelector:
-    xquare/server: "true"
-    xquare/critical_service: "true"
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: "xquare/server"
+                operator: In
+                values:
+                  - "true"
+              - key: "xquare/critical_service"
+                operator: In
+                values:
+                  - "true"
   image:
     repository: "otel/opentelemetry-collector-contrib"
   extraEnvsFrom:
