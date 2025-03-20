@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: test-config
-  namespace: avptest
-data:
-  database.properties: |
-    db.host=<path:avp/data/test#test>
