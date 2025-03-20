@@ -5,11 +5,19 @@ opentelemetry-collector:
       containerPort: 8889
       servicePort: 8889
       protocol: TCP
+  mode: "daemonset"
   tolerations:
-    - operator: "Exists"
+    - key: "xquare/server"
+      operator: "Exists"
+      effect: "NoSchedule"
+    - key: "xquare/critical_service"
+      operator: "Exists"
+      effect: "NoSchedule"
+  nodeSelector:
+    xquare/server: "true"
+    xquare/critical_service: "true"
   image:
     repository: "otel/opentelemetry-collector-contrib"
-  mode: "daemonset"
   extraEnvsFrom:
     - secretRef:
         name: datadog-secret
