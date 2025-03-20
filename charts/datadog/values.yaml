@@ -34,3 +34,5 @@ datadog:
       requests:
         cpu: "100m"
         memory: "256Mi"
+    tolerations:
+      - operator: "Exists"
