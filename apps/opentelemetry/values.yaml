@@ -8,10 +8,12 @@ opentelemetry-collector:
   mode: "daemonset"
   tolerations:
     - key: "xquare/server"
-      operator: "Exists"
+      operator: "Equal"
+      value: "true"
       effect: "NoSchedule"
     - key: "xquare/critical_service"
-      operator: "Exists"
+      operator: "Equal"
+      value: "true"
       effect: "NoSchedule"
   affinity:
     nodeAffinity:
