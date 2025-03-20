@@ -15,20 +15,6 @@ opentelemetry-collector:
       operator: "Equal"
       value: "true"
       effect: "NoSchedule"
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: "xquare/server"
-                operator: In
-                values:
-                  - "true"
-          - matchExpressions:
-              - key: "xquare/critical_service"
-                operator: In
-                values:
-                  - "true"
   image:
     repository: "otel/opentelemetry-collector-contrib"
   extraEnvsFrom:
