@@ -12,8 +12,8 @@ istioOperator:
   service:
     externalTrafficPolicy: Local
   hpaSpec:
-    minReplicas: 3
-    maxReplicas: 10
+    minReplicas: 2
+    maxReplicas: 4
   serviceType: LoadBalancer 
   servicePorts:
     - name: http
@@ -48,6 +48,6 @@ nodeSelector:
   
 tolerations:
 - effect: "NoSchedule"
-  key: "xquare/platform"
+  key: "xquare/critical_platform"
   operator: "Equal"
   value: "true"
