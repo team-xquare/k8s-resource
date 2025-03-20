@@ -1,0 +1,10 @@
+apiVersion: v2
+name: argo-event
+description: argo-event chart for Kubernetes
+type: application
+version: 1.0.0
+appVersion: "v1.9.3"
+dependencies:
+  - name: argo-events
+    version: "2.4.9"
+    repository: "https://argoproj.github.io/argo-helm"
