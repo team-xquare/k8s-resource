@@ -165,6 +165,15 @@ projects:
           automated:
             prune: false
             selfHeal: true
+      - name: argo-events
+        namespace: argo-events
+        source:
+          path: apps/argo-events
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
       #      - name: percona-operator
       #        namespace: percona
       #        source:
