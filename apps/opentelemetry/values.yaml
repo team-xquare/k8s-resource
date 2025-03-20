@@ -22,6 +22,7 @@ opentelemetry-collector:
                 operator: In
                 values:
                   - "true"
+          - matchExpressions:
               - key: "xquare/critical_service"
                 operator: In
                 values:
