@@ -5,24 +5,24 @@ argo-workflows:
     authMode: "sso"
     secure: false
 
-  sso:
-    enabled: true
-    issuer: "https://dex.xquare.app"
-    clientId:
-      name: "argo-workflow-sso"
-      key: "client-id"
-    clientSecret:
-      name: "argo-workflow-sso"
-      key: "client-secret"
-    redirectUrl: "https://argo-workflow.xquare.app/oauth2/callback"
-    rbac:
+    sso:
       enabled: true
-    secretWhitelist: []
-    scopes: ["openid", "profile", "email", "groups"]
-    sessionExpiry: "12h"
-    customGroupClaimName: "groups"
-    filterGroupsRegex:
-      - "team-xquare:DevOps"
+      issuer: "https://dex.xquare.app"
+      clientId:
+        name: "argo-workflow-sso"
+        key: "client-id"
+      clientSecret:
+        name: "argo-workflow-sso"
+        key: "client-secret"
+      redirectUrl: "https://argo-workflow.xquare.app/oauth2/callback"
+      rbac:
+        enabled: true
+      secretWhitelist: []
+      scopes: ["openid", "profile", "email", "groups"]
+      sessionExpiry: "12h"
+      customGroupClaimName: "groups"
+      filterGroupsRegex:
+        - "team-xquare:DevOps"
 
     extraArgs:
       - --auth-mode=sso
