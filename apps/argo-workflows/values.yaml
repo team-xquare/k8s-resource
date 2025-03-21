@@ -16,7 +16,7 @@ argo-workflows:
         key: "client-secret"
       redirectUrl: "https://argo-workflows.xquare.app/oauth2/callback"
       rbac:
-        enabled: true
+        enabled: false
       secretWhitelist: []
       scopes: ["openid", "profile", "email", "groups"]
       sessionExpiry: "12h"
