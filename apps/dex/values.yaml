@@ -29,7 +29,7 @@ dex:
     - id: argo-workflow
       name: 'argo-workflow'
       redirectURIs:
-        - 'https://argo-workflow.xquare.app/oauth2/callback'
+        - 'https://argo-workflows.xquare.app/oauth2/callback'
       secret: N5hgDw9KzP3QrFb
     connectors:
     - type: github
