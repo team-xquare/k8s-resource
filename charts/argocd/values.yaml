@@ -99,8 +99,8 @@ argo-cd:
   controller:
     resources:
       requests:
-        cpu: 32m
-        memory: 516Mi
+        cpu: 500m
+        memory: 1G
   server:
     resources:
       requests:
