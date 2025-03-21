@@ -146,7 +146,7 @@ virtualServices:
       host: a40a99a7501254d8e90fee695b88dd5d-875139687.ap-northeast-2.elb.amazonaws.com
       port: 27017
   - name: argo-workflows
-    host: workflowsargo-workflows.xquare.app
+    host: argo-workflows.xquare.app
     destination:
       host: argo-workflows-server.argo-workflows.svc.cluster.local
       port: 2746
