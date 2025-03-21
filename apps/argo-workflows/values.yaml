@@ -31,3 +31,21 @@ argo-workflows:
       requests:
         cpu: 32m
         memory: 256Mi
+
+    tolerations:
+      - key: "xquare/platform"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+
+  controller:
+    tolerations:
+      - key: "xquare/platform"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+
+    resources:
+      requests:
+        cpu: 32m
+        memory: 256Mi
