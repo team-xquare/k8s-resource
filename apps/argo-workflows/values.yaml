@@ -14,7 +14,7 @@ argo-workflows:
       clientSecret:
         name: "argo-workflow-sso"
         key: "client-secret"
-      redirectUrl: "https://argo-workflow.xquare.app/oauth2/callback"
+      redirectUrl: "https://argo-workflows.xquare.app/oauth2/callback"
       rbac:
         enabled: true
       secretWhitelist: []
