@@ -40,7 +40,6 @@ opentelemetry-collector:
         spike_limit_percentage: 15
       batch:
         timeout: 1s
-      datadog/connector: {}
 
     receivers:
       otlp:
@@ -100,12 +99,14 @@ opentelemetry-collector:
       pipelines:
         traces:
           receivers: [ otlp ]
-          processors: [ datadog/connector, batch ]
-          exporters: [ datadog/exporter ]
+          processors: [ batch ]
+          exporters: [ datadog/connector ]
+
         metrics:
           receivers: [ otlp, prometheus, hostmetrics, datadog/connector ]
           processors: [ batch ]
           exporters: [ datadog/exporter ]
+
         logs:
           receivers: [ otlp, filelog ]
           processors: [ batch ]
