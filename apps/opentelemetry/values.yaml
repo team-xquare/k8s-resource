@@ -26,8 +26,6 @@ opentelemetry-collector:
         api:
           site: us5.datadoghq.com
           key: ${env:DD_API_KEY}
-      prometheus:
-        endpoint: "0.0.0.0:8889"
       datadog/connector:
         api:
           site: us5.datadoghq.com
@@ -94,23 +92,18 @@ opentelemetry-collector:
               parse_from: attributes.trace_id
             span_id:
               parse_from: attributes.span_id
-      datadog/connector: {}
 
     service:
-      extensions:
-        - health_check
-        - memory_ballast
+      extensions: [ health_check, memory_ballast ]
       pipelines:
         traces:
           receivers: [ otlp ]
           processors: [ batch ]
           exporters: [ datadog/connector ]
-
         metrics:
           receivers: [ otlp, prometheus, hostmetrics ]
           processors: [ batch ]
           exporters: [ datadog/exporter ]
-
         logs:
           receivers: [ otlp, filelog ]
           processors: [ batch ]
