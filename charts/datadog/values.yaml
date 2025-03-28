@@ -24,6 +24,17 @@ datadog-operator:
 
 datadog:
   datadog:
+    otlp:
+      receiver:
+        protocols:
+          grpc:
+            enabled: true
+            endpoint: "0.0.0.0:4317"
+            useHostPort: true
+          http:
+            enabled: false
+      otelCollector:
+        enabled: false
     apiKeyExistingSecret: datadog-secret
     appKeyExistingSecret: datadog-secret
     site: us5.datadoghq.com
