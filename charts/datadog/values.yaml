@@ -24,6 +24,9 @@ datadog-operator:
 
 datadog:
   datadog:
+    agents:
+      tolerations:
+        - operator: "Exists"
     otlp:
       receiver:
         protocols:
