@@ -150,6 +150,11 @@ virtualServices:
     destination:
       host: argo-workflows-server.argo-workflows.svc.cluster.local
       port: 2746
+  - name: opencost
+    host: opencost.xquare.app
+    destination:
+      host: opencost-server.opencost.svc.cluster.local
+      port: 80
 addons:
   jeager:
     enable: false
