@@ -26,12 +26,13 @@ opentelemetry-collector:
         api:
           site: us5.datadoghq.com
           key: ${env:DD_API_KEY}
-        apm_stats_enabled: true
       prometheus:
         endpoint: "0.0.0.0:8889"
+
     extensions:
       health_check: {}
       memory_ballast: {}
+
     processors:
       memory_limiter:
         check_interval: 1s
@@ -39,6 +40,8 @@ opentelemetry-collector:
         spike_limit_percentage: 15
       batch:
         timeout: 1s
+      datadog/connector: {}
+
     receivers:
       otlp:
         protocols:
@@ -88,6 +91,8 @@ opentelemetry-collector:
               parse_from: attributes.trace_id
             span_id:
               parse_from: attributes.span_id
+      datadog/connector: {}
+
     service:
       extensions:
         - health_check
@@ -95,10 +100,10 @@ opentelemetry-collector:
       pipelines:
         traces:
           receivers: [ otlp ]
-          processors: [ batch ]
+          processors: [ datadog/connector, batch ]
           exporters: [ datadog/exporter ]
         metrics:
-          receivers: [ otlp, prometheus, hostmetrics ]
+          receivers: [ otlp, prometheus, hostmetrics, datadog/connector ]
           processors: [ batch ]
           exporters: [ datadog/exporter ]
         logs:
