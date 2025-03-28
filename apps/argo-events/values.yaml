@@ -1,0 +1,13 @@
+controller:
+  tolerations:
+    - key: "xquare/platform"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+
+webhook:
+  tolerations:
+    - key: "xquare/platform"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
