@@ -26,6 +26,7 @@ opentelemetry-collector:
         api:
           site: us5.datadoghq.com
           key: ${env:DD_API_KEY}
+        apm_stats_enabled: true
       prometheus:
         endpoint: "0.0.0.0:8889"
     extensions:
