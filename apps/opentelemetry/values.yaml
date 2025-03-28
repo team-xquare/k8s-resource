@@ -107,7 +107,7 @@ opentelemetry-collector:
           exporters: [ datadog/connector ]
 
         metrics:
-          receivers: [ otlp, prometheus, hostmetrics, datadog/connector ]
+          receivers: [ otlp, prometheus, hostmetrics ]
           processors: [ batch ]
           exporters: [ datadog/exporter ]
 
