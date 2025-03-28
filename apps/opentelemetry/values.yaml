@@ -28,7 +28,10 @@ opentelemetry-collector:
           key: ${env:DD_API_KEY}
       prometheus:
         endpoint: "0.0.0.0:8889"
-      datadog/connector: {}
+      datadog/connector:
+        api:
+          site: us5.datadoghq.com
+          key: ${env:DD_API_KEY}
 
     extensions:
       health_check: {}
