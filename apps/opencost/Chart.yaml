@@ -4,4 +4,7 @@ name: opencost
 description: OpenCost and OpenCost UI
 type: application
 version: 2.0.1
-home: https://github.com/opencost/opencost-helm-chart
+dependencies:
+  - name: opencost
+    version: 2.0.1
+    repository: https://github.com/opencost/opencost-helm-chart
