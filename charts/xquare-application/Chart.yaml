@@ -1,6 +1,6 @@
 apiVersion: v2
 type: application
 name: xquare-application
-version: 1.1.19
+version: 1.1.20
 appVersion: "1.0.0"
 description: Xquare application
