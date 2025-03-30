@@ -1,7 +1,9 @@
 prometheus:
   internal:
-    enabled: false
-  url: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+    enabled: true
+    serviceName: kube-prometheus-stack-prometheus
+    namespaceName: monitoring
+    port: 9090
 
 opencost:
   exporter:
