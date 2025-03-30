@@ -36,8 +36,3 @@ podSecurityContext:
   runAsUser: 1000
   runAsGroup: 1000
   runAsNonRoot: true
-
-serviceMonitor:
-  enabled: true
-  additionalLabels:
-    release: kube-prometheus-stack
