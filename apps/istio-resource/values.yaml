@@ -154,7 +154,7 @@ virtualServices:
     host: opencost.xquare.app
     destination:
       host: opencost.opencost.svc.cluster.local
-      port: 80
+      port: 9003
 addons:
   jeager:
     enable: false
