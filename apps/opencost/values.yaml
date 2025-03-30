@@ -14,11 +14,12 @@ plugins:
       runAsNonRoot: true
       runAsUser: 1000
   folder: /opt/opencost/plugin
-  configs:
+  configs: {}
 
 serviceAccount:
   create: true
-  annotations: "arn:aws:iam::786584124104:role/opencost-role"
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/opencost-role"
   automountServiceAccountToken: true
 
 networkPolicies:
@@ -69,20 +70,19 @@ opencost:
       failureThreshold: 3
     securityContext: {}
     csv_path: ""
-
     persistence:
       enabled: false
       annotations: {}
       accessMode: ""
       storageClass: ""
       size: ""
-
     aws:
       secret_access_key: ""
       access_key_id: ""
     extraVolumeMounts: []
     env: []
     extraEnv: {}
+
   customPricing:
     enabled: false
     configmapName: custom-pricing-model
@@ -122,9 +122,10 @@ opencost:
       emitKsmV1MetricsOnly: ~
 
     serviceMonitor:
-      enabled: false
+      enabled: true
       additionalLabels: {}
-      namespace: ""
+      # Prometheus Operator를 사용하는 경우 Prometheus가 위치한 네임스페이스로 변경합니다.
+      namespace: "monitoring"
       scrapeInterval: 30s
       scrapeTimeout: 10s
       honorLabels: true
@@ -141,10 +142,7 @@ opencost:
 
   prometheus:
     external:
-      enabled: false
-      url: "https://prometheus.xquare.app"
-    internal:
       enabled: true
-      serviceName: kube-prometheus-stack-prometheus
-      namespaceName: monitoring
-      port: 9090
+      url: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+    internal:
+      enabled: false
