@@ -44,6 +44,8 @@ opencost:
         value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
       - name: CLUSTER_ID
         value: "xquare-v3-cluster"
+      - name: LOG_LEVEL
+        value: "debug"
 
   dataRetention:
     dailyResolutionDays: 15
@@ -58,7 +60,6 @@ opencost:
   metrics:
     serviceMonitor:
       enabled: true
-      additionalLabels: {}
       namespace: "monitoring"
       scrapeInterval: 30s
       scrapeTimeout: 10s
