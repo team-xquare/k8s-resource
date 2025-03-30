@@ -124,7 +124,6 @@ opencost:
     serviceMonitor:
       enabled: true
       additionalLabels: {}
-      # Prometheus Operator를 사용하는 경우 Prometheus가 위치한 네임스페이스로 변경합니다.
       namespace: "monitoring"
       scrapeInterval: 30s
       scrapeTimeout: 10s
@@ -141,8 +140,10 @@ opencost:
       disabledMetrics: []
 
   prometheus:
-    external:
-      enabled: true
-      url: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
     internal:
+      enabled: true
+      serviceName: kube-prometheus-stack-prometheus
+      namespaceName: monitoring
+      port: 9090
+    external:
       enabled: false
