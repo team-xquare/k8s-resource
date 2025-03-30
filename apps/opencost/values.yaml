@@ -24,12 +24,6 @@ serviceAccount:
 networkPolicies:
   enabled: false
 
-  prometheus:
-    namespace: monitoring
-    port: 9090
-    labels:
-      app.kubernetes.io/name: prometheus
-
 updateStrategy:
   rollingUpdate:
     maxSurge: 1
@@ -147,7 +141,7 @@ opencost:
 
   prometheus:
     external:
-      enabled: true
+      enabled: false
       url: "https://prometheus.xquare.app"
     internal:
       enabled: true
