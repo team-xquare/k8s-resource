@@ -1,0 +1,10 @@
+apiVersion: v2
+appVersion: 1.114.0
+name: opencost
+description: OpenCost and OpenCost UI
+type: application
+version: 2.0.1
+dependencies:
+  - name: opencost
+    version: "2.0.1"
+    repository: "https://opencost.github.io/opencost-helm-chart"
