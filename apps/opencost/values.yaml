@@ -13,13 +13,9 @@ opencost:
       limits:
         cpu: '100m'
         memory: '512Mi'
-  serviceMonitor:
-    enabled: true
-    additionalLabels:
-      release: kube-prometheus-stack
 
-dataRetention:
-  dailyResolutionDays: 30
+  dataRetention:
+    dailyResolutionDays: 30
 
 rbac:
   enabled: true
@@ -40,3 +36,8 @@ podSecurityContext:
   runAsUser: 1000
   runAsGroup: 1000
   runAsNonRoot: true
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: kube-prometheus-stack
