@@ -1,11 +1,10 @@
-prometheus:
-  internal:
-    enabled: true
-    serviceName: kube-prometheus-stack-prometheus
-    namespaceName: monitoring
-    port: 9090
-
 opencost:
+  prometheus:
+    internal:
+      enabled: true
+      serviceName: kube-prometheus-stack-prometheus
+      namespaceName: monitoring
+      port: 9090
   exporter:
     resources:
       requests:
@@ -14,7 +13,6 @@ opencost:
       limits:
         cpu: '100m'
         memory: '512Mi'
-
   serviceMonitor:
     enabled: true
     additionalLabels:
@@ -30,6 +28,7 @@ serviceAccount:
   create: true
   annotations:
     eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/opencost-role"
+
 updateStrategy:
   type: RollingUpdate
   rollingUpdate:
