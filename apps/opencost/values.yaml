@@ -1,40 +1,11 @@
-plugins:
-  enabled: false
-  install:
-    enabled: true
-    fullImageName: curlimages/curl:latest
-    securityContext:
-      allowPrivilegeEscalation: false
-      seccompProfile:
-        type: RuntimeDefault
-      capabilities:
-        drop:
-          - ALL
-      readOnlyRootFilesystem: true
-      runAsNonRoot: true
-      runAsUser: 1000
-  folder: /opt/opencost/plugin
-  configs: {}
-
 serviceAccount:
   create: true
   annotations:
     eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/opencost-role"
   automountServiceAccountToken: true
 
-networkPolicies:
-  enabled: false
-
-updateStrategy:
-  rollingUpdate:
-    maxSurge: 1
-    maxUnavailable: 1
-  type: RollingUpdate
-
 service:
   enabled: true
-  annotations: {}
-  labels: {}
   type: ClusterIP
 
 rbac:
@@ -68,44 +39,14 @@ opencost:
       initialDelaySeconds: 10
       periodSeconds: 10
       failureThreshold: 3
-    securityContext: {}
-    csv_path: ""
-    persistence:
-      enabled: false
-      annotations: {}
-      accessMode: ""
-      storageClass: ""
-      size: ""
-    aws:
-      secret_access_key: ""
-      access_key_id: ""
-    extraVolumeMounts: []
-    env: []
-    extraEnv: {}
-
-  customPricing:
-    enabled: false
-    configmapName: custom-pricing-model
-    configPath: /tmp/custom-config
-    createConfigmap: true
-    provider: custom
-    costModel:
-      description: Modified pricing configuration.
-      CPU: 1.25
-      spotCPU: 0.006655
-      RAM: 0.50
-      spotRAM: 0.000892
-      GPU: 0.95
-      storage: 0.25
-      zoneNetworkEgress: 0.01
-      regionNetworkEgress: 0.01
-      internetNetworkEgress: 0.12
+    env:
+      - name: PROMETHEUS_SERVER_ENDPOINT
+        value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+      - name: CLUSTER_ID
+        value: "xquare-v3-cluster"
 
   dataRetention:
     dailyResolutionDays: 15
-
-  carbonCost:
-    enabled: false
 
   cloudCost:
     enabled: true
@@ -115,12 +56,6 @@ opencost:
     queryWindowDays: 7
 
   metrics:
-    kubeStateMetrics:
-      emitPodAnnotations: ~
-      emitNamespaceAnnotations: ~
-      emitKsmV1Metrics: ~
-      emitKsmV1MetricsOnly: ~
-
     serviceMonitor:
       enabled: true
       additionalLabels: {}
@@ -128,16 +63,6 @@ opencost:
       scrapeInterval: 30s
       scrapeTimeout: 10s
       honorLabels: true
-      relabelings: []
-      metricRelabelings: []
-      extraEndpoints: []
-      scheme: http
-      tlsConfig: {}
-
-    config:
-      enabled: false
-      configmapName: custom-metrics
-      disabledMetrics: []
 
   prometheus:
     internal:
@@ -145,5 +70,3 @@ opencost:
       serviceName: kube-prometheus-stack-prometheus
       namespaceName: monitoring
       port: 9090
-    external:
-      enabled: false
