@@ -24,27 +24,26 @@ opencost:
     external:
       enabled: false
 
-  opencost:
-    exporter:
-      extraEnv:
-        PROMETHEUS_SERVER_ENDPOINT: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
-        CLUSTER_ID: "xquare-v3-cluster"
-        LOG_LEVEL: "debug"
+  exporter:
+    extraEnv:
+      PROMETHEUS_SERVER_ENDPOINT: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+      CLUSTER_ID: "xquare-v3-cluster"
+      LOG_LEVEL: "debug"
 
-      env:
-        - name: PROMETHEUS_SERVER_ENDPOINT
-          value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
-        - name: CLUSTER_ID
-          value: "xquare-v3-cluster"
-        - name: LOG_LEVEL
-          value: "debug"
+    env:
+      - name: PROMETHEUS_SERVER_ENDPOINT
+        value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
+      - name: CLUSTER_ID
+        value: "xquare-v3-cluster"
+      - name: LOG_LEVEL
+        value: "debug"
 
-    metrics:
-      serviceMonitor:
-        enabled: true
-        namespace: "monitoring"
-        scrapeInterval: 30s
-        honorLabels: true
+  metrics:
+    serviceMonitor:
+      enabled: true
+      namespace: "monitoring"
+      scrapeInterval: 30s
+      honorLabels: true
 
-      kubeStateMetrics:
-        emitKsmV1Metrics: true
+    kubeStateMetrics:
+      emitKsmV1Metrics: true
