@@ -14,15 +14,15 @@ opencost:
 
   rbac:
     enabled: true
-
-  prometheus:
-    internal:
-      enabled: true
-      serviceName: kube-prometheus-stack-prometheus
-      namespaceName: monitoring
-      port: 9090
-    external:
-      enabled: false
+  opencost:
+    prometheus:
+      internal:
+        enabled: true
+        serviceName: kube-prometheus-stack-prometheus
+        namespaceName: monitoring
+        port: 9090
+      external:
+        enabled: false
 
   exporter:
     extraEnv:
