@@ -23,19 +23,21 @@ opencost:
         port: 9090
       external:
         enabled: false
+    metrics:
+      serviceMonitor:
+        enabled: true
+        namespace: "monitoring"
+        scrapeInterval: 30s
+        honorLabels: true
 
-  exporter:
-    extraEnv:
-      PROMETHEUS_SERVER_ENDPOINT: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
-      CLUSTER_ID: "xquare-v3-cluster"
-      LOG_LEVEL: "debug"
+      kubeStateMetrics:
+        emitKsmV1Metrics: true
 
-  metrics:
-    serviceMonitor:
-      enabled: true
-      namespace: "monitoring"
-      scrapeInterval: 30s
-      honorLabels: true
-
-    kubeStateMetrics:
-      emitKsmV1Metrics: true
+  prometheus-opencost-exporter:
+    opencost:
+      prometheus:
+        internal:
+          enabled: true
+          serviceName: kube-prometheus-stack-prometheus
+          namespaceName: monitoring
+          port: 9090

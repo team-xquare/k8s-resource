@@ -8,3 +8,6 @@ dependencies:
   - name: opencost
     version: "2.0.1"
     repository: "https://opencost.github.io/opencost-helm-chart"
+  - name: prometheus-opencost-exporter
+    version: 0.1.2
+    repository: https://prometheus-community.github.io/helm-charts
