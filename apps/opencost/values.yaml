@@ -30,14 +30,6 @@ opencost:
       CLUSTER_ID: "xquare-v3-cluster"
       LOG_LEVEL: "debug"
 
-    env:
-      - name: PROMETHEUS_SERVER_ENDPOINT
-        value: "http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090"
-      - name: CLUSTER_ID
-        value: "xquare-v3-cluster"
-      - name: LOG_LEVEL
-        value: "debug"
-
   metrics:
     serviceMonitor:
       enabled: true
