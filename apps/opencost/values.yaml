@@ -1,40 +1,39 @@
-opencost:
-  serviceAccount:
-    create: true
-    annotations:
-      eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/opencost-role"
-    automountServiceAccountToken: true
-
-  networkPolicies:
-    enabled: false
-
-  service:
-    enabled: true
-    type: ClusterIP
-
-  rbac:
-    enabled: true
-
-  opencost:
-    prometheus:
-      internal:
-        enabled: true
-        serviceName: kube-prometheus-stack-prometheus
-        namespaceName: monitoring
-        port: 9090
-      external:
-        enabled: false
-    metrics:
-      serviceMonitor:
-        enabled: true
-        namespace: "monitoring"
-        scrapeInterval: 30s
-        honorLabels: true
-      kubeStateMetrics:
-        emitKsmV1Metrics: true
+#opencost:
+#  serviceAccount:
+#    create: true
+#    annotations:
+#      eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/opencost-role"
+#    automountServiceAccountToken: true
+#
+#  networkPolicies:
+#    enabled: false
+#
+#  service:
+#    enabled: true
+#    type: ClusterIP
+#
+#  rbac:
+#    enabled: true
+#
+#  opencost:
+#    prometheus:
+#      internal:
+#        enabled: true
+#        serviceName: kube-prometheus-stack-prometheus
+#        namespaceName: monitoring
+#        port: 9090
+#      external:
+#        enabled: false
+#    metrics:
+#      serviceMonitor:
+#        enabled: true
+#        namespace: "monitoring"
+#        scrapeInterval: 30s
+#        honorLabels: true
+#      kubeStateMetrics:
+#        emitKsmV1Metrics: true
 
 prometheus-opencost-exporter:
-  enabled: true
   opencost:
     prometheus:
       internal:
@@ -42,3 +41,6 @@ prometheus-opencost-exporter:
         serviceName: kube-prometheus-stack-prometheus
         namespaceName: monitoring
         port: 9090
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/opencost-role"
