@@ -1,9 +1,11 @@
+{{- range .Values.clubs }}
+{{- $clubname := .name }}
 ---
 apiVersion: opentelemetry.io/v1alpha1
 kind: Instrumentation
 metadata:
-  name: otel-instrumentation-{{ .Values.club }}-stag
-  namespace: {{ .Values.club }}-stag
+  name: otel-instrumentation-{{ $clubname }}-stag
+  namespace: {{ $clubname }}-stag
 spec:
   exporter:
     endpoint: "http://0.0.0.0:4317"
@@ -17,8 +19,8 @@ spec:
 apiVersion: opentelemetry.io/v1alpha1
 kind: Instrumentation
 metadata:
-  name: otel-instrumentation-{{ .Values.club }}-prod
-  namespace: {{ .Values.club }}-stag
+  name: otel-instrumentation-{{ $clubname }}-prod
+  namespace: {{ $clubname }}-stag
 spec:
   exporter:
     endpoint: "http://0.0.0.0:4317"
@@ -28,3 +30,4 @@ spec:
   sampler:
     type: parentbased_traceidratio
     argument: "1"
+{{- end }}
