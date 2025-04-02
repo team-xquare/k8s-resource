@@ -1,0 +1,30 @@
+---
+apiVersion: opentelemetry.io/v1alpha1
+kind: Instrumentation
+metadata:
+  name: otel-instrumentation-{{ .Values.club }}-stag
+  namespace: {{ .Values.club }}-stag
+spec:
+  exporter:
+    endpoint: "http://0.0.0.0:4317"
+  propagators:
+    - tracecontext
+    - baggage
+  sampler:
+    type: parentbased_traceidratio
+    argument: "1"
+---
+apiVersion: opentelemetry.io/v1alpha1
+kind: Instrumentation
+metadata:
+  name: otel-instrumentation-{{ .Values.club }}-prod
+  namespace: {{ .Values.club }}-stag
+spec:
+  exporter:
+    endpoint: "http://0.0.0.0:4317"
+  propagators:
+    - tracecontext
+    - baggage
+  sampler:
+    type: parentbased_traceidratio
+    argument: "1"
