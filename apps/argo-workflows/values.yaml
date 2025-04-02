@@ -5,6 +5,8 @@ argo-workflows:
     authMode: "sso"
     secure: false
 
+    executor:
+      workflowTaskResults: true
     sso:
       enabled: true
       issuer: "https://dex.xquare.app"
