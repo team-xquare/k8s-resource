@@ -4,11 +4,11 @@
 apiVersion: opentelemetry.io/v1alpha1
 kind: Instrumentation
 metadata:
-  name: otel-instrumentation-{{ $clubname }}-stag
-  namespace: {{ $clubname }}-stag
+  name: otel-instrumentation-{{ $clubname }}-prod
+  namespace: {{ $clubname }}-prod
 spec:
   exporter:
-    endpoint: "http://0.0.0.0:4317"
+    endpoint: "http://$(OTEL_NODE_IP):4317"
   propagators:
     - tracecontext
     - baggage
@@ -23,7 +23,7 @@ metadata:
   namespace: {{ $clubname }}-stag
 spec:
   exporter:
-    endpoint: "http://0.0.0.0:4317"
+    endpoint: "http://$(OTEL_NODE_IP):4317"
   propagators:
     - tracecontext
     - baggage
