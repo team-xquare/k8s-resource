@@ -1,0 +1,16 @@
+s3:
+  enabled: false
+
+rds:
+  enabled: false
+
+ec2:
+  enabled: false
+
+ecr:
+  enabled: true
+  aws:
+    region: "ap-northeast-2"
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: "arn:aws:iam::786584124104:role/xquare-ack-ecr-role"
