@@ -1,0 +1,9 @@
+apiVersion: v2
+name: aws-controllers
+description: AWS Controllers for Kubernetes (ACK)
+type: application
+version: 1.0.0
+dependencies:
+  - name: ack-chart
+    version: "46.21.1"
+    repository: "oci://public.ecr.aws/aws-controllers-k8s/ack-chart"

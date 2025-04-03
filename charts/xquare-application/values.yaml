@@ -192,6 +192,15 @@ projects:
           automated:
             prune: false
             selfHeal: true
+      - name: aws-controllers
+        namespace: aws-controllers
+        source:
+          path: apps/aws-controllers
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
       #      - name: percona-operator
       #        namespace: percona
       #        source:
