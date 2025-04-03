@@ -1,12 +1,3 @@
-s3:
-  enabled: false
-
-rds:
-  enabled: false
-
-ec2:
-  enabled: false
-
 ecr:
   enabled: true
   aws:
