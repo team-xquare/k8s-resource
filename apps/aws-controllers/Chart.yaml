@@ -1,0 +1,11 @@
+apiVersion: v2
+name: aws-controllers
+description: AWS Controllers for Kubernetes (ACK)
+type: application
+version: 1.0.0
+dependencies:
+  - name: ecr-chart
+    alias: ecr
+    version: 1.0.26
+    repository: oci://public.ecr.aws/aws-controllers-k8s
+    condition: ecr.enabled
