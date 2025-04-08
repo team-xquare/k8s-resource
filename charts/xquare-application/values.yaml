@@ -129,15 +129,6 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: gocd
-        namespace: gocd
-        source:
-          path: apps/gocd
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
       - name: kafka-operator
         namespace: kafka
         source:
