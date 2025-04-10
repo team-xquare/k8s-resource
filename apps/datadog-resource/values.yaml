@@ -1,0 +1,101 @@
+monitors:
+  - name: "kubernetes-high-cpu-usage"
+    type: "metric alert"
+    query: "avg(last_5m):avg:system.cpu.user{kubernetes_cluster:xquare-v3-cluster} by {host} > 80"
+    message: |
+      CPU usage is above 80% on {{host.name}}
+      
+      @slack-xquare-monitoring
+    tags:
+      - "service:kubernetes"
+      - "env:production"
+    options:
+      thresholds:
+        critical: 80
+        warning: 70
+      notify_no_data: false
+      require_full_window: false
+      new_host_delay: 300
+      renotify_interval: 60
+      include_tags: true
+      evaluation_delay: 900
+
+  - name: "kubernetes-high-memory-usage"
+    type: "metric alert"
+    query: "avg(last_5m):avg:system.mem.pct_usable{kubernetes_cluster:xquare-v3-cluster} by {host} < 0.2"
+    message: |
+      Memory usage is critical on {{host.name}}
+      
+      @slack-xquare-monitoring
+    tags:
+      - "service:kubernetes"
+      - "env:production"
+    options:
+      thresholds:
+        critical: 0.2
+        warning: 0.3
+      notify_no_data: false
+      require_full_window: false
+      new_host_delay: 300
+      renotify_interval: 60
+      include_tags: true
+      evaluation_delay: 900
+
+  - name: "kubernetes-high-disk-usage"
+    type: "metric alert"
+    query: "avg(last_5m):avg:system.disk.in_use{kubernetes_cluster:xquare-v3-cluster} by {host,device} > 0.85"
+    message: |
+      Disk usage is above 85% on {{host.name}} ({{device.name}})
+      
+      @slack-xquare-monitoring
+    tags:
+      - "service:kubernetes"
+      - "env:production"
+    options:
+      thresholds:
+        critical: 0.85
+        warning: 0.75
+      notify_no_data: false
+      require_full_window: false
+      new_host_delay: 300
+      renotify_interval: 60
+      include_tags: true
+      evaluation_delay: 900
+
+  - name: "kubernetes-node-not-ready"
+    type: "metric alert"
+    query: "avg(last_5m):sum:kubernetes_state.node.condition{kubernetes_cluster:xquare-v3-cluster,condition:ready,status:true} < 3"
+    message: |
+      Less than 3 Kubernetes nodes are in Ready state!
+      
+      @slack-xquare-monitoring
+    tags:
+      - "service:kubernetes"
+      - "env:production"
+    options:
+      thresholds:
+        critical: 3
+      notify_no_data: true
+      no_data_timeframe: 10
+      require_full_window: false
+      include_tags: true
+      evaluation_delay: 60
+
+  - name: "kubernetes-pending-pods"
+    type: "metric alert"
+    query: "sum(last_10m):sum:kubernetes_state.pod.status_phase{kubernetes_cluster:xquare-v3-cluster,phase:pending} > 5"
+    message: |
+      There are more than 5 pods in pending state in the cluster
+      
+      @slack-xquare-monitoring
+    tags:
+      - "service:kubernetes"
+      - "env:production"
+    options:
+      thresholds:
+        critical: 5
+        warning: 3
+      notify_no_data: false
+      require_full_window: false
+      include_tags: true
+      evaluation_delay: 60

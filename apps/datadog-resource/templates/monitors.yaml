@@ -1,0 +1,45 @@
+{{- range .Values.monitors }}
+---
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogMonitor
+metadata:
+  name: {{ .name }}
+spec:
+  type: {{ .type }}
+  query: {{ .query }}
+  message: {{ .message }}
+  {{- if .tags }}
+  tags:
+  {{- range .tags }}
+    - {{ . }}
+  {{- end }}
+  {{- end }}
+  {{- if .options }}
+  options:
+    {{- if .options.thresholds }}
+    thresholds:
+      {{- if .options.thresholds.critical }}
+      critical: {{ .options.thresholds.critical }}
+      {{- end }}
+      {{- if .options.thresholds.warning }}
+      warning: {{ .options.thresholds.warning }}
+      {{- end }}
+    {{- end }}
+    notify_no_data: {{ .options.notify_no_data | default false }}
+    require_full_window: {{ .options.require_full_window | default false }}
+    notify_audit: {{ .options.notify_audit | default false }}
+    include_tags: {{ .options.include_tags | default true }}
+    {{- if .options.evaluation_delay }}
+    evaluation_delay: {{ .options.evaluation_delay }}
+    {{- end }}
+    {{- if .options.new_host_delay }}
+    new_host_delay: {{ .options.new_host_delay }}
+    {{- end }}
+    {{- if .options.renotify_interval }}
+    renotify_interval: {{ .options.renotify_interval }}
+    {{- end }}
+    {{- if .options.no_data_timeframe }}
+    no_data_timeframe: {{ .options.no_data_timeframe }}
+    {{- end }}
+  {{- end }}
+{{- end }}
