@@ -28,9 +28,9 @@ argo-workflows:
       filterGroupsRegex:
         - "team-xquare:DevOps"
 
-    extraArgs:
-      - --auth-mode=sso
-      - --auth-mode=client
+#    extraArgs:
+#      - --auth-mode=sso
+#      - --auth-mode=client
 
     resources:
       requests:
