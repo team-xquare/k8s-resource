@@ -1,7 +1,9 @@
+clusterName: "xquare-v3-cluster"
+
 monitors:
   - name: "kubernetes-high-cpu-usage"
     type: "metric alert"
-    query: "avg(last_5m):avg:system.cpu.user{kubernetes_cluster:xquare-v3-cluster} by {host} > 80"
+    query: "avg(last_5m):avg:system.cpu.user{kubernetes_cluster:{{ .Values.clusterName }}} by {host} > 80"
     message: |
       CPU usage is above 80% on {{host.name}}
       
@@ -22,7 +24,7 @@ monitors:
 
   - name: "kubernetes-high-memory-usage"
     type: "metric alert"
-    query: "avg(last_5m):avg:system.mem.pct_usable{kubernetes_cluster:xquare-v3-cluster} by {host} < 0.2"
+    query: "avg(last_5m):avg:system.mem.pct_usable{kubernetes_cluster:{{ .Values.clusterName }}} by {host} < 0.2"
     message: |
       Memory usage is critical on {{host.name}}
       
@@ -43,7 +45,7 @@ monitors:
 
   - name: "kubernetes-high-disk-usage"
     type: "metric alert"
-    query: "avg(last_5m):avg:system.disk.in_use{kubernetes_cluster:xquare-v3-cluster} by {host,device} > 0.85"
+    query: "avg(last_5m):avg:system.disk.in_use{kubernetes_cluster:{{ .Values.clusterName }}} by {host,device} > 0.85"
     message: |
       Disk usage is above 85% on {{host.name}} ({{device.name}})
       
@@ -64,7 +66,7 @@ monitors:
 
   - name: "kubernetes-node-not-ready"
     type: "metric alert"
-    query: "avg(last_5m):sum:kubernetes_state.node.condition{kubernetes_cluster:xquare-v3-cluster,condition:ready,status:true} < 3"
+    query: "avg(last_5m):sum:kubernetes_state.node.condition{kubernetes_cluster:{{ .Values.clusterName }},condition:ready,status:true} < 3"
     message: |
       Less than 3 Kubernetes nodes are in Ready state!
       
@@ -83,7 +85,7 @@ monitors:
 
   - name: "kubernetes-pending-pods"
     type: "metric alert"
-    query: "sum(last_10m):sum:kubernetes_state.pod.status_phase{kubernetes_cluster:xquare-v3-cluster,phase:pending} > 5"
+    query: "sum(last_10m):sum:kubernetes_state.pod.status_phase{kubernetes_cluster:{{ .Values.clusterName }},phase:pending} > 5"
     message: |
       There are more than 5 pods in pending state in the cluster
       
