@@ -2,7 +2,7 @@ argo-workflows:
   server:
     enabled: true
     baseHref: /
-    authMode: "sso"
+    authMode: "sso,client"
     secure: false
 
     executor:
@@ -28,6 +28,7 @@ argo-workflows:
 
     extraArgs:
       - --auth-mode=sso
+      - --auth-mode=client
 
     resources:
       requests:
