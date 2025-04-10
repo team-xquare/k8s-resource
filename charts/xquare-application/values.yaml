@@ -129,15 +129,6 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: gocd
-        namespace: gocd
-        source:
-          path: apps/gocd
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
       - name: kafka-operator
         namespace: kafka
         source:
@@ -183,15 +174,6 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: opencost
-        namespace: opencost
-        source:
-          path: apps/opencost
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
       - name: aws-controllers
         namespace: aws-controllers
         source:
@@ -201,15 +183,15 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      #      - name: percona-operator
-      #        namespace: percona
-      #        source:
-      #          path: apps/percona-operator
-      #          repoURL: https://github.com/team-xquare/k8s-resource.git
-      #        syncPolicy:
-      #          automated:
-      #            prune: false
-      #            selfHeal: true
+      - name: percona-operator
+        namespace: percona
+        source:
+          path: apps/percona-operator
+          repoURL: https://github.com/team-xquare/k8s-resource.git
+        syncPolicy:
+          automated:
+            prune: false
+            selfHeal: true
       - name: datadog-resource
         namespace: monitoring
         source:
