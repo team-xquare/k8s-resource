@@ -21,6 +21,9 @@ datadog-operator:
   datadogDashboard:
     # datadogDashboard.enabled -- Enables the Datadog Dashboard controller
     enabled: true
+  datadogMonitor:
+    # datadogMonitor.enabled -- Enables the Datadog Monitor controller
+    enabled: true
 
 datadog:
   datadog:
