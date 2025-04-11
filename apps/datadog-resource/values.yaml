@@ -17,3 +17,24 @@ monitors:
       require_full_window: false
       include_tags: true
       evaluation_delay: 900
+  - name: node-cpu-high
+    namespace: monitoring
+    type: metric alert
+    query: >
+      avg(last_5m):avg:aws.ec2.cpuutilization{*} by {kube_node} >= 80
+    message: >
+      🚨 *High Node CPU Alert*
+      The average CPU utilization on one or more nodes is over 80% in the last 5 minutes.
+      @slack-your-alert-channel
+    tags:
+      - "env:production"
+    priority: 3
+    options:
+      evaluationDelay: 0
+      includeTags: true
+      locked: false
+      notifyNoData: false
+      noDataTimeframe: 10
+      thresholds:
+        critical: "80"
+        warning: "70"
