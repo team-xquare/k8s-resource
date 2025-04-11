@@ -5,7 +5,7 @@ monitors:
     message: |
       CPU usage is above 80% on {{host.name}}
       
-      @slack-xquare-monitoring
+      @slack-XQUARE-alerts-infra
     tags:
       - "service:kubernetes"
       - "env:production"
@@ -26,7 +26,7 @@ monitors:
     message: |
       Memory usage is critical on {{host.name}}
       
-      @slack-xquare-monitoring
+      @slack-XQUARE-alerts-infra
     tags:
       - "service:kubernetes"
       - "env:production"
@@ -47,7 +47,7 @@ monitors:
     message: |
       Disk usage is above 85% on {{host.name}} ({{device.name}})
       
-      @slack-xquare-monitoring
+      @slack-XQUARE-alerts-infra
     tags:
       - "service:kubernetes"
       - "env:production"
@@ -68,7 +68,7 @@ monitors:
     message: |
       Less than 3 Kubernetes nodes are in Ready state!
       
-      @slack-xquare-monitoring
+      @slack-XQUARE-alerts-infra
     tags:
       - "service:kubernetes"
       - "env:production"
@@ -87,7 +87,7 @@ monitors:
     message: |
       There are more than 5 pods in pending state in the cluster
       
-      @slack-xquare-monitoring
+      @slack-XQUARE-alerts-infra
     tags:
       - "service:kubernetes"
       - "env:production"
