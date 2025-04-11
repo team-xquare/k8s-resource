@@ -64,7 +64,7 @@ monitors:
 
   - name: "kubernetes-node-not-ready"
     type: "metric alert"
-    query: "avg(last_5m):sum:kubernetes_state.node.condition{kubernetes.io/cluster/xquare-v3-cluster:owned,condition:ready,status:true} < 3"
+    query: "avg(last_5m):sum:kubernetes_state.node.by_condition{kubernetes.io/cluster/xquare-v3-cluster:owned,condition:ready,status:true} < 3"
     message: |
       Less than 3 Kubernetes nodes are in Ready state!
       
