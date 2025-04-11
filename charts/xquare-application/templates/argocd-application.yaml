@@ -38,6 +38,7 @@ spec:
     {{- if or (eq .name "kube-prometheus-stack") (eq .name "percona-operator") }}
     syncOptions:
       - ServerSideApply=true
+      - CreateNamespace=true
     {{- end }}
     automated:
       prune: {{ .syncPolicy.automated.prune }}
