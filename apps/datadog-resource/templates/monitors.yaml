@@ -4,10 +4,13 @@ apiVersion: datadoghq.com/v1alpha1
 kind: DatadogMonitor
 metadata:
   name: {{ .name }}
+  {{- if .namespace }}
+  namespace: {{ .namespace }}
+  {{- end }}
 spec:
-  name: {{ .name }}
-  type: {{ .type }}
   query: "{{ .query }}"
+  type: "{{ .type }}"
+  name: "{{ .name }}"
   message: "{{ .message }}"
   {{- if .tags }}
   tags:
@@ -15,8 +18,26 @@ spec:
     - {{ . }}
   {{- end }}
   {{- end }}
-  {{- if .options }}
+  {{- if .priority }}
+  priority: {{ .priority }}
+  {{- end }}
   options:
+    {{- if .options }}
+    {{- if .options.evaluationDelay }}
+    evaluationDelay: {{ .options.evaluationDelay }}
+    {{- end }}
+    includeTags: {{ .options.includeTags | default true }}
+    locked: {{ .options.locked | default false }}
+    {{- if .options.newGroupDelay }}
+    newGroupDelay: {{ .options.newGroupDelay }}
+    {{- end }}
+    notifyNoData: {{ .options.notifyNoData | default false }}
+    {{- if .options.noDataTimeframe }}
+    noDataTimeframe: {{ .options.noDataTimeframe }}
+    {{- end }}
+    {{- if .options.renotifyInterval }}
+    renotifyInterval: {{ .options.renotifyInterval }}
+    {{- end }}
     {{- if .options.thresholds }}
     thresholds:
       {{- if .options.thresholds.critical }}
@@ -26,21 +47,5 @@ spec:
       warning: "{{ .options.thresholds.warning }}"
       {{- end }}
     {{- end }}
-    notify_no_data: {{ .options.notify_no_data | default false }}
-    require_full_window: {{ .options.require_full_window | default false }}
-    notify_audit: {{ .options.notify_audit | default false }}
-    include_tags: {{ .options.include_tags | default true }}
-    {{- if .options.evaluation_delay }}
-    evaluation_delay: {{ .options.evaluation_delay }}
     {{- end }}
-    {{- if .options.new_host_delay }}
-    new_host_delay: {{ .options.new_host_delay }}
-    {{- end }}
-    {{- if .options.renotify_interval }}
-    renotify_interval: {{ .options.renotify_interval }}
-    {{- end }}
-    {{- if .options.no_data_timeframe }}
-    no_data_timeframe: {{ .options.no_data_timeframe }}
-    {{- end }}
-  {{- end }}
 {{- end }}

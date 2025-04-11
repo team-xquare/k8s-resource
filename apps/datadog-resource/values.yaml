@@ -1,116 +1,19 @@
 monitors:
-  - name: "kubernetes-high-cpu-usage"
+  - name: "namespace-cost-monitoring-overall"
     type: "metric alert"
-    query: "avg(last_5m):avg:system.cpu.user{kubernetes.io/cluster/xquare-v3-cluster:owned} by {host} > 80"
+    query: "avg(last_1d):sum:kubernetes.cost.by_namespace{kubernetes.io/cluster/xquare-v3-cluster:owned} by {namespace} > 100"
     message: |
-      CPU usage is above 80% on {{host.name}}
+      네임스페이스 {{namespace.name}}의 일일 비용이 100 달러를 초과했습니다.
       
-      @slack-XQUARE-alerts-infra
+      @slack-XQUARE-alerts-cost
     tags:
-      - "service:kubernetes"
+      - "service:cost-monitoring"
       - "env:production"
     options:
       thresholds:
-        critical: 80
-        warning: 70
+        critical: 100
+        warning: 80
       notify_no_data: false
       require_full_window: false
-      new_host_delay: 300
-      renotify_interval: 60
       include_tags: true
       evaluation_delay: 900
-
-  - name: "kubernetes-high-memory-usage"
-    type: "metric alert"
-    query: "avg(last_5m):avg:system.mem.pct_usable{kubernetes.io/cluster/xquare-v3-cluster:owned} by {host} < 0.2"
-    message: |
-      Memory usage is critical on {{host.name}}
-      
-      @slack-XQUARE-alerts-infra
-    tags:
-      - "service:kubernetes"
-      - "env:production"
-    options:
-      thresholds:
-        critical: 0.2
-        warning: 0.3
-      notify_no_data: false
-      require_full_window: false
-      new_host_delay: 300
-      renotify_interval: 60
-      include_tags: true
-      evaluation_delay: 900
-
-  - name: "kubernetes-high-disk-usage"
-    type: "metric alert"
-    query: "avg(last_5m):avg:system.disk.in_use{kubernetes.io/cluster/xquare-v3-cluster:owned} by {host,device} > 0.85"
-    message: |
-      Disk usage is above 85% on {{host.name}} ({{device.name}})
-      
-      @slack-XQUARE-alerts-infra
-    tags:
-      - "service:kubernetes"
-      - "env:production"
-    options:
-      thresholds:
-        critical: 0.85
-        warning: 0.75
-      notify_no_data: false
-      require_full_window: false
-      new_host_delay: 300
-      renotify_interval: 60
-      include_tags: true
-      evaluation_delay: 900
-
-  - name: "kubernetes-node-not-ready"
-    type: "metric alert"
-    query: "avg(last_5m):sum:kubernetes_state.node.by_condition{kubernetes.io/cluster/xquare-v3-cluster:owned,condition:ready,status:true} < 3"
-    message: |
-      Less than 3 Kubernetes nodes are in Ready state!
-      
-      @slack-xquare-monitoring
-    tags:
-      - "service:kubernetes"
-      - "env:production"
-    options:
-      thresholds:
-        critical: 3
-      notify_no_data: true
-      no_data_timeframe: 10
-      require_full_window: false
-      include_tags: true
-      evaluation_delay: 60
-
-  - name: "kubernetes-pending-pods"
-    type: "metric alert"
-    query: "sum(last_10m):sum:kubernetes_state.pod.status_phase{kubernetes.io/cluster/xquare-v3-cluster:owned,phase:pending} > 5"
-    message: |
-      There are more than 5 pods in pending state in the cluster
-      
-      @slack-XQUARE-alerts-infra
-    tags:
-      - "service:kubernetes"
-      - "env:production"
-    options:
-      thresholds:
-        critical: 5
-        warning: 3
-      notify_no_data: false
-      require_full_window: false
-      include_tags: true
-      evaluation_delay: 60
-
-  - name: "cost count"
-    type: "cost alert"
-    query: "formula(\"query1\").last(\"7d\").anomaly(direction=\"above\", threshold=80) >= 1"
-    message: "cost count"
-    tags: []
-    options:
-      thresholds:
-        critical: 1
-      variables:
-        - data_source: "cloud_cost"
-          query: "sum:aws.cost.net.amortized{aws_cost_type IN (Usage,DiscountedUsage,SavingsPlanCoveredUsage) AND aws_product NOT IN (supportenterprise)}.rollup(sum, 86400)"
-          name: "query1"
-          aggregator: "sum"
-      include_tags: false
