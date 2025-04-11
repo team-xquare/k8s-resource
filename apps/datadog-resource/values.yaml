@@ -99,3 +99,22 @@ monitors:
       require_full_window: false
       include_tags: true
       evaluation_delay: 60
+
+  - name: "cloud-cost-budget-exceeded"
+    type: "metric alert"
+    query: "sum(last_24h):sum:aws.cost{kubernetes_cluster:{{ .Values.clusterName }}} > 1000"
+    message: |
+      Daily AWS cost exceeded $1000 for cluster {{ .Values.clusterName }}
+
+      @slack-xquare-monitoring
+    tags:
+      - "service:cloud-cost"
+      - "env:production"
+    options:
+      thresholds:
+        critical: 1000
+        warning: 800
+      notify_no_data: false
+      require_full_window: false
+      include_tags: true
+      evaluation_delay: 60
