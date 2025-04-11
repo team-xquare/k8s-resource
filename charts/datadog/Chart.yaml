@@ -1,6 +1,6 @@
 apiVersion: v2
 name: datadog
-version: 2.3.1
+version: 2.3.2
 appVersion: 2.7.0
 description: Datadog Operator
 dependencies:
