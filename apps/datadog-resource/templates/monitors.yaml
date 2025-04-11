@@ -19,10 +19,10 @@ spec:
     {{- if .options.thresholds }}
     thresholds:
       {{- if .options.thresholds.critical }}
-      critical: {{ .options.thresholds.critical }}
+      critical: "{{ .options.thresholds.critical }}"
       {{- end }}
       {{- if .options.thresholds.warning }}
-      warning: {{ .options.thresholds.warning }}
+      warning: "{{ .options.thresholds.warning }}"
       {{- end }}
     {{- end }}
     notify_no_data: {{ .options.notify_no_data | default false }}
