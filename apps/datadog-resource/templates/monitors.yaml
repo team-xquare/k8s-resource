@@ -5,6 +5,7 @@ kind: DatadogMonitor
 metadata:
   name: {{ .name }}
 spec:
+  name: {{ .name }}
   type: {{ .type }}
   query: {{ .query }}
   message: "{{ .message }}"
