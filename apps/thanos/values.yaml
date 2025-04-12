@@ -39,7 +39,6 @@ thanos:
       enabled: false
     resources:
       requests:
-        cpu: 1m
         memory: 16Mi
     tolerations:
       - effect: "NoSchedule"
