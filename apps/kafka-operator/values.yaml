@@ -16,3 +16,10 @@ strimzi-kafka-operator:
       operator: "Equal"
       value: "true"
       effect: "NoSchedule"
+  resources:
+    limits:
+      memory: 384Mi
+      cpu: 1000m
+    requests:
+      memory: 384Mi
+      cpu: 120m
