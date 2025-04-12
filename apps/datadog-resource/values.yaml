@@ -44,7 +44,7 @@ monitors:
     namespace: monitoring
     type: "metric alert"
     query: >
-      avg(last_5m): (avg:kubernetes.cpu.usage.total{*} by {container_name}) / 
+      avg(last_10m): (avg:kubernetes.cpu.usage.total{*} by {container_name}) / 
       (avg:kubernetes.cpu.requests{*} by {container_name}) / 10000000 < 20
     message: >
       🚨 *Container CPU 과할당 감지*
@@ -67,7 +67,7 @@ monitors:
     namespace: monitoring
     type: "metric alert"
     query: >
-      avg(last_5m): (avg:kubernetes.memory.usage{*} by {container_name}) / 
+      avg(last_10m): (avg:kubernetes.memory.usage{*} by {container_name}) / 
       (avg:kubernetes.memory.requests{*} by {container_name}) * 100 < 20
     message: >
       🚨 *Container Memory 과할당 감지*
