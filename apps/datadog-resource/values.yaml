@@ -25,7 +25,7 @@ monitors:
     message: >
       🚨 *High Node CPU Alert*
       The average CPU utilization on one or more nodes is over 80% in the last 5 minutes.
-      @slack-your-alert-channel
+      @slack-XQUARE-alerts-infra
     tags:
       - "env:production"
     priority: 3
