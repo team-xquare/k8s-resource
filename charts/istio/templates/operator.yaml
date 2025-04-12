@@ -91,6 +91,8 @@ spec:
               memory: 80Mi
   values:
     sidecarInjectorWebhook:
+      injectedAnnotations:
+        sidecar.istio.io/proxyCPU: "20m"
       rewriteAppHTTPProbe: true
     gateways:
       istio-ingressgateway:
