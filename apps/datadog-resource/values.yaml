@@ -45,7 +45,7 @@ monitors:
     type: "metric alert"
     query: >
       avg(last_5m): (avg:kubernetes.cpu.usage.total{*} by {pod_name}) / 
-      (avg:kubernetes.cpu.requests{*} by {pod_name} / 10000000) < 0.2
+      (avg:kubernetes.cpu.requests{*} by {pod_name}) / 10000000 < 0.2
     message: >
       🚨 *Pod CPU 과할당 감지*
       Pod {{pod_name.name}} 의 CPU 사용률이 요청 대비 20% 미만입니다.
