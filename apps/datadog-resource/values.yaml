@@ -44,11 +44,11 @@ monitors:
     namespace: monitoring
     type: "metric alert"
     query: >
-      avg(last_5m): (avg:kubernetes.cpu.usage.total{*} by {pod_name}) / 
-      (avg:kubernetes.cpu.requests{*} by {pod_name}) / 10000000 < 20
+      avg(last_5m): (avg:kubernetes.cpu.usage.total{*} by {container_name}) / 
+      (avg:kubernetes.cpu.requests{*} by {container_name}) / 10000000 < 20
     message: >
-      🚨 *Pod CPU 과할당 감지*
-      Pod {{pod_name.name}} 의 CPU 사용률이 요청 대비 20% 미만입니다.
+      🚨 *Container CPU 과할당 감지*
+      Pod {{container_name.name}} 의 CPU 사용률이 요청 대비 20% 미만입니다.
       리소스 낭비 가능성이 있습니다. 요청량 조정을 고려해주세요.
       @slack-XQUARE-alerts-infra
     tags:
