@@ -45,10 +45,10 @@ monitors:
     type: "metric alert"
     query: >
       avg(last_5m): (avg:kubernetes.cpu.usage.total{*} by {container_name}) / 
-      (avg:kubernetes.cpu.requests{*} by {container_name}) / 10000000 < 30
+      (avg:kubernetes.cpu.requests{*} by {container_name}) / 10000000 < 20
     message: >
       🚨 *Container CPU 과할당 감지*
-      Container {{container_name.name}} 의 CPU 사용률이 요청 대비 30% 미만입니다.
+      Container {{container_name.name}} 의 CPU 사용률이 요청 대비 20% 미만입니다.
       리소스 낭비 가능성이 있습니다. 요청량 조정을 고려해주세요.
       @slack-XQUARE-alerts-infra
     tags:
@@ -57,8 +57,31 @@ monitors:
     priority: 2
     options:
       thresholds:
-        critical: "30"
-        warning: "40"
+        critical: "20"
+        warning: "30"
+      notifyNoData: false
+      requireFullWindow: false
+      includeTags: true
+
+  - name: "container-memory-overprovisioned"
+    namespace: monitoring
+    type: "metric alert"
+    query: >
+      avg(last_5m): (avg:kubernetes.memory.usage{*} by {container_name}) / 
+      (avg:kubernetes.memory.requests{*} by {container_name}) * 100 < 20
+    message: >
+      🚨 *Container Memory 과할당 감지*
+      Container {{container_name.name}} 의 Memory 사용률이 요청 대비 20% 미만입니다.
+      리소스 낭비 가능성이 있습니다. 요청량 조정을 고려해주세요.
+      @slack-XQUARE-alerts-infra
+    tags:
+      - "env:production"
+      - "resource:cpu"
+    priority: 2
+    options:
+      thresholds:
+        critical: "20"
+        warning: "30"
       notifyNoData: false
       requireFullWindow: false
       includeTags: true
