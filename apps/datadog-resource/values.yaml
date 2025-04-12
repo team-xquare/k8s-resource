@@ -17,6 +17,7 @@ monitors:
       require_full_window: false
       include_tags: true
       evaluation_delay: 900
+
   - name: node-cpu-high
     namespace: monitoring
     type: metric alert
@@ -38,3 +39,26 @@ monitors:
       thresholds:
         critical: "80"
         warning: "70"
+
+  - name: "pod-cpu-overprovisioned"
+    namespace: monitoring
+    type: "metric alert"
+    query: >
+      avg(last_5m): (avg:kubernetes.cpu.usage.total{*} by {pod_name}) / 
+      (avg:kubernetes.cpu.requests{*} by {pod_name}) < 0.2
+    message: >
+      🚨 *Pod CPU 과할당 감지*
+      Pod {{pod_name.name}} 의 CPU 사용률이 요청 대비 20% 미만입니다.
+      리소스 낭비 가능성이 있습니다. 요청량 조정을 고려해주세요.
+      @slack-XQUARE-alerts-infra
+    tags:
+      - "env:production"
+      - "resource:cpu"
+    priority: 2
+    options:
+      thresholds:
+        critical: "0.2"
+        warning: "0.4"
+      notifyNoData: false
+      requireFullWindow: false
+      includeTags: true
