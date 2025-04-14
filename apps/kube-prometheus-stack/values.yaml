@@ -463,7 +463,7 @@ kube-prometheus-stack:
       - http://thanos-query.monitoring.svc.cluster.local:9090
       resources:
         requests:
-          cpu: 16m
+          cpu: 8m
           memory: 128Mi
       tolerations:
         - effect: "NoSchedule"
