@@ -81,8 +81,8 @@ kube-prometheus-stack:
           prometheus: prometheus-stack
       resources:
         requests:
-          cpu: 1024m
-          memory: 8192Mi
+          cpu: 350m
+          memory: 10G
       tolerations:
         - effect: "NoSchedule"
           key: xquare/platform
