@@ -19,7 +19,7 @@ vault:
     resources:
       requests:
         memory: 200Mi
-        cpu: 30m
+        cpu: 15m
     tolerations:
       - effect: "NoSchedule"
         key: xquare/critical_platform
