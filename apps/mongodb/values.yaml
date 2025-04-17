@@ -2,8 +2,6 @@ psmdb-db:
   replsets:
     rs0:
       size: 3
-      expose:
-        enabled: true
       tolerations:
         - effect: "NoSchedule"
           key: xquare/database
@@ -76,9 +74,6 @@ psmdb-db:
           uploadPartSize: 10485760
           maxUploadParts: 10000
           storageClass: STANDARD
-      volumeMounts:
-        - mountPath: /mnt/nfs/
-          name: backup-nfs
 
 prometheus-mongodb-exporter:
   existingSecret:
