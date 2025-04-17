@@ -65,13 +65,17 @@ psmdb-db:
     storages:
       s3-ap-northeast-2:
         type: s3
-      tasks:
-        - name: daily-s3-ap-northeast-2
-          enabled: true
-          schedule: "0 0 * * *"
-          keep: 3
-          storageName: xquare-mongodb-backup
-          compressionType: gzip
+        s3:
+          bucket: xquare-mongodb-backup
+          retryer:
+            numMaxRetries: 3
+            minRetryDelay: 30ms
+            maxRetryDelay: 5m
+          region: ap-northeast-2
+          prefix: ""
+          uploadPartSize: 10485760
+          maxUploadParts: 10000
+          storageClass: STANDARD
       volumeMounts:
         - mountPath: /mnt/nfs/
           name: backup-nfs
