@@ -10,12 +10,9 @@ psmdb-db:
           operator: "Equal"
           value: "true"
       resources:
-        limits:
-          cpu: "600m"
-          memory: "4G"
         requests:
-          cpu: "600m"
-          memory: "4G"
+          cpu: "60m"
+          memory: "600Mi"
       volumeSpec:
         pvc:
           resources:
@@ -23,6 +20,9 @@ psmdb-db:
               storage: 55Gi
   sharding:
     configrs:
+      resources:
+        requests:
+          cpu: "80m"
       tolerations:
         - effect: "NoSchedule"
           key: xquare/database
@@ -38,12 +38,9 @@ psmdb-db:
       expose:
         exposeType: LoadBalancer
       resources:
-        limits:
-          cpu: "700m"
-          memory: "2G"
-        requests:
-          cpu: "700m"
-          memory: "2G"
+        rqeuests:
+          cpu: "300m"
+          memory: "80Mi"
 
   users:
     - name: admin
