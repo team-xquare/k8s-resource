@@ -36,6 +36,7 @@ psmdb-db:
           operator: "Equal"
           value: "true"
       expose:
+        enabled: true
         exposeType: LoadBalancer
       resources:
         rqeuests:
