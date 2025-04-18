@@ -12,7 +12,10 @@ psmdb-db:
       resources:
         requests:
           cpu: "60m"
-          memory: "600Mi"
+          memory: "500Mi"
+        limits:
+          cpu: "150m"
+          memory: "700Mi"
       volumeSpec:
         pvc:
           resources:
