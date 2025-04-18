@@ -62,6 +62,27 @@ psmdb-db:
           db: dsm-repo
   backup:
     enabled: false
+    tasks:
+     - name: daily-s3-us-west
+       enabled: true
+       schedule: "0 0 * * *"
+       keep: 3
+       storageName: s3-us-west
+       compressionType: gzip
+     - name: weekly-s3-us-west
+       enabled: false
+       schedule: "0 0 * * 0"
+       keep: 5
+       storageName: s3-us-west
+       compressionType: gzip
+     - name: weekly-s3-us-west-physical
+       enabled: false
+       schedule: "0 5 * * 0"
+       keep: 5
+       type: physical
+       storageName: s3-us-west
+       compressionType: gzip
+       compressionLevel: 6
     # annotations:
     #   iam.amazonaws.com/role: role-arn
     # podSecurityContext: {}
