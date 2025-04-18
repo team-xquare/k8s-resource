@@ -67,7 +67,7 @@ psmdb-db:
         type: s3
       tasks:
         - name: daily-s3-ap-northeast-2
-          enabled: true
+          enabled: false
           schedule: "0 0 * * *"
           keep: 3
           storageName: xquare-mongodb-backup
