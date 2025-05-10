@@ -1,7 +1,7 @@
 datadog-operator:
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
-  site: us5.datadoghq.com
+  site: app.datadoghq.com
   datadogCRDs:
     crds:
       # datadogCRDs.crds.datadogAgents -- Set to true to deploy the DatadogAgents CRD
@@ -43,7 +43,7 @@ datadog:
         enabled: false
     apiKeyExistingSecret: datadog-secret
     appKeyExistingSecret: datadog-secret
-    site: us5.datadoghq.com
+    site: app.datadoghq.com
     logs:
       enabled: true
       containerCollectAll: true
