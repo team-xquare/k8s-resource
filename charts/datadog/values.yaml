@@ -1,7 +1,7 @@
 datadog-operator:
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
-  site: app.datadoghq.com
+  site: datadoghq.com
   datadogCRDs:
     crds:
       # datadogCRDs.crds.datadogAgents -- Set to true to deploy the DatadogAgents CRD
@@ -24,12 +24,16 @@ datadog-operator:
   datadogMonitor:
     # datadogMonitor.enabled -- Enables the Datadog Monitor controller
     enabled: true
-
 datadog:
   datadog:
+    clusterName: "xquare-v3-cluster"
+    registry: "public.ecr.aws/datadog"
     agents:
       tolerations:
         - operator: "Exists"
+      image:
+        name: "gcr.io/datadoghq/agent:7.65.0-full"
+        pullPolicy: "Always"
     otlp:
       receiver:
         protocols:
@@ -38,18 +42,34 @@ datadog:
             endpoint: "0.0.0.0:4317"
             useHostPort: true
           http:
-            enabled: false
-      otelCollector:
-        enabled: false
+            enabled: true
+            endpoint: "0.0.0.0:4318"
+            useHostPort: true
     apiKeyExistingSecret: datadog-secret
     appKeyExistingSecret: datadog-secret
-    site: app.datadoghq.com
+    site: datadoghq.com
     logs:
       enabled: true
       containerCollectAll: true
+    apm:
+      instrumentation:
+        enabled: true
+        java:
+          version: "1"
+        python:
+          version: "3"
+        nodejs:
+          version: "5"
+        php:
+          version: "1"
+        dotnet:
+          version: "3"
     resources:
       requests:
         cpu: "100m"
         memory: "256Mi"
     tolerations:
       - operator: "Exists"
+    security:
+      runtime:
+        enabled: true
