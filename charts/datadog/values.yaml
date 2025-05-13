@@ -1,7 +1,7 @@
 datadog-operator:
   apiKeyExistingSecret: datadog-secret
   appKeyExistingSecret: datadog-secret
-  site: datadoghq.com
+  site: app.datadoghq.com
   datadogCRDs:
     crds:
       # datadogCRDs.crds.datadogAgents -- Set to true to deploy the DatadogAgents CRD
@@ -24,56 +24,32 @@ datadog-operator:
   datadogMonitor:
     # datadogMonitor.enabled -- Enables the Datadog Monitor controller
     enabled: true
+
 datadog:
-  agents:
-    image:
-      repository: "gcr.io/datadoghq/agent"
-      tag: "7.65.0-full"
-      pullPolicy: "Always"
-    datadog:
-      apiKeyExistingSecret: "datadog-secret"
+  datadog:
+    agents:
+      tolerations:
+        - operator: "Exists"
+    otlp:
+      receiver:
+        protocols:
+          grpc:
+            enabled: true
+            endpoint: "0.0.0.0:4317"
+            useHostPort: true
+          http:
+            enabled: false
       otelCollector:
-        enabled: true
-        ports:
-          - containerPort: 4317
-            hostPort: 4317
-            name: "otel-grpc"
-          - containerPort: 4318
-            hostPort: 4318
-            name: "otel-http"
-      site: "datadoghq.com"
-      apm:
-        instrumentation:
-          enabled: true
-          targets:
-            - name: "default-target"
-              ddTraceVersions:
-                java: "1"
-                python: "3"
-                js: "5"
-                php: "1"
-                dotnet: "3"
-      logs:
-        enabled: true
-        containerCollectAll: true
-      asm:
-        threats:
-          enabled: true
-        sca:
-          enabled: true
-        iast:
-          enabled: true
-      securityAgent:
-        runtime:
-          enabled: true
-        compliance:
-          enabled: true
-      sbom:
-        containerImage:
-          enabled: true
-        host:
-          enabled: true
-      serviceMonitoring:
-        enabled: true
-      networkMonitoring:
-        enabled: true
+        enabled: false
+    apiKeyExistingSecret: datadog-secret
+    appKeyExistingSecret: datadog-secret
+    site: app.datadoghq.com
+    logs:
+      enabled: true
+      containerCollectAll: true
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
+    tolerations:
+      - operator: "Exists"
