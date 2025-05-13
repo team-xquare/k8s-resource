@@ -25,51 +25,55 @@ datadog-operator:
     # datadogMonitor.enabled -- Enables the Datadog Monitor controller
     enabled: true
 datadog:
+agents:
+  image:
+    repository: "gcr.io/datadoghq/agent"
+    tag: "7.65.0-full"
+    pullPolicy: "Always"
   datadog:
-    clusterName: "xquare-v3-cluster"
-    registry: "public.ecr.aws/datadog"
-    agents:
-      tolerations:
-        - operator: "Exists"
-      image:
-        name: "gcr.io/datadoghq/agent:7.65.0-full"
-        pullPolicy: "Always"
-    otlp:
-      receiver:
-        protocols:
-          grpc:
-            enabled: true
-            endpoint: "0.0.0.0:4317"
-            useHostPort: true
-          http:
-            enabled: true
-            endpoint: "0.0.0.0:4318"
-            useHostPort: true
-    apiKeyExistingSecret: datadog-secret
-    appKeyExistingSecret: datadog-secret
-    site: datadoghq.com
-    logs:
+    apiKeyExistingSecret: "datadog-secret"
+    otelCollector:
       enabled: true
-      containerCollectAll: true
+      ports:
+        - containerPort: 4317
+          hostPort: 4317
+          name: "otel-grpc"
+        - containerPort: 4318
+          hostPort: 4318
+          name: "otel-http"
+    site: "datadoghq.com"
     apm:
       instrumentation:
         enabled: true
-        java:
-          version: "1"
-        python:
-          version: "3"
-        nodejs:
-          version: "5"
-        php:
-          version: "1"
-        dotnet:
-          version: "3"
-    resources:
-      requests:
-        cpu: "100m"
-        memory: "256Mi"
-    tolerations:
-      - operator: "Exists"
-    security:
+        targets:
+          - name: "default-target"
+            ddTraceVersions:
+              java: "1"
+              python: "3"
+              js: "5"
+              php: "1"
+              dotnet: "3"
+    logs:
+      enabled: true
+      containerCollectAll: true
+    asm:
+      threats:
+        enabled: true
+      sca:
+        enabled: true
+      iast:
+        enabled: true
+    securityAgent:
       runtime:
         enabled: true
+      compliance:
+        enabled: true
+    sbom:
+      containerImage:
+        enabled: true
+      host:
+        enabled: true
+    serviceMonitoring:
+      enabled: true
+    networkMonitoring:
+      enabled: true
