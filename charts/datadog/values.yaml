@@ -27,6 +27,9 @@ datadog-operator:
 
 datadog:
   datadog:
+    processAgent:
+        enabled: true
+        processCollection: true
     containers:
       tolerations:
         - operator: "Exists"
