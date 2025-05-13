@@ -27,7 +27,7 @@ datadog-operator:
 
 datadog:
   datadog:
-    agents:
+    containers:
       tolerations:
         - operator: "Exists"
     otlp:
