@@ -26,19 +26,26 @@ datadog-operator:
     enabled: true
 datadog:
   datadog:
+    agent :
+      env:
+        - name: "DD_CORE_AGENT_ENABLED"
+          value: false
     processAgent:
         enabled: true
         processCollection: true
     apm:
       errorTrackingStandalone:
-        enabled: "true"
+        enabled: true
       instrumentation:
         enabled: true
         targets:
           - name: "default-target"
             ddTraceVersions:
               java: "1"
+              python: "3"
               js: "5"
+              php: "1"
+              dotnet: "3"
     containers:
       tolerations:
         - operator: "Exists"
@@ -65,3 +72,6 @@ datadog:
         memory: "256Mi"
     tolerations:
       - operator: "Exists"
+
+
+
