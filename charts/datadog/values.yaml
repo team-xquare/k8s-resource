@@ -25,14 +25,13 @@ datadog-operator:
     # datadogMonitor.enabled -- Enables the Datadog Monitor controller
     enabled: true
 
-
 datadog:
   agents:
     containers:
       agent:
         env:
           - name: "DD_CORE_AGENT_ENABLED"
-            value: "false"
+            value: false
   datadog:
     apiKeyExistingSecret: datadog-secret
     appKeyExistingSecret: datadog-secret
@@ -51,7 +50,7 @@ datadog:
       processCollection: true
     apm:
       errorTrackingStandalone:
-        enabled: true
+        enabled: "true"
       instrumentation:
         enabled: true
         targets:
