@@ -30,6 +30,16 @@ datadog:
     processAgent:
         enabled: true
         processCollection: true
+    apm:
+      errorTrackingStandalone:
+        enabled: true
+      instrumentation:
+        enabled: true
+        targets:
+          - name: "default-target"
+            ddTraceVersions:
+              java: "1"
+              js: "5"
     containers:
       tolerations:
         - operator: "Exists"
