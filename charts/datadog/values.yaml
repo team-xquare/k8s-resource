@@ -24,7 +24,6 @@ datadog-operator:
   datadogMonitor:
     # datadogMonitor.enabled -- Enables the Datadog Monitor controller
     enabled: true
-
 datadog:
   datadog:
     processAgent:
@@ -32,7 +31,7 @@ datadog:
         processCollection: true
     apm:
       errorTrackingStandalone:
-        enabled: true
+        enabled: "true"
       instrumentation:
         enabled: true
         targets:
