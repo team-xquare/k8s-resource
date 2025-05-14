@@ -30,7 +30,7 @@ datadog:
     containers:
       agent:
         env:
-          - name: DD_CORE_AGENT_ENABLED
+          - name: "DD_CORE_AGENT_ENABLED"
             value: "false"
   datadog:
     apiKeyExistingSecret: datadog-secret
