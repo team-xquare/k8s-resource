@@ -46,8 +46,8 @@ datadog:
     tolerations:
       - operator: "Exists"
     processAgent:
-      enabled: true
-      processCollection: true
+      enabled: false
+      processCollection: false
     apm:
       errorTrackingStandalone:
         enabled: true
@@ -57,10 +57,6 @@ datadog:
           - name: "default-target"
             ddTraceVersions:
               java: "1"
-              python: "3"
-              js: "5"
-              php: "1"
-              dotnet: "3"
     otlp:
       receiver:
         protocols:
