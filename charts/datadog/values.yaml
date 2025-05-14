@@ -25,10 +25,12 @@ datadog-operator:
     # datadogMonitor.enabled -- Enables the Datadog Monitor controller
     enabled: true
 datadog:
-  agent :
-    env:
-      - name: "DD_CORE_AGENT_ENABLED"
-        value: false
+  agents:
+    containers:
+      agent:
+        env:
+          - name: "DD_CORE_AGENT_ENABLED"
+            value: false
   datadog:
     processAgent:
         enabled: true
