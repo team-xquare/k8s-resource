@@ -24,17 +24,31 @@ datadog-operator:
   datadogMonitor:
     # datadogMonitor.enabled -- Enables the Datadog Monitor controller
     enabled: true
+
+
 datadog:
   agents:
     containers:
       agent:
         env:
           - name: "DD_CORE_AGENT_ENABLED"
-            value: false
+            value: "false"
   datadog:
+    apiKeyExistingSecret: datadog-secret
+    appKeyExistingSecret: datadog-secret
+    site: datadoghq.com
+    logs:
+      enabled: true
+      containerCollectAll: true
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
+    tolerations:
+      - operator: "Exists"
     processAgent:
-        enabled: true
-        processCollection: true
+      enabled: true
+      processCollection: true
     apm:
       errorTrackingStandalone:
         enabled: true
@@ -48,9 +62,6 @@ datadog:
               js: "5"
               php: "1"
               dotnet: "3"
-    containers:
-      tolerations:
-        - operator: "Exists"
     otlp:
       receiver:
         protocols:
@@ -62,18 +73,3 @@ datadog:
             enabled: false
       otelCollector:
         enabled: false
-    apiKeyExistingSecret: datadog-secret
-    appKeyExistingSecret: datadog-secret
-    site: datadoghq.com
-    logs:
-      enabled: true
-      containerCollectAll: true
-    resources:
-      requests:
-        cpu: "100m"
-        memory: "256Mi"
-    tolerations:
-      - operator: "Exists"
-
-
-
