@@ -49,8 +49,8 @@ datadog:
       enabled: true
       processCollection: true
     apm:
-      errorTrackingStandalone:
-        enabled: true
+      # errorTrackingStandalone:
+      #   enabled: true
       instrumentation:
         enabled: true
         targets:
