@@ -30,8 +30,8 @@ datadog:
     containers:
       agent:
         env:
-          - name: "DD_CORE_AGENT_ENABLED"
-            value: false
+          - name: DD_CORE_AGENT_ENABLED
+            value: "false"
   datadog:
     apiKeyExistingSecret: datadog-secret
     appKeyExistingSecret: datadog-secret
@@ -50,7 +50,7 @@ datadog:
       processCollection: true
     apm:
       errorTrackingStandalone:
-        enabled: "true"
+        enabled: true
       instrumentation:
         enabled: true
         targets:
