@@ -31,7 +31,7 @@ datadog:
       agent:
         env:
           - name: "DD_CORE_AGENT_ENABLED"
-            value: "false"
+            value: false
   datadog:
     apiKeyExistingSecret: datadog-secret
     appKeyExistingSecret: datadog-secret
@@ -47,7 +47,7 @@ datadog:
       - operator: "Exists"
     processAgent:
       enabled: false
-      processCollection: false
+      containerCollection: false
     apm:
       errorTrackingStandalone:
         enabled: true
