@@ -46,8 +46,9 @@ datadog:
     tolerations:
       - operator: "Exists"
     processAgent:
-      enabled: false
+      enabled: true
       containerCollection: false
+      processCollection: true
     apm:
       errorTrackingStandalone:
         enabled: true
