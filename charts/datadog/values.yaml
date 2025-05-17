@@ -26,6 +26,7 @@ datadog-operator:
     enabled: true
 
 datadog:
+  targetSystem: "linux"
   agents:
     containers:
       agent:
@@ -58,6 +59,10 @@ datadog:
           - name: "default-target"
             ddTraceVersions:
               java: "1"
+              python: "3"
+              js: "5"
+              php: "1"
+              dotnet: "3"
     otlp:
       receiver:
         protocols:
@@ -69,3 +74,7 @@ datadog:
             enabled: false
       otelCollector:
         enabled: false
+
+
+
+
