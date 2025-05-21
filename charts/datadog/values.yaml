@@ -55,6 +55,8 @@ datadog:
         enabled: true
       instrumentation:
         enabled: true
+        language_detection:
+          enabled: true
     otlp:
       receiver:
         protocols:
