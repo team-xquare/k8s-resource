@@ -44,6 +44,18 @@ argo-cd:
         cpu: 1m
         memory: 32Mi
   repoServer:
+    ad.datadoghq.com/argocd-repo-server.checks: |
+      {
+        "argocd": {
+          "init_config": {},
+          "instances": [
+            {
+              "repo_server_endpoint": "http://%%host%%:8084/metrics"
+            }
+          ]
+        }
+      }
+    name: 'argocd-repo-server'
     resources:
       requests:
         cpu: 500m
@@ -97,11 +109,37 @@ argo-cd:
       - name: tmp-dir
         emptyDir: {}
   controller:
+    podAnnotations:
+      ad.datadoghq.com/argocd-application-controller.checks: |
+        {
+          "argocd": {
+            "init_config": {},
+            "instances": [
+              {
+                "app_controller_endpoint": "http://%%host%%:8082/metrics"
+              }
+            ]
+          }
+        }
+    name: 'argocd-application-controller'
     resources:
       requests:
         cpu: 500m
         memory: 1G
   server:
+    podAnnotations:
+      ad.datadoghq.com/argocd-server.checks: |
+        {
+          "argocd": {
+            "init_config": {},
+            "instances": [
+              {
+                "api_server_endpoint": "http://%%host%%:8083/metrics"
+              }
+            ]
+          }
+        }
+    name: 'argocd-server'
     resources:
       requests:
         cpu: 32m
