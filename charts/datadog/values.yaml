@@ -55,14 +55,6 @@ datadog:
         enabled: true
       instrumentation:
         enabled: true
-        targets:
-          - name: "default-target"
-            ddTraceVersions:
-              java: "1"
-              python: "3"
-              js: "5"
-              php: "1"
-              dotnet: "3"
     otlp:
       receiver:
         protocols:
