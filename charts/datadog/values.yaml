@@ -51,6 +51,9 @@ datadog:
       containerCollection: false
       processCollection: true
     apm:
+      enabled: true
+      port: 8126
+      socketEnabled: false
       errorTrackingStandalone:
         enabled: true
       instrumentation:
