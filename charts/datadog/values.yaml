@@ -49,17 +49,6 @@ datadog:
     processAgent:
       enabled: true
       containerCollection: false
-      processCollection: true
-    apm:
-      enabled: true # 부현수 : 잠시 비활성화 합니다.
-      port: 8126
-      socketEnabled: false
-      errorTrackingStandalone:
-        enabled: true
-      instrumentation:
-        enabled: false # 부현수 : 잠시 비활성화 합니다.
-        language_detection:
-          enabled: true
     otlp:
       receiver:
         protocols:
