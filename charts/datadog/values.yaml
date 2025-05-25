@@ -51,7 +51,7 @@ datadog:
       containerCollection: false
       processCollection: true
     apm:
-      enabled: false # 부현수 : 잠시 비활성화 합니다.
+      enabled: true # 부현수 : 잠시 비활성화 합니다.
       port: 8126
       socketEnabled: false
       errorTrackingStandalone:
