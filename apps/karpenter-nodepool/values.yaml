@@ -1,5 +1,25 @@
 nodepools:
   services:
+    - name: xquare-no-tolerations
+      nodeClass: "default"
+      spec:
+        labels:
+          Karpenter: enabled
+        kubeletConfiguration:
+          maxPods: 110
+        requirements:
+          - key: "topology.kubernetes.io/zone"
+            operator: In
+            values: [ "ap-northeast-2a" ]
+          - key: "kubernetes.io/arch"
+            operator: In
+            values: [ "amd64" ]
+          - key: "karpenter.sh/capacity-type"
+            operator: In
+            values: [ "spot" ]
+          - key: "karpenter.k8s.aws/instance-hypervisor"
+            operator: In
+            values: [ "nitro" ]
     - name: xquare-platform
       nodeClass: "default"
       spec:
