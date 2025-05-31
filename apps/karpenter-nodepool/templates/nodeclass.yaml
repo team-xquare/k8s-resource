@@ -6,7 +6,7 @@ spec:
   role: "KarpenterNodeRole-xquare-v3-cluster"
   amiFamily: AL2
   amiSelectorTerms:
-    - id: ami-055a279ce49cf8270
+    - id: ami-00aa0ede823b748b9
   securityGroupSelectorTerms:
     - tags:
         aws:eks:cluster-name: xquare-v3-cluster
