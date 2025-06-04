@@ -88,7 +88,7 @@ nodepools:
             values: [ "amd64" ]
           - key: "karpenter.sh/capacity-type"
             operator: In
-            values: [ "on-demand" ]
+            values: [ "spot" ]
     - name: xquare-critical-platform
       nodeClass: "default"
       spec:
@@ -109,7 +109,7 @@ nodepools:
             values: [ "amd64" ]
           - key: "karpenter.sh/capacity-type"
             operator: In
-            values: [ "on-demand" ]
+            values: [ "spot" ]
     - name: xquare-ci-server
       nodeClass: "default"
       spec:
