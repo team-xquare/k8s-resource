@@ -73,7 +73,7 @@ virtualServices:
   - name: argocd-server
     host: argo-cd.xquare.app
     destination:
-      host: argocd-server.argocd.svc.cluster.local
+      host: argocd-argocd-server.argocd.svc.cluster.local
       port: 80
   - name: kiali-server
     host: kiali.xquare.app
