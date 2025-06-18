@@ -7,7 +7,16 @@ dex:
       type: memory
     oauth2:
       responseTypes: ["code", "token", "id_token"]
-      skipApprovalScreen: true 
+      skipApprovalScreen: true
+    {{- $dexAdminEmail := "<path:avp/data/dex/admin#email>" }}
+    {{- $dexAdminHash := "<path:avp/data/dex/admin#hash>" }}
+    {{- $dexAdminUser := "<path:avp/data/dex/admin#username>" }}
+    {{- $dexAdminID := "<path:avp/data/dex/admin#userID>" }}
+    staticPasswords:
+    - email: {{$dexAdminEmail}}
+      hash: {{$dexAdminHash}}
+      username: {{$dexAdminUser}}
+      userID: {{$dexAdminID}}
     staticClients:
     - id: xquare  
       name: 'xquare'
