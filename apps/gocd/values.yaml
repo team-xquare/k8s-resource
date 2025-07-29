@@ -40,9 +40,6 @@ gocd:
       - apiGroups: [ "networking.k8s.io" ]
         resources: [ "ingresses" ]
         verbs: [ "*" ]
-      - apiGroups: [ "datadoghq.com" ]
-        resources: [ "datadogdashboards" ]
-        verbs: [ "*" ]
   server:
     securityContext:
       runAsUser: 0
