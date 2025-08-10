@@ -147,15 +147,6 @@ projects:
           automated:
             prune: false
             selfHeal: true
-      - name: external-dns
-        namespace: external-dns
-        source:
-          path: apps/external-dns
-          repoURL: https://github.com/team-xquare/k8s-resource.git
-        syncPolicy:
-          automated:
-            prune: false
-            selfHeal: true
       - name: argo-events
         namespace: argo-events
         source:
